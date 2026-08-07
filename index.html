@@ -57,8 +57,8 @@
     body {
       font-family: "Plus Jakarta Sans", sans-serif;
       background:
-        radial-gradient(circle at 15% 10%, rgba(16, 185, 129, 0.22), transparent 35%),
-        radial-gradient(circle at 85% 30%, rgba(251, 191, 36, 0.12), transparent 30%),
+        linear-gradient(rgba(5, 20, 11, 0.82), rgba(5, 20, 11, 0.92)),
+        url('https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1600&auto=format&fit=crop&q=80') center/cover fixed no-repeat,
         var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -100,8 +100,11 @@
       -webkit-backdrop-filter: blur(20px);
     }
 
-    /* TOP NOTICE BAR - PRICE CLEARLY VISIBLE */
+    /* TOP NOTICE BAR - STICKY PRICE BAR */
     .top-price-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       background: linear-gradient(90deg, #10b981, #f59e0b);
       color: #042f1a;
       text-align: center;
@@ -118,7 +121,7 @@
     .top-price-bar a {
       background: #042f1a;
       color: #ffffff;
-      padding: 5px 14px;
+      padding: 6px 16px;
       border-radius: 20px;
       font-size: 11px;
       transition: 0.3s;
@@ -138,8 +141,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: sticky;
-      top: 12px;
+      position: relative;
       z-index: 20;
     }
 
@@ -223,14 +225,6 @@
       background: var(--green-accent);
       box-shadow: 0 0 15px var(--green-accent);
       animation: pulse 1.5s infinite;
-    }
-
-    .offline-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #ef4444;
-      box-shadow: 0 0 10px #ef4444;
     }
 
     @keyframes pulse {
@@ -366,12 +360,58 @@
       box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
     }
 
+    /* PAYMENT METHODS BANNER SECTION */
+    .payment-methods-card {
+      margin: 30px 0 10px;
+      padding: 20px;
+      border-radius: 24px;
+      text-align: center;
+    }
+
+    .payment-methods-card h3 {
+      font-size: 14px;
+      color: var(--yellow-main);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .payment-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .payment-badge {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      padding: 10px 18px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .payment-badge img {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    .payment-badge span {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
     /* STATS */
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
-      margin: 40px 0 50px;
+      margin: 30px 0 50px;
     }
 
     .stat {
@@ -418,32 +458,33 @@
       margin-top: 5px;
     }
 
+    .category-tabs-container {
+      width: 100%;
+      margin-bottom: 25px;
+    }
+
     .category-tabs {
       display: flex;
       gap: 10px;
-      overflow-x: auto;
-      padding-bottom: 15px;
-      margin-bottom: 25px;
-      scrollbar-width: none;
-    }
-
-    .category-tabs::-webkit-scrollbar {
-      display: none;
+      width: 100%;
+      flex-wrap: wrap;
     }
 
     .tab-btn {
-      padding: 10px 20px;
+      padding: 10px 18px;
       border-radius: 30px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
       color: var(--muted);
       font-size: 12px;
       font-weight: 600;
-      white-space: nowrap;
       transition: 0.3s;
       display: flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      gap: 6px;
+      flex: 1 1 auto;
+      text-align: center;
     }
 
     .tab-btn.active, .tab-btn:hover {
@@ -633,13 +674,13 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      max-height: 280px;
+      max-height: 380px;
       overflow: hidden;
       position: relative;
     }
 
     .payout-item {
-      padding: 14px 18px;
+      padding: 12px 18px;
       border-radius: 16px;
       display: flex;
       justify-content: space-between;
@@ -648,6 +689,19 @@
       border: 1px solid rgba(255, 255, 255, 0.06);
       font-size: 12px;
       animation: slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .payout-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .payout-badge-img {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
+      border-radius: 4px;
     }
 
     @keyframes slideDown {
@@ -1167,10 +1221,10 @@
 
 <body>
 
-<!-- TOP BANNER - BEI WAZI NA LINK YA KUSAJILI -->
+<!-- TOP BANNER - BEI WAZI NA LINK YA KUSAJILI (STAYS VISIBLE EVEN ON SCROLLING) -->
 <div class="top-price-bar">
-  <span>🔥 ADA YA USAJILI: TZS 14,500 TU | Ukitaka kujiunga sasa:</span>
-  <a href="https://kozenasite.site/register?ref=Nico45" target="_blank">Bofya Hapa Kujiunga →</a>
+  <span>🔥 ADA YA USAJILI: TZS 14,500 TU | Ukitaka kujiunga sasa Bofya Hapa:</span>
+  <a href="https://kozenasite.site/register?ref=Nico45" target="_blank">Kujiunga Sasa (14,500 TZS) →</a>
 </div>
 
 <div class="container">
@@ -1222,7 +1276,7 @@
     </h1>
 
     <p>
-      Anza mazungumzo na watalii wanaopenda Tanzania na wanaotaka kujifunza Kiswahili kulingana na mapenzi yao (Wanyama, Utamaduni, Milima, Mimea na Maporomoko ya Maji).
+      Anza mazungumzo na watalii wanaopenda Tanzania na wanaotaka kujifunza Kiswahili kulingana na mapenzi yao (Utamaduni, Wanyama, Asili, Mimea, Milima na Maporomoko).
     </p>
 
     <!-- HOOK EMBEDDED -->
@@ -1233,7 +1287,7 @@
       </div>
     </div>
 
-    <!-- WHATSAPP CHANNEL CTA BANNER -->
+    <!-- WHATSAPP HERO CTA BANNER -->
     <div class="wa-banner">
       <div class="wa-banner-info">
         <div class="wa-icon">💬</div>
@@ -1249,6 +1303,11 @@
 
   </section>
 
+  <!-- PAYMENT METHODS BANNER SECTION -->
+  <div class="payment-methods-card glass">
+    <h3>Njia za Malipo Zilizothibitishwa (Kujiunga & Kutoa Hela)</h3>
+    <div class="payment-grid" id="paymentGrid"></div>
+  </div>
 
   <!-- STATS -->
   <section class="stats">
@@ -1283,14 +1342,16 @@
     </div>
 
     <!-- CATEGORY FILTER TABS -->
-    <div class="category-tabs" id="categoryTabs">
-      <button class="tab-btn active" onclick="filterCategory('all', this)">✨ Wote (All)</button>
-      <button class="tab-btn" onclick="filterCategory('culture', this)">🎭 Utamaduni (Culture)</button>
-      <button class="tab-btn" onclick="filterCategory('animals', this)">🦁 Wanyama (Animals)</button>
-      <button class="tab-btn" onclick="filterCategory('nature', this)">🌿 Asili (Nature)</button>
-      <button class="tab-btn" onclick="filterCategory('vegetation', this)">🌴 Mimea (Vegetation)</button>
-      <button class="tab-btn" onclick="filterCategory('mountains', this)">🏔️ Milima (Mountains)</button>
-      <button class="tab-btn" onclick="filterCategory('waterfalls', this)">🌊 Maporomoko (Waterfalls)</button>
+    <div class="category-tabs-container">
+      <div class="category-tabs" id="categoryTabs">
+        <button class="tab-btn active" onclick="filterCategory('all', this)">✨ Wote (All)</button>
+        <button class="tab-btn" onclick="filterCategory('culture', this)">🎭 Utamaduni (Culture)</button>
+        <button class="tab-btn" onclick="filterCategory('animals', this)">🦁 Wanyama (Animals)</button>
+        <button class="tab-btn" onclick="filterCategory('nature', this)">🌿 Asili (Nature)</button>
+        <button class="tab-btn" onclick="filterCategory('vegetation', this)">🌴 Mimea (Vegetation)</button>
+        <button class="tab-btn" onclick="filterCategory('mountains', this)">🏔️ Milima (Mountains)</button>
+        <button class="tab-btn" onclick="filterCategory('waterfalls', this)">🌊 Maporomoko (Waterfalls)</button>
+      </div>
     </div>
 
     <div class="profiles" id="profiles"></div>
@@ -1395,7 +1456,7 @@
 
         <div class="price-tag">
           Ada ya Usajili: <strong>TZS 14,500 tu</strong><br>
-          <small>(Utapata Access ya Kuchat bila kikomo & Kuweka Pesa Zako M-Pesa/Airtel/Tigo)</small>
+          <small>(Utapata Access ya Kuchat bila kikomo & Kuweka Pesa Zako M-Pesa/Mixx/Airtel/Halopesa)</small>
         </div>
 
         <a href="https://kozenasite.site/register?ref=Nico45" class="register-btn">
@@ -1434,6 +1495,29 @@
   */
   const REGISTRATION_URL = "https://kozenasite.site/register?ref=Nico45";
 
+  /*
+    ==========================================
+    PAYMENT BANNERS DATA (BASE64 BADGES)
+    ==========================================
+  */
+  const paymentBanners = [
+    {
+      name: "Mixx by Yas",
+      img: "data:image/png;base64,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"
+    },
+    {
+      name: "M-Pesa",
+      img: "data:image/png;base64,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WFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWFWF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"
+    },
+    {
+      name: "Airtel Money",
+      img: "data:image/png;base64,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"
+    },
+    {
+      name: "Halopesa",
+      img: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKQAAACUCAMAAAAqEXLeAAAAxlBMVEXwVSX+/v7////vVif+/vz8///wkXzsmYP//f/vTQ/xThjtQwDtSAD0tKn/+PLxUh/pYDrpckrsk3/6zMD36OPpViPpZj/67+fy19DoWSzrnobxuafsXCr//fb0x7nyUyr10sz34tjvh2nzwLD21srqbk7zzr7tqJXqYTPpeFvpfVf0rp/umYnnYkX0s5/yUjLymX7rmXbwj3LjhmzbbUbwybLrWDb43MfyOgDxw6j1yMTxeWbucVrwurHpiGHhUBHuuJvyiHSxo8T2AAAQRUlEQVR4nO1ci3/aOBI2egRLcixI/eBlHD/AmKQsTa9p2t1s2v//n7oZ2RCbJL0fkGy5u0y7C7Wx/HlmNPPNSGBxxhhJVsshpdbJCKXD5VXCIwBndTqEXVtKyt8NqiVUSmVduIR1LMaTQFi3lMa/G1RTYupTLYOE2xZ3Z9I6Ies+CrXkR5db5Fr8biQvi1h3rOQktVcJQEuslfrjd+N4WahzZS3lCavQ10treMIAY6op2Pmk4suOUOs0I8xWThvdu7zLu7zLu7zL/7loKfUxV4u3LBSpFs5s/WOkD6IT1NKqd7Yavx1CKPmuv7o2GfiHXO1bevYhZIQMj7DAr4XKT4QTxgeTgy7Xi4QzFhH/7QA656TD7UMBWr2Ic955Q4AWAuwcA5Bgy+cd4P8sQN2L2KkDfNfgW2mQav0qrdxjAbrPAqSUxlQqkDsltHVMz/RtAFqW0EG6ml4O5j/Ws+ExXKQFUAOveWEwtJaU9WlqSa3x0PMAqSWs7iWkaBIRpt3B/fIvh1L33vLkI/AY3Iawu3v4/339fTNbaLpZX/Y313x/sQD13d39I3x62y6KYI/1p3vd3S331fB5eB2ahd/3Iu3v3t42/3f0i/3yC3y+A/i3A/T311LJeJ0WR394fnhy70L38f/u5iI1Hsn43fL4oQD6qI/A/XThR9E1313OAFzcXdw3E/32+s7y5gU4E9Srm3eXz//7d18BvLs6u3q1/OHLp9UfP301Pnz49mO8X2c9u/j5+/vJ8ur59s0vX/m1u7u82T3+tXvj397dvdh++uuv04uPzy+/Pfx3s5p/23p+9f/2m9Pq9XN+/e3n34G7m4f/1f0E3kSAn7ePqS+b4/P2e/z87v/S938G3AzeN8v5+fnd4a/v32a/v69u/u8j319v25/X29eXN+/3f6w/fvt7Odt++fD4+L/1yevvLw5vb/4H3fX+eL/efr5dfv2xf3o2vfnl3e/vP5/uL+9v37y9uXm///n3d+D1/x3+AnX7O2S39X0H3j2/uv38z1/3j4fP+2P53u/++N1+/7R/eHk1+/72fv39L0i+efv22023+fL/y+/3f6x/fP/65e9vh/fv33//dfL1m4u3L7/fT7+efv/+5e3l/f/3E//w9v/fPv8XuvkO9uH+7er++/v1f4H74x+P5/eH78cf//vN6y+3Nze/3n//2P13/f+/+2X748vt9/f/++vh2e///3p5s3m1ef7z5eX/AN/++fn94X8Xb/89fvvp+f2Xfyxvf7v94f3l/d2L4f/y8/3ly+f399+eL+f3d69/fX95enPze/Xl3fI3fP779/fN//8A3d1tfy/X1/vr95sX8G9f3t5/3fz95/ef4I/3l3fL//8B+rE/3j/t//2fAzebr6vN7fI34ObH/f3Lq9ub61e//438+Ofx+923m9ffb1/f3Ny8vvv2592//fn38vb9/3y1fPP1/XfI/uun/X8A/nL5zff369tP63sIvvv/f/f/Gff/m/vff/94+PLy7vX363/+/QvS9uN//3u5f/f3e/X9w28/ff/lF/jh2+f/++fD37f3P7++ef/+69vfvwNfbm++/fTrze3fP37/cvN/v3x6eLh///fvhxf/fvx+v31/f/vx39evL57f/frLzS+vfvn97e1vP/3z7sX+8/f301eb/wP3D7/++e/r5c37T3+vf//nn583X16+/fnm+3///fn7j/9/Xnz+5cf7f15e3P78A7z+7u769evv355s3/9/AAnpYm0S2H1+AAAAAElFTkSuQmCC"
+    }
+  ];
 
   /*
     ==========================================
@@ -1460,11 +1544,23 @@
   // Initialize display on load
   updateBalanceDisplay();
 
+  // Render Payment Banners
+  function renderPaymentBanners() {
+    const grid = document.getElementById("paymentGrid");
+    grid.innerHTML = paymentBanners.map(p => `
+      <div class="payment-badge">
+        <img src="${p.img}" alt="${p.name}">
+        <span>${p.name}</span>
+      </div>
+    `).join('');
+  }
+  renderPaymentBanners();
+
 
   /*
     ==========================================
-    PROFILES DATA (ANGALAU 8 PER GROUP)
-    NO DUPLICATE NAMES OR IMAGES!
+    PROFILES DATA (STRICT: ANGALAU 8 PER GROUP)
+    STRICTLY UNIQUE NAMES & UNIQUE AVATARS ACROSS ALL GROUPS
     INCLUDES WHITE & AFRICAN TOURISTS FOR REALISM
     ==========================================
   */
@@ -1475,10 +1571,12 @@
     {
       id: 101,
       name: "Jessica Miller",
+      age: 26,
+      bio: "Anapenda kujifunza kuhusu mila za Watanzania, ngoma za asili na ukarimu.",
       country: "🇺🇸 United States",
       category: "culture",
       categoryLabel: "Utamaduni",
-      status: "online", // online, offline, typing
+      status: "online",
       image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
       price: "18,500 TZS",
       replies: [
@@ -1491,6 +1589,8 @@
     {
       id: 102,
       name: "Pierre Dubois",
+      age: 32,
+      bio: "Mpiga picha kutoka Ufaransa anayetaka kujifunza maneno ya sherehe na chakula cha asili.",
       country: "🇫🇷 France",
       category: "culture",
       categoryLabel: "Utamaduni",
@@ -1507,6 +1607,8 @@
     {
       id: 103,
       name: "Aminata Diallo",
+      age: 28,
+      bio: "Mtalii kutoka Senegal anayetembelea kijiji cha Maasai kujifunza utamaduni.",
       country: "🇸🇳 Senegal",
       category: "culture",
       categoryLabel: "Utamaduni",
@@ -1514,15 +1616,17 @@
       image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&auto=format&fit=crop&q=80",
       price: "19,000 TZS",
       replies: [
-        "Salama! I am visiting Maasai villages. How do I ask 'How are you' in respectful Maasai/Swahili?",
+        "Salama! I am visiting Maasai villages. How do I ask 'How are you' in respectful Swahili?",
         "Habari gani! Perfect. What is the Swahili word for 'Cultural Heritage'?",
-        "Uritithi wa Utamaduni! I am amazed. How do I say 'Thank you for your warmth'?",
+        "Urithi wa Utamaduni! I am amazed. How do I say 'Thank you for your warmth'?",
         "Asante kwa ukarimu wako! Swahili language is so melodic!"
       ]
     },
     {
       id: 104,
       name: "Klaus Schmidt",
+      age: 41,
+      bio: "Mtafiti wa historia ya Zanzibar na Mji Mkongwe, anapenda sana vitu vya kale.",
       country: "🇩🇪 Germany",
       category: "culture",
       categoryLabel: "Utamaduni",
@@ -1539,6 +1643,8 @@
     {
       id: 105,
       name: "Sofia Rossi",
+      age: 25,
+      bio: "Msanii wa vinyago kutoka Italia anayetaka kununua sanaa za mikono masokoni.",
       country: "🇮🇹 Italy",
       category: "culture",
       categoryLabel: "Utamaduni",
@@ -1555,6 +1661,8 @@
     {
       id: 106,
       name: "Kofi Mensah",
+      age: 30,
+      bio: "Mwanamuziki kutoka Ghana anayetaka kuunganisha sanaa ya Afrika Magharibi na Mashariki.",
       country: "🇬🇭 Ghana",
       category: "culture",
       categoryLabel: "Utamaduni",
@@ -1571,6 +1679,8 @@
     {
       id: 107,
       name: "Charlotte Smith",
+      age: 29,
+      bio: "Anahudhuria harusi ya kijadi visiwani Zanzibar, anataka kujua maneno ya sherehe.",
       country: "🇬🇧 United Kingdom",
       category: "culture",
       categoryLabel: "Utamaduni",
@@ -1587,6 +1697,8 @@
     {
       id: 108,
       name: "Lars Lindqvist",
+      age: 35,
+      bio: "Mpenzi wa muziki wa Taarab, anapenda mashairi na Nyimbo za ushairi za uswahilini.",
       country: "🇸🇪 Sweden",
       category: "culture",
       categoryLabel: "Utamaduni",
@@ -1607,6 +1719,8 @@
     {
       id: 201,
       name: "Markus Weber",
+      age: 34,
+      bio: "Mpenzi wa Safari katika mbuga za Serengeti, anapenda kupiga picha Simba na Tembo.",
       country: "🇩🇪 Germany",
       category: "animals",
       categoryLabel: "Wanyama",
@@ -1623,6 +1737,8 @@
     {
       id: 202,
       name: "Kenji Sato",
+      age: 27,
+      bio: "Mpiga picha wa wanyamapori katika kreta ya Ngorongoro, anatafuta Chui.",
       country: "🇯🇵 Japan",
       category: "animals",
       categoryLabel: "Wanyama",
@@ -1639,6 +1755,8 @@
     {
       id: 203,
       name: "Zuri Okafor",
+      age: 31,
+      bio: "Anatembelea Hifadhi ya Ruaha kuangalia Kiboko na Faru wa porini.",
       country: "🇳🇬 Nigeria",
       category: "animals",
       categoryLabel: "Wanyama",
@@ -1655,6 +1773,8 @@
     {
       id: 204,
       name: "Oliver Taylor",
+      age: 38,
+      bio: "Anatoka Australia kuja kutazama Pundamilia na Nyati wakivuka mto Mara.",
       country: "🇦🇺 Australia",
       category: "animals",
       categoryLabel: "Wanyama",
@@ -1671,6 +1791,8 @@
     {
       id: 205,
       name: "Emma Watson",
+      age: 26,
+      bio: "Mtafiti wa Sokwe na Nyani katika hifadhi za Gombe na Mahale.",
       country: "🇨🇦 Canada",
       category: "animals",
       categoryLabel: "Wanyama",
@@ -1687,6 +1809,8 @@
     {
       id: 206,
       name: "Lucas Moretti",
+      age: 33,
+      bio: "Anapenda kujua spishi zote za Swala na Paa waliopo katika mbuga za Mikumi.",
       country: "🇦🇷 Argentina",
       category: "animals",
       categoryLabel: "Wanyama",
@@ -1703,7 +1827,9 @@
     {
       id: 207,
       name: "Nia Abebe",
-      country: "🇪🇹 Ethiopia",
+      age: 24,
+      bio: "Mtaalamu wa ndege wa porini, anataka kutazama Flamingo katika Ziwa Manyara.",
+      country: "🇪thiopia",
       category: "animals",
       categoryLabel: "Wanyama",
       status: "online",
@@ -1711,14 +1837,16 @@
       price: "18,000 TZS",
       replies: [
         "Selam! What is 'Eagle' and 'Ostrich' in Swahili bird watching?",
-        "Esteri/Tai na Mbuni! Fantastic! How do I say 'Beautiful wild birds'?",
+        "Tai na Mbuni! Fantastic! How do I say 'Beautiful wild birds'?",
         "Ndege wazuri wa porini! What is 'Flamingo at Lake Manyara'?",
-        "Mzingimzingi/Flamingo ziwani! Beautiful language!"
+        "Flamingo ziwani! Beautiful language!"
       ]
     },
     {
       id: 208,
       name: "Henrik Nielsen",
+      age: 45,
+      bio: "Mgeni anayependa Night Safaris kuangalia wanyama wanaowinda usiku.",
       country: "🇩🇰 Denmark",
       category: "animals",
       categoryLabel: "Wanyama",
@@ -1739,6 +1867,8 @@
     {
       id: 301,
       name: "Elena Rostova",
+      age: 27,
+      bio: "Mwapiga picha wa mazingira ya asili, anapenda machweo ya jua baharini.",
       country: "🇬🇧 United Kingdom",
       category: "nature",
       categoryLabel: "Asili",
@@ -1755,6 +1885,8 @@
     {
       id: 302,
       name: "Sophia Martinez",
+      age: 23,
+      bio: "Mtalii anayependa kupiga kambi na kulinda mazingira ya kiasili.",
       country: "🇪🇸 Spain",
       category: "nature",
       categoryLabel: "Asili",
@@ -1771,6 +1903,8 @@
     {
       id: 303,
       name: "Tariq Al-Mansoor",
+      age: 39,
+      bio: "Mvumbuzi wa mabonde ya ufa na maajabu ya kiasili ya Afrika Mashariki.",
       country: "🇦🇪 UAE",
       category: "nature",
       categoryLabel: "Asili",
@@ -1787,6 +1921,8 @@
     {
       id: 304,
       name: "Aisha Kamara",
+      age: 29,
+      bio: "Mtalii anayetembelea fukwe za mchanga mweupe visiwani Zanzibar.",
       country: "🇸🇱 Sierra Leone",
       category: "nature",
       categoryLabel: "Asili",
@@ -1803,6 +1939,8 @@
     {
       id: 305,
       name: "Jan De Jong",
+      age: 36,
+      bio: "Anapenda mazingira tulivu ya visiwa na upepo mwanana wa baharini.",
       country: "🇳🇱 Netherlands",
       category: "nature",
       categoryLabel: "Asili",
@@ -1819,6 +1957,8 @@
     {
       id: 306,
       name: "Camila Fernandez",
+      age: 28,
+      bio: "Anapenda usiku wenye nyota tele mbugani na moto wa kambi.",
       country: "🇨🇱 Chile",
       category: "nature",
       categoryLabel: "Asili",
@@ -1835,6 +1975,8 @@
     {
       id: 307,
       name: "Dmitry Ivanov",
+      age: 42,
+      bio: "Mvumbuzi wa mapango ya asili na chemchemi za maji ya moto.",
       country: "🇷🇺 Russia",
       category: "nature",
       categoryLabel: "Asili",
@@ -1851,6 +1993,8 @@
     {
       id: 308,
       name: "Chloe Bennett",
+      age: 30,
+      bio: "Mhifadhi mazingira anayetaka kujua jinsi Tanzania inavyolinda ikolojia.",
       country: "🇳🇿 New Zealand",
       category: "nature",
       categoryLabel: "Asili",
@@ -1871,6 +2015,8 @@
     {
       id: 401,
       name: "Mateo Silva",
+      age: 32,
+      bio: "Mtaalamu wa miti ya Mbuyu na misitu ya kitropiki kutoka Brazil.",
       country: "🇧🇷 Brazil",
       category: "vegetation",
       categoryLabel: "Mimea",
@@ -1887,6 +2033,8 @@
     {
       id: 402,
       name: "Ingrid Larsen",
+      age: 28,
+      bio: "Anapenda miti ya dawa katika milima ya Usambara na misitu ya asili.",
       country: "🇳🇴 Norway",
       category: "vegetation",
       categoryLabel: "Mimea",
@@ -1895,364 +2043,412 @@
       price: "16,500 TZS",
       replies: [
         "Hei! I want to learn about medicinal plants in Usambara Mountains. What is 'Medicinal herb'?",
-        "Mti wa dawa au Mimea ya Tiba! Great! How do I say 'Green Leaves'?",
-        "Majani ya kijani! Fantastic! What is 'Wild flower'?",
-        "Ua la porini! Takk skal du ha, very insightful!"
+        "Mti wa dawa au Mimea ya Tiba! Brilliant! How do I ask 'Does this plant cure fever?'",
+        "Je, mmea huu unatibu homa? Exactly! What is 'Tree leaves'?",
+        "Majani ya mti! Thank you, very informative!"
       ]
     },
     {
       id: 403,
-      name: "Jabari Mwangi",
-      country: "🇰🇪 Kenya",
+      name: "Kwame Asante",
+      age: 35,
+      bio: "Mkulima wa karafuu na viungo vya chakula, anapenda sana mimea ya asili.",
+      country: "🇬🇭 Ghana",
       category: "vegetation",
       categoryLabel: "Mimea",
       status: "online",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
       price: "18,000 TZS",
       replies: [
-        "Jambo jirani! What do Tanzanians call 'Coconut Tree' and 'Mango Tree'?",
-        "Mti wa Nazi (Mnazi) na Mwembe! Safi sana! What about 'Banana Plantation'?",
-        "Shamba la ndizi! Haha asante bro, East African vegetation is rich!"
+        "Hello my brother! What is 'Spices' and 'Coconut tree' in Swahili?",
+        "Viungo na Mnazi! Exactly! How do I say 'Fertile soil'?",
+        "Udongo wenye rutuba! Superb! What is 'Banana tree'?",
+        "Mmgomba! Asante sana my African brother!"
       ]
     },
     {
       id: 404,
-      name: "Claire Lefevre",
-      country: "🇧🇪 Belgium",
+      name: "Isabella Rossi",
+      age: 26,
+      bio: "Anatembelea mashamba ya maua na miembe ya matunda mjini Morogoro.",
+      country: "🇮🇹 Italy",
       category: "vegetation",
       categoryLabel: "Mimea",
       status: "offline",
-      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
-      price: "17,500 TZS",
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
+      price: "15,000 TZS",
       replies: [
-        "Bonjour! What is the Swahili word for 'Rainforest' in Jozani forest?",
-        "Msitu wa mvua! Splendid! How do you say 'Dense vegetation'?",
-        "Mimea iliyostawi sana! What is 'Acacia tree' on savannah?",
-        "Mti wa Mchongoma/Mshindano! Merci beaucoup!"
+        "Ciao! What is 'Beautiful flowers' and 'Ripe Mango' in Swahili?",
+        "Maua mazuri na Embe mbivu! Yum! How do I say 'Fresh fruit'?",
+        "Matunda mabichi au matamu! Perfect! What is 'Palm tree'?",
+        "Mchiganani au Mnazi! Bellissimo!"
       ]
     },
     {
       id: 405,
-      name: "Siddharth Patel",
-      country: "🇮🇳 India",
+      name: "Youssef El-Hadary",
+      age: 38,
+      bio: "Mtafiti wa miti ya mikoko inayolinda fukwe za bahari ya Hindi.",
+      country: "🇪🇬 Egypt",
       category: "vegetation",
       categoryLabel: "Mimea",
       status: "online",
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
-      price: "18,500 TZS",
+      price: "17,500 TZS",
       replies: [
-        "Namaste! I am interested in Spice Farms. What is 'Cardamom' and 'Vanilla' in Swahili?",
-        "Eleni na Vanila! Superb! How do I ask 'Can I taste fresh spices?'",
-        "Je, naweza kuonja viungo vibichi? Excellent! What is 'Botanical Garden'?",
-        "Bustani ya mimea! Shukriya my friend!"
+        "Salam! How do you say 'Mangrove forest' in Swahili?",
+        "Msitu wa Mikoko! Excellent! How do I say 'Deep roots'?",
+        "Mizizi mirefu ya ndani! Great! What is 'Dense jungle'?",
+        "Msitu mnene! Shukran Habibi!"
       ]
     },
     {
       id: 406,
-      name: "Grace O'Connor",
-      country: "🇮🇪 Ireland",
+      name: "Hannah Fischer",
+      age: 30,
+      bio: "Anapenda maua ya asili yanayoota mlimani na misitu ya mvua.",
+      country: "🇦🇹 Austria",
       category: "vegetation",
       categoryLabel: "Mimea",
-      status: "online",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
-      price: "19,500 TZS",
+      status: "typing",
+      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
+      price: "18,500 TZS",
       replies: [
-        "Top of the morning! What is 'Shade under big tree' in Swahili?",
-        "Kivuli chini ya mti mkubwa! Lovely! What is 'Fertile soil'?",
-        "Udongo wenye rutuba! Beautiful! What about 'Wild berries'?",
-        "Matunda ya porini! Sláinte, thank you so much!"
+        "Hallo! What is 'Wild orchid' in Swahili?",
+        "Ua la porini! So sweet! How do I say 'Green leaves in spring'?",
+        "Majani ya kijani kibichi! Lovely! What is 'Big trunk'?",
+        "Jina la mti au Shina kubwa! Danke sehr!"
       ]
     },
     {
       id: 407,
-      name: "Tariq Kwame",
-      country: "🇿🇦 South Africa",
+      name: "Samuel Osei",
+      age: 33,
+      bio: "Anajifunza kuhusu kilimo cha kahawa mkoani Kilimanjaro.",
+      country: "🇨🇩 DRC",
       category: "vegetation",
       categoryLabel: "Mimea",
-      status: "typing",
-      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80",
-      price: "17,000 TZS",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=600&auto=format&fit=crop&q=80",
+      price: "16,000 TZS",
       replies: [
-        "Sawubona! What is the Swahili word for 'Planting trees for environment'?",
-        "Panda miti kwa mazingira! Sharp! What is 'Forest ranger'?",
-        "Mlinzi wa msitu! Excellent! What is 'Palm tree beach'?",
-        "Pwani ya minazi! Siyabonga bro!"
+        "Bonjour ndeko! What is 'Coffee plantation' and 'Tea leaves'?",
+        "Shamba la kahawa na Majani ya chai! Super! How do I say 'Harvest time'?",
+        "Msimu wa mavuno! Perfect! What is 'Sweet sugarcane'?",
+        "Mwao wa miwa matamu! Mbote mingi!"
       ]
     },
     {
       id: 408,
-      name: "Miya Tanaka",
-      country: "🇯🇵 Japan",
+      name: "Abigail Adams",
+      age: 27,
+      bio: "Mgeni anayependa harufu ya karafuu na mdalasini mashambani.",
+      country: "🇺🇸 United States",
       category: "vegetation",
       categoryLabel: "Mimea",
       status: "offline",
-      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&auto=format&fit=crop&q=80",
-      price: "16,000 TZS",
+      image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=600&auto=format&fit=crop&q=80",
+      price: "19,500 TZS",
       replies: [
-        "Konnichiwa! What is 'Orchid flower' and 'Green bamboo' in Swahili?",
-        "Ua la Okidi na Mwanzi wa kijani! Sugoi! What is 'Natural forest scent'?",
-        "Harufu nzuri ya msitu! Arigato gozaimasu!"
+        "Hi! What is 'Fragrant spice garden' in Swahili?",
+        "Bustani ya viungo vyenye harufu nzuri! Awesome! How do I say 'Nutmeg'?",
+        "Kungumanga! Nice! What is 'Vanilla plant'?",
+        "Mmea wa vanila! You are the best teacher!"
       ]
     },
 
     // ------------------------------------
-    // 🏔️ 5. MILIMA (MOUNTAINS & CLIMBING) - 8 PROFILES
+    // 🏔️ 5. MILIMA (MOUNTAINS & TREKKING) - 8 PROFILES
     // ------------------------------------
     {
       id: 501,
       name: "Liam O'Connor",
-      country: "🇦🇺 Australia",
+      age: 29,
+      bio: "Anapanda Mlima Kilimanjaro upande wa Machame Route, anapenda theluji summit.",
+      country: "🇮🇪 Ireland",
       category: "mountains",
       categoryLabel: "Milima",
       status: "online",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
-      price: "18,000 TZS",
+      image: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=600&auto=format&fit=crop&q=80",
+      price: "21,000 TZS",
       replies: [
-        "G'day mate! 🦘 I am climbing Mt. Kilimanjaro next month! What is the famous phrase used on mountain trails?",
-        "Pole pole! 🏔️ Yes! 'Slowly slowly'! How do I say 'We reached the peak of the mountain'?",
-        "Tumefika kileleni! What is 'Mount Meru' and 'Snow on the mountain' in Swahili?",
-        "Barafu mlimani! Cheers mate, now I feel prepared to conquer Uhuru Peak!"
+        "Top of the morning! 🏔️ I am climbing Mount Kilimanjaro! What is 'High Mountain' & 'Snow'?",
+        "Mlima mrefu na Theluji! ❄️ Incredible! What is the famous phrase porters use when hiking slowly?",
+        "Pole pole! Ah yes! 'Pole pole ndio mwendo'! How do I say 'We reached the peak Uhuru Peak'?",
+        "Tufika kileleni Uhuru Peak! Fantastic! I am super motivated now!"
       ]
     },
     {
       id: 502,
-      name: "Franziska Huber",
-      country: "🇦🇹 Austria",
-      category: "mountains",
-      categoryLabel: "Milima",
-      status: "online",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
-      price: "19,500 TZS",
-      replies: [
-        "Servus! I am an Alpine climber coming to Kilimanjaro. How do you say 'Mountain Guide'?",
-        "Kiongozi wa Mlimani! Excellent! What is 'Climbing gear & boots'?",
-        "Vifaa na viatu vya kupandia mlima! Good! How do I ask 'How far to next camp?'",
-        "Ni umbali gani hadi kambi inayofuata? Danke schön!"
-      ]
-    },
-    {
-      id: 503,
-      name: "Thabo Mokoena",
-      country: "🇿🇦 South Africa",
+      name: "Sven Erikson",
+      age: 37,
+      bio: "Mpanda milima kutoka Sweden anayepanda Mlima Meru na milima ya Udzungwa.",
+      country: "🇸🇪 Sweden",
       category: "mountains",
       categoryLabel: "Milima",
       status: "typing",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80",
-      price: "17,500 TZS",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&auto=format&fit=crop&q=80",
+      price: "18,000 TZS",
       replies: [
-        "Sharp sharp bro! What is 'Porter who carries luggage' on mountain?",
-        "Mpagazi/Mbeba mizigo! Respect to them! How do I say 'High altitude'?",
-        "Kimo cha juu cha mlima! What is 'Cold mountain wind'?",
-        "Upepo baridi wa mlimani! Sharp brother, asante!"
+        "Hej! I am hiking Mount Meru! What is 'Climbing a steep hill' in Swahili?",
+        "Kupanda mlima mwinuko! Great! How do I say 'The summit is near'?",
+        "Kilele kipo karibu! Thank you! What is 'Mountain guide'?",
+        "Kiongozi wa mlima! Tack so mycket!"
+      ]
+    },    {
+      id: 503,
+      name: "Fatima Al-Kouri",
+      age: 31,
+      bio: "Mtalii anayetaka kuona mawingu chini ya kilele cha Mlima Kilimanjaro.",
+      country: "🇶🇦 Qatar",
+      category: "mountains",
+      categoryLabel: "Milima",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&auto=format&fit=crop&q=80",
+      price: "22,000 TZS",
+      replies: [
+        "Marhaba! How do you say 'Clouds below the mountain' in Swahili?",
+        "Mawingu chini ya mlima! Breathtaking! How do I say 'Cold weather'?",
+        "Hali ya hewa ya baridi! Yes, it's freezing up here! What is 'Walking stick'?",
+        "Fimbo ya kutembelea! Very useful!"
       ]
     },
     {
       id: 504,
-      name: "Freja Lind",
-      country: "🇩🇰 Denmark",
+      name: "Jean-Luc Moreau",
+      age: 44,
+      bio: "Mwandishi anayerekodi safari za milimani za Uluguru na Pare Mountains.",
+      country: "🇫🇷 France",
       category: "mountains",
       categoryLabel: "Milima",
       status: "offline",
-      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
-      price: "16,000 TZS",
+      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80",
+      price: "17,000 TZS",
       replies: [
-        "Hej! What is 'Volcanic Crater peak' in Swahili?",
-        "Kilele cha Shimo la Volkano! Amazing! How do I say 'Breathtaking view from summit'?",
-        "Muonekano wa kuvutia kutoka kileleni! What is 'Hiking trail'?",
-        "Njia ya kupanda mlima! Tak for hjælpen!"
+        "Salut! What is 'Rock climbing' and 'Deep ravine' in Swahili?",
+        "Kupanda miamba na Korongo la kina! Superb! How do I say 'Mountain view'?",
+        "Muonekano wa mlima! Magnifique! What is 'High altitude'?",
+        "Kimo cha juu kabisa! Merci beaucoup!"
       ]
     },
     {
       id: 505,
-      name: "Giacomo Marino",
-      country: "🇮🇹 Italy",
+      name: "Jabari Taylor",
+      age: 28,
+      bio: "Anapanda Mlima Hanang na kuangalia jamii za wafugaji wa Barbaig.",
+      country: "🇰🇪 Kenya",
       category: "mountains",
       categoryLabel: "Milima",
       status: "online",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=80",
-      price: "18,500 TZS",
+      image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=600&auto=format&fit=crop&q=80",
+      price: "16,500 TZS",
       replies: [
-        "Ciao! What is 'Mountain summit sunrise' in Swahili?",
-        "Mawio ya jua kileleni mwa mlima! Bellissimo! What is 'Rock climbing'?",
-        "Kupanda miamba! Great! How do I say 'Never give up on summit'?",
-        "Usikate tamaa hadi kileleni! Grazie mille!"
+        "Sasa bro! What is 'Hiker's backpack' and 'Heavy boots' in Swahili?",
+        "Begi la mgongoni na Viatu mizigo! Haha top! How do I say 'Keep pushing ahead'?",
+        "Songa mbele bila kukata tamaa! Wise words! What is 'Sunrise peak'?",
+        "Mawio kileleni! Mazingira hatari sana bro!"
       ]
     },
     {
       id: 506,
-      name: "Sarah Jenkins",
-      country: "🇺🇸 United States",
+      name: "Astrid Lindgren",
+      age: 25,
+      bio: "Anapenda picha za kilele cha Kibo na Mawenzi zikiwa na theluji.",
+      country: "🇫🇮 Finland",
       category: "mountains",
       categoryLabel: "Milima",
       status: "typing",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=80",
-      price: "20,000 TZS",
+      image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&auto=format&fit=crop&q=80",
+      price: "19,000 TZS",
       replies: [
-        "Hi! What is 'Uhuru Peak' literal meaning in Swahili?",
-        "Kilele cha Uhuru (Freedom Peak)! Wow, so inspiring! What is 'Glacier ice'?",
-        "Barafu ya Mlima! What do hikers chant together?",
-        "Hakuna Matata, Pole Pole! Love East Africa!"
+        "Moi! What is 'Ice glacier' in Swahili on Mount Kilimanjaro?",
+        "Barafu ya mlimani! Amazing! How do I ask 'How many days to the top?'",
+        "Inachukua siku ngapi kufika kileleni? Good question! What is 'Camp site'?",
+        "Eneo la kuweka kambi! Kiitos!"
       ]
     },
     {
-      id: 507,
-      name: "Bakari Keita",
-      country: "🇲🇱 Mali",
+      id: 701,
+      name: "Lucas Vance",
+      age: 33,
+      bio: "Mchezaji wa michezo ya milimani anayependa njia za miteremko mikali.",
+      country: "🇨🇦 Canada",
       category: "mountains",
       categoryLabel: "Milima",
       status: "online",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
-      price: "17,000 TZS",
+      image: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=600&auto=format&fit=crop&q=80",
+      price: "18,500 TZS",
       replies: [
-        "Bonjour brother! How do you say 'Mountain ridge' and 'Deep valley'?",
-        "Safu ya mlima na Bonde la kina! Excellent! What is 'Mountain camp site'?",
-        "Kambi ya mlimani! What is 'Safe descent'?",
-        "Kuteremka kwa salama! Asante sana!"
+        "Hey man! What is 'Steep cliff' and 'Rocky trail' in Swahili?",
+        "Ukingo mwinuko na Njia ya mawe! Nice! How do I say 'Watch your step'?",
+        "Angalia hatua zako! Safety first! What is 'Strong mountain wind'?",
+        "Upepo mkali wa mlimani! Thanks!"
       ]
     },
     {
-      id: 508,
-      name: "Sven Svensson",
-      country: "🇸🇪 Sweden",
+      id: 702,
+      name: "Grace Kim",
+      age: 27,
+      bio: "Mtalii kutoka Korea Kusini anayependa kupiga picha maawio mlimani.",
+      country: "🇰🇷 South Korea",
       category: "mountains",
       categoryLabel: "Milima",
       status: "offline",
-      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&auto=format&fit=crop&q=80",
-      price: "16,500 TZS",
+      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
+      price: "17,500 TZS",
       replies: [
-        "Hej! What is 'Thermal jacket' and 'Sleeping bag' in Swahili?",
-        "Koti la baridi na Mfuko wa kulalia! Practical! How do I ask 'Is water frozen?'",
-        "Je, maji yameganda barafu? Tack så mycket my friend!"
+        "Annyeong! What is 'Foggy mountain morning' in Swahili?",
+        "Asubuhi yenye ukungu mlimani! So serene! How do I say 'Breathable air'?",
+        "Hewa ya kuvuta! Excellent! What is 'Rescue team'?",
+        "Kikundi cha uokoaji! Gamsahamnida!"
       ]
     },
 
     // ------------------------------------
-    // 🌊 6. MAPOROMOKO (WATERFALLS) - 8 PROFILES
+    // 🌊 6. MAPOROMOKO (WATERFALLS & RIVERS) - 8 PROFILES
     // ------------------------------------
     {
       id: 601,
-      name: "Hannah & Alex",
-      country: "🇨🇦 Canada",
-      category: "waterfalls",
-      categoryLabel: "Maporomoko",
-      status: "online",
-      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&auto=format&fit=crop&q=80",
-      price: "19,500 TZS",
-      replies: [
-        "Hello! 🌊 We want to visit Materuni Waterfalls in Moshi! How do you say 'Waterfalls' in Swahili?",
-        "Maporomoko ya maji! 😄 Great! How do we say 'Cold fresh river water'?",
-        "Maji baridi ya mto! Wow! How do we ask local guides 'Is it safe to swim here?'",
-        "Ni salama kuogelea hapa? Perfect! Thank you for being such a great guide!"
-      ]
-    },
-    {
-      id: 602,
-      name: "Mateo Rossi",
-      country: "🇨🇭 Switzerland",
-      category: "waterfalls",
-      categoryLabel: "Maporomoko",
-      status: "typing",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
-      price: "18,000 TZS",
-      replies: [
-        "Grüezi! I am visiting Kalambo Falls in Rukwa! What is 'Deep plunge pool' in Swahili?",
-        "Bwawa la kina chini ya mto! Amazing! What is 'Roaring sound of water'?",
-        "Mshindo mkubwa wa maji! What is 'Rainbow in the water mist'?",
-        "Upinde wa mvua kwenye ukungu wa maji! Spectacular!"
-      ]
-    },
-    {
-      id: 603,
-      name: "Zahra Hassan",
-      country: "🇰🇪 Kenya",
-      category: "waterfalls",
-      categoryLabel: "Maporomoko",
-      status: "online",
-      image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&auto=format&fit=crop&q=80",
-      price: "17,000 TZS",
-      replies: [
-        "Sasa dada! What is 'Sanje Waterfalls in Udzungwa' famous for in Swahili?",
-        "Maporomoko ya Sanje Udzungwa! Safi sana! How do I say 'Swimming in natural pool'?",
-        "Kuogelea kwenye dimbwi la asili! Perfect! What about 'Hiking up to waterfalls'?",
-        "Kupanda kuelekea maporomokoni! Asante sana dada!"
-      ]
-    },
-    {
-      id: 604,
-      name: "Finn O'Shea",
-      country: "🇮🇪 Ireland",
-      category: "waterfalls",
-      categoryLabel: "Maporomoko",
-      status: "offline",
-      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80",
-      price: "16,500 TZS",
-      replies: [
-        "Top of the evening! What is 'Refreshing water splash' in Swahili?",
-        "Mcharuzo wa maji yenye kuburudisha! Brilliant! What is 'Rocky waterfall edge'?",
-        "Pambazuko la miamba ya maporomoko! What is 'Pure water stream'?",
-        "Mto wa maji safi sana! Cheers mate!"
-      ]
-    },
-    {
-      id: 605,
-      name: "Ananya Sharma",
-      country: "🇮🇳 India",
+      name: "Maya Lin",
+      age: 26,
+      bio: "Mtalii anayetembelea maporomoko ya Materuni na Kalambo Falls.",
+      country: "🇨🇳 China",
       category: "waterfalls",
       categoryLabel: "Maporomoko",
       status: "online",
       image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
-      price: "18,500 TZS",
+      price: "18,000 TZS",
       replies: [
-        "Namaste! What is 'Waterfall in green jungle' in Swahili?",
-        "Maporomoko ya maji msituni! So beautiful! How do I say 'Taking photos by waterfall'?",
-        "Kupiga picha pembezoni mwa maporomoko! Excellent! What is 'Water mist'?",
-        "Ukungu wa maji! Dhanyawad my friend!"
+        "Nǐ hǎo! 🌊 I am visiting Materuni Waterfalls near Moshi! What is 'Waterfall' & 'Roaring water'?",
+        "Maporomoko ya maji na Maji yanayoguruma! 💦 Beautiful! How do I say 'Swimming in cool pool'?",
+        "Kuogelea kwenye dimbwi la maji baridi! So refreshing! What is 'Rainbow in spray'?",
+        "Upinde wa mvua kwenye maji! Tanzania is paradise! Xiexie!"
+      ]
+    },
+    {
+      id: 602,
+      name: "David Miller",
+      age: 35,
+      bio: "Mvumbuzi wa maporomoko ya Sanje iliyopo ndani ya hifadhi ya Udzungwa.",
+      country: "🇬🇧 United Kingdom",
+      category: "waterfalls",
+      categoryLabel: "Maporomoko",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
+      price: "20,000 TZS",
+      replies: [
+        "Hello mate! I am hiking Sanje Waterfalls in Udzungwa! How do you say 'Cascading water'?",
+        "Maji yanayomwagika kwa kasi! Brilliant! How do I ask 'Is the water deep?'",
+        "Je, maji haya yana kina kirefu? Helpful sentence! What is 'River bank'?",
+        "Ufukwe wa mto! Top notch Swahili teaching!"
+      ]
+    },
+    {
+      id: 603,
+      name: "Zahara Hassan",
+      age: 29,
+      bio: "Mtalii anayefanya tour ya miamba na maporomoko ya maji mkoani Tanga.",
+      country: "🇴🇲 Oman",
+      category: "waterfalls",
+      categoryLabel: "Maporomoko",
+      status: "typing",
+      image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&auto=format&fit=crop&q=80",
+      price: "17,000 TZS",
+      replies: [
+        "Marhaba! How do you say 'Splashing water' and 'Fast flowing river' in Swahili?",
+        "Maji yanayoruka na Mto unakotiririka kwa kasi! Wonderful! How do I say 'Clean spring'?",
+        "Chemchemi safi ya maji! Perfect! What is 'Mist over water'?",
+        "Ukungu juu ya maji! Shukran jazilan!"
+      ]
+    },
+    {
+      id: 604,
+      name: "Carlos Gomez",
+      age: 32,
+      bio: "Anapenda michezo ya Kayaking na Rafting katika mito yenye maporomoko.",
+      country: "🇲🇽 Mexico",
+      category: "waterfalls",
+      categoryLabel: "Maporomoko",
+      status: "offline",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
+      price: "16,500 TZS",
+      replies: [
+        "Hola amigo! What is 'Water rafting' and 'Dangerous currents' in Swahili?",
+        "Michezo ya majini na Mkondo hatari wa maji! Excellent! How do I say 'Life jacket'?",
+        "Koti la kuogelea / Uokoaji! Essential! What is 'Diving into water'?",
+        "Kuzamia majini! Muchas gracias hermano!"
+      ]
+    },
+    {
+      id: 605,
+      name: "Chloe Dubois",
+      age: 24,
+      bio: "Mpiga picha wa maporomoko ya Ndoro na Marangu kisiwani Kilimanjaro.",
+      country: "🇧🇪 Belgium",
+      category: "waterfalls",
+      categoryLabel: "Maporomoko",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=80",
+      price: "19,000 TZS",
+      replies: [
+        "Bonjour! How do you say 'Scenic waterfall viewpoint' in Swahili?",
+        "Eneo la kutazama maporomoko! Beautiful! How do I say 'Sound of falling water'?",
+        "Sauti ya maji yanayoporomoka! Musical! What is 'Moist air'?",
+        "Hewa yenye unyevunyevu! Merci beaucoup!"
       ]
     },
     {
       id: 606,
-      name: "Julien Mercer",
-      country: "🇫🇷 France",
+      name: "Faraji Mwamba",
+      age: 30,
+      bio: "Mtalii kutoka Zambia anayetazama Mto Rufiji na maporomoko ya Stiegler's Gorge.",
+      country: "🇿🇲 Zambia",
       category: "waterfalls",
       categoryLabel: "Maporomoko",
       status: "typing",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
-      price: "17,500 TZS",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80",
+      price: "18,500 TZS",
       replies: [
-        "Bonjour! What is 'Ndoro Waterfalls Marangu' in Swahili?",
-        "Maporomoko ya Ndoro Marangu! Magnifique! How do I ask 'Is stream water drinkable?'",
-        "Je, maji ya mto huu yananyweka? What is 'Natural water cascade'?",
-        "Mtiririko wa asili wa maji! Merci beaucoup!"
+        "Bwanji brother! What is 'Gorge' and 'Huge river' in Swahili?",
+        "Bonde la korongo na Mto mkubwa! Spot on! How do I say 'Water current'?",
+        "Mkondo wa maji! Exactly! What is 'Natural pool'?",
+        "Dimbwi la asili! Zikomo kwambiri!"
       ]
     },
     {
       id: 607,
-      name: "Ese Oghene",
-      country: "🇳🇬 Nigeria",
+      name: "Lukas Novak",
+      age: 36,
+      bio: "Anatembelea maporomoko ya Rusumo na kuangalia nguvu za maji ya mto Kagera.",
+      country: "🇨🇿 Czech Republic",
       category: "waterfalls",
       categoryLabel: "Maporomoko",
       status: "online",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80",
-      price: "19,000 TZS",
+      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&auto=format&fit=crop&q=80",
+      price: "15,500 TZS",
       replies: [
-        "How far bro! What do Swahili people call 'Huge roaring waterfall'?",
-        "Poromoko kubwa la maji yanayorindima! Odogwu Swahili! What about 'River bank picnic'?",
-        "Pikiniki kando ya mto! Sharp sharp bro, Swahili is lit!"
+        "Ahoj! What is 'Hydro power' and 'Fast waterfall' in Swahili?",
+        "Umeme wa maji na Maporomoko ya kasi! Great! How do I say 'Slippery rocks'?",
+        "Mawe yenye telezi! Good warning! What is 'Foaming water'?",
+        "Maji yenye povu! Děkuji!"
       ]
     },
     {
       id: 608,
-      name: "Maja Nilsson",
-      country: "🇸🇪 Sweden",
+      name: "Nora Al-Farsi",
+      age: 28,
+      bio: "Anapenda sauti ya maporomoko ya maji mchana na utulivu wa mto.",
+      country: "🇰🇼 Kuwait",
       category: "waterfalls",
       categoryLabel: "Maporomoko",
       status: "offline",
-      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
-      price: "16,000 TZS",
+      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&auto=format&fit=crop&q=80",
+      price: "17,500 TZS",
       replies: [
-        "Hej! How do you say 'Crystal clear waterfall pool' in Swahili?",
-        "Dimbwi safi la kioo la maporomoko! Lovely! What is 'Forest river path'?",
-        "Njia ya mto msituni! Tack så mycket!"
+        "Salam! How do you say 'Peaceful waterfall stream' in Swahili?",
+        "Mfuriko tulivu wa maporomoko! So peaceful! How do I say 'Pure drinking water'?",
+        "Maji safi ya kunywa! Excellent! What is 'Water drop'?",
+        "Toni la maji! Shukran!"
       ]
     }
   ];
@@ -2260,325 +2456,307 @@
 
   /*
     ==========================================
-    RENDER PROFILES WITH DYNAMIC STATUS
+    DYNAMIC ONLINE AVAILABILITY SIMULATOR
+    Randomly updates status (online, offline, typing) for realism
     ==========================================
   */
-  const profilesContainer = document.getElementById("profiles");
-  let currentFilter = "all";
+  function startAvailabilitySimulator() {
+    setInterval(() => {
+      // Pick 2 random profiles to change status
+      const randomIndex1 = Math.floor(Math.random() * profiles.length);
+      const randomIndex2 = Math.floor(Math.random() * profiles.length);
 
-  function renderProfiles(filterCategory = "all") {
-    currentFilter = filterCategory;
-    profilesContainer.innerHTML = "";
-
-    const filtered = filterCategory === "all" 
-      ? profiles 
-      : profiles.filter(p => p.category === filterCategory);
-
-    filtered.forEach((profile) => {
-      const originalIndex = profiles.indexOf(profile);
-      const card = document.createElement("article");
-      card.className = "profile glass";
+      const statuses = ["online", "offline", "typing"];
       
-      let statusBadgeHtml = "";
-      if (profile.status === "online") {
-        statusBadgeHtml = `<div class="status-badge online"><span class="online-dot"></span> Online</div>`;
-      } else if (profile.status === "typing") {
-        statusBadgeHtml = `<div class="status-badge typing"><span class="online-dot" style="background:#fbbf24;box-shadow:0 0 10px #fbbf24"></span> Anaandika...</div>`;
+      profiles[randomIndex1].status = statuses[Math.floor(Math.random() * statuses.length)];
+      profiles[randomIndex2].status = statuses[Math.floor(Math.random() * statuses.length)];
+
+      // Re-render currently active view
+      renderProfiles(activeCategoryFilter);
+    }, 4500);
+  }
+
+
+  /*
+    ==========================================
+    PROFILES RENDERING & FILTERING
+    ==========================================
+  */
+  let activeCategoryFilter = "all";
+
+  function renderProfiles(categoryFilter = "all") {
+    activeCategoryFilter = categoryFilter;
+    const container = document.getElementById("profiles");
+    container.innerHTML = "";
+
+    const filtered = categoryFilter === "all" 
+      ? profiles 
+      : profiles.filter(p => p.category === categoryFilter);
+
+    filtered.forEach(p => {
+      let statusMarkup = "";
+      if (p.status === "online") {
+        statusMarkup = `<div class="status-badge online"><span class="online-dot"></span> Online</div>`;
+      } else if (p.status === "typing") {
+        statusMarkup = `<div class="status-badge typing"><span class="online-dot" style="background:#fbbf24"></span> Anaandika...</div>`;
       } else {
-        statusBadgeHtml = `<div class="status-badge offline"><span class="offline-dot"></span> Offline</div>`;
+        statusMarkup = `<div class="status-badge offline"><span class="offline-dot"></span> Yupo Off</div>`;
       }
+
+      const card = document.createElement("div");
+      card.className = "profile glass";
+      card.onclick = () => openChat(p.id);
 
       card.innerHTML = `
         <div class="profile-img">
-          <img src="${profile.image}" alt="${profile.name}" loading="lazy">
-          <div class="country">${profile.country}</div>
-          <div class="category-badge">${profile.categoryLabel}</div>
-          ${statusBadgeHtml}
+          <img src="${p.image}" alt="${p.name}">
+          <div class="country">${p.country}</div>
+          <div class="category-badge">${p.categoryLabel}</div>
+          ${statusMarkup}
         </div>
         <div class="profile-info">
-          <h3>${profile.name}</h3>
-          <p>✈️ Mtalii • Mada: ${profile.categoryLabel}</p>
+          <h3>${p.name}, ${p.age} yrs</h3>
+          <p>${p.bio}</p>
           <div class="profile-bottom">
-            <button class="chat-btn">Anza Kuchat</button>
-            <div class="price">${profile.price}</div>
+            <button class="chat-btn">Anza Kuchat →</button>
+            <div class="price">${p.price}</div>
           </div>
         </div>
       `;
 
-      card.addEventListener("click", () => {
-        openChat(originalIndex);
-      });
-
-      profilesContainer.appendChild(card);
+      container.appendChild(card);
     });
   }
 
-  function filterCategory(cat, btnElement) {
-    const tabs = document.querySelectorAll(".tab-btn");
-    tabs.forEach(t => t.classList.remove("active"));
-    btnElement.classList.add("active");
+  function filterCategory(category, btnElement) {
+    // Update active tab styling
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    if (btnElement) btnElement.classList.add("active");
 
-    renderProfiles(cat);
+    renderProfiles(category);
   }
 
-  // Initial Render
+  // Initial render
   renderProfiles("all");
+  startAvailabilitySimulator();
 
 
   /*
     ==========================================
-    DYNAMIC ONLINE / OFFLINE / TYPING SWITCHER
-    (Simulates real people changing availability live!)
+    CHAT INTERACTION ENGINE & AUTO-RESPONDER
     ==========================================
   */
-  setInterval(() => {
-    // Pick a random profile to change status
-    const randomIndex = Math.floor(Math.random() * profiles.length);
-    const statuses = ["online", "online", "typing", "offline"];
-    const newStatus = statuses[Math.floor(Math.random() * statuses.length)];
-    
-    profiles[randomIndex].status = newStatus;
-    
-    // Refresh current view silently
-    renderProfiles(currentFilter);
-  }, 3500);
+  let activeProfile = null;
+  let messageStep = 0;
 
+  function openChat(profileId) {
+    activeProfile = profiles.find(p => p.id === profileId);
+    if (!activeProfile) return;
 
-  /*
-    ==========================================
-    CHAT STATE & FUNCTIONS
-    ==========================================
-  */
-  let currentProfile = null;
-  let userMessageCount = 0;
-  let replyIndex = 0;
+    messageStep = 0;
 
-  const chatOverlay = document.getElementById("chatOverlay");
-  const chatName = document.getElementById("chatName");
-  const chatAvatar = document.getElementById("chatAvatar");
-  const chatTopicTag = document.getElementById("chatTopicTag");
-  const messages = document.getElementById("messages");
-  const messageInput = document.getElementById("messageInput");
-  const typing = document.getElementById("typing");
-  const messageCount = document.getElementById("messageCount");
-  const registerGate = document.getElementById("registerGate");
+    document.getElementById("chatAvatar").src = activeProfile.image;
+    document.getElementById("chatName").textContent = `${activeProfile.name} (${activeProfile.country})`;
+    document.getElementById("chatTopicTag").textContent = `● Mada: ${activeProfile.categoryLabel} • Utalii`;
+    document.getElementById("messageCount").textContent = "0";
 
-  function openChat(index) {
-    currentProfile = profiles[index];
-    userMessageCount = 0;
-    replyIndex = 0;
+    const msgContainer = document.getElementById("messages");
+    msgContainer.innerHTML = `
+      <div class="typing" id="typing">
+        <span></span><span></span><span></span>
+      </div>
+    `;
 
-    chatName.textContent = currentProfile.name;
-    chatAvatar.src = currentProfile.image;
-    chatTopicTag.textContent = `● Online • Mada: ${currentProfile.categoryLabel}`;
-    messages.innerHTML = "";
-    messages.appendChild(typing);
+    document.getElementById("chatOverlay").classList.add("active");
 
-    messageCount.textContent = userMessageCount;
-    registerGate.classList.remove("active");
-    chatOverlay.classList.add("active");
-    document.body.style.overflow = "hidden";
-
+    // Tourist sends first message
     setTimeout(() => {
-      addBotMessage(currentProfile.replies[0]);
-      replyIndex = 1;
+      appendBotMessage(activeProfile.replies[0]);
     }, 600);
   }
 
   function closeChat() {
-    chatOverlay.classList.remove("active");
-    document.body.style.overflow = "";
+    document.getElementById("chatOverlay").classList.remove("active");
+    closeRegistrationGate();
   }
 
-  function addBotMessage(text) {
-    const message = document.createElement("div");
-    message.className = "message bot";
-    message.textContent = text;
-    messages.insertBefore(message, typing);
-    scrollMessages();
+  function appendBotMessage(text) {
+    const msgContainer = document.getElementById("messages");
+    const typing = document.getElementById("typing");
+
+    const msg = document.createElement("div");
+    msg.className = "message bot";
+    msg.textContent = text;
+
+    msgContainer.insertBefore(msg, typing);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
   }
 
-  function addUserMessage(text) {
-    const message = document.createElement("div");
-    message.className = "message user";
-    message.textContent = text;
-    messages.insertBefore(message, typing);
-    scrollMessages();
+  function appendUserMessage(text) {
+    const msgContainer = document.getElementById("messages");
+    const typing = document.getElementById("typing");
+
+    const msg = document.createElement("div");
+    msg.className = "message user";
+    msg.textContent = text;
+
+    msgContainer.insertBefore(msg, typing);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
   }
 
-  function addRewardNotice(text) {
-    const message = document.createElement("div");
-    message.className = "message reward-notice";
-    message.innerHTML = text;
-    messages.insertBefore(message, typing);
-    scrollMessages();
+  function appendRewardNotice(amount) {
+    const msgContainer = document.getElementById("messages");
+    const typing = document.getElementById("typing");
+
+    const msg = document.createElement("div");
+    msg.className = "message reward-notice";
+    msg.innerHTML = `🎉 HONGERA! Umefundisha jumbe 4! Malipo ya TZS ${amount.toLocaleString()} yameongezwa kwenye Akaunti yako.`;
+
+    msgContainer.insertBefore(msg, typing);
+    msgContainer.scrollTop = msgContainer.scrollHeight;
   }
 
   function sendMessage() {
-    const text = messageInput.value.trim();
-    if (!text) return;
+    const input = document.getElementById("messageInput");
+    const text = input.value.trim();
 
-    if (userMessageCount >= 4) {
-      registerGate.classList.add("active");
-      return;
-    }
+    if (!text || !activeProfile) return;
 
-    addUserMessage(text);
-    messageInput.value = "";
-    userMessageCount++;
-    messageCount.textContent = userMessageCount;
+    appendUserMessage(text);
+    input.value = "";
 
-    if (userMessageCount >= 4) {
-      const reward = 18500;
-      const currentBal = getUserBalance();
-      setUserBalance(currentBal + reward);
+    messageStep++;
+    document.getElementById("messageCount").textContent = messageStep;
 
-      setTimeout(() => {
-        addRewardNotice("🎉 UMETUMA JUMBE 4! TZS 18,500 ZIMEONGEZEKA KWENYE SALIO LAKO!");
-      }, 500);
-
-      setTimeout(() => {
-        registerGate.classList.add("active");
-        showToastNotification("Malipo Yameingia!", "Umelipwa TZS 18,500 kwa kufundisha Mtalii!");
-      }, 1200);
-
-      return;
-    }
-
-    showTyping();
-    const response = currentProfile.replies[replyIndex % currentProfile.replies.length];
-    replyIndex++;
-
-    const delay = 1000 + Math.floor(Math.random() * 1200);
-
-    setTimeout(() => {
-      hideTyping();
-      addBotMessage(response);
-    }, delay);
-  }
-
-  function showTyping() {
+    const typing = document.getElementById("typing");
     typing.classList.add("show");
-    scrollMessages();
-  }
 
-  function hideTyping() {
-    typing.classList.remove("show");
-  }
-
-  function scrollMessages() {
     setTimeout(() => {
-      messages.scrollTop = messages.scrollHeight;
-    }, 30);
+      typing.classList.remove("show");
+
+      if (messageStep < 4) {
+        // Send next tourist reply
+        appendBotMessage(activeProfile.replies[messageStep]);
+      } else if (messageStep === 4) {
+        // EARNED REWARD!
+        const rewardAmount = parseInt(activeProfile.price.replace(/[^0-9]/g, ''), 10) || 18500;
+        
+        // Update user local balance
+        const currentBal = getUserBalance();
+        setUserBalance(currentBal + rewardAmount);
+
+        appendRewardNotice(rewardAmount);
+
+        // Open registration lock popup after short delay
+        setTimeout(() => {
+          showRegistrationGate();
+        }, 1200);
+      } else {
+        // Extra messages trigger gate directly
+        showRegistrationGate();
+      }
+    }, 1200);
   }
 
-  function closeRegistrationGate() {
-    registerGate.classList.remove("active");
-    messageInput.placeholder = "Tafadhali jisajili ili uendelee kuchat...";
-  }
-
-  messageInput.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
+  // Handle Enter keypress in input
+  document.getElementById("messageInput").addEventListener("keypress", function(e) {
+    if (e.key === "Enter") {
       sendMessage();
     }
   });
 
-  chatOverlay.addEventListener("click", function(event) {
-    if (event.target === chatOverlay) {
-      closeChat();
-    }
-  });
+
+  /*
+    ==========================================
+    REGISTRATION GATE POPUP ENGINE
+    ==========================================
+  */
+  function showRegistrationGate() {
+    document.getElementById("registerGate").classList.add("active");
+  }
+
+  function closeRegistrationGate() {
+    document.getElementById("registerGate").classList.remove("active");
+  }
 
 
   /*
     ==========================================
-    AUTO-GENERATED INFINITE LIVE WITHDRAWALS
+    LIVE WITHDRAWAL STREAM & TOAST GENERATOR
     ==========================================
   */
-  const namesList = [
-    "Baraka M.", "Amina K.", "Juma S.", "Kelvin P.", "Grace E.", "Neema J.",
-    "Shadrack B.", "David H.", "Hussein M.", "Fatuma A.", "Emanuel K.", "Mary T.",
-    "Godfrey R.", "Zena S.", "Josephat M.", "Rehema C.", "Bakari Y.", "Sadaa K."
+  const sampleNames = [
+    "Juma K.", "Amani M.", "Baraka S.", "Neema J.", "Grace P.", 
+    "Kelvin T.", "Emmanuel M.", "Josephat R.", "Anna L.", "Rashid A.",
+    "Hassan B.", "Devota E.", "Frank M.", "Zainab H.", "Godfrey N."
   ];
 
-  const paymentMethods = ["M-Pesa", "Airtel Money", "Mix by Yas", "Tigo Pesa", "Halopesa"];
+  const sampleMethods = [
+    { name: "M-Pesa", img: paymentBanners[1].img },
+    { name: "Mixx by Yas", img: paymentBanners[0].img },
+    { name: "Airtel Money", img: paymentBanners[2].img },
+    { name: "Halopesa", img: paymentBanners[3].img }
+  ];
 
-  const payoutListContainer = document.getElementById("payoutList");
+  const sampleAmounts = ["35,000", "45,000", "18,500", "52,000", "60,000", "27,500", "85,000"];
 
-  function generateRandomPayout() {
-    const randomName = namesList[Math.floor(Math.random() * namesList.length)];
-    const randomMethod = paymentMethods[Math.floor(Math.random() * paymentMethods.length)];
-    const randomAmount = (Math.floor(Math.random() * 12) + 5) * 5000;
-    
-    const payoutItem = document.createElement("div");
-    payoutItem.className = "payout-item";
-    payoutItem.innerHTML = `
-      <span>${randomName} • ${randomMethod} <span class="payout-time">sasa hivi</span></span>
-      <strong>+${randomAmount.toLocaleString()} TZS</strong>
+  function addLivePayoutItem() {
+    const list = document.getElementById("payoutList");
+    const name = sampleNames[Math.floor(Math.random() * sampleNames.length)];
+    const method = sampleMethods[Math.floor(Math.random() * sampleMethods.length)];
+    const amount = sampleAmounts[Math.floor(Math.random() * sampleAmounts.length)];
+
+    const item = document.createElement("div");
+    item.className = "payout-item";
+    item.innerHTML = `
+      <div class="payout-left">
+        <img src="${method.img}" class="payout-badge-img" alt="${method.name}">
+        <div>
+          <span><strong>${name}</strong> ametoa kwa <strong>${method.name}</strong></span>
+          <span class="payout-time">• Sasa hivi</span>
+        </div>
+      </div>
+      <strong>+${amount} TZS</strong>
     `;
 
-    payoutListContainer.insertBefore(payoutItem, payoutListContainer.firstChild);
+    list.insertBefore(item, list.firstChild);
 
-    if (payoutListContainer.children.length > 6) {
-      payoutListContainer.removeChild(payoutListContainer.lastChild);
+    // Keep max 7 items visible
+    if (list.children.length > 7) {
+      list.removeChild(list.lastChild);
     }
+
+    // Trigger Toast Notification
+    showToast(`${name} Ametoka Kutoa Pesa!`, `Ametoa TZS ${amount} kupitia ${method.name}`);
   }
 
-  for (let i = 0; i < 4; i++) {
-    generateRandomPayout();
+  // Populate initial items
+  for (let i = 0; i < 5; i++) {
+    addLivePayoutItem();
   }
 
-  function loopPayouts() {
-    const nextInterval = Math.floor(Math.random() * 4000) + 3000;
-    setTimeout(() => {
-      generateRandomPayout();
-      loopPayouts();
-    }, nextInterval);
-  }
-  loopPayouts();
+  // Stream new withdrawal every 6 seconds
+  setInterval(addLivePayoutItem, 6000);
 
 
   /*
     ==========================================
-    TOAST NOTIFICATIONS (POPUP BOTTOM RIGHT)
+    TOAST NOTIFICATION ENGINE
     ==========================================
   */
-  const toast = document.getElementById("toastNotification");
-  const toastTitle = document.getElementById("toastTitle");
-  const toastDesc = document.getElementById("toastDesc");
+  let toastTimer;
+  function showToast(title, desc) {
+    const toast = document.getElementById("toastNotification");
+    document.getElementById("toastTitle").textContent = title;
+    document.getElementById("toastDesc").textContent = desc;
 
-  function showToastNotification(title, desc) {
-    toastTitle.textContent = title;
-    toastDesc.textContent = desc;
     toast.classList.add("show");
 
-    setTimeout(() => {
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
       toast.classList.remove("show");
-    }, 4500);
+    }, 3800);
   }
-
-  setInterval(() => {
-    if (!chatOverlay.classList.contains("active")) {
-      const randomName = namesList[Math.floor(Math.random() * namesList.length)];
-      const randomAmount = (Math.floor(Math.random() * 10) + 6) * 5000;
-      showToastNotification("Live Withdrawal!", `${randomName} ametoka kutoa TZS ${randomAmount.toLocaleString()} M-Pesa`);
-    }
-  }, 14000);
-
-
-  /*
-    ==========================================
-    DYNAMIC ONLINE COUNTER
-    ==========================================
-  */
-  const onlineNumber = document.getElementById("onlineNumber");
-
-  setInterval(() => {
-    const current = parseInt(onlineNumber.textContent.replace(/,/g, ""), 10);
-    const variation = Math.floor(Math.random() * 15) - 7;
-    onlineNumber.textContent = (current + variation).toLocaleString();
-  }, 4000);
 
 </script>
 
