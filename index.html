@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UtaliiChatting — Fundisha Kiswahili, Pata Kipato</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* Brand Palette: Green, White, Yellow / Gold */
+      --bg: #05140b;
+      --bg2: #0a2214;
+      --card: rgba(255, 255, 255, 0.05);
+      --border: rgba(255, 255, 255, 0.1);
+      
+      --green-main: #10b981;
+      --green-glow: #059669;
+      --green-accent: #34d399;
+      
+      --yellow-main: #fbbf24;
+      --yellow-glow: #f59e0b;
+      
+      --white: #ffffff;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(16, 185, 129, 0.22), transparent 35%),
+        radial-gradient(circle at 85% 30%, rgba(251, 191, 36, 0.12), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.03;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: 0;
+    }
+
+    .container {
+      width: min(1150px, calc(100% - 32px));
+      margin: auto;
+    }
+
+    .glass {
+      background: var(--card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    /* HEADER */
+    header {
+      margin-top: 20px;
+      padding: 14px 22px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--green-main), var(--yellow-main));
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+      font-size: 22px;
+    }
+
+    .brand-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+      color: var(--white);
+    }
+
+    .brand-name span {
+      color: var(--yellow-main);
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 1px;
+    }
+
+    .user-balance-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 8px 16px;
+      border-radius: 30px;
+    }
+
+    .balance-title {
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    .balance-amount {
+      font-weight: 800;
+      color: var(--yellow-main);
+      font-size: 14px;
+    }
+
+    .online-counter {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 16px;
+      border-radius: 30px;
+      font-size: 11px;
+    }
+
+    .online-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green-accent);
+      box-shadow: 0 0 15px var(--green-accent);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      50% { opacity: .4; transform: scale(.75); }
+    }
+
+    .online-counter strong {
+      color: var(--yellow-main);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 65px 0 45px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 30px;
+      color: var(--yellow-main);
+      font-size: 11px;
+      font-weight: 600;
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(38px, 6.5vw, 72px);
+      line-height: 1.05;
+      letter-spacing: -2px;
+      max-width: 920px;
+      margin: auto;
+      color: var(--white);
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, var(--green-accent), var(--yellow-main));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: 22px auto 0;
+      color: #d1d5db;
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .hook-box {
+      margin: 25px auto 0;
+      max-width: 700px;
+      padding: 16px 20px;
+      border-radius: 20px;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px dashed rgba(16, 185, 129, 0.3);
+      color: #a7f3d0;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    /* STATS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 55px;
+    }
+
+    .stat {
+      padding: 25px;
+      border-radius: 25px;
+      text-align: center;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .stat-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 38px;
+      font-weight: 800;
+      margin: 8px 0;
+    }
+
+    .stat-sub {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* PROFILES */
+    .section-title {
+      margin-bottom: 22px;
+    }
+
+    .section-title small {
+      color: var(--yellow-main);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .section-title h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 30px;
+      margin-top: 5px;
+    }
+
+    .profiles {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      padding-bottom: 70px;
+    }
+
+    .profile {
+      border-radius: 25px;
+      overflow: hidden;
+      transition: 0.35s ease;
+      cursor: pointer;
+    }
+
+    .profile:hover {
+      transform: translateY(-6px);
+      border-color: rgba(16, 185, 129, 0.5);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    .profile-img {
+      height: 240px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.7s;
+    }
+
+    .profile:hover img {
+      transform: scale(1.08);
+    }
+
+    .profile-img::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 40%, rgba(0, 0, 0, 0.85));
+    }
+
+    .country {
+      position: absolute;
+      z-index: 2;
+      top: 12px;
+      left: 12px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .status {
+      position: absolute;
+      z-index: 2;
+      right: 14px;
+      top: 16px;
+      width: 10px;
+      height: 10px;
+      background: var(--green-accent);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--green-accent);
+    }
+
+    .profile-info {
+      padding: 16px;
+    }
+
+    .profile-info h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 18px;
+    }
+
+    .profile-info p {
+      color: var(--muted);
+      font-size: 11px;
+      margin: 6px 0 15px;
+    }
+
+    .profile-bottom {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .chat-btn {
+      flex: 1;
+      padding: 11px;
+      border-radius: 30px;
+      color: #042f1a;
+      font-size: 11px;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--green-accent), var(--yellow-main));
+      box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
+    }
+
+    .price {
+      padding: 9px 12px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--yellow-main);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* PAYOUT / LIVE WITHDRAWAL */
+    .payout {
+      margin-bottom: 80px;
+      padding: 28px;
+      border-radius: 28px;
+    }
+
+    .payout-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .payout h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+    }
+
+    .live-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      color: var(--green-accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .payout-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 280px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .payout-item {
+      padding: 14px 18px;
+      border-radius: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 12px;
+      animation: slideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .payout-item strong {
+      color: var(--yellow-main);
+      font-weight: 700;
+    }
+
+    .payout-time {
+      color: var(--muted);
+      font-size: 10px;
+      margin-left: 8px;
+    }
+
+    /* CHAT MODAL */
+    .chat-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(14px);
+      padding: 15px;
+    }
+
+    .chat-overlay.active {
+      display: flex;
+    }
+
+    .chat-window {
+      width: min(460px, 100%);
+      height: min(720px, 94vh);
+      border-radius: 30px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: #081a10;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+      animation: chatIn 0.3s ease;
+      position: relative;
+    }
+
+    @keyframes chatIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .chat-header {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .back {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+      font-size: 18px;
+      display: grid;
+      place-items: center;
+    }
+
+    .chat-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--green-accent);
+    }
+
+    .chat-user {
+      flex: 1;
+    }
+
+    .chat-user strong {
+      font-size: 15px;
+      display: block;
+    }
+
+    .chat-user small {
+      color: var(--green-accent);
+      font-size: 10px;
+    }
+
+    .chat-messages {
+      flex: 1;
+      padding: 20px 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .message {
+      max-width: 82%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      font-size: 13px;
+      line-height: 1.55;
+      animation: msgIn 0.25s ease;
+    }
+
+    @keyframes msgIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .message.bot {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.08);
+      border-bottom-left-radius: 4px;
+      color: var(--white);
+    }
+
+    .message.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, var(--green-main), var(--green-glow));
+      color: var(--white);
+      border-bottom-right-radius: 4px;
+    }
+
+    .message.reward-notice {
+      align-self: center;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.4);
+      color: var(--yellow-main);
+      text-align: center;
+      font-weight: 700;
+      border-radius: 16px;
+      max-width: 90%;
+      font-size: 12px;
+    }
+
+    .typing {
+      align-self: flex-start;
+      display: none;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+    }
+
+    .typing.show {
+      display: flex;
+      gap: 5px;
+    }
+
+    .typing span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ccc;
+      animation: typing 1s infinite;
+    }
+
+    .typing span:nth-child(2) { animation-delay: .15s; }
+    .typing span:nth-child(3) { animation-delay: .3s; }
+
+    @keyframes typing {
+      50% { transform: translateY(-4px); opacity: .4; }
+    }
+
+    .chat-input-area {
+      padding: 14px;
+      border-top: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .free-counter {
+      font-size: 10px;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .free-counter strong {
+      color: var(--yellow-main);
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .input-row input {
+      flex: 1;
+      min-width: 0;
+      padding: 13px 18px;
+      border-radius: 25px;
+      outline: none;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.06);
+      color: white;
+      font-family: inherit;
+      font-size: 13px;
+    }
+
+    .input-row input:focus {
+      border-color: var(--green-accent);
+    }
+
+    .send {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--green-main), var(--yellow-main));
+      color: #042f1a;
+      font-size: 18px;
+      display: grid;
+      place-items: center;
+    }
+
+    /* REGISTRATION OVERLAY / POPUP */
+    .register-overlay {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(2, 15, 8, 0.88);
+      backdrop-filter: blur(12px);
+      z-index: 50;
+    }
+
+    .register-overlay.active {
+      display: flex;
+    }
+
+    .register-box {
+      width: min(380px, 100%);
+      padding: 30px 24px;
+      text-align: center;
+      border-radius: 28px;
+      background: #092013;
+      border: 1px solid rgba(251, 191, 36, 0.35);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.8);
+      animation: chatIn 0.3s ease;
+    }
+
+    .reward-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      font-size: 28px;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+    }
+
+    .register-box h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      color: var(--white);
+    }
+
+    .earned-amount {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--yellow-main);
+      margin: 8px 0;
+    }
+
+    .register-box p {
+      color: #d1d5db;
+      font-size: 12px;
+      line-height: 1.7;
+      margin: 10px 0 22px;
+    }
+
+    .price-tag {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 10px;
+      border-radius: 16px;
+      margin-bottom: 20px;
+      font-size: 12px;
+      color: #a7f3d0;
+    }
+
+    .price-tag strong {
+      color: var(--yellow-main);
+      font-size: 15px;
+    }
+
+    .register-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 30px;
+      color: #042f1a;
+      font-weight: 800;
+      font-size: 14px;
+      background: linear-gradient(90deg, var(--green-accent), var(--yellow-main));
+      margin-bottom: 10px;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+    }
+
+    .later-btn {
+      width: 100%;
+      padding: 11px;
+      border-radius: 30px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.05);
+      font-size: 12px;
+    }
+
+    /* TOAST NOTIFICATION */
+    .toast-notification {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #092013;
+      border: 1px solid var(--green-main);
+      color: white;
+      padding: 14px 20px;
+      border-radius: 18px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 200;
+      transform: translateY(120px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast-notification.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast-icon {
+      font-size: 24px;
+    }
+
+    .toast-content strong {
+      display: block;
+      color: var(--yellow-main);
+      font-size: 13px;
+    }
+
+    .toast-content span {
+      font-size: 11px;
+      color: #d1d5db;
+    }
+
+    footer {
+      padding: 30px 0 45px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 11px;
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 850px) {
+      .profiles {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: min(100% - 20px, 1150px);
+      }
+
+      header {
+        margin-top: 10px;
+        padding: 12px 16px;
+      }
+
+      .online-counter {
+        display: none;
+      }
+
+      .hero {
+        padding: 45px 0 35px;
+      }
+
+      .hero h1 {
+        font-size: 40px;
+        letter-spacing: -1.5px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .stat {
+        padding: 18px;
+      }
+
+      .profiles {
+        gap: 10px;
+      }
+
+      .profile-img {
+        height: 190px;
+      }
+
+      .profile-info {
+        padding: 12px;
+      }
+
+      .profile-info h3 {
+        font-size: 15px;
+      }
+
+      .price {
+        display: none;
+      }
+
+      .chat-window {
+        height: 95vh;
+        border-radius: 25px;
+      }
+
+      .toast-notification {
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="glass">
+    <div class="brand">
+      <div class="logo">🌍</div>
+
+      <div>
+        <div class="brand-name">
+          UTALII<span>CHATTING</span>
+        </div>
+        <small>Teach Swahili • Earn Money</small>
+      </div>
+    </div>
+
+    <!-- User Local Balance Badge -->
+    <div class="user-balance-badge">
+      <div>
+        <div class="balance-title">Salio Lako:</div>
+        <div class="balance-amount" id="userBalanceText">0 TZS</div>
+      </div>
+    </div>
+
+    <div class="online-counter glass">
+      <span class="online-dot"></span>
+      <strong id="onlineNumber">21,981</strong>
+      <span>ONLINE</span>
+    </div>
+  </header>
+
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+
+    <div class="hero-badge">
+      <span class="online-dot"></span>
+      LIVE NOW • WATALII WAPO ONLINE
+    </div>
+
+    <h1>
+      Wafundishe Watalii
+      <span class="gradient">Kiswahili.</span>
+      <br>
+      <span class="gradient">Ulipwe Papo Hapo.</span>
+    </h1>
+
+    <p>
+      Anza mazungumzo na watalii wanaopenda Tanzania na wanaotaka kujifunza Kiswahili kabla ya kuja nchini. Badilisha muda wako kuwa pesa!
+    </p>
+
+    <!-- HOOK EMBEDDED -->
+    <div class="hook-box">
+      <span>✈️</span>
+      <div>
+        <strong>Ukweli Unaoingiza Hela:</strong> Kuna watalii wengi sana duniani wanaopenda Tanzania na wanataka kujifunza Kiswahili kabla hawajawasili!
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- STATS -->
+  <section class="stats">
+
+    <div class="stat glass">
+      <div class="stat-label">Watalii Walipo</div>
+      <div class="stat-number" style="color:var(--white)">48+</div>
+      <div class="stat-sub">Nchi mbalimbali duniani</div>
+    </div>
+
+    <div class="stat glass">
+      <div class="stat-label">Miamala ya Leo</div>
+      <div class="stat-number" style="color:var(--yellow-main)">5.8M</div>
+      <div class="stat-sub">TZS zilizolipwa kwa watumiaji</div>
+    </div>
+
+    <div class="stat glass">
+      <div class="stat-label">Wakiwa Online</div>
+      <div class="stat-number" style="color:var(--green-accent)">24K+</div>
+      <div class="stat-sub">Watalii wanaosubiri kuchat</div>
+    </div>
+
+  </section>
+
+
+  <!-- PROFILES -->
+  <section>
+
+    <div class="section-title">
+      <small>UCHAGUZI WA WATALII</small>
+      <h2>Chagua Mtalii wa Kuchat Naye</h2>
+    </div>
+
+    <div class="profiles" id="profiles"></div>
+
+  </section>
+
+
+  <!-- LIVE WITHDRAWAL / PAYOUT SECTION -->
+  <section class="payout glass">
+
+    <div class="payout-header">
+      <h2>💸 Miamala ya Live Withdrawal</h2>
+      <div class="live-badge">
+        <span class="online-dot"></span> Live Updates
+      </div>
+    </div>
+
+    <div class="payout-list" id="payoutList">
+      <!-- Auto-generated infinite payout items will stream here -->
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 UtaliiChatting. All rights reserved. | Wafundishe Kiswahili Watalii na Upate Kipato
+  </footer>
+
+</div>
+
+
+<!-- CHAT OVERLAY -->
+<div class="chat-overlay" id="chatOverlay">
+
+  <div class="chat-window">
+
+    <div class="chat-header">
+      <button class="back" onclick="closeChat()">←</button>
+      <img id="chatAvatar" class="chat-avatar" alt="Tourist Avatar">
+      <div class="chat-user">
+        <strong id="chatName"></strong>
+        <small>● Online • Anataka kujifunza Kiswahili</small>
+      </div>
+    </div>
+
+    <div class="chat-messages" id="messages">
+      <div class="typing" id="typing">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <div class="chat-input-area">
+      <div class="free-counter">
+        Ujumbe uliotuma:
+        <strong><span id="messageCount">0</span>/4</strong> (Baada ya jumbe 4 utalipwa!)
+      </div>
+
+      <div class="input-row">
+        <input
+          id="messageInput"
+          type="text"
+          placeholder="Andika ujumbe wako hapa..."
+          autocomplete="off"
+        >
+        <button class="send" onclick="sendMessage()">➤</button>
+      </div>
+    </div>
+
+
+    <!-- REGISTRATION POPUP OVERLAY -->
+    <div class="register-overlay" id="registerGate">
+
+      <div class="register-box">
+
+        <div class="reward-icon">🎉</div>
+
+        <h3>Hongera Sana! 👏</h3>
+        <div class="earned-amount">+18,500 TZS</div>
+
+        <p>
+          Umelipwa TZS 18,500 kwa kufundisha jumbe 4 za Kiswahili! Pesa yako imehifadhiwa kwenye akaunti yako ya kifaa hiki.
+        </p>
+
+        <div class="price-tag">
+          Ada ya Usajili: <strong>TZS 14,500 tu</strong><br>
+          <small>(Utapata Access ya Kuchat bila kikomo & Kuweka Pesa Zako M-Pesa/Airtel/Tigo)</small>
+        </div>
+
+        <button class="register-btn" onclick="goToRegistration()">
+          Kamilisha Usajili Sasa (14,500 TZS) →
+        </button>
+
+        <button class="later-btn" onclick="closeRegistrationGate()">
+          Funga Kwa Muda
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- TOAST NOTIFICATION FOR REAL-TIME EARNINGS/WITHDRAWALS -->
+<div class="toast-notification" id="toastNotification">
+  <div class="toast-icon">💵</div>
+  <div class="toast-content">
+    <strong id="toastTitle">Malipo Mapya!</strong>
+    <span id="toastDesc">Juma K. ametoka kutoa TZS 45,000 M-Pesa</span>
+  </div>
+</div>
+
+
+<script>
+
+  /*
+    ==========================================
+    REGISTRATION LINK CONFIGURATION
+    ==========================================
+  */
+  const REGISTRATION_URL = ""; // Weka link yako ya Malipo/Usajili hapa (Mfano: https://malipo.com/join)
+
+
+  /*
+    ==========================================
+    LOCAL STORAGE & USER BALANCE MANAGEMENT
+    ==========================================
+  */
+  const BALANCE_KEY = "utalii_chatting_user_balance";
+
+  function getUserBalance() {
+    const saved = localStorage.getItem(BALANCE_KEY);
+    return saved ? parseInt(saved, 10) : 0;
+  }
+
+  function setUserBalance(amount) {
+    localStorage.setItem(BALANCE_KEY, amount);
+    updateBalanceDisplay();
+  }
+
+  function updateBalanceDisplay() {
+    const balance = getUserBalance();
+    document.getElementById("userBalanceText").textContent = balance.toLocaleString() + " TZS";
+  }
+
+  // Initialize display on load
+  updateBalanceDisplay();
+
+
+  /*
+    ==========================================
+    PROFILES DATA (Unsplash High Quality Travel Images)
+    ==========================================
+  */
+  const profiles = [
+    {
+      name: "Jessica & Travel",
+      country: "🇺🇸 United States",
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=700&auto=format&fit=crop&q=80",
+      price: "18,500 TZS / Chat",
+      replies: [
+        "Jambo! 👋 I'm travelling to Serengeti next month. Can you teach me basic Swahili?",
+        "Awesome! How do I say 'Thank you very much' in Swahili?",
+        "Asante sana! 😄 What is the Swahili word for 'Beautiful place'?",
+        "I love Tanzania so much! ❤️ Can you teach me one more phrase before I come?"
+      ]
+    },
+    {
+      name: "Markus Weber",
+      country: "🇩🇪 Germany",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&auto=format&fit=crop&q=80",
+      price: "15,000 TZS / Chat",
+      replies: [
+        "Hallo! 👋 I want to visit Zanzibar soon. How do I greet local people politely?",
+        "Habari gani! 😄 That sounds so smooth. How do I reply if someone asks me that?",
+        "Mambo vipi! Haha I like that! What does 'Karibu' mean?",
+        "Super cool! 🇹🇿 I am really excited to learn more Swahili from you!"
+      ]
+    },
+    {
+      name: "Elena Rostova",
+      country: "🇬🇧 United Kingdom",
+      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=700&auto=format&fit=crop&q=80",
+      price: "20,000 TZS / Chat",
+      replies: [
+        "Hello there! 😊 Swahili sounds so poetic. How do I say 'I am happy to be here'?",
+        "Oh wow, 'Nina furaha kuwa hapa'! Did I spell that right?",
+        "Yes! How do I order food or coffee in Swahili when I arrive?",
+        "You are an amazing teacher! I can't wait to practice this in Arusha!"
+      ]
+    },
+    {
+      name: "Kenji Sato",
+      country: "🇯🇵 Japan",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=700&auto=format&fit=crop&q=80",
+      price: "17,500 TZS / Chat",
+      replies: [
+        "Konnichiwa! 👋 I am planning a wildlife safari in Mt. Kilimanjaro. How do you say lion in Swahili?",
+        "Simba! Like Disney! 🦁 What about elephant?",
+        "Tembo! Nice! What is 'Good friend' in Swahili?",
+        "Rafiki mzuri! Thank you my friend, Swahili is great!"
+      ]
+    },
+    {
+      name: "Chloe & Pierre",
+      country: "🇫🇷 France",
+      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=700&auto=format&fit=crop&q=80",
+      price: "16,000 TZS / Chat",
+      replies: [
+        "Bonjour! 😊 We are coming for our honeymoon in Zanzibar. Teach us something romantic!",
+        "Nakupenda! That means 'I love you', right?",
+        "Haha oui! How do we say 'Delicious food' in Swahili?",
+        "Chakula kitamu! Perfect! Tanzania is our dream destination."
+      ]
+    },
+    {
+      name: "Mateo Silva",
+      country: "🇧🇷 Brazil",
+      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=700&auto=format&fit=crop&q=80",
+      price: "19,000 TZS / Chat",
+      replies: [
+        "Ola! 🇧🇷 I love African culture! Teach me some cool Swahili slang!",
+        "Mambo vipi! Fresh! What is the coolest way to answer?",
+        "Poa kabisa! I love this energy brother!",
+        "Swahili people are so welcoming. Can't wait to visit Dar es Salaam!"
+      ]
+    },
+    {
+      name: "Sophia Martinez",
+      country: "🇪🇸 Spain",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=700&auto=format&fit=crop&q=80",
+      price: "14,500 TZS / Chat",
+      replies: [
+        "Hola! 👋 I am a solo traveler coming to Ngorongoro. Is Swahili easy to learn?",
+        "That's encouraging! How do I ask 'How much is this?'",
+        "Ni kiasi gani! Excellent. How about 'Where is the hotel?'",
+        "You make learning Swahili so fun and easy!"
+      ]
+    },
+    {
+      name: "Liam O'Connor",
+      country: "🇦🇺 Australia",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=700&auto=format&fit=crop&q=80",
+      price: "18,000 TZS / Chat",
+      replies: [
+        "G'day mate! 🦘 Heading to East Africa soon. What's the first word I should master?",
+        "Hakuna Matata! Is that actually used in daily life?",
+        "Haha awesome! How do I say 'Goodbye, see you later'?",
+        "Kwaheri! Cheers mate, really appreciate your help!"
+      ]
+    }
+  ];
+
+
+  /*
+    ==========================================
+    RENDER PROFILES
+    ==========================================
+  */
+  const profilesContainer = document.getElementById("profiles");
+
+  profiles.forEach((profile, index) => {
+    const card = document.createElement("article");
+    card.className = "profile glass";
+    card.innerHTML = `
+      <div class="profile-img">
+        <img src="${profile.image}" alt="${profile.name}" loading="lazy">
+        <div class="country">${profile.country}</div>
+        <div class="status"></div>
+      </div>
+      <div class="profile-info">
+        <h3>${profile.name}</h3>
+        <p>✈️ Mtalii • Anajifunza Kiswahili</p>
+        <div class="profile-bottom">
+          <button class="chat-btn">Anza Kuchat</button>
+          <div class="price">${profile.price}</div>
+        </div>
+      </div>
+    `;
+
+    card.addEventListener("click", () => {
+      openChat(index);
+    });
+
+    profilesContainer.appendChild(card);
+  });
+
+
+  /*
+    ==========================================
+    CHAT STATE & FUNCTIONS
+    ==========================================
+  */
+  let currentProfile = null;
+  let userMessageCount = 0;
+  let replyIndex = 0;
+
+  const chatOverlay = document.getElementById("chatOverlay");
+  const chatName = document.getElementById("chatName");
+  const chatAvatar = document.getElementById("chatAvatar");
+  const messages = document.getElementById("messages");
+  const messageInput = document.getElementById("messageInput");
+  const typing = document.getElementById("typing");
+  const messageCount = document.getElementById("messageCount");
+  const registerGate = document.getElementById("registerGate");
+
+  function openChat(index) {
+    currentProfile = profiles[index];
+    userMessageCount = 0;
+    replyIndex = 0;
+
+    chatName.textContent = currentProfile.name;
+    chatAvatar.src = currentProfile.image;
+    messages.innerHTML = "";
+    messages.appendChild(typing);
+
+    messageCount.textContent = userMessageCount;
+    registerGate.classList.remove("active");
+    chatOverlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+
+    setTimeout(() => {
+      addBotMessage(currentProfile.replies[0]);
+      replyIndex = 1;
+    }, 600);
+  }
+
+  function closeChat() {
+    chatOverlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  function addBotMessage(text) {
+    const message = document.createElement("div");
+    message.className = "message bot";
+    message.textContent = text;
+    messages.insertBefore(message, typing);
+    scrollMessages();
+  }
+
+  function addUserMessage(text) {
+    const message = document.createElement("div");
+    message.className = "message user";
+    message.textContent = text;
+    messages.insertBefore(message, typing);
+    scrollMessages();
+  }
+
+  function addRewardNotice(text) {
+    const message = document.createElement("div");
+    message.className = "message reward-notice";
+    message.innerHTML = text;
+    messages.insertBefore(message, typing);
+    scrollMessages();
+  }
+
+  /*
+    TRIGGERED AFTER 4 USER MESSAGES
+  */
+  function sendMessage() {
+    const text = messageInput.value.trim();
+    if (!text) return;
+
+    // Block if already reached 4
+    if (userMessageCount >= 4) {
+      registerGate.classList.add("active");
+      return;
+    }
+
+    addUserMessage(text);
+    messageInput.value = "";
+    userMessageCount++;
+    messageCount.textContent = userMessageCount;
+
+    // CHECK IF 4TH MESSAGE REACHED
+    if (userMessageCount >= 4) {
+      // 1. Add reward to local balance
+      const reward = 18500;
+      const currentBal = getUserBalance();
+      setUserBalance(currentBal + reward);
+
+      // 2. Show reward notice in chat
+      setTimeout(() => {
+        addRewardNotice("🎉 UMETUMA JUMBE 4! TZS 18,500 ZIMEONGEZEKA KWENYE SALIO LAKO!");
+      }, 500);
+
+      // 3. Trigger Registration Popup after 1 second
+      setTimeout(() => {
+        registerGate.classList.add("active");
+        showToastNotification("Malipo Yameingia!", "Umelipwa TZS 18,500 kwa kufundisha Mtalii!");
+      }, 1200);
+
+      return;
+    }
+
+    // BOT RESPONSE FOR MESSAGES 1 to 3
+    showTyping();
+    const response = currentProfile.replies[replyIndex % currentProfile.replies.length];
+    replyIndex++;
+
+    const delay = 1000 + Math.floor(Math.random() * 1200);
+
+    setTimeout(() => {
+      hideTyping();
+      addBotMessage(response);
+    }, delay);
+  }
+
+  function showTyping() {
+    typing.classList.add("show");
+    scrollMessages();
+  }
+
+  function hideTyping() {
+    typing.classList.remove("show");
+  }
+
+  function scrollMessages() {
+    setTimeout(() => {
+      messages.scrollTop = messages.scrollHeight;
+    }, 30);
+  }
+
+  function goToRegistration() {
+    if (!REGISTRATION_URL) {
+      alert("Link ya usajili haijawekwa bado. (Weka URL kwenye variable ya REGISTRATION_URL ndani ya script)");
+      return;
+    }
+    window.location.href = REGISTRATION_URL;
+  }
+
+  function closeRegistrationGate() {
+    registerGate.classList.remove("active");
+    messageInput.placeholder = "Tafadhali jisajili ili uendelee kuchat...";
+  }
+
+  messageInput.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      sendMessage();
+    }
+  });
+
+  chatOverlay.addEventListener("click", function(event) {
+    if (event.target === chatOverlay) {
+      closeChat();
+    }
+  });
+
+
+  /*
+    ==========================================
+    AUTO-GENERATED INFINITE LIVE WITHDRAWALS
+    ==========================================
+  */
+  const namesList = [
+    "Baraka M.", "Amina K.", "Juma S.", "Kelvin P.", "Grace E.", "Neema J.",
+    "Shadrack B.", "David H.", "Hussein M.", "Fatuma A.", "Emanuel K.", "Mary T.",
+    "Godfrey R.", "Zena S.", "Josephat M.", "Rehema C.", "Bakari Y.", "Sadaa K."
+  ];
+
+  const paymentMethods = ["M-Pesa", "Airtel Money", "Mix by Yas", "Tigo Pesa", "Halopesa"];
+
+  const payoutListContainer = document.getElementById("payoutList");
+
+  function generateRandomPayout() {
+    const randomName = namesList[Math.floor(Math.random() * namesList.length)];
+    const randomMethod = paymentMethods[Math.floor(Math.random() * paymentMethods.length)];
+    // Amounts between 25,000 and 85,000 TZS
+    const randomAmount = (Math.floor(Math.random() * 12) + 5) * 5000;
+    
+    const payoutItem = document.createElement("div");
+    payoutItem.className = "payout-item";
+    payoutItem.innerHTML = `
+      <span>${randomName} • ${randomMethod} <span class="payout-time">sasa hivi</span></span>
+      <strong>+${randomAmount.toLocaleString()} TZS</strong>
+    `;
+
+    payoutListContainer.insertBefore(payoutItem, payoutListContainer.firstChild);
+
+    // Keep list clean (max 6 items)
+    if (payoutListContainer.children.length > 6) {
+      payoutListContainer.removeChild(payoutListContainer.lastChild);
+    }
+  }
+
+  // Pre-fill initial items
+  for (let i = 0; i < 4; i++) {
+    generateRandomPayout();
+  }
+
+  // Infinite loop with realistic random timing (3 to 7 seconds)
+  function loopPayouts() {
+    const nextInterval = Math.floor(Math.random() * 4000) + 3000;
+    setTimeout(() => {
+      generateRandomPayout();
+      loopPayouts();
+    }, nextInterval);
+  }
+  loopPayouts();
+
+
+  /*
+    ==========================================
+    TOAST NOTIFICATIONS (POPUP BOTTOM RIGHT)
+    ==========================================
+  */
+  const toast = document.getElementById("toastNotification");
+  const toastTitle = document.getElementById("toastTitle");
+  const toastDesc = document.getElementById("toastDesc");
+
+  function showToastNotification(title, desc) {
+    toastTitle.textContent = title;
+    toastDesc.textContent = desc;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 4500);
+  }
+
+  // Periodic simulated live toast notifications
+  setInterval(() => {
+    if (!chatOverlay.classList.contains("active")) {
+      const randomName = namesList[Math.floor(Math.random() * namesList.length)];
+      const randomAmount = (Math.floor(Math.random() * 10) + 6) * 5000;
+      showToastNotification("Live Withdrawal!", `${randomName} ametoka kutoa TZS ${randomAmount.toLocaleString()} M-Pesa`);
+    }
+  }, 14000);
+
+
+  /*
+    ==========================================
+    DYNAMIC ONLINE COUNTER
+    ==========================================
+  */
+  const onlineNumber = document.getElementById("onlineNumber");
+
+  setInterval(() => {
+    const current = parseInt(onlineNumber.textContent.replace(/,/g, ""), 10);
+    const variation = Math.floor(Math.random() * 15) - 7;
+    onlineNumber.textContent = (current + variation).toLocaleString();
+  }, 4000);
+
+</script>
+
+</body>
+</html>
