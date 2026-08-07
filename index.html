@@ -3,7 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UtaliiChatting — Fundisha Kiswahili, Pata Kipato</title>
+  
+  <!-- SEO META TAGS -->
+  <title>UtaliiChatting — Fundisha Kiswahili kwa Watalii, Pata Kipato</title>
+  <meta name="description" content="Fundisha watalii Kiswahili mtandaoni na upate TZS 18,500+ kwa kila mazungumzo. Jiunge na UtaliiChatting sasa uanze kuingiza kipato papo hapo.">
+  <meta name="keywords" content="Fundisha Kiswahili, Watalii Tanzania, Pata Pesa Mtandaoni, UtaliiChatting, Ajira ya Mtandaoni, Kiswahili kwa Watalii">
+  <meta name="author" content="UtaliiChatting">
+  <meta name="robots" content="index, follow">
+
+  <!-- OPEN GRAPH / FACEBOOK / WHATSAPP META TAGS -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://kozenasite.site/register?ref=Nico45">
+  <meta property="og:title" content="UtaliiChatting — Fundisha Kiswahili kwa Watalii, Pata Kipato">
+  <meta property="og:description" content="Wafundishe watalii wanaotembelea Tanzania Kiswahili na ulipwe TZS 18,500+ papo hapo. Bonyeza hapa kujiunga!">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1200&auto=format&fit=crop&q=80">
+
+  <!-- TWITTER META TAGS -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="UtaliiChatting — Fundisha Kiswahili, Pata Kipato">
+  <meta name="twitter:description" content="Anza kuchat na watalii wanaopenda Tanzania na uingize pesa papo hapo.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=1200&auto=format&fit=crop&q=80">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,9 +100,39 @@
       -webkit-backdrop-filter: blur(20px);
     }
 
+    /* TOP NOTICE BAR - PRICE CLEARLY VISIBLE */
+    .top-price-bar {
+      background: linear-gradient(90deg, #10b981, #f59e0b);
+      color: #042f1a;
+      text-align: center;
+      padding: 10px 15px;
+      font-weight: 800;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    .top-price-bar a {
+      background: #042f1a;
+      color: #ffffff;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      transition: 0.3s;
+      display: inline-block;
+    }
+
+    .top-price-bar a:hover {
+      background: #ffffff;
+      color: #042f1a;
+    }
+
     /* HEADER */
     header {
-      margin-top: 20px;
+      margin-top: 15px;
       padding: 14px 22px;
       border-radius: 24px;
       display: flex;
@@ -176,6 +225,14 @@
       animation: pulse 1.5s infinite;
     }
 
+    .offline-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ef4444;
+      box-shadow: 0 0 10px #ef4444;
+    }
+
     @keyframes pulse {
       50% { opacity: .4; transform: scale(.75); }
     }
@@ -186,7 +243,7 @@
 
     /* HERO */
     .hero {
-      padding: 55px 0 35px;
+      padding: 45px 0 30px;
       text-align: center;
     }
 
@@ -206,7 +263,7 @@
 
     .hero h1 {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(36px, 6vw, 68px);
+      font-size: clamp(34px, 5.5vw, 64px);
       line-height: 1.08;
       letter-spacing: -2px;
       max-width: 920px;
@@ -314,7 +371,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
-      margin: 45px 0 55px;
+      margin: 40px 0 50px;
     }
 
     .stat {
@@ -357,7 +414,7 @@
 
     .section-title h2 {
       font-family: 'Syne', sans-serif;
-      font-size: 30px;
+      font-size: 28px;
       margin-top: 5px;
     }
 
@@ -409,6 +466,7 @@
       overflow: hidden;
       transition: 0.35s ease;
       cursor: pointer;
+      position: relative;
     }
 
     .profile:hover {
@@ -448,7 +506,7 @@
       left: 12px;
       padding: 6px 12px;
       border-radius: 20px;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.65);
       backdrop-filter: blur(10px);
       font-size: 10px;
       font-weight: 600;
@@ -469,16 +527,35 @@
       letter-spacing: 0.5px;
     }
 
-    .status {
+    .status-badge {
       position: absolute;
       z-index: 2;
-      right: 14px;
-      top: 16px;
-      width: 10px;
-      height: 10px;
-      background: var(--green-accent);
-      border-radius: 50%;
-      box-shadow: 0 0 12px var(--green-accent);
+      right: 12px;
+      top: 12px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 9px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+    }
+
+    .status-badge.online {
+      color: #34d399;
+      border: 1px solid rgba(52, 211, 153, 0.3);
+    }
+
+    .status-badge.offline {
+      color: #f87171;
+      border: 1px solid rgba(248, 113, 113, 0.3);
+    }
+
+    .status-badge.typing {
+      color: #fbbf24;
+      border: 1px solid rgba(251, 191, 36, 0.3);
     }
 
     .profile-info {
@@ -487,7 +564,7 @@
 
     .profile-info h3 {
       font-family: 'Syne', sans-serif;
-      font-size: 17px;
+      font-size: 16px;
     }
 
     .profile-info p {
@@ -610,7 +687,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      width: min(480px, calc(100% - 30px));
+      width: min(520px, calc(100% - 30px));
       justify-content: space-between;
     }
 
@@ -943,6 +1020,7 @@
       background: linear-gradient(90deg, var(--green-accent), var(--yellow-main));
       margin-bottom: 10px;
       box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+      display: block;
     }
 
     .later-btn {
@@ -1017,6 +1095,12 @@
     }
 
     @media (max-width: 600px) {
+      .top-price-bar {
+        font-size: 11px;
+        flex-direction: column;
+        gap: 5px;
+      }
+
       .container {
         width: min(100% - 20px, 1150px);
       }
@@ -1031,11 +1115,11 @@
       }
 
       .hero {
-        padding: 35px 0 25px;
+        padding: 30px 0 20px;
       }
 
       .hero h1 {
-        font-size: 36px;
+        font-size: 32px;
         letter-spacing: -1.5px;
       }
 
@@ -1052,7 +1136,7 @@
       }
 
       .profile-img {
-        height: 190px;
+        height: 180px;
       }
 
       .profile-info {
@@ -1060,7 +1144,7 @@
       }
 
       .profile-info h3 {
-        font-size: 15px;
+        font-size: 14px;
       }
 
       .price {
@@ -1082,6 +1166,12 @@
 </head>
 
 <body>
+
+<!-- TOP BANNER - BEI WAZI NA LINK YA KUSAJILI -->
+<div class="top-price-bar">
+  <span>🔥 ADA YA USAJILI: TZS 14,500 TU | Ukitaka kujiunga sasa:</span>
+  <a href="https://kozenasite.site/register?ref=Nico45" target="_blank">Bofya Hapa Kujiunga →</a>
+</div>
 
 <div class="container">
 
@@ -1188,19 +1278,19 @@
   <section>
 
     <div class="section-title">
-      <small>MAKUNDI YA WATALII NA MAPENZI YAO</small>
+      <small>MAKUNDI YA WATALII NA MAPENZI YAO (ANGALAU 8 KILA KUNDI)</small>
       <h2>Chagua Mtalii Kulingana na Mada Hizi</h2>
     </div>
 
     <!-- CATEGORY FILTER TABS -->
     <div class="category-tabs" id="categoryTabs">
       <button class="tab-btn active" onclick="filterCategory('all', this)">✨ Wote (All)</button>
-      <button class="tab-btn" onclick="filterCategory('culture', this)">🎭 Utamaduni (Culture Lovers)</button>
-      <button class="tab-btn" onclick="filterCategory('animals', this)">🦁 Wanyama (Animals & Safari)</button>
-      <button class="tab-btn" onclick="filterCategory('nature', this)">🌿 Asili & Mazingira (Nature)</button>
-      <button class="tab-btn" onclick="filterCategory('vegetation', this)">🌴 Mimea & Misitu (Vegetation)</button>
-      <button class="tab-btn" onclick="filterCategory('mountains', this)">🏔️ Milima (Mountains & Climbing)</button>
-      <button class="tab-btn" onclick="filterCategory('waterfalls', this)">🌊 Maporomoko ya Maji (Waterfalls)</button>
+      <button class="tab-btn" onclick="filterCategory('culture', this)">🎭 Utamaduni (Culture)</button>
+      <button class="tab-btn" onclick="filterCategory('animals', this)">🦁 Wanyama (Animals)</button>
+      <button class="tab-btn" onclick="filterCategory('nature', this)">🌿 Asili (Nature)</button>
+      <button class="tab-btn" onclick="filterCategory('vegetation', this)">🌴 Mimea (Vegetation)</button>
+      <button class="tab-btn" onclick="filterCategory('mountains', this)">🏔️ Milima (Mountains)</button>
+      <button class="tab-btn" onclick="filterCategory('waterfalls', this)">🌊 Maporomoko (Waterfalls)</button>
     </div>
 
     <div class="profiles" id="profiles"></div>
@@ -1227,7 +1317,8 @@
 
   <!-- FOOTER -->
   <footer>
-    © 2026 UtaliiChatting. All rights reserved. | Wafundishe Kiswahili Watalii na Upate Kipato
+    © 2026 UtaliiChatting. All rights reserved. | Wafundishe Kiswahili Watalii na Upate Kipato | 
+    <a href="https://kozenasite.site/register?ref=Nico45" style="color:var(--yellow-main); font-weight:bold;">Jiunge Hapa (TZS 14,500)</a>
   </footer>
 
 </div>
@@ -1307,9 +1398,9 @@
           <small>(Utapata Access ya Kuchat bila kikomo & Kuweka Pesa Zako M-Pesa/Airtel/Tigo)</small>
         </div>
 
-        <button class="register-btn" onclick="goToRegistration()">
+        <a href="https://kozenasite.site/register?ref=Nico45" class="register-btn">
           Kamilisha Usajili Sasa (14,500 TZS) →
-        </button>
+        </a>
 
         <button class="later-btn" onclick="closeRegistrationGate()">
           Funga Kwa Muda
@@ -1341,7 +1432,7 @@
     REGISTRATION LINK CONFIGURATION
     ==========================================
   */
-  const REGISTRATION_URL = ""; // Weka link yako ya Malipo/Usajili hapa
+  const REGISTRATION_URL = "https://kozenasite.site/register?ref=Nico45";
 
 
   /*
@@ -1372,145 +1463,796 @@
 
   /*
     ==========================================
-    PROFILES DATA BY CATEGORIES & SPECIFIC TOPIC MESSAGES
+    PROFILES DATA (ANGALAU 8 PER GROUP)
+    NO DUPLICATE NAMES OR IMAGES!
+    INCLUDES WHITE & AFRICAN TOURISTS FOR REALISM
     ==========================================
   */
   const profiles = [
-    // 🎭 CULTURE LOVERS
+    // ------------------------------------
+    // 🎭 1. UTAMADUNI (CULTURE) - 8 PROFILES
+    // ------------------------------------
     {
-      name: "Jessica & Travel",
+      id: 101,
+      name: "Jessica Miller",
       country: "🇺🇸 United States",
       category: "culture",
       categoryLabel: "Utamaduni",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=700&auto=format&fit=crop&q=80",
-      price: "18,500 TZS / Chat",
+      status: "online", // online, offline, typing
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
+      price: "18,500 TZS",
       replies: [
-        "Jambo! 👋 I love African culture & traditions. How do you greet elders respectfully in Swahili?",
+        "Jambo! 👋 I love African traditions. How do you greet elders respectfully in Swahili?",
         "Shikamoo! 😄 Wow, and what is the proper response when an elder says 'Marahaba'?",
-        "That is so polite! What is the Swahili word for traditional clothing like Kitenge or Kanga?",
+        "That is so polite! What is the Swahili word for traditional clothing like Kitenge?",
         "I love Tanzanian hospitality! ❤️ Can you teach me how to say 'Welcome home' in Swahili?"
       ]
     },
     {
-      name: "Chloe & Pierre",
+      id: 102,
+      name: "Pierre Dubois",
       country: "🇫🇷 France",
       category: "culture",
       categoryLabel: "Utamaduni",
-      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=700&auto=format&fit=crop&q=80",
-      price: "16,000 TZS / Chat",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
+      price: "16,000 TZS",
       replies: [
-        "Bonjour! 😊 We love Swahili music and wedding dances! How do you say 'Traditional dance' in Swahili?",
+        "Bonjour! 😊 We love Swahili music and wedding dances! How do you say 'Traditional dance'?",
         "Ngoma za kienyeji! Amazing! How do we say 'Delicious traditional food'?",
         "Chakula kitamu cha asili! What is 'Ugali and Fish' called in Swahili?",
         "Wonderful! Swahili culture is so rich and vibrant. Asante sana!"
       ]
     },
-
-    // 🦁 ANIMALS (WANYAMA)
     {
+      id: 103,
+      name: "Aminata Diallo",
+      country: "🇸🇳 Senegal",
+      category: "culture",
+      categoryLabel: "Utamaduni",
+      status: "typing",
+      image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&auto=format&fit=crop&q=80",
+      price: "19,000 TZS",
+      replies: [
+        "Salama! I am visiting Maasai villages. How do I ask 'How are you' in respectful Maasai/Swahili?",
+        "Habari gani! Perfect. What is the Swahili word for 'Cultural Heritage'?",
+        "Uritithi wa Utamaduni! I am amazed. How do I say 'Thank you for your warmth'?",
+        "Asante kwa ukarimu wako! Swahili language is so melodic!"
+      ]
+    },
+    {
+      id: 104,
+      name: "Klaus Schmidt",
+      country: "🇩🇪 Germany",
+      category: "culture",
+      categoryLabel: "Utamaduni",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
+      price: "17,000 TZS",
+      replies: [
+        "Guten Tag! I am researching Swahili history in Stone Town. What is 'Historical Museum' in Swahili?",
+        "Makumbusho ya Historia! Great! How do I ask 'Who constructed this castle'?",
+        "Nani alijenga jengo hili? Perfect grammar! What is 'Ancient artifacts'?",
+        "Vitu vya kale! Thank you, you are a great language partner!"
+      ]
+    },
+    {
+      id: 105,
+      name: "Sofia Rossi",
+      country: "🇮🇹 Italy",
+      category: "culture",
+      categoryLabel: "Utamaduni",
+      status: "offline",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=80",
+      price: "15,500 TZS",
+      replies: [
+        "Ciao! I love Tanzanian handicrafts and wood carvings! How do I say 'Makonde Carvings'?",
+        "Kinyago cha Makonde! Nice! How do I negotiate price gently in a local market?",
+        "Naomba unipe punguzo! Haha love it! What is 'Handmade jewelry'?",
+        "Mapambo ya mikono! Swahili people are so creative!"
+      ]
+    },
+    {
+      id: 106,
+      name: "Kofi Mensah",
+      country: "🇬🇭 Ghana",
+      category: "culture",
+      categoryLabel: "Utamaduni",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80",
+      price: "18,000 TZS",
+      replies: [
+        "Hello brother! Pan-African roots are strong! How do you say 'Brotherhood' in Swahili?",
+        "Undugu! Exactly! What about 'Unity is strength'?",
+        "Umoja ni Nguvu! Wise words from East Africa! How do I say 'One Love'?",
+        "Upendo mmoja! Asante sana my brother!"
+      ]
+    },
+    {
+      id: 107,
+      name: "Charlotte Smith",
+      country: "🇬🇧 United Kingdom",
+      category: "culture",
+      categoryLabel: "Utamaduni",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
+      price: "20,000 TZS",
+      replies: [
+        "Hello! I want to attend a Swahili wedding! What is 'Bride' and 'Groom' in Swahili?",
+        "Bibi harusi na Bwana harusi! Splendid! What is 'Wedding celebration'?",
+        "Sherehe ya harusi! What do guests shout during celebrations?",
+        "Vigelegele! Haha that sounds amazing! Can't wait!"
+      ]
+    },
+    {
+      id: 108,
+      name: "Lars Lindqvist",
+      country: "🇸🇪 Sweden",
+      category: "culture",
+      categoryLabel: "Utamaduni",
+      status: "typing",
+      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&auto=format&fit=crop&q=80",
+      price: "16,500 TZS",
+      replies: [
+        "Hej! I am listening to Taarab music! How do you say 'Poetic song' in Swahili?",
+        "Wimbo wa ushairi! Amazing! How do I ask 'Who is the singer'?",
+        "Nani mwimbaji? Excellent! What is 'Sweet melody'?",
+        "Sauti tamu! Swahili culture is truly rich."
+      ]
+    },
+
+    // ------------------------------------
+    // 🦁 2. WANYAMA (ANIMALS & SAFARI) - 8 PROFILES
+    // ------------------------------------
+    {
+      id: 201,
       name: "Markus Weber",
       country: "🇩🇪 Germany",
       category: "animals",
       categoryLabel: "Wanyama",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&auto=format&fit=crop&q=80",
-      price: "15,000 TZS / Chat",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=600&auto=format&fit=crop&q=80",
+      price: "15,000 TZS",
       replies: [
-        "Hallo! 👋 I am coming for a Wildlife Safari in Serengeti! How do you say 'Lion' and 'Elephant' in Swahili?",
+        "Hallo! 👋 I am coming for a Safari in Serengeti! How do you say 'Lion' and 'Elephant' in Swahili?",
         "Simba and Tembo! 😄 Super cool! What about 'Cheetah' and 'Giraffe'?",
-        "Duma and Twiga! I love wildlife! How do I ask the safari guide 'Where are the wild animals?'",
-        "Wako wapi wanyama! Perfect! 🦁 I can't wait to see the Big Five in Tanzania!"
+        "Duma and Twiga! I love wildlife! How do I ask the guide 'Where are the wild animals?'",
+        "Wako wapi wanyama! Perfect! 🦁 I can't wait to see the Big Five!"
       ]
     },
     {
+      id: 202,
       name: "Kenji Sato",
       country: "🇯🇵 Japan",
       category: "animals",
       categoryLabel: "Wanyama",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=700&auto=format&fit=crop&q=80",
-      price: "17,500 TZS / Chat",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=600&auto=format&fit=crop&q=80",
+      price: "17,500 TZS",
       replies: [
-        "Konnichiwa! 🦁 I want to photograph wild birds and leopards in Ngorongoro Crater. What is leopard in Swahili?",
+        "Konnichiwa! 🦁 I want to photograph leopards in Ngorongoro. What is leopard in Swahili?",
         "Chui! Excellent! How do I say 'Look at that big animal over there'?",
         "Mnyama mkubwa! Haha great! What is the Swahili word for 'Wild birds'?",
         "Ndege wa porini! Thank you my friend, you are an expert!"
       ]
     },
-
-    // 🌿 NATURE (ASILI & MAZINGIRA)
     {
-      name: "Elena Rostova",
-      country: "🇬邦 United Kingdom",
-      category: "nature",
-      categoryLabel: "Asili",
-      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=700&auto=format&fit=crop&q=80",
-      price: "20,000 TZS / Chat",
+      id: 203,
+      name: "Zuri Okafor",
+      country: "🇳🇬 Nigeria",
+      category: "animals",
+      categoryLabel: "Wanyama",
+      status: "typing",
+      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&auto=format&fit=crop&q=80",
+      price: "18,500 TZS",
       replies: [
-        "Hello there! 🌿 I am obsessed with African natural landscapes. How do you say 'Fresh air and beautiful scenery'?",
-        "Hawa safi na mazingira mazuri! Wow! How do I say 'I love nature' in Swahili?",
-        "Ninapenda asili! Did I pronounce it right? What is 'Sunset over the ocean'?",
-        "Chakwe cha jua baharini! That sounds so poetic. Tanzania's nature is unreal!"
+        "Hey! 👋 Safari lover here! What is 'Hippopotamus' and 'Rhinoceros' in Swahili?",
+        "Kiboko na Faru! Brilliant! How do you say 'The animals are migrating'?",
+        "Wanyama wanahama! Awesome. What about 'Crocodile in the river'?",
+        "Mamba mtoni! Asante, now I sound like a local guide!"
       ]
     },
     {
+      id: 204,
+      name: "Oliver Taylor",
+      country: "🇦🇺 Australia",
+      category: "animals",
+      categoryLabel: "Wanyama",
+      status: "offline",
+      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80",
+      price: "16,000 TZS",
+      replies: [
+        "G'day mate! What is the Swahili name for 'Zebra' and 'Buffalo'?",
+        "Pundamilia na Nyati! Spot on! How do I say 'Dangerous animal'?",
+        "Mnyama hatari! Good to know! What is 'Hyena' called?",
+        "Fisi! Haha cheers mate, loving the Swahili safari slang!"
+      ]
+    },
+    {
+      id: 205,
+      name: "Emma Watson",
+      country: "🇨🇦 Canada",
+      category: "animals",
+      categoryLabel: "Wanyama",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=80",
+      price: "19,000 TZS",
+      replies: [
+        "Hi! I love primates! How do you say 'Monkey' and 'Chimpanzee' in Swahili?",
+        "Nyani na Sokwe! Wow! How do I say 'Baboon in Gombe Forest'?",
+        "Sokwe kwenye msitu wa Gombe! Amazing! What is 'Animal footprint'?",
+        "Hatua ya mnyama! You are a brilliant teacher!"
+      ]
+    },
+    {
+      id: 206,
+      name: "Lucas Moretti",
+      country: "🇦🇷 Argentina",
+      category: "animals",
+      categoryLabel: "Wanyama",
+      status: "typing",
+      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=80",
+      price: "17,000 TZS",
+      replies: [
+        "Hola amigo! What is 'Antelope' and 'Gazelle' in Swahili?",
+        "Paa na Swala! Perfect! How do I say 'The cheetah is running very fast'?",
+        "Duma anakimbia kwa kasi sana! Great sentence! What is 'Hunting animal'?",
+        "Mnyama anayewinda! Swahili is super clear!"
+      ]
+    },
+    {
+      id: 207,
+      name: "Nia Abebe",
+      country: "🇪🇹 Ethiopia",
+      category: "animals",
+      categoryLabel: "Wanyama",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&auto=format&fit=crop&q=80",
+      price: "18,000 TZS",
+      replies: [
+        "Selam! What is 'Eagle' and 'Ostrich' in Swahili bird watching?",
+        "Esteri/Tai na Mbuni! Fantastic! How do I say 'Beautiful wild birds'?",
+        "Ndege wazuri wa porini! What is 'Flamingo at Lake Manyara'?",
+        "Mzingimzingi/Flamingo ziwani! Beautiful language!"
+      ]
+    },
+    {
+      id: 208,
+      name: "Henrik Nielsen",
+      country: "🇩🇰 Denmark",
+      category: "animals",
+      categoryLabel: "Wanyama",
+      status: "offline",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&auto=format&fit=crop&q=80",
+      price: "15,500 TZS",
+      replies: [
+        "Hej! What is 'Night safari' and 'Nocturnal animal'?",
+        "Safari ya usiku na mnyama wa usiku! How do I say 'Quiet, look over there'?",
+        "Tulia, tazama kule! Useful tip! What is 'Park keeper'?",
+        "Mlinzi wa hifadhi! Thank you so much!"
+      ]
+    },
+
+    // ------------------------------------
+    // 🌿 3. ASILI (NATURE & ENVIRONMENT) - 8 PROFILES
+    // ------------------------------------
+    {
+      id: 301,
+      name: "Elena Rostova",
+      country: "🇬🇧 United Kingdom",
+      category: "nature",
+      categoryLabel: "Asili",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=600&auto=format&fit=crop&q=80",
+      price: "20,000 TZS",
+      replies: [
+        "Hello there! 🌿 How do you say 'Fresh air and beautiful scenery' in Swahili?",
+        "Hawa safi na mazingira mazuri! Wow! How do I say 'I love nature'?",
+        "Ninapenda asili! Did I say it right? What is 'Sunset over the ocean'?",
+        "Machweo ya jua baharini! That sounds so poetic. Tanzania's nature is unreal!"
+      ]
+    },
+    {
+      id: 302,
       name: "Sophia Martinez",
       country: "🇪🇸 Spain",
       category: "nature",
       categoryLabel: "Asili",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=700&auto=format&fit=crop&q=80",
-      price: "14,500 TZS / Chat",
+      status: "typing",
+      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
+      price: "14,500 TZS",
       replies: [
-        "Hola! 🌊 I love camping outdoors in natural reserves. How do I say 'Clean green environment'?",
+        "Hola! 🌊 I love camping outdoors in reserves. How do I say 'Clean green environment'?",
         "Mazingira safi ya kijani! Awesome! How do I say 'Protecting nature' in Swahili?",
         "Kutunza asili! Excellent! What is the word for 'Fresh water spring'?",
-        "Mtasirika au chemchemi ya maji! Swahili is such a beautiful language!"
+        "Chemchemi ya maji mwanana! Swahili is such a beautiful language!"
+      ]
+    },
+    {
+      id: 303,
+      name: "Tariq Al-Mansoor",
+      country: "🇦🇪 UAE",
+      category: "nature",
+      categoryLabel: "Asili",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80",
+      price: "21,000 TZS",
+      replies: [
+        "Marhaba! I am exploring East African Rift Valley. How do you say 'Valley' and 'Crater'?",
+        "Bonde na Shimo la Ngorongoro! Perfect! What is 'Sunrise over crater'?",
+        "Mawio ya jua shimoni! Magnificent! How do I say 'Natural Wonder'?",
+        "Ajabu la kiasili! Shukran my teacher!"
+      ]
+    },
+    {
+      id: 304,
+      name: "Aisha Kamara",
+      country: "🇸🇱 Sierra Leone",
+      category: "nature",
+      categoryLabel: "Asili",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=600&auto=format&fit=crop&q=80",
+      price: "17,500 TZS",
+      replies: [
+        "Hello sister! How do you say 'Sandy Beach' and 'Indian Ocean' in Swahili?",
+        "Pwani ya mchanga na Bahari ya Hindi! Lovely! What is 'Coral reef'?",
+        "Miamba ya matumbawe! Amazing! How do I say 'Crystal clear water'?",
+        "Maji safi kama kioo! Asante sana!"
+      ]
+    },
+    {
+      id: 305,
+      name: "Jan De Jong",
+      country: "🇳🇱 Netherlands",
+      category: "nature",
+      categoryLabel: "Asili",
+      status: "offline",
+      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&auto=format&fit=crop&q=80",
+      price: "16,000 TZS",
+      replies: [
+        "Hallo! I love island nature in Zanzibar. How do you say 'Green Island'?",
+        "Kisiwa cha kijani! Nice! What is 'Gentle sea breeze' in Swahili?",
+        "Upepo mwanana wa bahari! So nice! What about 'Tropical rain'?",
+        "Mvua ya kitropiki! Dank u wohl, super helpful!"
+      ]
+    },
+    {
+      id: 306,
+      name: "Camila Fernandez",
+      country: "🇨🇱 Chile",
+      category: "nature",
+      categoryLabel: "Asili",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
+      price: "18,000 TZS",
+      replies: [
+        "Hola! What is 'Starry night sky' in Swahili when camping in nature?",
+        "Mbinguni yenye nyota usiku! Beautiful! How do I say 'Campfire under the stars'?",
+        "Moto wa kambi chini ya nyota! So romantic! What is 'Wilderness'?",
+        "Pori la asili! Gracias, Swahili is poetic!"
+      ]
+    },
+    {
+      id: 307,
+      name: "Dmitry Ivanov",
+      country: "🇷🇺 Russia",
+      category: "nature",
+      categoryLabel: "Asili",
+      status: "typing",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
+      price: "16,500 TZS",
+      replies: [
+        "Privet! What is 'Fresh air in the wilderness' in Swahili?",
+        "Hewa safi porini! Excellent! How do I say 'Deep cave'?",
+        "Pango la ndani! Great! What is 'Hot thermal spring'?",
+        "Maji ya moto ya asili! Spasibo brother!"
+      ]
+    },
+    {
+      id: 308,
+      name: "Chloe Bennett",
+      country: "🇳🇿 New Zealand",
+      category: "nature",
+      categoryLabel: "Asili",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&auto=format&fit=crop&q=80",
+      price: "19,500 TZS",
+      replies: [
+        "Kia Ora! How do you say 'Conservation area' in Swahili?",
+        "Eneo la hifadhi! Brilliant! How do I ask 'Is this forest protected?'",
+        "Je, msitu hivi unalindwa? Spot on! What is 'Ecosystem'?",
+        "Mfumo wa kiikolojia! Fantastic Swahili knowledge!"
       ]
     },
 
-    // 🌴 VEGETATION (MIMEA & MISITU)
+    // ------------------------------------
+    // 🌴 4. MIMEA (VEGETATION & FORESTS) - 8 PROFILES
+    // ------------------------------------
     {
+      id: 401,
       name: "Mateo Silva",
       country: "🇧🇷 Brazil",
       category: "vegetation",
       categoryLabel: "Mimea",
-      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=700&auto=format&fit=crop&q=80",
-      price: "19,000 TZS / Chat",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80",
+      price: "19,000 TZS",
       replies: [
-        "Ola! 🇧🇷 I am a botanist coming to study Baobab trees & tropical forests in Tanzania! What is Baobab called in Swahili?",
+        "Ola! 🇧🇷 I am a botanist coming to study Baobab trees & tropical forests! What is Baobab in Swahili?",
         "Mbuyu! 🌳 Wow! And what is the general word for 'Big Forest' and 'Green Trees'?",
-        "Msitu mkubwa na Mimea ya kijani! Perfect! What about 'Zanzibar Spices' like Cloves?",
+        "Msitu mkubwa na Miti ya kijani! Perfect! What about 'Zanzibar Spices' like Cloves?",
         "Karafuu na Mdalasini! Incredible! I am going to buy lots of spices in Spice Island!"
       ]
     },
-
-    // 🏔️ MOUNTAINS (MILIMA & UPANDAJI)
     {
+      id: 402,
+      name: "Ingrid Larsen",
+      country: "🇳🇴 Norway",
+      category: "vegetation",
+      categoryLabel: "Mimea",
+      status: "typing",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=80",
+      price: "16,500 TZS",
+      replies: [
+        "Hei! I want to learn about medicinal plants in Usambara Mountains. What is 'Medicinal herb'?",
+        "Mti wa dawa au Mimea ya Tiba! Great! How do I say 'Green Leaves'?",
+        "Majani ya kijani! Fantastic! What is 'Wild flower'?",
+        "Ua la porini! Takk skal du ha, very insightful!"
+      ]
+    },
+    {
+      id: 403,
+      name: "Jabari Mwangi",
+      country: "🇰🇪 Kenya",
+      category: "vegetation",
+      categoryLabel: "Mimea",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
+      price: "18,000 TZS",
+      replies: [
+        "Jambo jirani! What do Tanzanians call 'Coconut Tree' and 'Mango Tree'?",
+        "Mti wa Nazi (Mnazi) na Mwembe! Safi sana! What about 'Banana Plantation'?",
+        "Shamba la ndizi! Haha asante bro, East African vegetation is rich!"
+      ]
+    },
+    {
+      id: 404,
+      name: "Claire Lefevre",
+      country: "🇧🇪 Belgium",
+      category: "vegetation",
+      categoryLabel: "Mimea",
+      status: "offline",
+      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
+      price: "17,500 TZS",
+      replies: [
+        "Bonjour! What is the Swahili word for 'Rainforest' in Jozani forest?",
+        "Msitu wa mvua! Splendid! How do you say 'Dense vegetation'?",
+        "Mimea iliyostawi sana! What is 'Acacia tree' on savannah?",
+        "Mti wa Mchongoma/Mshindano! Merci beaucoup!"
+      ]
+    },
+    {
+      id: 405,
+      name: "Siddharth Patel",
+      country: "🇮🇳 India",
+      category: "vegetation",
+      categoryLabel: "Mimea",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
+      price: "18,500 TZS",
+      replies: [
+        "Namaste! I am interested in Spice Farms. What is 'Cardamom' and 'Vanilla' in Swahili?",
+        "Eleni na Vanila! Superb! How do I ask 'Can I taste fresh spices?'",
+        "Je, naweza kuonja viungo vibichi? Excellent! What is 'Botanical Garden'?",
+        "Bustani ya mimea! Shukriya my friend!"
+      ]
+    },
+    {
+      id: 406,
+      name: "Grace O'Connor",
+      country: "🇮🇪 Ireland",
+      category: "vegetation",
+      categoryLabel: "Mimea",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
+      price: "19,500 TZS",
+      replies: [
+        "Top of the morning! What is 'Shade under big tree' in Swahili?",
+        "Kivuli chini ya mti mkubwa! Lovely! What is 'Fertile soil'?",
+        "Udongo wenye rutuba! Beautiful! What about 'Wild berries'?",
+        "Matunda ya porini! Sláinte, thank you so much!"
+      ]
+    },
+    {
+      id: 407,
+      name: "Tariq Kwame",
+      country: "🇿🇦 South Africa",
+      category: "vegetation",
+      categoryLabel: "Mimea",
+      status: "typing",
+      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80",
+      price: "17,000 TZS",
+      replies: [
+        "Sawubona! What is the Swahili word for 'Planting trees for environment'?",
+        "Panda miti kwa mazingira! Sharp! What is 'Forest ranger'?",
+        "Mlinzi wa msitu! Excellent! What is 'Palm tree beach'?",
+        "Pwani ya minazi! Siyabonga bro!"
+      ]
+    },
+    {
+      id: 408,
+      name: "Miya Tanaka",
+      country: "🇯🇵 Japan",
+      category: "vegetation",
+      categoryLabel: "Mimea",
+      status: "offline",
+      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&auto=format&fit=crop&q=80",
+      price: "16,000 TZS",
+      replies: [
+        "Konnichiwa! What is 'Orchid flower' and 'Green bamboo' in Swahili?",
+        "Ua la Okidi na Mwanzi wa kijani! Sugoi! What is 'Natural forest scent'?",
+        "Harufu nzuri ya msitu! Arigato gozaimasu!"
+      ]
+    },
+
+    // ------------------------------------
+    // 🏔️ 5. MILIMA (MOUNTAINS & CLIMBING) - 8 PROFILES
+    // ------------------------------------
+    {
+      id: 501,
       name: "Liam O'Connor",
       country: "🇦🇺 Australia",
       category: "mountains",
       categoryLabel: "Milima",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=700&auto=format&fit=crop&q=80",
-      price: "18,000 TZS / Chat",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
+      price: "18,000 TZS",
       replies: [
-        "G'day mate! 🦘 I am climbing Mt. Kilimanjaro next month! What is the famous Swahili hiking phrase used on mountain trails?",
+        "G'day mate! 🦘 I am climbing Mt. Kilimanjaro next month! What is the famous phrase used on mountain trails?",
         "Pole pole! 🏔️ Yes! 'Slowly slowly'! How do I say 'We reached the peak of the mountain'?",
-        "Tulumefika kileleni! What is 'Mount Meru' and 'Snow on the mountain' in Swahili?",
+        "Tumefika kileleni! What is 'Mount Meru' and 'Snow on the mountain' in Swahili?",
         "Barafu mlimani! Cheers mate, now I feel prepared to conquer Uhuru Peak!"
       ]
     },
-
-    // 🌊 WATERFALLS (MAPOROMOKO YA MAJI)
     {
+      id: 502,
+      name: "Franziska Huber",
+      country: "🇦🇹 Austria",
+      category: "mountains",
+      categoryLabel: "Milima",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
+      price: "19,500 TZS",
+      replies: [
+        "Servus! I am an Alpine climber coming to Kilimanjaro. How do you say 'Mountain Guide'?",
+        "Kiongozi wa Mlimani! Excellent! What is 'Climbing gear & boots'?",
+        "Vifaa na viatu vya kupandia mlima! Good! How do I ask 'How far to next camp?'",
+        "Ni umbali gani hadi kambi inayofuata? Danke schön!"
+      ]
+    },
+    {
+      id: 503,
+      name: "Thabo Mokoena",
+      country: "🇿🇦 South Africa",
+      category: "mountains",
+      categoryLabel: "Milima",
+      status: "typing",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80",
+      price: "17,500 TZS",
+      replies: [
+        "Sharp sharp bro! What is 'Porter who carries luggage' on mountain?",
+        "Mpagazi/Mbeba mizigo! Respect to them! How do I say 'High altitude'?",
+        "Kimo cha juu cha mlima! What is 'Cold mountain wind'?",
+        "Upepo baridi wa mlimani! Sharp brother, asante!"
+      ]
+    },
+    {
+      id: 504,
+      name: "Freja Lind",
+      country: "🇩🇰 Denmark",
+      category: "mountains",
+      categoryLabel: "Milima",
+      status: "offline",
+      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
+      price: "16,000 TZS",
+      replies: [
+        "Hej! What is 'Volcanic Crater peak' in Swahili?",
+        "Kilele cha Shimo la Volkano! Amazing! How do I say 'Breathtaking view from summit'?",
+        "Muonekano wa kuvutia kutoka kileleni! What is 'Hiking trail'?",
+        "Njia ya kupanda mlima! Tak for hjælpen!"
+      ]
+    },
+    {
+      id: 505,
+      name: "Giacomo Marino",
+      country: "🇮🇹 Italy",
+      category: "mountains",
+      categoryLabel: "Milima",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=80",
+      price: "18,500 TZS",
+      replies: [
+        "Ciao! What is 'Mountain summit sunrise' in Swahili?",
+        "Mawio ya jua kileleni mwa mlima! Bellissimo! What is 'Rock climbing'?",
+        "Kupanda miamba! Great! How do I say 'Never give up on summit'?",
+        "Usikate tamaa hadi kileleni! Grazie mille!"
+      ]
+    },
+    {
+      id: 506,
+      name: "Sarah Jenkins",
+      country: "🇺🇸 United States",
+      category: "mountains",
+      categoryLabel: "Milima",
+      status: "typing",
+      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=80",
+      price: "20,000 TZS",
+      replies: [
+        "Hi! What is 'Uhuru Peak' literal meaning in Swahili?",
+        "Kilele cha Uhuru (Freedom Peak)! Wow, so inspiring! What is 'Glacier ice'?",
+        "Barafu ya Mlima! What do hikers chant together?",
+        "Hakuna Matata, Pole Pole! Love East Africa!"
+      ]
+    },
+    {
+      id: 507,
+      name: "Bakari Keita",
+      country: "🇲🇱 Mali",
+      category: "mountains",
+      categoryLabel: "Milima",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
+      price: "17,000 TZS",
+      replies: [
+        "Bonjour brother! How do you say 'Mountain ridge' and 'Deep valley'?",
+        "Safu ya mlima na Bonde la kina! Excellent! What is 'Mountain camp site'?",
+        "Kambi ya mlimani! What is 'Safe descent'?",
+        "Kuteremka kwa salama! Asante sana!"
+      ]
+    },
+    {
+      id: 508,
+      name: "Sven Svensson",
+      country: "🇸🇪 Sweden",
+      category: "mountains",
+      categoryLabel: "Milima",
+      status: "offline",
+      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&auto=format&fit=crop&q=80",
+      price: "16,500 TZS",
+      replies: [
+        "Hej! What is 'Thermal jacket' and 'Sleeping bag' in Swahili?",
+        "Koti la baridi na Mfuko wa kulalia! Practical! How do I ask 'Is water frozen?'",
+        "Je, maji yameganda barafu? Tack så mycket my friend!"
+      ]
+    },
+
+    // ------------------------------------
+    // 🌊 6. MAPOROMOKO (WATERFALLS) - 8 PROFILES
+    // ------------------------------------
+    {
+      id: 601,
       name: "Hannah & Alex",
       country: "🇨🇦 Canada",
       category: "waterfalls",
       categoryLabel: "Maporomoko",
-      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=700&auto=format&fit=crop&q=80",
-      price: "19,500 TZS / Chat",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&auto=format&fit=crop&q=80",
+      price: "19,500 TZS",
       replies: [
-        "Hello! 🌊 We want to swim at Materuni Waterfalls in Moshi and Kalambo Falls. How do you say 'Waterfalls' in Swahili?",
+        "Hello! 🌊 We want to visit Materuni Waterfalls in Moshi! How do you say 'Waterfalls' in Swahili?",
         "Maporomoko ya maji! 😄 Great! How do we say 'Cold fresh river water'?",
         "Maji baridi ya mto! Wow! How do we ask local guides 'Is it safe to swim here?'",
-        "Ni salama kuogelea hapa? Perfect! Thank you for being such a great Swahili guide!"
+        "Ni salama kuogelea hapa? Perfect! Thank you for being such a great guide!"
+      ]
+    },
+    {
+      id: 602,
+      name: "Mateo Rossi",
+      country: "🇨🇭 Switzerland",
+      category: "waterfalls",
+      categoryLabel: "Maporomoko",
+      status: "typing",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
+      price: "18,000 TZS",
+      replies: [
+        "Grüezi! I am visiting Kalambo Falls in Rukwa! What is 'Deep plunge pool' in Swahili?",
+        "Bwawa la kina chini ya mto! Amazing! What is 'Roaring sound of water'?",
+        "Mshindo mkubwa wa maji! What is 'Rainbow in the water mist'?",
+        "Upinde wa mvua kwenye ukungu wa maji! Spectacular!"
+      ]
+    },
+    {
+      id: 603,
+      name: "Zahra Hassan",
+      country: "🇰🇪 Kenya",
+      category: "waterfalls",
+      categoryLabel: "Maporomoko",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&auto=format&fit=crop&q=80",
+      price: "17,000 TZS",
+      replies: [
+        "Sasa dada! What is 'Sanje Waterfalls in Udzungwa' famous for in Swahili?",
+        "Maporomoko ya Sanje Udzungwa! Safi sana! How do I say 'Swimming in natural pool'?",
+        "Kuogelea kwenye dimbwi la asili! Perfect! What about 'Hiking up to waterfalls'?",
+        "Kupanda kuelekea maporomokoni! Asante sana dada!"
+      ]
+    },
+    {
+      id: 604,
+      name: "Finn O'Shea",
+      country: "🇮🇪 Ireland",
+      category: "waterfalls",
+      categoryLabel: "Maporomoko",
+      status: "offline",
+      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80",
+      price: "16,500 TZS",
+      replies: [
+        "Top of the evening! What is 'Refreshing water splash' in Swahili?",
+        "Mcharuzo wa maji yenye kuburudisha! Brilliant! What is 'Rocky waterfall edge'?",
+        "Pambazuko la miamba ya maporomoko! What is 'Pure water stream'?",
+        "Mto wa maji safi sana! Cheers mate!"
+      ]
+    },
+    {
+      id: 605,
+      name: "Ananya Sharma",
+      country: "🇮🇳 India",
+      category: "waterfalls",
+      categoryLabel: "Maporomoko",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
+      price: "18,500 TZS",
+      replies: [
+        "Namaste! What is 'Waterfall in green jungle' in Swahili?",
+        "Maporomoko ya maji msituni! So beautiful! How do I say 'Taking photos by waterfall'?",
+        "Kupiga picha pembezoni mwa maporomoko! Excellent! What is 'Water mist'?",
+        "Ukungu wa maji! Dhanyawad my friend!"
+      ]
+    },
+    {
+      id: 606,
+      name: "Julien Mercer",
+      country: "🇫🇷 France",
+      category: "waterfalls",
+      categoryLabel: "Maporomoko",
+      status: "typing",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
+      price: "17,500 TZS",
+      replies: [
+        "Bonjour! What is 'Ndoro Waterfalls Marangu' in Swahili?",
+        "Maporomoko ya Ndoro Marangu! Magnifique! How do I ask 'Is stream water drinkable?'",
+        "Je, maji ya mto huu yananyweka? What is 'Natural water cascade'?",
+        "Mtiririko wa asili wa maji! Merci beaucoup!"
+      ]
+    },
+    {
+      id: 607,
+      name: "Ese Oghene",
+      country: "🇳🇬 Nigeria",
+      category: "waterfalls",
+      categoryLabel: "Maporomoko",
+      status: "online",
+      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80",
+      price: "19,000 TZS",
+      replies: [
+        "How far bro! What do Swahili people call 'Huge roaring waterfall'?",
+        "Poromoko kubwa la maji yanayorindima! Odogwu Swahili! What about 'River bank picnic'?",
+        "Pikiniki kando ya mto! Sharp sharp bro, Swahili is lit!"
+      ]
+    },
+    {
+      id: 608,
+      name: "Maja Nilsson",
+      country: "🇸🇪 Sweden",
+      category: "waterfalls",
+      categoryLabel: "Maporomoko",
+      status: "offline",
+      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
+      price: "16,000 TZS",
+      replies: [
+        "Hej! How do you say 'Crystal clear waterfall pool' in Swahili?",
+        "Dimbwi safi la kioo la maporomoko! Lovely! What is 'Forest river path'?",
+        "Njia ya mto msituni! Tack så mycket!"
       ]
     }
   ];
@@ -1518,12 +2260,14 @@
 
   /*
     ==========================================
-    RENDER PROFILES WITH FILTERING
+    RENDER PROFILES WITH DYNAMIC STATUS
     ==========================================
   */
   const profilesContainer = document.getElementById("profiles");
+  let currentFilter = "all";
 
   function renderProfiles(filterCategory = "all") {
+    currentFilter = filterCategory;
     profilesContainer.innerHTML = "";
 
     const filtered = filterCategory === "all" 
@@ -1534,12 +2278,22 @@
       const originalIndex = profiles.indexOf(profile);
       const card = document.createElement("article");
       card.className = "profile glass";
+      
+      let statusBadgeHtml = "";
+      if (profile.status === "online") {
+        statusBadgeHtml = `<div class="status-badge online"><span class="online-dot"></span> Online</div>`;
+      } else if (profile.status === "typing") {
+        statusBadgeHtml = `<div class="status-badge typing"><span class="online-dot" style="background:#fbbf24;box-shadow:0 0 10px #fbbf24"></span> Anaandika...</div>`;
+      } else {
+        statusBadgeHtml = `<div class="status-badge offline"><span class="offline-dot"></span> Offline</div>`;
+      }
+
       card.innerHTML = `
         <div class="profile-img">
           <img src="${profile.image}" alt="${profile.name}" loading="lazy">
           <div class="country">${profile.country}</div>
           <div class="category-badge">${profile.categoryLabel}</div>
-          <div class="status"></div>
+          ${statusBadgeHtml}
         </div>
         <div class="profile-info">
           <h3>${profile.name}</h3>
@@ -1569,6 +2323,25 @@
 
   // Initial Render
   renderProfiles("all");
+
+
+  /*
+    ==========================================
+    DYNAMIC ONLINE / OFFLINE / TYPING SWITCHER
+    (Simulates real people changing availability live!)
+    ==========================================
+  */
+  setInterval(() => {
+    // Pick a random profile to change status
+    const randomIndex = Math.floor(Math.random() * profiles.length);
+    const statuses = ["online", "online", "typing", "offline"];
+    const newStatus = statuses[Math.floor(Math.random() * statuses.length)];
+    
+    profiles[randomIndex].status = newStatus;
+    
+    // Refresh current view silently
+    renderProfiles(currentFilter);
+  }, 3500);
 
 
   /*
@@ -1697,14 +2470,6 @@
     setTimeout(() => {
       messages.scrollTop = messages.scrollHeight;
     }, 30);
-  }
-
-  function goToRegistration() {
-    if (!REGISTRATION_URL) {
-      alert("Link ya usajili haijawekwa bado. (Weka URL kwenye variable ya REGISTRATION_URL ndani ya script)");
-      return;
-    }
-    window.location.href = REGISTRATION_URL;
   }
 
   function closeRegistrationGate() {
