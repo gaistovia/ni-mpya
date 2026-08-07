@@ -17,7 +17,6 @@
     }
 
     :root {
-      /* Brand Palette: Green, White, Yellow / Gold */
       --bg: #05140b;
       --bg2: #0a2214;
       --card: rgba(255, 255, 255, 0.05);
@@ -30,6 +29,7 @@
       --yellow-main: #fbbf24;
       --yellow-glow: #f59e0b;
       
+      --whatsapp-green: #25d366;
       --white: #ffffff;
       --text: #f3f4f6;
       --muted: #9ca3af;
@@ -44,6 +44,7 @@
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
+      padding-bottom: 70px;
     }
 
     body::before {
@@ -58,8 +59,12 @@
       background-size: 40px 40px;
     }
 
-    button {
+    button, a {
       font-family: inherit;
+      text-decoration: none;
+    }
+
+    button {
       cursor: pointer;
       border: 0;
     }
@@ -125,6 +130,12 @@
       margin-top: 1px;
     }
 
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     .user-balance-badge {
       display: flex;
       align-items: center;
@@ -175,7 +186,7 @@
 
     /* HERO */
     .hero {
-      padding: 65px 0 45px;
+      padding: 55px 0 35px;
       text-align: center;
     }
 
@@ -195,8 +206,8 @@
 
     .hero h1 {
       font-family: 'Syne', sans-serif;
-      font-size: clamp(38px, 6.5vw, 72px);
-      line-height: 1.05;
+      font-size: clamp(36px, 6vw, 68px);
+      line-height: 1.08;
       letter-spacing: -2px;
       max-width: 920px;
       margin: auto;
@@ -212,15 +223,15 @@
 
     .hero p {
       max-width: 680px;
-      margin: 22px auto 0;
+      margin: 20px auto 0;
       color: #d1d5db;
       line-height: 1.8;
       font-size: 15px;
     }
 
     .hook-box {
-      margin: 25px auto 0;
-      max-width: 700px;
+      margin: 22px auto 0;
+      max-width: 720px;
       padding: 16px 20px;
       border-radius: 20px;
       background: rgba(16, 185, 129, 0.08);
@@ -233,12 +244,77 @@
       gap: 10px;
     }
 
+    /* WHATSAPP HERO CTA BANNER */
+    .wa-banner {
+      margin: 30px auto 0;
+      max-width: 800px;
+      padding: 18px 24px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.15), rgba(16, 185, 129, 0.1));
+      border: 1px solid rgba(37, 211, 102, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      text-align: left;
+    }
+
+    .wa-banner-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .wa-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      background: #25d366;
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+      flex-shrink: 0;
+    }
+
+    .wa-text strong {
+      display: block;
+      color: white;
+      font-size: 15px;
+    }
+
+    .wa-text span {
+      color: #a7f3d0;
+      font-size: 12px;
+    }
+
+    .wa-btn {
+      padding: 12px 22px;
+      border-radius: 30px;
+      background: #25d366;
+      color: #042f1a;
+      font-weight: 800;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 10px 20px rgba(37, 211, 102, 0.25);
+      transition: 0.3s;
+      white-space: nowrap;
+    }
+
+    .wa-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
+    }
+
     /* STATS */
     .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
-      margin-bottom: 55px;
+      margin: 45px 0 55px;
     }
 
     .stat {
@@ -266,9 +342,9 @@
       font-size: 11px;
     }
 
-    /* PROFILES */
+    /* CATEGORIES TABS SECTION */
     .section-title {
-      margin-bottom: 22px;
+      margin-bottom: 18px;
     }
 
     .section-title small {
@@ -285,6 +361,42 @@
       margin-top: 5px;
     }
 
+    .category-tabs {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      scrollbar-width: none;
+    }
+
+    .category-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background: linear-gradient(90deg, var(--green-main), var(--yellow-main));
+      color: #042f1a;
+      border-color: transparent;
+      font-weight: 800;
+    }
+
+    /* PROFILES GRID */
     .profiles {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -342,6 +454,21 @@
       font-weight: 600;
     }
 
+    .category-badge {
+      position: absolute;
+      z-index: 2;
+      bottom: 12px;
+      left: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, 0.85);
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
     .status {
       position: absolute;
       z-index: 2;
@@ -360,7 +487,7 @@
 
     .profile-info h3 {
       font-family: 'Syne', sans-serif;
-      font-size: 18px;
+      font-size: 17px;
     }
 
     .profile-info p {
@@ -466,6 +593,52 @@
       color: var(--muted);
       font-size: 10px;
       margin-left: 8px;
+    }
+
+    /* BOTTOM FLOATING WHATSAPP CTA BAR */
+    .floating-wa {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 80;
+      background: #092013;
+      border: 1px solid #25d366;
+      padding: 10px 20px;
+      border-radius: 40px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: min(480px, calc(100% - 30px));
+      justify-content: space-between;
+    }
+
+    .floating-wa-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .floating-wa-info strong {
+      font-size: 12px;
+      color: white;
+      display: block;
+    }
+
+    .floating-wa-info small {
+      color: #a7f3d0;
+      font-size: 10px;
+    }
+
+    .floating-wa-btn {
+      background: #25d366;
+      color: #042f1a;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 800;
+      font-size: 11px;
+      white-space: nowrap;
     }
 
     /* CHAT MODAL */
@@ -784,7 +957,7 @@
     /* TOAST NOTIFICATION */
     .toast-notification {
       position: fixed;
-      bottom: 20px;
+      bottom: 75px;
       right: 20px;
       background: #092013;
       border: 1px solid var(--green-main);
@@ -833,6 +1006,14 @@
       .profiles {
         grid-template-columns: repeat(2, 1fr);
       }
+      .wa-banner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .wa-btn {
+        width: 100%;
+        justify-content: center;
+      }
     }
 
     @media (max-width: 600px) {
@@ -850,11 +1031,11 @@
       }
 
       .hero {
-        padding: 45px 0 35px;
+        padding: 35px 0 25px;
       }
 
       .hero h1 {
-        font-size: 40px;
+        font-size: 36px;
         letter-spacing: -1.5px;
       }
 
@@ -894,7 +1075,7 @@
       .toast-notification {
         left: 15px;
         right: 15px;
-        bottom: 15px;
+        bottom: 80px;
       }
     }
   </style>
@@ -917,18 +1098,20 @@
       </div>
     </div>
 
-    <!-- User Local Balance Badge -->
-    <div class="user-balance-badge">
-      <div>
-        <div class="balance-title">Salio Lako:</div>
-        <div class="balance-amount" id="userBalanceText">0 TZS</div>
+    <div class="header-actions">
+      <!-- User Local Balance Badge -->
+      <div class="user-balance-badge">
+        <div>
+          <div class="balance-title">Salio Lako:</div>
+          <div class="balance-amount" id="userBalanceText">0 TZS</div>
+        </div>
       </div>
-    </div>
 
-    <div class="online-counter glass">
-      <span class="online-dot"></span>
-      <strong id="onlineNumber">21,981</strong>
-      <span>ONLINE</span>
+      <div class="online-counter glass">
+        <span class="online-dot"></span>
+        <strong id="onlineNumber">24,580</strong>
+        <span>ONLINE</span>
+      </div>
     </div>
   </header>
 
@@ -949,7 +1132,7 @@
     </h1>
 
     <p>
-      Anza mazungumzo na watalii wanaopenda Tanzania na wanaotaka kujifunza Kiswahili kabla ya kuja nchini. Badilisha muda wako kuwa pesa!
+      Anza mazungumzo na watalii wanaopenda Tanzania na wanaotaka kujifunza Kiswahili kulingana na mapenzi yao (Wanyama, Utamaduni, Milima, Mimea na Maporomoko ya Maji).
     </p>
 
     <!-- HOOK EMBEDDED -->
@@ -960,6 +1143,20 @@
       </div>
     </div>
 
+    <!-- WHATSAPP CHANNEL CTA BANNER -->
+    <div class="wa-banner">
+      <div class="wa-banner-info">
+        <div class="wa-icon">💬</div>
+        <div class="wa-text">
+          <strong>Jiunge na Channel Yetu ya WhatsApp ya Watalii!</strong>
+          <span>Pata fursa za haraka, updates za watalii wapya na mbinu za kuongeza kipato kila siku.</span>
+        </div>
+      </div>
+      <a href="https://whatsapp.com/channel/0029VbE3xFJF1YlLvDsmT73Y" target="_blank" class="wa-btn">
+        Jiunge WhatsApp Channel →
+      </a>
+    </div>
+
   </section>
 
 
@@ -968,31 +1165,42 @@
 
     <div class="stat glass">
       <div class="stat-label">Watalii Walipo</div>
-      <div class="stat-number" style="color:var(--white)">48+</div>
+      <div class="stat-number" style="color:var(--white)">65+</div>
       <div class="stat-sub">Nchi mbalimbali duniani</div>
     </div>
 
     <div class="stat glass">
       <div class="stat-label">Miamala ya Leo</div>
-      <div class="stat-number" style="color:var(--yellow-main)">5.8M</div>
+      <div class="stat-number" style="color:var(--yellow-main)">7.2M</div>
       <div class="stat-sub">TZS zilizolipwa kwa watumiaji</div>
     </div>
 
     <div class="stat glass">
       <div class="stat-label">Wakiwa Online</div>
-      <div class="stat-number" style="color:var(--green-accent)">24K+</div>
+      <div class="stat-number" style="color:var(--green-accent)">28K+</div>
       <div class="stat-sub">Watalii wanaosubiri kuchat</div>
     </div>
 
   </section>
 
 
-  <!-- PROFILES -->
+  <!-- PROFILES SECTION WITH GROUP CATEGORIES -->
   <section>
 
     <div class="section-title">
-      <small>UCHAGUZI WA WATALII</small>
-      <h2>Chagua Mtalii wa Kuchat Naye</h2>
+      <small>MAKUNDI YA WATALII NA MAPENZI YAO</small>
+      <h2>Chagua Mtalii Kulingana na Mada Hizi</h2>
+    </div>
+
+    <!-- CATEGORY FILTER TABS -->
+    <div class="category-tabs" id="categoryTabs">
+      <button class="tab-btn active" onclick="filterCategory('all', this)">✨ Wote (All)</button>
+      <button class="tab-btn" onclick="filterCategory('culture', this)">🎭 Utamaduni (Culture Lovers)</button>
+      <button class="tab-btn" onclick="filterCategory('animals', this)">🦁 Wanyama (Animals & Safari)</button>
+      <button class="tab-btn" onclick="filterCategory('nature', this)">🌿 Asili & Mazingira (Nature)</button>
+      <button class="tab-btn" onclick="filterCategory('vegetation', this)">🌴 Mimea & Misitu (Vegetation)</button>
+      <button class="tab-btn" onclick="filterCategory('mountains', this)">🏔️ Milima (Mountains & Climbing)</button>
+      <button class="tab-btn" onclick="filterCategory('waterfalls', this)">🌊 Maporomoko ya Maji (Waterfalls)</button>
     </div>
 
     <div class="profiles" id="profiles"></div>
@@ -1025,6 +1233,21 @@
 </div>
 
 
+<!-- FLOATING STICKY WHATSAPP CTA -->
+<div class="floating-wa">
+  <div class="floating-wa-info">
+    <span style="font-size:20px;">📲</span>
+    <div>
+      <strong>UtaliiChatting WhatsApp Channel</strong>
+      <small>Usipitwe na fursa za Watalii wapya!</small>
+    </div>
+  </div>
+  <a href="https://whatsapp.com/channel/0029VbE3xFJF1YlLvDsmT73Y" target="_blank" class="floating-wa-btn">
+    Jiunge Channel →
+  </a>
+</div>
+
+
 <!-- CHAT OVERLAY -->
 <div class="chat-overlay" id="chatOverlay">
 
@@ -1035,7 +1258,7 @@
       <img id="chatAvatar" class="chat-avatar" alt="Tourist Avatar">
       <div class="chat-user">
         <strong id="chatName"></strong>
-        <small>● Online • Anataka kujifunza Kiswahili</small>
+        <small id="chatTopicTag">● Online • Anataka kujifunza Kiswahili</small>
       </div>
     </div>
 
@@ -1118,7 +1341,7 @@
     REGISTRATION LINK CONFIGURATION
     ==========================================
   */
-  const REGISTRATION_URL = ""; // Weka link yako ya Malipo/Usajili hapa (Mfano: https://malipo.com/join)
+  const REGISTRATION_URL = ""; // Weka link yako ya Malipo/Usajili hapa
 
 
   /*
@@ -1149,104 +1372,145 @@
 
   /*
     ==========================================
-    PROFILES DATA (Unsplash High Quality Travel Images)
+    PROFILES DATA BY CATEGORIES & SPECIFIC TOPIC MESSAGES
     ==========================================
   */
   const profiles = [
+    // 🎭 CULTURE LOVERS
     {
       name: "Jessica & Travel",
       country: "🇺🇸 United States",
+      category: "culture",
+      categoryLabel: "Utamaduni",
       image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=700&auto=format&fit=crop&q=80",
       price: "18,500 TZS / Chat",
       replies: [
-        "Jambo! 👋 I'm travelling to Serengeti next month. Can you teach me basic Swahili?",
-        "Awesome! How do I say 'Thank you very much' in Swahili?",
-        "Asante sana! 😄 What is the Swahili word for 'Beautiful place'?",
-        "I love Tanzania so much! ❤️ Can you teach me one more phrase before I come?"
-      ]
-    },
-    {
-      name: "Markus Weber",
-      country: "🇩🇪 Germany",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&auto=format&fit=crop&q=80",
-      price: "15,000 TZS / Chat",
-      replies: [
-        "Hallo! 👋 I want to visit Zanzibar soon. How do I greet local people politely?",
-        "Habari gani! 😄 That sounds so smooth. How do I reply if someone asks me that?",
-        "Mambo vipi! Haha I like that! What does 'Karibu' mean?",
-        "Super cool! 🇹🇿 I am really excited to learn more Swahili from you!"
-      ]
-    },
-    {
-      name: "Elena Rostova",
-      country: "🇬🇧 United Kingdom",
-      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=700&auto=format&fit=crop&q=80",
-      price: "20,000 TZS / Chat",
-      replies: [
-        "Hello there! 😊 Swahili sounds so poetic. How do I say 'I am happy to be here'?",
-        "Oh wow, 'Nina furaha kuwa hapa'! Did I spell that right?",
-        "Yes! How do I order food or coffee in Swahili when I arrive?",
-        "You are an amazing teacher! I can't wait to practice this in Arusha!"
-      ]
-    },
-    {
-      name: "Kenji Sato",
-      country: "🇯🇵 Japan",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=700&auto=format&fit=crop&q=80",
-      price: "17,500 TZS / Chat",
-      replies: [
-        "Konnichiwa! 👋 I am planning a wildlife safari in Mt. Kilimanjaro. How do you say lion in Swahili?",
-        "Simba! Like Disney! 🦁 What about elephant?",
-        "Tembo! Nice! What is 'Good friend' in Swahili?",
-        "Rafiki mzuri! Thank you my friend, Swahili is great!"
+        "Jambo! 👋 I love African culture & traditions. How do you greet elders respectfully in Swahili?",
+        "Shikamoo! 😄 Wow, and what is the proper response when an elder says 'Marahaba'?",
+        "That is so polite! What is the Swahili word for traditional clothing like Kitenge or Kanga?",
+        "I love Tanzanian hospitality! ❤️ Can you teach me how to say 'Welcome home' in Swahili?"
       ]
     },
     {
       name: "Chloe & Pierre",
       country: "🇫🇷 France",
+      category: "culture",
+      categoryLabel: "Utamaduni",
       image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=700&auto=format&fit=crop&q=80",
       price: "16,000 TZS / Chat",
       replies: [
-        "Bonjour! 😊 We are coming for our honeymoon in Zanzibar. Teach us something romantic!",
-        "Nakupenda! That means 'I love you', right?",
-        "Haha oui! How do we say 'Delicious food' in Swahili?",
-        "Chakula kitamu! Perfect! Tanzania is our dream destination."
+        "Bonjour! 😊 We love Swahili music and wedding dances! How do you say 'Traditional dance' in Swahili?",
+        "Ngoma za kienyeji! Amazing! How do we say 'Delicious traditional food'?",
+        "Chakula kitamu cha asili! What is 'Ugali and Fish' called in Swahili?",
+        "Wonderful! Swahili culture is so rich and vibrant. Asante sana!"
+      ]
+    },
+
+    // 🦁 ANIMALS (WANYAMA)
+    {
+      name: "Markus Weber",
+      country: "🇩🇪 Germany",
+      category: "animals",
+      categoryLabel: "Wanyama",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&auto=format&fit=crop&q=80",
+      price: "15,000 TZS / Chat",
+      replies: [
+        "Hallo! 👋 I am coming for a Wildlife Safari in Serengeti! How do you say 'Lion' and 'Elephant' in Swahili?",
+        "Simba and Tembo! 😄 Super cool! What about 'Cheetah' and 'Giraffe'?",
+        "Duma and Twiga! I love wildlife! How do I ask the safari guide 'Where are the wild animals?'",
+        "Wako wapi wanyama! Perfect! 🦁 I can't wait to see the Big Five in Tanzania!"
       ]
     },
     {
-      name: "Mateo Silva",
-      country: "🇧🇷 Brazil",
-      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=700&auto=format&fit=crop&q=80",
-      price: "19,000 TZS / Chat",
+      name: "Kenji Sato",
+      country: "🇯🇵 Japan",
+      category: "animals",
+      categoryLabel: "Wanyama",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=700&auto=format&fit=crop&q=80",
+      price: "17,500 TZS / Chat",
       replies: [
-        "Ola! 🇧🇷 I love African culture! Teach me some cool Swahili slang!",
-        "Mambo vipi! Fresh! What is the coolest way to answer?",
-        "Poa kabisa! I love this energy brother!",
-        "Swahili people are so welcoming. Can't wait to visit Dar es Salaam!"
+        "Konnichiwa! 🦁 I want to photograph wild birds and leopards in Ngorongoro Crater. What is leopard in Swahili?",
+        "Chui! Excellent! How do I say 'Look at that big animal over there'?",
+        "Mnyama mkubwa! Haha great! What is the Swahili word for 'Wild birds'?",
+        "Ndege wa porini! Thank you my friend, you are an expert!"
+      ]
+    },
+
+    // 🌿 NATURE (ASILI & MAZINGIRA)
+    {
+      name: "Elena Rostova",
+      country: "🇬邦 United Kingdom",
+      category: "nature",
+      categoryLabel: "Asili",
+      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=700&auto=format&fit=crop&q=80",
+      price: "20,000 TZS / Chat",
+      replies: [
+        "Hello there! 🌿 I am obsessed with African natural landscapes. How do you say 'Fresh air and beautiful scenery'?",
+        "Hawa safi na mazingira mazuri! Wow! How do I say 'I love nature' in Swahili?",
+        "Ninapenda asili! Did I pronounce it right? What is 'Sunset over the ocean'?",
+        "Chakwe cha jua baharini! That sounds so poetic. Tanzania's nature is unreal!"
       ]
     },
     {
       name: "Sophia Martinez",
       country: "🇪🇸 Spain",
+      category: "nature",
+      categoryLabel: "Asili",
       image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=700&auto=format&fit=crop&q=80",
       price: "14,500 TZS / Chat",
       replies: [
-        "Hola! 👋 I am a solo traveler coming to Ngorongoro. Is Swahili easy to learn?",
-        "That's encouraging! How do I ask 'How much is this?'",
-        "Ni kiasi gani! Excellent. How about 'Where is the hotel?'",
-        "You make learning Swahili so fun and easy!"
+        "Hola! 🌊 I love camping outdoors in natural reserves. How do I say 'Clean green environment'?",
+        "Mazingira safi ya kijani! Awesome! How do I say 'Protecting nature' in Swahili?",
+        "Kutunza asili! Excellent! What is the word for 'Fresh water spring'?",
+        "Mtasirika au chemchemi ya maji! Swahili is such a beautiful language!"
       ]
     },
+
+    // 🌴 VEGETATION (MIMEA & MISITU)
+    {
+      name: "Mateo Silva",
+      country: "🇧🇷 Brazil",
+      category: "vegetation",
+      categoryLabel: "Mimea",
+      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=700&auto=format&fit=crop&q=80",
+      price: "19,000 TZS / Chat",
+      replies: [
+        "Ola! 🇧🇷 I am a botanist coming to study Baobab trees & tropical forests in Tanzania! What is Baobab called in Swahili?",
+        "Mbuyu! 🌳 Wow! And what is the general word for 'Big Forest' and 'Green Trees'?",
+        "Msitu mkubwa na Mimea ya kijani! Perfect! What about 'Zanzibar Spices' like Cloves?",
+        "Karafuu na Mdalasini! Incredible! I am going to buy lots of spices in Spice Island!"
+      ]
+    },
+
+    // 🏔️ MOUNTAINS (MILIMA & UPANDAJI)
     {
       name: "Liam O'Connor",
       country: "🇦🇺 Australia",
+      category: "mountains",
+      categoryLabel: "Milima",
       image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=700&auto=format&fit=crop&q=80",
       price: "18,000 TZS / Chat",
       replies: [
-        "G'day mate! 🦘 Heading to East Africa soon. What's the first word I should master?",
-        "Hakuna Matata! Is that actually used in daily life?",
-        "Haha awesome! How do I say 'Goodbye, see you later'?",
-        "Kwaheri! Cheers mate, really appreciate your help!"
+        "G'day mate! 🦘 I am climbing Mt. Kilimanjaro next month! What is the famous Swahili hiking phrase used on mountain trails?",
+        "Pole pole! 🏔️ Yes! 'Slowly slowly'! How do I say 'We reached the peak of the mountain'?",
+        "Tulumefika kileleni! What is 'Mount Meru' and 'Snow on the mountain' in Swahili?",
+        "Barafu mlimani! Cheers mate, now I feel prepared to conquer Uhuru Peak!"
+      ]
+    },
+
+    // 🌊 WATERFALLS (MAPOROMOKO YA MAJI)
+    {
+      name: "Hannah & Alex",
+      country: "🇨🇦 Canada",
+      category: "waterfalls",
+      categoryLabel: "Maporomoko",
+      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=700&auto=format&fit=crop&q=80",
+      price: "19,500 TZS / Chat",
+      replies: [
+        "Hello! 🌊 We want to swim at Materuni Waterfalls in Moshi and Kalambo Falls. How do you say 'Waterfalls' in Swahili?",
+        "Maporomoko ya maji! 😄 Great! How do we say 'Cold fresh river water'?",
+        "Maji baridi ya mto! Wow! How do we ask local guides 'Is it safe to swim here?'",
+        "Ni salama kuogelea hapa? Perfect! Thank you for being such a great Swahili guide!"
       ]
     }
   ];
@@ -1254,36 +1518,57 @@
 
   /*
     ==========================================
-    RENDER PROFILES
+    RENDER PROFILES WITH FILTERING
     ==========================================
   */
   const profilesContainer = document.getElementById("profiles");
 
-  profiles.forEach((profile, index) => {
-    const card = document.createElement("article");
-    card.className = "profile glass";
-    card.innerHTML = `
-      <div class="profile-img">
-        <img src="${profile.image}" alt="${profile.name}" loading="lazy">
-        <div class="country">${profile.country}</div>
-        <div class="status"></div>
-      </div>
-      <div class="profile-info">
-        <h3>${profile.name}</h3>
-        <p>✈️ Mtalii • Anajifunza Kiswahili</p>
-        <div class="profile-bottom">
-          <button class="chat-btn">Anza Kuchat</button>
-          <div class="price">${profile.price}</div>
+  function renderProfiles(filterCategory = "all") {
+    profilesContainer.innerHTML = "";
+
+    const filtered = filterCategory === "all" 
+      ? profiles 
+      : profiles.filter(p => p.category === filterCategory);
+
+    filtered.forEach((profile) => {
+      const originalIndex = profiles.indexOf(profile);
+      const card = document.createElement("article");
+      card.className = "profile glass";
+      card.innerHTML = `
+        <div class="profile-img">
+          <img src="${profile.image}" alt="${profile.name}" loading="lazy">
+          <div class="country">${profile.country}</div>
+          <div class="category-badge">${profile.categoryLabel}</div>
+          <div class="status"></div>
         </div>
-      </div>
-    `;
+        <div class="profile-info">
+          <h3>${profile.name}</h3>
+          <p>✈️ Mtalii • Mada: ${profile.categoryLabel}</p>
+          <div class="profile-bottom">
+            <button class="chat-btn">Anza Kuchat</button>
+            <div class="price">${profile.price}</div>
+          </div>
+        </div>
+      `;
 
-    card.addEventListener("click", () => {
-      openChat(index);
+      card.addEventListener("click", () => {
+        openChat(originalIndex);
+      });
+
+      profilesContainer.appendChild(card);
     });
+  }
 
-    profilesContainer.appendChild(card);
-  });
+  function filterCategory(cat, btnElement) {
+    const tabs = document.querySelectorAll(".tab-btn");
+    tabs.forEach(t => t.classList.remove("active"));
+    btnElement.classList.add("active");
+
+    renderProfiles(cat);
+  }
+
+  // Initial Render
+  renderProfiles("all");
 
 
   /*
@@ -1298,6 +1583,7 @@
   const chatOverlay = document.getElementById("chatOverlay");
   const chatName = document.getElementById("chatName");
   const chatAvatar = document.getElementById("chatAvatar");
+  const chatTopicTag = document.getElementById("chatTopicTag");
   const messages = document.getElementById("messages");
   const messageInput = document.getElementById("messageInput");
   const typing = document.getElementById("typing");
@@ -1311,6 +1597,7 @@
 
     chatName.textContent = currentProfile.name;
     chatAvatar.src = currentProfile.image;
+    chatTopicTag.textContent = `● Online • Mada: ${currentProfile.categoryLabel}`;
     messages.innerHTML = "";
     messages.appendChild(typing);
 
@@ -1354,14 +1641,10 @@
     scrollMessages();
   }
 
-  /*
-    TRIGGERED AFTER 4 USER MESSAGES
-  */
   function sendMessage() {
     const text = messageInput.value.trim();
     if (!text) return;
 
-    // Block if already reached 4
     if (userMessageCount >= 4) {
       registerGate.classList.add("active");
       return;
@@ -1372,19 +1655,15 @@
     userMessageCount++;
     messageCount.textContent = userMessageCount;
 
-    // CHECK IF 4TH MESSAGE REACHED
     if (userMessageCount >= 4) {
-      // 1. Add reward to local balance
       const reward = 18500;
       const currentBal = getUserBalance();
       setUserBalance(currentBal + reward);
 
-      // 2. Show reward notice in chat
       setTimeout(() => {
         addRewardNotice("🎉 UMETUMA JUMBE 4! TZS 18,500 ZIMEONGEZEKA KWENYE SALIO LAKO!");
       }, 500);
 
-      // 3. Trigger Registration Popup after 1 second
       setTimeout(() => {
         registerGate.classList.add("active");
         showToastNotification("Malipo Yameingia!", "Umelipwa TZS 18,500 kwa kufundisha Mtalii!");
@@ -1393,7 +1672,6 @@
       return;
     }
 
-    // BOT RESPONSE FOR MESSAGES 1 to 3
     showTyping();
     const response = currentProfile.replies[replyIndex % currentProfile.replies.length];
     replyIndex++;
@@ -1466,7 +1744,6 @@
   function generateRandomPayout() {
     const randomName = namesList[Math.floor(Math.random() * namesList.length)];
     const randomMethod = paymentMethods[Math.floor(Math.random() * paymentMethods.length)];
-    // Amounts between 25,000 and 85,000 TZS
     const randomAmount = (Math.floor(Math.random() * 12) + 5) * 5000;
     
     const payoutItem = document.createElement("div");
@@ -1478,18 +1755,15 @@
 
     payoutListContainer.insertBefore(payoutItem, payoutListContainer.firstChild);
 
-    // Keep list clean (max 6 items)
     if (payoutListContainer.children.length > 6) {
       payoutListContainer.removeChild(payoutListContainer.lastChild);
     }
   }
 
-  // Pre-fill initial items
   for (let i = 0; i < 4; i++) {
     generateRandomPayout();
   }
 
-  // Infinite loop with realistic random timing (3 to 7 seconds)
   function loopPayouts() {
     const nextInterval = Math.floor(Math.random() * 4000) + 3000;
     setTimeout(() => {
@@ -1519,7 +1793,6 @@
     }, 4500);
   }
 
-  // Periodic simulated live toast notifications
   setInterval(() => {
     if (!chatOverlay.classList.contains("active")) {
       const randomName = namesList[Math.floor(Math.random() * namesList.length)];
