@@ -1324,6 +1324,26 @@
       font-size: 12px;
     }
 
+    .popup-extra-links {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .popup-extra-links a {
+      color: var(--yellow-main);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .popup-extra-links a:hover {
+      opacity: 0.8;
+    }
+
     /* GENERAL WITHDRAWAL MODAL */
     .withdraw-modal-overlay {
       position: fixed;
@@ -1864,29 +1884,26 @@
 
         <div class="reward-icon">🎉</div>
 
-        <h3>Hongera Sana! 👏</h3>
-        <div class="earned-amount">+18,500 TZS</div>
+        <h3>Hongera sana umepokea <span id="earnedAmountText">18,500 TZS</span></h3>
 
         <p>
-          Ili uendelee kuchat na kupokea malipo yako inabidi ufungue account.
-        </p>
-
-        <div class="price-tag">
-          Ada ya usajili: <strong></strong><br>
-          <small>(Utapata Access ya Kuchat bila kikomo & Kuweka Pesa Zako M-Pesa, Mixx by Yas, Airtel na Halopesa)</small>
-        </div>
-
-        <p style="margin: -8px 0 12px 0; font-size: 11px; color: var(--muted);">
-          Bonyeza hapa chini kufungua account
+          Ili uendelee kuchat na kupokea malipo yako inabidi ufungue account. Ada ya kufungua account ni <strong>14,500 TZS</strong>. Then bonyeza hapa chini kufungua account.
         </p>
 
         <a href="https://kozenasite.site/register?ref=Nico45" class="register-btn" target="_blank">
-          fungua account →
+          Fungua Account →
         </a>
 
         <button class="later-btn" onclick="closeRegistrationGate()">
           Funga Kwa Muda
         </button>
+
+        <div class="popup-extra-links">
+          <span>📞 Msaada wa haraka zaidi: <strong>0725962119</strong></span>
+          <a href="https://chat.whatsapp.com/GwkRHy9dWttFq2ldUQ9RyD?s=cl&p=a&ilr=0" target="_blank">
+            💬 WhatsApp group ili kukutana na kucha ama kuuliza maswali
+          </a>
+        </div>
 
       </div>
 
@@ -2274,9 +2291,13 @@
         addMessage(activeProfile.replies[userMsgCount], "bot");
       } else {
         // EARNED REWARD TRIGGER
+        const rewardAmount = activeProfile.price || "18,500 TZS";
+        const numericReward = parseInt(rewardAmount.replace(/[^0-9]/g, ""), 10) || 18500;
+        
         const currentBalance = getUserBalance();
-        setUserBalance(currentBalance + 18500);
+        setUserBalance(currentBalance + numericReward);
 
+        document.getElementById("earnedAmountText").textContent = rewardAmount;
         document.getElementById("registerGate").classList.add("active");
       }
     }, 1200);
