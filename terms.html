@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
+  <title>Vigezo na Masharti — UTALIICHAT</title>
+  <meta name="description" content="Soma vigezo na masharti ya kutumia jukwaa la UTALIICHAT. Shabaha zetu, malipo na miongozo ya matumizi.">
+  <meta name="author" content="UTALIICHAT">
+  <meta name="robots" content="index, follow">
+
+  <!-- THEME COLOR FOR MOBILE BROWSERS -->
+  <meta name="theme-color" content="#030d07">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --bg: #030d07;
+      --bg2: #071f12;
+      --card: rgba(12, 35, 22, 0.65);
+      --border: rgba(52, 211, 153, 0.18);
+      
+      --green-main: #10b981;
+      --green-glow: #059669;
+      --green-accent: #34d399;
+      
+      --yellow-main: #fbbf24;
+      --yellow-glow: #f59e0b;
+      
+      --whatsapp-green: #25d366;
+      --white: #ffffff;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      background:
+        linear-gradient(rgba(3, 13, 7, 0.88), rgba(3, 13, 7, 0.94)),
+        url('https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1920&auto=format&fit=crop&q=80') center/cover fixed no-repeat;
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 60px;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.04;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+      background-size: 35px 35px;
+      z-index: 1;
+    }
+
+    button, a {
+      font-family: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1000px, calc(100% - 28px));
+      margin: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .glass {
+      background: var(--card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    /* HEADER */
+    header {
+      margin-top: 15px;
+      padding: 14px 22px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 15px;
+      z-index: 80;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--green-main), var(--yellow-main));
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+      font-size: 22px;
+    }
+
+    .brand-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+      color: var(--white);
+    }
+
+    .brand-name span {
+      color: var(--yellow-main);
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 1px;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: var(--green-main);
+      color: #03140a;
+    }
+
+    /* HERO & PAGE CONTENT */
+    .page-header {
+      padding: 40px 0 25px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 4vw, 42px);
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, var(--green-accent), var(--yellow-main));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .page-header p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .content-box {
+      padding: 35px;
+      border-radius: 28px;
+      margin-bottom: 40px;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .content-box h2 {
+      font-family: 'Syne', sans-serif;
+      color: var(--yellow-main);
+      font-size: 20px;
+      margin: 25px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .content-box h2:first-child {
+      margin-top: 0;
+    }
+
+    .content-box p {
+      color: #d1d5db;
+      margin-bottom: 15px;
+    }
+
+    .content-box ul {
+      margin-left: 20px;
+      margin-bottom: 15px;
+      color: #d1d5db;
+    }
+
+    .content-box li {
+      margin-bottom: 8px;
+    }
+
+    .last-updated {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(251, 191, 36, 0.1);
+      border: 1px solid rgba(251, 191, 36, 0.25);
+      border-radius: 20px;
+      color: var(--yellow-main);
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      padding: 30px 0 15px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 11px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    footer a {
+      color: var(--muted);
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: var(--yellow-main);
+    }
+
+    @media (max-width: 600px) {
+      .content-box {
+        padding: 20px;
+      }
+      .page-header h1 {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="glass">
+    <a href="index.html" class="brand">
+      <div class="logo">🌍</div>
+      <div>
+        <div class="brand-name">UTALII<span>CHAT</span></div>
+        <small>Teach Swahili • Earn Money</small>
+      </div>
+    </a>
+
+    <a href="index.html" class="back-btn">← Rudi Mwanzo</a>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+    <div class="last-updated">🗓️ Ilisasishwa Mwisho: Agosti 2026</div>
+    <h1>Vigezo na <span class="gradient">Masharti</span></h1>
+    <p>Tafadhali soma vigezo na masharti haya kwa umakini kabla ya kutumia huduma zetu.</p>
+  </section>
+
+  <!-- CONTENT -->
+  <main class="content-box glass">
+    
+    <h2>1. Utambulisho na Kukubali Masharti</h2>
+    <p>Kwa kufungua, kutembelea, au kutumia jukwaa la <strong>UTALIICHAT</strong>, unakubaliana kikamilifu na vigezo na masharti yaliyoainishwa hapa. Ukawa haukubaliani na sehemu yoyote ya masharti haya, hauruhusiwi kuendelea kutumia huduma zetu.</p>
+
+    <h2>2. Maelezo ya Huduma</h2>
+    <p>UTALIICHAT ni jukwaa linalowaunganisha wazungumzaji wa Kiswahili na watalii pamoja na wanafunzi wa kimataifa wanaotaka kujifunza lugha na utamaduni wa East Africa. Jukwaa hili linatoa fursa kwa watumiaji kujipatia kipato kwa njia ya mazungumzo na mafunzo ya Kiswahili.</p>
+
+    <h2>3. Usajili na Uamilisho wa Akaunti (Account Activation)</h2>
+    <p>Ili kuanza kutumia huduma zote za mfumo na kuweza kutoa salio lako (Withdrawal) kwenda kwenye mtandao wako wa simu (M-Pesa, Mixx by Yas, Airtel Money au Halopesa), lazima uwe na akaunti iliyothibitishwa na kuamilishwa.</p>
+    <ul>
+      <li>Ada ya usajili/uamilisho ya <strong>TZS 14,500</strong> inalipwa mara moja tu.</li>
+      <li>Ada hii inatumika kuhakiki utambulisho wa mtumiaji na kuzuia akaunti za kughushi (spam accounts).</li>
+      <li>Ada hii hairudishwa (Non-refundable) mara tu akaunti inapoanzishwa.</li>
+    </ul>
+
+    <h2>4. Mfumo wa Malipo na Kutoa Pesa</h2>
+    <p>Watumiaji wote wanapaswa kuzingatia miongozo ifuatayo kuhusu malipo:</p>
+    <ul>
+      <li>Salio huongezeka kulingana na idadi ya mazungumzo/jumbe zilizokamilika na mtalii.</li>
+      <li>Utoaji wa pesa unachakatwa kwa njia ya <em>Instant Auto-Withdrawal</em> mara tu unapoweka ombi lako.</li>
+      <li>Unapaswa kuhakikisha namba ya simu unayotumia kupokea pesa imesajiliwa kwa jina lako sahihi.</li>
+    </ul>
+
+    <h2>5. Mwenendo na Maadili ya Mtumiaji</h2>
+    <p>Watumiaji wote wa UTALIICHAT wanatakiwa kudumisha nidhamu na heshima ya hali ya juu wakati wa kuongea na watalii. Ni marufuku kabisa:</p>
+    <ul>
+      <li>Kutumia lugha za matusi, ubaguzi au picha zisizo na maadili.</li>
+      <li>Kujaribu kumtapeli au kumlaghai mtalii kwa namna yoyote ile.</li>
+      <li>Kushiriki taarifa za siri au za kibinafsi zinazoweza kuhatarisha usalama wa mtumiaji mwingine.</li>
+    </ul>
+    <p>Mtu yeyote atakayekiuka miongozo hii akaunti yake itafungiwa mara moja bila taarifa wala kurudishiwa salio lake.</p>
+
+    <h2>6. Mabadiliko ya Masharti</h2>
+    <p>UTALIICHAT inahifadhi haki ya kubadilisha au kuboresha vigezo na masharti haya wakati wowote ili kukidhi mahitaji ya kisheria na maboresho ya huduma. Mabadiliko yakifanyika yatatangazwa kupitia ukurasa huu.</p>
+
+    <h2>7. Msaada na Mawasiliano</h2>
+    <p>Ikiwa una swali au changamoto yoyote kuhusu vigezo na masharti haya, unaweza kuwasiliana nasi kupitia Channel yetu rasmi ya WhatsApp au timu ya huduma kwa wateja.</p>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 UTALIICHAT. All rights reserved. | 
+    <a href="index.html">Nyumbani</a> • 
+    <a href="privacy.html">Sera ya Faragha</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
