@@ -177,6 +177,49 @@
       -webkit-backdrop-filter: blur(24px);
     }
 
+    /* TOP CONTACT & SUPPORT CTA BAR */
+    .top-cta-contact-bar {
+      background: rgba(4, 20, 11, 0.95);
+      border-bottom: 1px solid rgba(52, 211, 153, 0.2);
+      padding: 8px 15px;
+      font-size: 11px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: relative;
+      z-index: 95;
+    }
+
+    .top-cta-contact-bar .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #e5e7eb;
+    }
+
+    .top-cta-contact-bar a {
+      color: var(--yellow-main);
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+
+    .top-cta-contact-bar a:hover {
+      color: #ffffff;
+    }
+
+    .wa-group-badge-top {
+      background: #25d366;
+      color: #03140a !important;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
     /* TOP STICKY PRICE NOTICE BAR */
     .top-price-bar {
       position: sticky;
@@ -1227,7 +1270,7 @@
       flex-shrink: 0;
     }
 
-    /* REGISTRATION / WITHDRAWAL OVERLAY / POPUP */
+    /* REGISTRATION / WITHDRAWAL OVERLAY / POPUP WITH HIGH DESIRE REALITY & GOLD GLOW */
     .register-overlay {
       position: absolute;
       inset: 0;
@@ -1235,8 +1278,8 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: rgba(2, 15, 8, 0.94);
-      backdrop-filter: blur(14px);
+      background: rgba(2, 15, 8, 0.96);
+      backdrop-filter: blur(16px);
       z-index: 50;
     }
 
@@ -1245,74 +1288,132 @@
     }
 
     .register-box {
-      width: min(380px, 100%);
-      padding: 28px 22px;
+      width: min(390px, 100%);
+      padding: 30px 22px;
       text-align: center;
       border-radius: 28px;
-      background: #082113;
-      border: 1px solid rgba(251, 191, 36, 0.4);
-      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.9);
-      animation: chatIn 0.3s ease;
+      background: linear-gradient(145deg, #092616, #04140b);
+      border: 2px solid #f59e0b;
+      box-shadow: 0 0 50px rgba(245, 158, 11, 0.35), 0 30px 90px rgba(0, 0, 0, 0.95);
+      animation: popGlow 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    @keyframes popGlow {
+      0% { transform: scale(0.8) translateY(30px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .register-box::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(251, 191, 36, 0.1) 0%, transparent 60%);
+      pointer-events: none;
+      animation: rotateGlow 10s linear infinite;
+    }
+
+    @keyframes rotateGlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     .reward-icon {
-      width: 60px;
-      height: 60px;
-      border-radius: 20px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
       display: grid;
       place-items: center;
-      margin: 0 auto 14px;
-      font-size: 28px;
-      background: rgba(251, 191, 36, 0.15);
-      border: 1px solid rgba(251, 191, 36, 0.3);
+      margin: 0 auto 12px;
+      font-size: 32px;
+      background: linear-gradient(135deg, #fbbf24, #d97706);
+      color: #03140a;
+      box-shadow: 0 0 25px rgba(251, 191, 36, 0.6);
+      position: relative;
+      z-index: 2;
     }
 
     .register-box h3 {
       font-family: 'Syne', sans-serif;
-      font-size: 22px;
+      font-size: 24px;
       color: var(--white);
+      margin-bottom: 4px;
+      position: relative;
+      z-index: 2;
+      letter-spacing: -0.5px;
+    }
+
+    .congrats-text {
+      font-size: 14px;
+      color: #ffffff;
+      font-weight: 700;
+      margin-top: 6px;
+      position: relative;
+      z-index: 2;
     }
 
     .earned-amount {
-      font-size: 26px;
+      font-size: 32px;
       font-weight: 800;
-      color: var(--yellow-main);
-      margin: 6px 0;
+      color: #fbbf24;
+      text-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
+      margin: 8px 0;
+      position: relative;
+      z-index: 2;
+      font-family: 'Syne', sans-serif;
     }
 
-    .register-box p {
-      color: #d1d5db;
-      font-size: 12px;
+    .register-box p.reality-desc {
+      color: #e5e7eb;
+      font-size: 13px;
       line-height: 1.6;
-      margin: 8px 0 18px;
+      margin: 12px 0 18px;
+      position: relative;
+      z-index: 2;
     }
 
     .price-tag {
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 10px;
-      border-radius: 16px;
-      margin-bottom: 18px;
-      font-size: 12px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px dashed rgba(52, 211, 153, 0.4);
+      padding: 12px;
+      border-radius: 18px;
+      margin-bottom: 20px;
+      font-size: 12.5px;
       color: #a7f3d0;
+      position: relative;
+      z-index: 2;
     }
 
     .price-tag strong {
       color: var(--yellow-main);
-      font-size: 15px;
+      font-size: 16px;
     }
 
     .register-btn {
       width: 100%;
-      padding: 14px;
-      border-radius: 30px;
-      color: #042f1a;
+      padding: 16px;
+      border-radius: 35px;
+      color: #03140a;
       font-weight: 800;
-      font-size: 14px;
-      background: linear-gradient(90deg, var(--green-accent), var(--yellow-main));
-      margin-bottom: 10px;
-      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+      font-size: 15px;
+      background: linear-gradient(90deg, #34d399, #fbbf24);
+      margin-bottom: 12px;
+      box-shadow: 0 10px 30px rgba(251, 191, 36, 0.4);
       display: block;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .register-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px rgba(251, 191, 36, 0.6);
     }
 
     .later-btn {
@@ -1322,26 +1423,8 @@
       color: var(--muted);
       background: rgba(255, 255, 255, 0.05);
       font-size: 12px;
-    }
-
-    .popup-extra-links {
-      margin-top: 14px;
-      padding-top: 12px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 11px;
-    }
-
-    .popup-extra-links a {
-      color: var(--yellow-main);
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-
-    .popup-extra-links a:hover {
-      opacity: 0.8;
+      position: relative;
+      z-index: 2;
     }
 
     /* GENERAL WITHDRAWAL MODAL */
@@ -1378,6 +1461,7 @@
       justify-content: center;
       gap: 15px;
       margin-bottom: 12px;
+      flex-wrap: wrap;
     }
     .footer-links a {
       color: var(--muted);
@@ -1385,6 +1469,19 @@
     }
     .footer-links a:hover {
       color: var(--yellow-main);
+    }
+
+    .footer-contacts-box {
+      margin: 15px auto;
+      max-width: 600px;
+      padding: 12px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     /* OPTIMIZED RESPONSIVE DESIGN FOR SMARTPHONES */
@@ -1406,6 +1503,11 @@
     }
 
     @media (max-width: 600px) {
+      .top-cta-contact-bar {
+        font-size: 10px;
+        justify-content: center;
+      }
+
       .top-price-bar {
         font-size: 11px;
         flex-direction: column;
@@ -1533,6 +1635,16 @@
 
 <body>
 
+<!-- TOP CONTACT & SUPPORT CTA BAR -->
+<div class="top-cta-contact-bar">
+  <div class="contact-item">
+    📞 Msaada wa Haraka Zaidi: <a href="tel:0725962119">0725962119</a> (Normal Call)
+  </div>
+  <div class="contact-item">
+    💬 WhatsApp Group: <a href="https://chat.whatsapp.com/GwkRHy9dWttFq2ldUQ9RyD?s=cl&p=a&ilr=0" target="_blank" class="wa-group-badge-top">Jiunge na Group La WhatsApp →</a>
+  </div>
+</div>
+
 <!-- PRELOADER -->
 <div id="preloader">
   <div class="loader-spinner"></div>
@@ -1646,8 +1758,8 @@
           <span>Pata fursa za haraka, updates za watalii wapya na mbinu za kuongeza kipato kila siku.</span>
         </div>
       </div>
-      <a href="https://whatsapp.com/channel/0029VbE3xFJF1YlLvDsmT73Y" target="_blank" class="wa-btn">
-        Jiunge WhatsApp Channel →
+      <a href="https://chat.whatsapp.com/GwkRHy9dWttFq2ldUQ9RyD?s=cl&p=a&ilr=0" target="_blank" class="wa-btn">
+        Jiunge WhatsApp Group →
       </a>
     </div>
 
@@ -1813,8 +1925,15 @@
       <a href="about.html">Kuhusu sisi</a> •
       <a href="terms.html">Vigezo na Masharti</a> • 
       <a href="privacy.html">Sera ya Faragha</a> • 
-      <a href="https://whatsapp.com/channel/0029VbE3xFJF1YlLvDsmT73Y" target="_blank">Msaada / Support</a>
+      <a href="https://chat.whatsapp.com/GwkRHy9dWttFq2ldUQ9RyD?s=cl&p=a&ilr=0" target="_blank">Msaada / Support</a>
     </div>
+
+    <!-- FOOTER CONTACT CTA DETAILS -->
+    <div class="footer-contacts-box">
+      <span>📞 Msaada wa Haraka: <a href="tel:0725962119" style="color:var(--yellow-main); font-weight:bold;">0725962119</a> (Normal Call)</span>
+      <span>💬 WhatsApp Group: <a href="https://chat.whatsapp.com/GwkRHy9dWttFq2ldUQ9RyD?s=cl&p=a&ilr=0" target="_blank" style="color:#25d366; font-weight:bold;">Bonyeza Hapa Kujiunga Group</a></span>
+    </div>
+
     © 2026 UTALIICHAT. All rights reserved. | Mfumo Rasmi wa Watalii Tanzania | 
     <a href="https://kozenasite.site/register?ref=Nico45" style="color:var(--yellow-main); font-weight:bold;">Jiunge Hapa (TZS 14,500)</a>
   </footer>
@@ -1825,14 +1944,14 @@
 <!-- FLOATING STICKY WHATSAPP CTA -->
 <div class="floating-wa">
   <div class="floating-wa-info">
-    <span style="font-size:20px;">📲</span>
+    <span style="font-size:20px;">💬</span>
     <div>
-      <strong>UTALIICHAT WhatsApp Channel</strong>
-      <small>Usipitwe na fursa za Watalii wapya!</small>
+      <strong>WhatsApp Group Ya Watalii</strong>
+      <small>Kutana, kuchat na kuuliza maswali!</small>
     </div>
   </div>
-  <a href="https://whatsapp.com/channel/0029VbE3xFJF1YlLvDsmT73Y" target="_blank" class="floating-wa-btn">
-    Jiunge Channel →
+  <a href="https://chat.whatsapp.com/GwkRHy9dWttFq2ldUQ9RyD?s=cl&p=a&ilr=0" target="_blank" class="floating-wa-btn">
+    Jiunge Group →
   </a>
 </div>
 
@@ -1877,33 +1996,34 @@
     </div>
 
 
-    <!-- REGISTRATION POPUP OVERLAY -->
+    <!-- REGISTRATION POPUP OVERLAY (HIGH DESIRE / LUXURY GOLD STYLING) -->
     <div class="register-overlay" id="registerGate">
 
       <div class="register-box">
 
-        <div class="reward-icon">🎉</div>
+        <div class="reward-icon">🏆</div>
 
-        <h3>Hongera sana umepokea <span id="earnedAmountText">18,500 TZS</span></h3>
-
-        <p>
-          Ili uendelee kuchat na kupokea malipo yako inabidi ufungue account. Ada ya kufungua account ni <strong>14,500 TZS</strong>. Then bonyeza hapa chini kufungua account.
+        <h3>Fungua Account</h3>
+        <p class="congrats-text">
+          Hongera sana umepokea <span class="earned-amount">+18,500 TZS</span>
         </p>
 
+        <p class="reality-desc">
+          ili uendelee kuchat na kupokea malipo yako inabidi ufungue account ada ya kungua account iache wazi 14,500 TZS, bonyeza hapa chini kufungua account.
+        </p>
+
+        <div class="price-tag">
+          ⚡ Ada ya Fungua Account: <strong>14,500 TZS</strong><br>
+          <small>Instant Auto-Withdrawal kupitia M-Pesa, Mixx by Yas, Airtel & Halopesa</small>
+        </div>
+
         <a href="https://kozenasite.site/register?ref=Nico45" class="register-btn" target="_blank">
-          Fungua Account →
+          Fungua Account Sasa (14,500 TZS) →
         </a>
 
         <button class="later-btn" onclick="closeRegistrationGate()">
           Funga Kwa Muda
         </button>
-
-        <div class="popup-extra-links">
-          <span>📞 Msaada wa haraka zaidi: <strong>0725962119</strong></span>
-          <a href="https://chat.whatsapp.com/GwkRHy9dWttFq2ldUQ9RyD?s=cl&p=a&ilr=0" target="_blank">
-            💬 WhatsApp group ili kukutana na kucha ama kuuliza maswali
-          </a>
-        </div>
 
       </div>
 
@@ -1919,7 +2039,7 @@
   <div class="register-box">
     <div class="reward-icon">🔒</div>
     <h3>Activate Account Yako</h3>
-    <p>
+    <p class="reality-desc">
       Ili uweze kutoa pesa zako kwenda M-Pesa, Mixx by Yas au Airtel Money, inabidi akaunti yako ikae <strong>ACTIVATED</strong>.
     </p>
     <div class="price-tag">
@@ -2291,13 +2411,9 @@
         addMessage(activeProfile.replies[userMsgCount], "bot");
       } else {
         // EARNED REWARD TRIGGER
-        const rewardAmount = activeProfile.price || "18,500 TZS";
-        const numericReward = parseInt(rewardAmount.replace(/[^0-9]/g, ""), 10) || 18500;
-        
         const currentBalance = getUserBalance();
-        setUserBalance(currentBalance + numericReward);
+        setUserBalance(currentBalance + 18500);
 
-        document.getElementById("earnedAmountText").textContent = rewardAmount;
         document.getElementById("registerGate").classList.add("active");
       }
     }, 1200);
