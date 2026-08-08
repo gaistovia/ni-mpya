@@ -2,7 +2,7 @@
 <html lang="sw">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   
   <!-- SEO META TAGS -->
   <title>UTALIICHAT — Fundisha Kiswahili kwa Watalii, Pata Kipato Papo Hapo</title>
@@ -57,7 +57,11 @@
       --yellow-main: #fbbf24;
       --yellow-glow: #f59e0b;
       
-      --whatsapp-green: #25d366;
+      --whatsapp-green: #075e54;
+      --whatsapp-chat-bg: #0b141a;
+      --whatsapp-bubble-bot: #202c33;
+      --whatsapp-bubble-user: #005c4b;
+      
       --white: #ffffff;
       --text: #f3f4f6;
       --muted: #9ca3af;
@@ -798,7 +802,7 @@
       white-space: nowrap;
     }
 
-    /* LIVE RECENT ACTIVITY WIDGET (ADDITIONAL REAL VIBE) */
+    /* LIVE RECENT ACTIVITY WIDGET */
     .activity-widget {
       position: fixed;
       top: 100px;
@@ -1069,17 +1073,19 @@
       white-space: nowrap;
     }
 
-    /* CHAT MODAL OVERLAY */
+    /* ==========================================================================
+       WHATSAPP & TELEGRAM REDESIGNED CHAT MODAL OVERLAY (MOBILE OPTIMIZED)
+       ========================================================================== */
     .chat-overlay {
       position: fixed;
       inset: 0;
-      z-index: 100;
+      z-index: 99999;
       display: none;
       align-items: center;
       justify-content: center;
       background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(16px);
-      padding: 0;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .chat-overlay.active {
@@ -1088,133 +1094,183 @@
 
     .chat-window {
       width: min(460px, 100%);
-      height: min(720px, 100vh);
-      border-radius: 30px;
-      overflow: hidden;
+      height: 100%;
+      max-height: 100dvh;
       display: flex;
       flex-direction: column;
-      background: #06180d;
-      border: 1px solid rgba(52, 211, 153, 0.3);
-      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
-      animation: chatIn 0.3s ease;
+      background: var(--whatsapp-chat-bg);
+      background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+      background-size: 16px 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
       position: relative;
+      overflow: hidden;
     }
 
-    @keyframes chatIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.96);
-      }
-      to {
-        opacity: 1;
-        transform: none;
+    @media (min-width: 601px) {
+      .chat-window {
+        height: min(720px, 95vh);
+        border-radius: 24px;
+        border: 1px solid rgba(52, 211, 153, 0.3);
       }
     }
 
+    /* WHATSAPP/TELEGRAM HEADER FIX */
     .chat-header {
-      padding: 14px 16px;
+      padding: 10px 14px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.04);
+      gap: 10px;
+      background: #1f2c34;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      z-index: 10;
+      flex-shrink: 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
 
     .back {
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08);
-      color: white;
-      font-size: 18px;
+      background: transparent;
+      color: #e9edef;
+      font-size: 20px;
       display: grid;
       place-items: center;
+      transition: background 0.2s;
+    }
+
+    .back:active {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .chat-avatar-container {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
     }
 
     .chat-avatar {
-      width: 44px;
-      height: 44px;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid var(--green-accent);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .chat-avatar-container::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #00a884;
+      border: 2px solid #1f2c34;
     }
 
     .chat-user {
       flex: 1;
+      overflow: hidden;
     }
 
     .chat-user strong {
       font-size: 15px;
       display: block;
-      color: white;
+      color: #e9edef;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 600;
     }
 
     .chat-user small {
-      color: var(--green-accent);
-      font-size: 10px;
+      color: #8696a0;
+      font-size: 11px;
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
+    /* MESSAGES AREA */
     .chat-messages {
       flex: 1;
-      padding: 18px 14px;
+      padding: 14px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
     }
 
     .message {
-      max-width: 82%;
-      padding: 12px 16px;
-      border-radius: 18px;
-      font-size: 13px;
-      line-height: 1.55;
-      animation: msgIn 0.25s ease;
+      max-width: 80%;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      line-height: 1.45;
+      position: relative;
+      word-wrap: break-word;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      animation: msgIn 0.2s cubic-bezier(0.1, 1, 0.1, 1);
     }
 
     @keyframes msgIn {
       from {
         opacity: 0;
-        transform: translateY(8px);
+        transform: translateY(6px);
       }
       to {
         opacity: 1;
-        transform: none;
+        transform: translateY(0);
       }
     }
 
     .message.bot {
       align-self: flex-start;
-      background: rgba(255, 255, 255, 0.08);
-      border-bottom-left-radius: 4px;
-      color: var(--white);
+      background: var(--whatsapp-bubble-bot);
+      color: #e9edef;
+      border-top-left-radius: 2px;
     }
 
     .message.user {
       align-self: flex-end;
-      background: linear-gradient(135deg, var(--green-main), var(--green-glow));
-      color: var(--white);
-      border-bottom-right-radius: 4px;
+      background: var(--whatsapp-bubble-user);
+      color: #e9edef;
+      border-top-right-radius: 2px;
+    }
+
+    .message-time {
+      font-size: 9.5px;
+      color: rgba(241, 241, 241, 0.6);
+      float: right;
+      margin: 4px 0 -2px 8px;
     }
 
     .typing {
       align-self: flex-start;
       display: none;
-      padding: 10px 16px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
+      padding: 8px 14px;
+      background: var(--whatsapp-bubble-bot);
+      border-radius: 12px;
+      border-top-left-radius: 2px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.2);
     }
 
     .typing.show {
       display: flex;
-      gap: 5px;
+      align-items: center;
+      gap: 4px;
     }
 
     .typing span {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #ccc;
+      background: #8696a0;
       animation: typing 1s infinite;
     }
 
@@ -1222,20 +1278,25 @@
     .typing span:nth-child(3) { animation-delay: .3s; }
 
     @keyframes typing {
-      50% { transform: translateY(-4px); opacity: .4; }
+      50% { transform: translateY(-3px); opacity: .4; }
     }
 
+    /* INPUT AREA FIX FOR SMARTPHONES */
     .chat-input-area {
-      padding: 12px;
-      border-top: 1px solid var(--border);
-      background: rgba(0, 0, 0, 0.4);
+      padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px));
+      background: #1f2c34;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      flex-shrink: 0;
+      position: sticky;
+      bottom: 0;
+      z-index: 20;
     }
 
     .free-counter {
       font-size: 10px;
-      color: var(--muted);
+      color: #8696a0;
       text-align: center;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .free-counter strong {
@@ -1244,36 +1305,42 @@
 
     .input-row {
       display: flex;
+      align-items: center;
       gap: 8px;
     }
 
     .input-row input {
       flex: 1;
       min-width: 0;
-      padding: 12px 16px;
-      border-radius: 25px;
+      padding: 10px 14px;
+      border-radius: 20px;
       outline: none;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.06);
-      color: white;
+      border: none;
+      background: #2a3942;
+      color: #e9edef;
       font-family: inherit;
-      font-size: 13px;
+      font-size: 14px;
     }
 
-    .input-row input:focus {
-      border-color: var(--green-accent);
+    .input-row input::placeholder {
+      color: #8696a0;
     }
 
     .send {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--green-main), var(--yellow-main));
-      color: #042f1a;
+      background: #00a884;
+      color: #ffffff;
       font-size: 16px;
       display: grid;
       place-items: center;
       flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .send:active {
+      background: #008f6f;
     }
 
     /* REGISTRATION / WITHDRAWAL OVERLAY / POPUP */
@@ -1468,7 +1535,7 @@
         justify-content: center;
       }
       .activity-widget {
-        display: none; /* Dynamic popup widget hidden on small screens for cleaner view */
+        display: none;
       }
     }
 
@@ -1574,16 +1641,6 @@
 
       .price {
         display: none;
-      }
-
-      .chat-overlay {
-        padding: 0;
-      }
-
-      .chat-window {
-        height: 100vh;
-        width: 100%;
-        border-radius: 0;
       }
 
       .toast-notification {
@@ -1923,17 +1980,19 @@
 </div>
 
 
-<!-- CHAT OVERLAY -->
+<!-- REDESIGNED CHAT OVERLAY (WHATSAPP / TELEGRAM LOOK) -->
 <div class="chat-overlay" id="chatOverlay">
 
   <div class="chat-window">
 
     <div class="chat-header">
       <button class="back" onclick="closeChat()">←</button>
-      <img id="chatAvatar" class="chat-avatar" alt="Tourist Avatar">
+      <div class="chat-avatar-container">
+        <img id="chatAvatar" class="chat-avatar" alt="Tourist Avatar">
+      </div>
       <div class="chat-user">
-        <strong id="chatName"></strong>
-        <small id="chatTopicTag">● Online • Anataka kujifunza Kiswahili</small>
+        <strong id="chatName">---</strong>
+        <small id="chatTopicTag">online • anataka kujifunza Kiswahili</small>
       </div>
     </div>
 
@@ -2212,7 +2271,7 @@
       ]
     },
     {
-      id: 205, name: "Nia Abebe", age: 26, country: "🇪th Ethiopia", category: "animals", categoryLabel: "Wanyama", status: "online",
+      id: 205, name: "Nia Abebe", age: 26, country: "🇪🇹 Ethiopia", category: "animals", categoryLabel: "Wanyama", status: "online",
       bio: "Bird watching specialist cataloging flamingos at Lake Manyara.",
       image: "https://i.pravatar.cc/500?img=16", price: "18,000 TZS",
       replies: [
@@ -2234,7 +2293,7 @@
       ]
     },
     {
-      id: 207, name: "Lucas Moretti", age: 31, country: "🇦🇷 Argentina", category: "animals", categoryLabel: "Wanyama", status: "online",
+      id: 207, name: "Lucas Moretti", age: 31, country: "🇦R Argentina", category: "animals", categoryLabel: "Wanyama", status: "online",
       bio: "Veterinary student traveling through Mikumi Reserve.",
       image: "https://i.pravatar.cc/500?img=18", price: "17,000 TZS",
       replies: [
@@ -2591,286 +2650,258 @@
     },
     {
       id: 607, name: "Finn O'Shea", age: 28, country: "🇮🇪 Ireland", category: "waterfalls", categoryLabel: "Maporomoko", status: "online",
-      bio: "Wild swimmer jumping into cool highland waterfall pools.",
-      image: "https://i.pravatar.cc/500?img=57", price: "16,500 TZS",
+      bio: "Wild swimmer discovering hidden forest cascades.",
+      image: "https://i.pravatar.cc/500?img=57", price: "16,000 TZS",
       replies: [
-        "Top of the evening! What is 'Refreshing water splash' in Swahili?",
-        "Mcharuzo wa maji yenye kuburudisha! Brilliant! What is 'Rocky waterfall edge'?",
-        "Pambazuko la miamba ya maporomoko! What is 'Pure water stream'?",
-        "Mto wa maji safi sana! Cheers mate!"
+        "Top o' the morning! What is 'Refreshing waterfall dip' in Swahili?",
+        "Kujirusha na kuogelea maporomokoni! Lovely! How do I say 'Clean mountain stream'?",
+        "Mto safi wa mlimani! Fantastic! What is 'Mossy rocks'?",
+        "Miamba yenye mwani! Cheers mate!"
       ]
     },
     {
-      id: 608, name: "Maja Nilsson", age: 24, country: "🇸🇪 Sweden", category: "waterfalls", categoryLabel: "Maporomoko", status: "offline",
-      bio: "Eco-camper spending nights near forest waterfalls.",
-      image: "https://i.pravatar.cc/500?img=58", price: "16,000 TZS",
+      id: 608, name: "Mina Kim", age: 24, country: "🇰🇷 S. Korea", category: "waterfalls", categoryLabel: "Maporomoko", status: "offline",
+      bio: "Travel vlogger filming Kinole waterfalls in Uluguru mountains.",
+      image: "https://i.pravatar.cc/500?img=58", price: "18,000 TZS",
       replies: [
-        "Hej! How do you say 'Crystal clear waterfall pool' in Swahili?",
-        "Dimbwi safi la kioo la maporomoko! Lovely! What is 'Forest river path'?",
-        "Njia ya mto msituni! Tack så mycket!"
+        "Annyeong! What is 'Kinole Waterfalls Uluguru' in Swahili?",
+        "Maporomoko ya Kinole Uluguru! Wow! How do I say 'Scenic nature trail'?",
+        "Njia nzuri ya mazingira! Perfect! What is 'Cool mountain breeze'?",
+        "Upepo mwanana wa mlimani! Kamsahamnida!"
       ]
     }
   ];
 
   /* RENDER PROFILES */
-  const profilesContainer = document.getElementById("profiles");
-  let currentFilter = "all";
+  function renderProfiles(filterCategoryName = 'all') {
+    const container = document.getElementById("profiles");
+    container.innerHTML = "";
 
-  function renderProfiles(filterCategory = "all") {
-    currentFilter = filterCategory;
-    profilesContainer.innerHTML = "";
-
-    const filtered = filterCategory === "all" 
+    const filtered = filterCategoryName === 'all' 
       ? profiles 
-      : profiles.filter(p => p.category === filterCategory);
+      : profiles.filter(p => p.category === filterCategoryName);
 
-    filtered.forEach((profile) => {
-      const originalIndex = profiles.indexOf(profile);
-      const card = document.createElement("article");
+    filtered.forEach(p => {
+      const card = document.createElement("div");
       card.className = "profile glass";
-      
-      let statusBadgeHtml = "";
-      if (profile.status === "online") {
-        statusBadgeHtml = `<div class="status-badge online"><span class="online-dot"></span> Online</div>`;
-      } else if (profile.status === "typing") {
-        statusBadgeHtml = `<div class="status-badge typing"><span class="online-dot" style="background:#fbbf24;box-shadow:0 0 10px #fbbf24"></span> Anaandika...</div>`;
-      } else {
-        statusBadgeHtml = `<div class="status-badge offline"><span class="offline-dot"></span> Offline</div>`;
-      }
+      card.onclick = () => openChat(p.id);
+
+      let statusClass = "online";
+      let statusText = "● Online";
+      if(p.status === "typing") { statusClass = "typing"; statusText = "✍️ Anaandika..."; }
+      if(p.status === "offline") { statusClass = "offline"; statusText = "○ Offline"; }
 
       card.innerHTML = `
         <div class="profile-img">
-          <img src="${profile.image}" alt="${profile.name}" loading="lazy">
-          <div class="country">${profile.country}</div>
-          <div class="age-badge">${profile.age} yrs</div>
-          <div class="category-badge">${profile.categoryLabel}</div>
-          ${statusBadgeHtml}
+          <img src="${p.image}" alt="${p.name}">
+          <div class="country">${p.country}</div>
+          <div class="status-badge ${statusClass}">${statusText}</div>
+          <div class="category-badge">${p.categoryLabel}</div>
+          <div class="age-badge">${p.age} yrs</div>
         </div>
         <div class="profile-info">
-          <h3>${profile.name}</h3>
-          <p>${profile.bio}</p>
+          <h3>${p.name}</h3>
+          <p>${p.bio}</p>
           <div class="profile-bottom">
-            <button class="chat-btn">Anza Kuchat</button>
-            <div class="price">${profile.price}</div>
+            <button class="chat-btn">Anza Kuchat 💬</button>
+            <div class="price">${p.price}</div>
           </div>
         </div>
       `;
-
-      card.addEventListener("click", () => {
-        openChat(originalIndex);
-      });
-
-      profilesContainer.appendChild(card);
+      container.appendChild(card);
     });
   }
 
-  function filterCategory(cat, btnElement) {
-    const tabs = document.querySelectorAll(".tab-btn");
-    tabs.forEach(t => t.classList.remove("active"));
-    btnElement.classList.add("active");
+  renderProfiles('all');
 
-    renderProfiles(cat);
+  /* CATEGORY FILTER TAB SWITCHING */
+  function filterCategory(category, btn) {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    renderProfiles(category);
   }
 
-  // Initial Render
-  renderProfiles("all");
-
-  /* DYNAMIC REAL-TIME STATUS ROTATION */
-  setInterval(() => {
-    const randomIndex = Math.floor(Math.random() * profiles.length);
-    const statuses = ["online", "online", "typing", "offline"];
-    const newStatus = statuses[Math.floor(Math.random() * statuses.length)];
-    
-    profiles[randomIndex].status = newStatus;
-    renderProfiles(currentFilter);
-
-    // Update real-time activity floating widget
-    const p = profiles[randomIndex];
-    document.getElementById("actImg").src = p.image;
-    document.getElementById("actName").textContent = p.name;
-    if (newStatus === "typing") {
-      document.getElementById("actAction").textContent = "Anaandika ujumbe wa Kiswahili...";
-    } else if (newStatus === "online") {
-      document.getElementById("actAction").textContent = "Yupo online anasubiri mwalimu!";
-    } else {
-      document.getElementById("actAction").textContent = "Amemaliza mazungumzo muda huu.";
-    }
-  }, 3200);
-
-
-  /* CHAT MODAL LOGIC */
-  let activeProfileIndex = null;
+  /* CHAT LOGIC WITH WHATSAPP UI REFINEMENTS */
+  let currentProfile = null;
   let chatStep = 0;
 
-  function openChat(index) {
-    activeProfileIndex = index;
+  function openChat(profileId) {
+    currentProfile = profiles.find(p => p.id === profileId);
+    if (!currentProfile) return;
+
     chatStep = 0;
-    const profile = profiles[index];
-
-    document.getElementById("chatName").textContent = profile.name;
-    document.getElementById("chatAvatar").src = profile.image;
-    document.getElementById("chatTopicTag").textContent = `● Online • ${profile.categoryLabel}`;
+    document.getElementById("chatName").textContent = currentProfile.name;
+    document.getElementById("chatAvatar").src = currentProfile.image;
+    document.getElementById("chatTopicTag").textContent = `online • Mapenzi: ${currentProfile.categoryLabel}`;
     document.getElementById("messageCount").textContent = "0";
-
-    const messagesBox = document.getElementById("messages");
-    messagesBox.innerHTML = `
+    
+    const messages = document.getElementById("messages");
+    messages.innerHTML = `
       <div class="typing" id="typing">
-        <span></span><span></span><span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     `;
 
-    document.getElementById("registerGate").classList.remove("active");
     document.getElementById("chatOverlay").classList.add("active");
+    document.body.style.overflow = "hidden"; // Prevent background scrolling
 
-    // First auto message from tourist after brief delay
+    // Send initial bot greeting
     setTimeout(() => {
-      showBotReply(profile.replies[0]);
-    }, 600);
+      appendBotMessage(currentProfile.replies[0]);
+    }, 400);
   }
 
   function closeChat() {
     document.getElementById("chatOverlay").classList.remove("active");
+    document.body.style.overflow = "auto";
+  }
+
+  function getCurrentTime() {
+    const now = new Date();
+    return now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+  }
+
+  function appendBotMessage(text) {
+    const messages = document.getElementById("messages");
+    const typing = document.getElementById("typing");
+
+    const msg = document.createElement("div");
+    msg.className = "message bot";
+    msg.innerHTML = `${text} <span class="message-time">${getCurrentTime()}</span>`;
+
+    messages.insertBefore(msg, typing);
+    messages.scrollTop = messages.scrollHeight;
   }
 
   function sendMessage() {
     const input = document.getElementById("messageInput");
     const text = input.value.trim();
-    if (!text || activeProfileIndex === null) return;
+    if (!text || !currentProfile) return;
 
-    appendMessage(text, "user");
+    const messages = document.getElementById("messages");
+    const typing = document.getElementById("typing");
+
+    // Append User Message
+    const userMsg = document.createElement("div");
+    userMsg.className = "message user";
+    userMsg.innerHTML = `${text} <span class="message-time">${getCurrentTime()}</span>`;
+    messages.insertBefore(userMsg, typing);
+
     input.value = "";
+    messages.scrollTop = messages.scrollHeight;
 
     chatStep++;
-    document.getElementById("messageCount").textContent = chatStep;
+    document.getElementById("messageCount").textContent = Math.min(chatStep, 4);
 
     if (chatStep >= 4) {
-      // Reward Triggered
+      // Reward user with 18,500 TZS
       setTimeout(() => {
-        const currentBal = getUserBalance();
-        const addedVal = 18500;
-        setUserBalance(currentBal + addedVal);
-
+        const currentBalance = getUserBalance();
+        setUserBalance(currentBalance + 18500);
         document.getElementById("registerGate").classList.add("active");
-        showToast("Hongera! TZS 18,500 Imeongezwa kwenye salio lako!");
       }, 1000);
       return;
     }
 
-    // Show bot typing and then response
-    const typingIndicator = document.getElementById("typing");
-    typingIndicator.classList.add("show");
-    
-    // Auto scroll
-    const messagesBox = document.getElementById("messages");
-    messagesBox.scrollTop = messagesBox.scrollHeight;
+    // Show bot typing indicator & send response
+    typing.classList.add("show");
+    messages.scrollTop = messages.scrollHeight;
 
     setTimeout(() => {
-      typingIndicator.classList.remove("show");
-      const profile = profiles[activeProfileIndex];
-      const reply = profile.replies[chatStep] || "Asante sana kwa kunifundisha Kiswahili!";
-      appendMessage(reply, "bot");
-    }, 1400);
+      typing.classList.remove("show");
+      if (currentProfile.replies[chatStep]) {
+        appendBotMessage(currentProfile.replies[chatStep]);
+      }
+    }, 1200);
   }
 
-  function appendMessage(text, sender) {
-    const messagesBox = document.getElementById("messages");
-    const typingIndicator = document.getElementById("typing");
-
-    const msgDiv = document.createElement("div");
-    msgDiv.className = `message ${sender}`;
-    msgDiv.textContent = text;
-
-    messagesBox.insertBefore(msgDiv, typingIndicator);
-    messagesBox.scrollTop = messagesBox.scrollHeight;
-  }
-
-  function showBotReply(text) {
-    appendMessage(text, "bot");
-  }
-
-  function closeRegistrationGate() {
-    document.getElementById("registerGate").classList.remove("active");
-  }
-
-  /* ENTER KEY SUPPORT FOR CHAT */
+  // Handle Enter key on input
   document.getElementById("messageInput").addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       sendMessage();
     }
   });
 
+  function closeRegistrationGate() {
+    document.getElementById("registerGate").classList.remove("active");
+    closeChat();
+  }
 
-  /* REAL-TIME LIVE PAYOUT TRANSACTIONS GENERATOR */
-  const sampleNames = ["Juma K.", "Aisha M.", "Emmanuel P.", "Fatuma H.", "Godfrey L.", "Neema S.", "Baraka T.", "Kelvin B.", "Mariam A.", "Rashid W."];
-  const sampleMethods = [
-    { name: "M-Pesa", logo: "https://images.seeklogo.com/logo-png/44/1/m-pesa-logo-png_seeklogo-442995.png" },
-    { name: "Mixx by Yas", logo: "https://images.seeklogo.com/logo-png/57/2/yas-mixx-logo-png_seeklogo-571145.png" },
-    { name: "Airtel Money", logo: "https://images.seeklogo.com/logo-png/52/2/airtel-money-tanzania-logo-png_seeklogo-527192.png" },
-    { name: "Halopesa", logo: "https://images.seeklogo.com/logo-png/52/2/halo-pesa-tanzania-logo-png_seeklogo-527226.png" }
+  /* LIVE PAYOUT SCROLLING WIDGET */
+  const payoutNames = ["Juma M.", "Amani K.", "Emanuel S.", "Neema R.", "Aisha B.", "Baraka H.", "Kelvin P.", "Rehema W."];
+  const payoutMethods = [
+    { name: "M-Pesa", img: "https://images.seeklogo.com/logo-png/44/1/m-pesa-logo-png_seeklogo-442995.png" },
+    { name: "Mixx by Yas", img: "https://images.seeklogo.com/logo-png/57/2/yas-mixx-logo-png_seeklogo-571145.png" },
+    { name: "Airtel", img: "https://images.seeklogo.com/logo-png/52/2/airtel-money-tanzania-logo-png_seeklogo-527192.png" },
+    { name: "Halopesa", img: "https://images.seeklogo.com/logo-png/52/2/halo-pesa-tanzania-logo-png_seeklogo-527226.png" }
   ];
-  const sampleAmounts = [37000, 55500, 74000, 18500, 92500, 111000, 148000];
 
   function generatePayoutItem() {
-    const name = sampleNames[Math.floor(Math.random() * sampleNames.length)];
-    const method = sampleMethods[Math.floor(Math.random() * sampleMethods.length)];
-    const amount = sampleAmounts[Math.floor(Math.random() * sampleAmounts.length)];
-    
-    const payoutList = document.getElementById("payoutList");
+    const list = document.getElementById("payoutList");
+    const name = payoutNames[Math.floor(Math.random() * payoutNames.length)];
+    const method = payoutMethods[Math.floor(Math.random() * payoutMethods.length)];
+    const amount = (Math.floor(Math.random() * 8) + 2) * 18500;
+
     const item = document.createElement("div");
     item.className = "payout-item";
-
     item.innerHTML = `
       <div class="payout-left">
         <div class="payout-method-badge">
-          <img src="${method.logo}" alt="${method.name}">
+          <img src="${method.img}" alt="${method.name}">
         </div>
         <div>
           <span>${name} ametoka kutoa</span>
-          <span class="payout-time">• Sasa hivi</span>
+          <span class="payout-time">• hivi sasa</span>
         </div>
       </div>
-      <strong>+ TZS ${amount.toLocaleString()}</strong>
+      <strong>+${amount.toLocaleString()} TZS</strong>
     `;
 
-    payoutList.insertBefore(item, payoutList.firstChild);
+    list.insertBefore(item, list.firstChild);
 
-    // Keep max 6 items
-    if (payoutList.children.length > 6) {
-      payoutList.removeChild(payoutList.lastChild);
+    if (list.children.length > 6) {
+      list.removeChild(list.lastChild);
     }
   }
 
-  // Prepopulate Payouts
-  for(let i = 0; i < 5; i++) {
-    generatePayoutItem();
-  }
+  setInterval(generatePayoutItem, 3500);
+  generatePayoutItem();
+  generatePayoutItem();
+  generatePayoutItem();
 
-  // Stream continuous live transactions
-  setInterval(() => {
-    generatePayoutItem();
-  }, 4500);
-
-
-  /* TOAST NOTIFICATION HELPER */
-  function showToast(message) {
+  /* TOAST NOTIFICATIONS POPUP */
+  function showToastNotification() {
     const toast = document.getElementById("toastNotification");
-    document.getElementById("toastDesc").textContent = message;
+    const name = payoutNames[Math.floor(Math.random() * payoutNames.length)];
+    const method = payoutMethods[Math.floor(Math.random() * payoutMethods.length)];
+    const amount = (Math.floor(Math.random() * 5) + 1) * 18500;
+
+    document.getElementById("toastTitle").textContent = `Kutoa Pesa Imefanikiwa! ⚡`;
+    document.getElementById("toastDesc").textContent = `${name} ametoka kutoa TZS ${amount.toLocaleString()} kupitia ${method.name}`;
+
     toast.classList.add("show");
 
     setTimeout(() => {
       toast.classList.remove("show");
-    }, 4000);
+    }, 4500);
   }
 
-  // Periodic random social proof toast
-  setInterval(() => {
-    if (Math.random() > 0.5) {
-      const name = sampleNames[Math.floor(Math.random() * sampleNames.length)];
-      const amt = sampleAmounts[Math.floor(Math.random() * sampleAmounts.length)];
-      showToast(`${name} ametoka kutoa TZS ${amt.toLocaleString()} M-Pesa papo hapo!`);
-    }
-  }, 12000);
+  setInterval(showToastNotification, 12000);
 
+  /* DYNAMIC DESKTOP ACTIVITY WIDGET UPDATER */
+  const activityNames = ["Jessica Miller", "Pierre Dubois", "Markus Weber", "Elena Rostova", "Liam O'Connor"];
+  const activityActions = ["Anaandika ujumbe...", "Yupo tayari kuchat!", "Ameingia mtandaoni hivi sasa"];
+  let actIndex = 0;
+
+  setInterval(() => {
+    actIndex = (actIndex + 1) % activityNames.length;
+    document.getElementById("actName").textContent = activityNames[actIndex];
+    document.getElementById("actAction").textContent = activityActions[Math.floor(Math.random() * activityActions.length)];
+    document.getElementById("actImg").src = `https://i.pravatar.cc/500?img=${actIndex + 1}`;
+  }, 5000);
 </script>
+
 </body>
 </html>
