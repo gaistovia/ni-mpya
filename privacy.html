@@ -1,179 +1,327 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sera ya Faragha - UTALII CHAT</title>
-    <style>
-        :root {
-            --primary-color: #2e7d32;
-            --secondary-color: #f4a261;
-            --dark-bg: #121212;
-            --card-bg: #1e1e1e;
-            --text-color: #e0e0e0;
-            --text-muted: #a0a0a0;
-            --accent-red: #e63946;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
+  <title>Sera ya Faragha — UTALIICHAT</title>
+  <meta name="description" content="Sera ya Faragha ya UTALIICHAT. Jinsi tunavyolinda na kuhifadhi taarifa zako za kibinafsi kwa usalama.">
+  <meta name="author" content="UTALIICHAT">
+  <meta name="robots" content="index, follow">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <!-- THEME COLOR FOR MOBILE BROWSERS -->
+  <meta name="theme-color" content="#030d07">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding: 20px;
-        }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-            border-top: 5px solid var(--primary-color);
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        .header {
-            text-align: center;
-            border-bottom: 1px solid #333;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
+    :root {
+      --bg: #030d07;
+      --bg2: #071f12;
+      --card: rgba(12, 35, 22, 0.65);
+      --border: rgba(52, 211, 153, 0.18);
+      
+      --green-main: #10b981;
+      --green-glow: #059669;
+      --green-accent: #34d399;
+      
+      --yellow-main: #fbbf24;
+      --yellow-glow: #f59e0b;
+      
+      --whatsapp-green: #25d366;
+      --white: #ffffff;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+    }
 
-        .header h1 {
-            color: var(--primary-color);
-            font-size: 2rem;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      background:
+        linear-gradient(rgba(3, 13, 7, 0.88), rgba(3, 13, 7, 0.94)),
+        url('https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1920&auto=format&fit=crop&q=80') center/cover fixed no-repeat;
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 60px;
+    }
 
-        .header p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.04;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+      background-size: 35px 35px;
+      z-index: 1;
+    }
 
-        .section {
-            margin-bottom: 30px;
-        }
+    button, a {
+      font-family: inherit;
+      text-decoration: none;
+    }
 
-        .section h2 {
-            color: var(--secondary-color);
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    .container {
+      width: min(1000px, calc(100% - 28px));
+      margin: auto;
+      position: relative;
+      z-index: 2;
+    }
 
-        .section p {
-            margin-bottom: 10px;
-            color: var(--text-color);
-        }
+    .glass {
+      background: var(--card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
 
-        .warning-box {
-            background-color: rgba(230, 57, 70, 0.1);
-            border-left: 4px solid var(--accent-red);
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 4px;
-        }
+    /* HEADER */
+    header {
+      margin-top: 15px;
+      padding: 14px 22px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 15px;
+      z-index: 80;
+    }
 
-        .warning-box h3 {
-            color: var(--accent-red);
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-        ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--green-main), var(--yellow-main));
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+      font-size: 22px;
+    }
 
-        li {
-            margin-bottom: 8px;
-        }
+    .brand-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+      color: var(--white);
+    }
 
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
+    .brand-name span {
+      color: var(--yellow-main);
+    }
 
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-                margin: 10px auto;
-            }
-            .header h1 {
-                font-size: 1.5rem;
-            }
-        }
-    </style>
+    .brand small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 1px;
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      color: var(--white);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: var(--green-main);
+      color: #03140a;
+    }
+
+    /* HERO & PAGE CONTENT */
+    .page-header {
+      padding: 40px 0 25px;
+      text-align: center;
+    }
+
+    .page-header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(28px, 4vw, 42px);
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, var(--green-accent), var(--yellow-main));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .page-header p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .content-box {
+      padding: 35px;
+      border-radius: 28px;
+      margin-bottom: 40px;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .content-box h2 {
+      font-family: 'Syne', sans-serif;
+      color: var(--green-accent);
+      font-size: 20px;
+      margin: 25px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .content-box h2:first-child {
+      margin-top: 0;
+    }
+
+    .content-box p {
+      color: #d1d5db;
+      margin-bottom: 15px;
+    }
+
+    .content-box ul {
+      margin-left: 20px;
+      margin-bottom: 15px;
+      color: #d1d5db;
+    }
+
+    .content-box li {
+      margin-bottom: 8px;
+    }
+
+    .last-updated {
+      display: inline-block;
+      padding: 6px 14px;
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.25);
+      border-radius: 20px;
+      color: var(--green-accent);
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      padding: 30px 0 15px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 11px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    footer a {
+      color: var(--muted);
+      transition: color 0.3s;
+    }
+
+    footer a:hover {
+      color: var(--yellow-main);
+    }
+
+    @media (max-width: 600px) {
+      .content-box {
+        padding: 20px;
+      }
+      .page-header h1 {
+        font-size: 26px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
 <div class="container">
-    <div class="header">
-        <h1>UTALII CHAT</h1>
-        <p>Sera ya Faragha na Ulinzi wa Taarifa za Mtumiaji</p>
-    </div>
 
-    <div class="section">
-        <h2>1. Udhibiti wa Mazungumzo na Picha (Screenshot Strict Policy)</h2>
-        <p>Usalama na faragha ya mazungumzo yako ndio kipengele chetu kuu. Katika jukwaa la <strong>UTALII CHAT</strong>, sheria zifuatazo ni za lazima:</p>
-        
-        <div class="warning-box">
-            <h3>MARUFUKU KABISA:</h3>
-            <ul>
-                <li>Ni marufuku kupiga picha ya skrini (Screenshot) au kurekodi skrini (Screen Record) ya mazungumzo au taarifa yoyote ndani ya mfumo huu.</li>
-                <li>Ni marufuku kusambaza, kumtumia mtu mwingine, au kuchapisha mazungumzo yoyote yanayofanyika ndani ya UTALII CHAT kwenye mitandao ya kijamii au jukwaa jingine lolote.</li>
-                <li>Mtumiaji yeyote atakayebainika kuvunja sheria hii Akaunti yake itafungiwa mfululizo (Permanent Ban) bila taarifa.</li>
-            </ul>
-        </div>
-    </div>
+  <!-- HEADER -->
+  <header class="glass">
+    <a href="index.html" class="brand">
+      <div class="logo">🌍</div>
+      <div>
+        <div class="brand-name">UTALII<span>CHAT</span></div>
+        <small>Teach Swahili • Earn Money</small>
+      </div>
+    </a>
 
-    <div class="section">
-        <h2>2. Ulinzi wa Taarifa Binafsi</h2>
-        <p>Tunathamini siri za watumiaji wetu. Taarifa zako binafsi zinazokusanywa wakati wa kujisajili (kama vile jina, barua pepe, au namba ya simu):</p>
-        <ul>
-            <li>Zitahifadhiwa kwa njia ya usalama wa hali ya juu (Encrypted Data).</li>
-            <li>Hazitauzwa, kuazimishwa, wala kugawanywa kwa mtu au kampuni yoyote ya nje kwa madhumuni ya kibiashara.</li>
-        </ul>
-    </div>
+    <a href="index.html" class="back-btn">← Rudi Mwanzo</a>
+  </header>
 
-    <div class="section">
-        <h2>3. Matumizi ya Mfumo</h2>
-        <p>UTALII CHAT ni jukwaa lililotengenezwa kwa ajili ya mawasiliano salama. Unapotumia mfumo huu unakubali:</p>
-        <ul>
-            <li>Kutotumia lugha ya matusi, udhalilishaji, au kuingilia faragha ya mtumiaji mwingine.</li>
-            <li>Kutotumia jukwaa hili kwa shughuli zozote zinazovunja sheria za nchi.</li>
-            <li>Kuhakikisha kuwa taarifa unazoshiriki ni za kweli na hazilengi kumlaghai mtu yeyote.</li>
-        </ul>
-    </div>
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+    <div class="last-updated">🔒 Ulinzi wa Taarifa Zako</div>
+    <h1>Sera ya <span class="gradient">Faragha</span></h1>
+    <p>Tunathamini na kulinda faragha ya taarifa zote za watumiaji wetu.</p>
+  </section>
 
-    <div class="section">
-        <h2>4. Usalama wa Akaunti</h2>
-        <p>Ni wajibu wa kila mtumiaji kulinda nenosiri (password) na taarifa za kuingilia kwenye akaunti yake. UTALII CHAT haitahusika na hasara yoyote itakayotokea kutokana na mtumiaji kutoa taarifa zake za siri kwa mtu mwingine.</p>
-    </div>
+  <!-- CONTENT -->
+  <main class="content-box glass">
+    
+    <h2>1. Utangulizi</h2>
+    <p>Sera hii ya Faragha inaeleza jinsi <strong>UTALIICHAT</strong> inavyokusanya, inavyotumia, na inavyolinda taarifa zako za kibinafsi unapochat na kutumia mfumo wetu. Tunaahidi kulinda faragha yako kwa mujibu wa sheria za ulinzi wa data.</p>
 
-    <div class="section">
-        <h2>5. Mabadiliko ya Sera Hii</h2>
-        <p>Tunaweza kuboresha sera hii ya faragha muda wowote kulingana na mahitaji ya kisheria na kiteknolojia. Mabadiliko yakifanyika, watumiaji wote wataarifiwa kupitia mfumo wetu.</p>
-    </div>
+    <h2>2. Taarifa Tunazokusanya</h2>
+    <p>Tunapokusanya taarifa zako, tunafanya hivyo ili kukupa huduma bora na za uhakika. Taarifa tunazokusanya ni pamoja na:</p>
+    <ul>
+      <li><strong>Taarifa za Usajili:</strong> Jina lako, namba ya simu na barua pepe (email).</li>
+      <li><strong>Taarifa za Miamala:</strong> Namba za simu za M-Pesa, Mixx by Yas, Airtel Money au Halopesa zinazotumika kupokea na kutoa malipo.</li>
+      <li><strong>Kumbukumbu za Kifaa:</strong> Data za mfumo (kama vile LocalStorage) kuhifadhi salio lako na historia ya jumbe ulizochat.</li>
+    </ul>
 
-    <div class="footer">
-        <p>&copy; 2026 UTALII CHAT. Haki zote zimehifadhiwa.</p>
-    </div>
+    <h2>3. Jinsi Tunavyotumia Taarifa Zako</h2>
+    <p>Taarifa zako zinatumika kwa madhumuni yafuatayo pekee:</p>
+    <ul>
+      <li>Kukamilisha miamala ya kutoa fedha (Withdrawals) papo hapo.</li>
+      <li>Kuhakiki akaunti yako na kuzuia udanganyifu au akaunti za kughushi.</li>
+      <li>Kukutumia taarifa muhimu za mfumo na fursa mpya za watalii kupitia WhatsApp.</li>
+    </ul>
+
+    <h2>4. Ulinzi na Usalama wa Data (SSL Encryption)</h2>
+    <p>Jukwaa la UTALIICHAT linatumia teknolojia ya kisasa ya ulinzi ya <strong>256-Bit SSL Encryption</strong> kuhakikisha taarifa zote zinazopita kwenye mfumo wetu ziko salama na hazijadukuliwa na mtu yeyote wa tatu.</p>
+
+    <h2>5. Utoaji wa Taarifa kwa Watu wa Tatu</h2>
+    <p>UTALIICHAT haitauza, haitakodisha, wala haitashiriki taarifa zako za kibinafsi kwa kampuni au watu wa nje, isipokuwa tu pale inapobidi kukamilisha miamala ya kifedha kupitia mitandao ya simu au inapotakiwa kisheria na mamlaka za serikali.</p>
+
+    <h2>6. Haki Zako Kama Mtumiaji</h2>
+    <p>Unayo haki ya kuomba kufutwa au kubadilishwa kwa taarifa zako za kibinafsi wakati wowote kwa kuwasiliana na timu yetu ya msaada kwa wateja.</p>
+
+    <h2>7. Mabadiliko ya Sera Hii</h2>
+    <p>Tunaweza kuboresha au kubadilisha sera hii mara kwa mara. Mabadiliko yoyote yakifanyika, yatapakiwa kwenye ukurasa huu mara moja.</p>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 UTALIICHAT. All rights reserved. | 
+    <a href="index.html">Nyumbani</a> • 
+    <a href="terms.html">Vigezo na Masharti</a>
+  </footer>
+
 </div>
 
 </body>
