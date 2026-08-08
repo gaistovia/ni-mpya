@@ -65,6 +65,71 @@
       padding-bottom: 80px;
     }
 
+    /* PRELOADER STYLES */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: #030d07;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .loader-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(52, 211, 153, 0.1);
+      border-top: 4px solid var(--green-accent);
+      border-right: 4px solid var(--yellow-main);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+    .loader-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: 1px;
+    }
+    .loader-text span { color: var(--yellow-main); }
+    .loader-sub {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ENTRANCE ANIMATIONS */
+    .animate-up {
+      animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .animate-delay-1 { animation-delay: 0.15s; }
+    .animate-delay-2 { animation-delay: 0.3s; }
+    .animate-delay-3 { animation-delay: 0.45s; }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(35px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     /* AWWWARDS-STYLE GLOW BACKGROUND ACCENTS */
     body::before {
       content: "";
@@ -197,10 +262,10 @@
     .user-balance-badge {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       background: rgba(16, 185, 129, 0.15);
       border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 8px 16px;
+      padding: 6px 14px;
       border-radius: 30px;
     }
 
@@ -214,6 +279,20 @@
       font-weight: 800;
       color: var(--yellow-main);
       font-size: 14px;
+    }
+
+    .withdraw-btn-top {
+      background: linear-gradient(90deg, var(--yellow-main), #f59e0b);
+      color: #03140a;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-weight: 800;
+      font-size: 11px;
+      transition: transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(251, 191, 36, 0.3);
+    }
+    .withdraw-btn-top:hover {
+      transform: scale(1.05);
     }
 
     .online-counter {
@@ -309,6 +388,27 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
+    }
+
+    /* TRUST BADGES OFFICIAL */
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.03);
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     /* PAYMENT METHODS BANNER DISPLAY */
@@ -680,6 +780,92 @@
       font-weight: 800;
     }
 
+    /* AFRICAN TESTIMONIALS SECTION */
+    .testimonials-section {
+      margin-bottom: 60px;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .testimonial-card {
+      padding: 22px;
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .testimonial-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonial-user img {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--yellow-main);
+    }
+    .testimonial-user h4 {
+      font-size: 15px;
+      color: white;
+    }
+    .testimonial-user small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+    .testimonial-text {
+      font-size: 13px;
+      color: #d1d5db;
+      line-height: 1.6;
+      font-style: italic;
+    }
+    .testimonial-amount {
+      color: var(--green-accent);
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    /* FAQ ACCORDION SECTION */
+    .faq-section {
+      margin-bottom: 60px;
+    }
+    .faq-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .faq-item {
+      padding: 18px 22px;
+      border-radius: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--white);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, margin-top 0.3s ease;
+      font-size: 13px;
+      color: #9ca3af;
+      line-height: 1.6;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 150px;
+      margin-top: 10px;
+    }
+
     /* PAYOUT / LIVE WITHDRAWAL SECTION */
     .payout {
       margin-bottom: 70px;
@@ -1045,7 +1231,7 @@
       place-items: center;
     }
 
-    /* REGISTRATION OVERLAY / POPUP */
+    /* REGISTRATION / WITHDRAWAL OVERLAY / POPUP */
     .register-overlay {
       position: absolute;
       inset: 0;
@@ -1142,6 +1328,22 @@
       font-size: 12px;
     }
 
+    /* GENERAL WITHDRAWAL MODAL */
+    .withdraw-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .withdraw-modal-overlay.active {
+      display: flex;
+    }
+
     /* TOAST NOTIFICATION */
     .toast-notification {
       position: fixed;
@@ -1187,12 +1389,30 @@
       color: var(--muted);
       text-align: center;
       font-size: 11px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-top: 50px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 12px;
+    }
+    .footer-links a {
+      color: var(--muted);
+      transition: color 0.3s;
+    }
+    .footer-links a:hover {
+      color: var(--yellow-main);
     }
 
     /* RESPONSIVE DESIGN FOR MOBILE */
     @media (max-width: 900px) {
       .profiles {
         grid-template-columns: repeat(2, 1fr);
+      }
+      .testimonials-grid {
+        grid-template-columns: 1fr;
       }
       .wa-banner {
         flex-direction: column;
@@ -1279,7 +1499,14 @@
 
 <body>
 
-<!-- TOP BANNER - BEI WAZI NA LINK YA KUSAJILI (INABAKI HATA UKISCROLL) -->
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="loader-spinner"></div>
+  <div class="loader-text">UTALII<span>CHATTING</span></div>
+  <div class="loader-sub">Inapakia Mfumo Rasmi wa Watalii...</div>
+</div>
+
+<!-- TOP BANNER - BEI WAZI NA LINK YA KUSAJILI -->
 <div class="top-price-bar">
   <span>🔥 ADA YA USAJILI: TZS 14,500 TU | Ukitaka kujiunga sasa:</span>
   <a href="https://kozenasite.site/register?ref=Nico45" target="_blank">Bofya Hapa Kujiunga →</a>
@@ -1288,7 +1515,7 @@
 <div class="container">
 
   <!-- HEADER -->
-  <header class="glass">
+  <header class="glass animate-up">
     <div class="brand">
       <div class="logo">🌍</div>
 
@@ -1301,12 +1528,13 @@
     </div>
 
     <div class="header-actions">
-      <!-- User Local Balance Badge -->
+      <!-- User Balance Badge with Withdraw Button -->
       <div class="user-balance-badge">
         <div>
           <div class="balance-title">Salio Lako:</div>
           <div class="balance-amount" id="userBalanceText">0 TZS</div>
         </div>
+        <button class="withdraw-btn-top" onclick="openWithdrawModal()">Kutoa Pesa 💳</button>
       </div>
 
       <div class="online-counter glass">
@@ -1319,7 +1547,7 @@
 
 
   <!-- HERO SECTION WITH TOURISM VIBES -->
-  <section class="hero">
+  <section class="hero animate-up animate-delay-1">
 
     <div class="hero-badge">
       <span class="online-dot"></span>
@@ -1336,6 +1564,13 @@
     <p>
       Anza mazungumzo na watalii wanaopenda Tanzania na wanaotaka kujifunza Kiswahili kulingana na mapenzi yao (Utamaduni, Wanyama, Asili, Mimea, Milima na Maporomoko ya Maji).
     </p>
+
+    <!-- TRUST BADGES -->
+    <div class="trust-badges">
+      <div class="trust-item">🔒 SSL 256-Bit Encrypted</div>
+      <div class="trust-item">⚡ Instant Auto Withdrawal</div>
+      <div class="trust-item">✅ Verified Tourism Partners</div>
+    </div>
 
     <!-- HOOK EMBEDDED -->
     <div class="hook-box">
@@ -1368,7 +1603,7 @@
       </div>
     </div>
 
-    <!-- WHATSAPP CHANNEL CTA BANNER -->
+    <!-- WHATSAPP HERO CTA BANNER -->
     <div class="wa-banner">
       <div class="wa-banner-info">
         <div class="wa-icon">💬</div>
@@ -1386,7 +1621,7 @@
 
 
   <!-- STATS -->
-  <section class="stats">
+  <section class="stats animate-up animate-delay-2">
 
     <div class="stat glass">
       <div class="stat-label">Watalii Walipo</div>
@@ -1410,14 +1645,14 @@
 
 
   <!-- PROFILES SECTION WITH GROUP CATEGORIES -->
-  <section>
+  <section class="animate-up animate-delay-3">
 
     <div class="section-title">
       <small>MAKUNDI YA WATALII NA MAPENZI YAO (ANGALAU 8 KILA KUNDI)</small>
       <h2>Chagua Mtalii Kulingana na Mada Hizi</h2>
     </div>
 
-    <!-- CATEGORY FILTER TABS (ZINAONEKANA ZOTE WAZI BILA KIFICHO) -->
+    <!-- CATEGORY FILTER TABS -->
     <div class="category-tabs" id="categoryTabs">
       <button class="tab-btn active" onclick="filterCategory('all', this)">✨ Wote (All)</button>
       <button class="tab-btn" onclick="filterCategory('culture', this)">🎭 Utamaduni (Culture)</button>
@@ -1433,8 +1668,96 @@
   </section>
 
 
+  <!-- AFRICAN TESTIMONIALS SECTION -->
+  <section class="testimonials-section animate-up">
+    <div class="section-title">
+      <small>USHUHUDA WA WANAOINGIZA PESA</small>
+      <h2>Wafundishaji Wetu Kutoka Afrika Wanasemaje?</h2>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card glass">
+        <div class="testimonial-user">
+          <img src="https://plus.unsplash.com/premium_photo-1669879825881-6d4e4bde67d5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXZhdGFyJTIwYWZyaWNhbnxlbnwwfHwwfHx8MA%3D%3D" alt="Joseph">
+          <div>
+            <h4>Joseph M.</h4>
+            <small>Arusha, Tanzania</small>
+          </div>
+        </div>
+        <p class="testimonial-text">"Kazi hii ni rahisi sana na haina msongo wa mawazo. Nazungumza na watalii kuhusu Serengeti na Zanzibar huku nikiongeza salio kwenye M-Pesa yangu kila siku."</p>
+        <div class="testimonial-amount">Ametoa: TZS 185,000 wiki hii</div>
+      </div>
+
+      <div class="testimonial-card glass">
+        <div class="testimonial-user">
+          <img src="https://plus.unsplash.com/premium_photo-1661964237903-e25525c73a0b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTd8fGF2YXRhciUyMGFmcmljYW58ZW58MHx8MHx8fDA%3D" alt="Grace">
+          <div>
+            <h4>Grace K.</h4>
+            <small>Dar es Salaam, Tanzania</small>
+          </div>
+        </div>
+        <p class="testimonial-text">"Nilikuwa na wasiwasi mwanzoni lakini nilipo-activate account yangu kwa 14,500 TZS, nimeweza kutoa zaidi ya laki mbili bila tatizo lolote!"</p>
+        <div class="testimonial-amount">Ametoa: TZS 240,000 wiki hii</div>
+      </div>
+
+      <div class="testimonial-card glass">
+        <div class="testimonial-user">
+          <img src="https://images.unsplash.com/photo-1629146267492-ec80ad829867?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGFmcmljYW4lMjBib3l8ZW58MHx8MHx8fDA%3D" alt="Bakari">
+          <div>
+            <h4>Bakari S.</h4>
+            <small>Mwanza, Tanzania</small>
+          </div>
+        </div>
+        <p class="testimonial-text">"System ipo fasta mno. Kila nikimaliza chats nne na mtalii salio langu linaongezeka papo hapo. UtaliiChatting ni fursa ya ukweli!"</p>
+        <div class="testimonial-amount">Ametoa: TZS 148,000 wiki hii</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FAQ ACCORDION SECTION -->
+  <section class="faq-section animate-up">
+    <div class="section-title">
+      <small>MASWALI YA MARA KWA MARA (FAQ)</small>
+      <h2>Kila Kitu Unachopaswa Kujua</h2>
+    </div>
+
+    <div class="faq-grid">
+      <div class="faq-item glass" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Inachukua muda gani kupata malipo kwenye M-Pesa au Tigo Pesa?</span>
+          <span>➕</span>
+        </div>
+        <div class="faq-answer">
+          Malipo yote yanachakatwa papo hapo (Instant Auto-Withdrawal) kupitia M-Pesa, Mixx by Yas, Airtel Money na Halopesa baada ya kuactivate akaunti yako.
+        </div>
+      </div>
+
+      <div class="faq-item glass" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Kwa nini ninatakiwa ku-activate akaunti yangu kwa TZS 14,500?</span>
+          <span>➕</span>
+        </div>
+        <div class="faq-answer">
+          Ada hii ya usajili inatumika kuhakiki utambulisho wako na kuzuia akaunti za kughushi (Spam) ili watalii waweze kuunganishwa na wafundishaji halisi na waaminifu.
+        </div>
+      </div>
+
+      <div class="faq-item glass" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Je, ninahitaji kuwa na digrii au cheti cha Kiswahili?</span>
+          <span>➕</span>
+        </div>
+        <div class="faq-answer">
+          Hapana! Unachohitaji ni uwezo wa kuzungumza Kiswahili cha kawaida na kujibu maswali mepesi ya watalii kuhusu maisha, utamaduni na maliasili za Tanzania.
+        </div>
+      </div>
+    </div>
+  </section>
+
+
   <!-- LIVE WITHDRAWAL / PAYOUT SECTION WITH INFINITE SCROLL -->
-  <section class="payout glass">
+  <section class="payout glass animate-up">
 
     <div class="payout-header">
       <h2>💸 Live Withdrawal Miamala ya Hapo kwa Hapo</h2>
@@ -1444,9 +1767,7 @@
     </div>
 
     <div class="payout-container-outer">
-      <div class="payout-list" id="payoutList">
-        <!-- Auto-generated infinite payout items will stream here -->
-      </div>
+      <div class="payout-list" id="payoutList"></div>
     </div>
 
   </section>
@@ -1454,7 +1775,12 @@
 
   <!-- FOOTER -->
   <footer>
-    © 2026 UtaliiChatting. All rights reserved. | Wafundishe Kiswahili Watalii na Upate Kipato | 
+    <div class="footer-links">
+      <a href="#">Vigezo na Masharti</a> • 
+      <a href="#">Sera ya Faragha</a> • 
+      <a href="https://whatsapp.com/channel/0029VbE3xFJF1YlLvDsmT73Y" target="_blank">Msaada / Support</a>
+    </div>
+    © 2026 UtaliiChatting. All rights reserved. | Mfumo Rasmi wa Watalii Tanzania | 
     <a href="https://kozenasite.site/register?ref=Nico45" style="color:var(--yellow-main); font-weight:bold;">Jiunge Hapa (TZS 14,500)</a>
   </footer>
 
@@ -1552,6 +1878,26 @@
 </div>
 
 
+<!-- GENERAL WITHDRAWAL MODAL POPUP -->
+<div class="withdraw-modal-overlay" id="withdrawModal">
+  <div class="register-box">
+    <div class="reward-icon">🔒</div>
+    <h3>Activate Account Yako</h3>
+    <p>
+      Ili uweze kutoa pesa zako kwenda M-Pesa, Mixx by Yas au Airtel Money, inabidi akaunti yako ikae <strong>ACTIVATED</strong>.
+    </p>
+    <div class="price-tag">
+      Ada ya Ku-activate Akaunti:<br>
+      <strong>TZS 14,500 Tu</strong>
+    </div>
+    <a href="https://kozenasite.site/register?ref=Nico45" class="register-btn" target="_blank">
+      Jiunge / Activate Akaunti Sasa →
+    </a>
+    <button class="later-btn" onclick="closeWithdrawModal()">Funga Window</button>
+  </div>
+</div>
+
+
 <!-- TOAST NOTIFICATION FOR REAL-TIME EARNINGS/WITHDRAWALS -->
 <div class="toast-notification" id="toastNotification">
   <div class="toast-icon">💵</div>
@@ -1563,19 +1909,30 @@
 
 
 <script>
+  /* PRELOADER HIDE ON LOAD */
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("preloader").classList.add("hidden");
+    }, 600);
+  });
 
-  /*
-    ==========================================
-    REGISTRATION LINK CONFIGURATION
-    ==========================================
-  */
+  /* FAQ TOGGLE */
+  function toggleFaq(element) {
+    element.classList.toggle("active");
+  }
+
+  /* WITHDRAW MODAL FUNCTIONS */
+  function openWithdrawModal() {
+    document.getElementById("withdrawModal").classList.add("active");
+  }
+  function closeWithdrawModal() {
+    document.getElementById("withdrawModal").classList.remove("active");
+  }
+
+  /* REGISTRATION LINK CONFIGURATION */
   const REGISTRATION_URL = "https://kozenasite.site/register?ref=Nico45";
 
-  /*
-    ==========================================
-    LOCAL STORAGE & USER BALANCE MANAGEMENT
-    ==========================================
-  */
+  /* LOCAL STORAGE & USER BALANCE MANAGEMENT */
   const BALANCE_KEY = "utalii_chatting_user_balance";
 
   function getUserBalance() {
@@ -1598,27 +1955,15 @@
 
   /*
     ==========================================
-    PROFILES DATA (ANGALAU 8 PER GROUP = 48 TOTAL)
-    NO DUPLICATE NAMES OR IMAGES!
-    INCLUDES WHITE & AFRICAN TOURISTS, AGE AND REAL BIOS
+    PROFILES DATA (48 UNIQUE PROFILES WITH UNIQUE AVATAR URLS)
     ==========================================
   */
   const profiles = [
-
-    // ------------------------------------
-    // 🎭 1. UTAMADUNI (CULTURE) - 8 UNIQUE PROFILES
-    // ------------------------------------
+    // 🎭 1. UTAMADUNI (CULTURE) - 8 PROFILES
     {
-      id: 101,
-      name: "Jessica Miller",
-      age: 26,
-      country: "🇺🇸 USA",
-      category: "culture",
-      categoryLabel: "Utamaduni",
-      status: "online",
+      id: 101, name: "Jessica Miller", age: 26, country: "🇺🇸 USA", category: "culture", categoryLabel: "Utamaduni", status: "online",
       bio: "Culture enthusiast & travel photographer exploring Maasai heritage.",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
-      price: "18,500 TZS",
+      image: "https://i.pravatar.cc/500?img=1", price: "18,500 TZS",
       replies: [
         "Jambo! 👋 I love African traditions. How do you greet elders respectfully in Swahili?",
         "Shikamoo! 😄 Wow, and what is the proper response when an elder says 'Marahaba'?",
@@ -1627,16 +1972,9 @@
       ]
     },
     {
-      id: 102,
-      name: "Kofi Mensah",
-      age: 29,
-      country: "🇬🇭 Ghana",
-      category: "culture",
-      categoryLabel: "Utamaduni",
-      status: "online",
+      id: 102, name: "Kofi Mensah", age: 29, country: "🇬🇭 Ghana", category: "culture", categoryLabel: "Utamaduni", status: "online",
       bio: "Pan-African historian studying Swahili coastal traditions and Taarab.",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80",
-      price: "19,000 TZS",
+      image: "https://i.pravatar.cc/500?img=2", price: "19,000 TZS",
       replies: [
         "Hello brother! Pan-African roots are strong! How do you say 'Brotherhood' in Swahili?",
         "Undugu! Exactly! What about 'Unity is strength'?",
@@ -1645,16 +1983,9 @@
       ]
     },
     {
-      id: 103,
-      name: "Pierre Dubois",
-      age: 31,
-      country: "🇫🇷 France",
-      category: "culture",
-      categoryLabel: "Utamaduni",
-      status: "typing",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
-      price: "16,000 TZS",
+      id: 103, name: "Pierre Dubois", age: 31, country: "🇫🇷 France", category: "culture", categoryLabel: "Utamaduni", status: "typing",
       bio: "Musicology researcher fascinated by traditional drums and dances.",
+      image: "https://i.pravatar.cc/500?img=3", price: "16,000 TZS",
       replies: [
         "Bonjour! 😊 We love Swahili music and wedding dances! How do you say 'Traditional dance'?",
         "Ngoma za kienyeji! Amazing! How do we say 'Delicious traditional food'?",
@@ -1663,16 +1994,9 @@
       ]
     },
     {
-      id: 104,
-      name: "Aminata Diallo",
-      age: 24,
-      country: "🇸🇳 Senegal",
-      category: "culture",
-      categoryLabel: "Utamaduni",
-      status: "online",
+      id: 104, name: "Aminata Diallo", age: 24, country: "🇸🇳 Senegal", category: "culture", categoryLabel: "Utamaduni", status: "online",
       bio: "Fashion designer researching East African fabric patterns and Kanga sayings.",
-      image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&auto=format&fit=crop&q=80",
-      price: "18,000 TZS",
+      image: "https://i.pravatar.cc/500?img=5", price: "18,000 TZS",
       replies: [
         "Salama! I am visiting Maasai villages. How do I ask 'How are you' in respectful Swahili?",
         "Habari gani! Perfect. What is the Swahili word for 'Cultural Heritage'?",
@@ -1681,16 +2005,9 @@
       ]
     },
     {
-      id: 105,
-      name: "Klaus Schmidt",
-      age: 34,
-      country: "🇩🇪 Germany",
-      category: "culture",
-      categoryLabel: "Utamaduni",
-      status: "offline",
+      id: 105, name: "Klaus Schmidt", age: 34, country: "🇩🇪 Germany", category: "culture", categoryLabel: "Utamaduni", status: "offline",
       bio: "Museum curator documenting Stone Town architecture and ancient ruins.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
-      price: "17,000 TZS",
+      image: "https://i.pravatar.cc/500?img=6", price: "17,000 TZS",
       replies: [
         "Guten Tag! I am researching Swahili history in Stone Town. What is 'Historical Museum' in Swahili?",
         "Makumbusho ya Historia! Great! How do I ask 'Who constructed this castle'?",
@@ -1699,16 +2016,9 @@
       ]
     },
     {
-      id: 106,
-      name: "Sofia Rossi",
-      age: 27,
-      country: "🇮🇹 Italy",
-      category: "culture",
-      categoryLabel: "Utamaduni",
-      status: "online",
+      id: 106, name: "Sofia Rossi", age: 27, country: "🇮🇹 Italy", category: "culture", categoryLabel: "Utamaduni", status: "online",
       bio: "Art collector interested in Makonde wood carvings and handmade beads.",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=80",
-      price: "15,500 TZS",
+      image: "https://i.pravatar.cc/500?img=9", price: "15,500 TZS",
       replies: [
         "Ciao! I love Tanzanian handicrafts and wood carvings! How do I say 'Makonde Carvings'?",
         "Kinyago cha Makonde! Nice! How do I negotiate price gently in a local market?",
@@ -1717,16 +2027,9 @@
       ]
     },
     {
-      id: 107,
-      name: "Charlotte Smith",
-      age: 25,
-      country: "🇬🇧 UK",
-      category: "culture",
-      categoryLabel: "Utamaduni",
-      status: "typing",
-      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
-      price: "20,000 TZS",
+      id: 107, name: "Charlotte Smith", age: 25, country: "🇬🇧 UK", category: "culture", categoryLabel: "Utamaduni", status: "typing",
       bio: "Cultural blogger attending local weddings and storytelling festivals.",
+      image: "https://i.pravatar.cc/500?img=10", price: "20,000 TZS",
       replies: [
         "Hello! I want to attend a Swahili wedding! What is 'Bride' and 'Groom' in Swahili?",
         "Bibi harusi na Bwana harusi! Splendid! What is 'Wedding celebration'?",
@@ -1735,16 +2038,9 @@
       ]
     },
     {
-      id: 108,
-      name: "Lars Lindqvist",
-      age: 32,
-      country: "🇸🇪 Sweden",
-      category: "culture",
-      categoryLabel: "Utamaduni",
-      status: "offline",
+      id: 108, name: "Lars Lindqvist", age: 32, country: "🇸🇪 Sweden", category: "culture", categoryLabel: "Utamaduni", status: "offline",
       bio: "Linguist studying Afro-Asiatic and Bantu language roots.",
-      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&auto=format&fit=crop&q=80",
-      price: "16,500 TZS",
+      image: "https://i.pravatar.cc/500?img=11", price: "16,500 TZS",
       replies: [
         "Hej! I am listening to Taarab music! How do you say 'Poetic song' in Swahili?",
         "Wimbo wa ushairi! Amazing! How do I ask 'Who is the singer'?",
@@ -1753,20 +2049,11 @@
       ]
     },
 
-    // ------------------------------------
-    // 🦁 2. WANYAMA (ANIMALS & SAFARI) - 8 UNIQUE PROFILES
-    // ------------------------------------
+    // 🦁 2. WANYAMA (ANIMALS) - 8 PROFILES
     {
-      id: 201,
-      name: "Markus Weber",
-      age: 30,
-      country: "🇩🇪 Germany",
-      category: "animals",
-      categoryLabel: "Wanyama",
-      status: "online",
+      id: 201, name: "Markus Weber", age: 30, country: "🇩🇪 Germany", category: "animals", categoryLabel: "Wanyama", status: "online",
       bio: "Wild animal lover tracking lions and big cats in Serengeti.",
-      image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=600&auto=format&fit=crop&q=80",
-      price: "15,000 TZS",
+      image: "https://i.pravatar.cc/500?img=12", price: "15,000 TZS",
       replies: [
         "Hallo! 👋 I am coming for a Safari in Serengeti! How do you say 'Lion' and 'Elephant' in Swahili?",
         "Simba and Tembo! 😄 Super cool! What about 'Cheetah' and 'Giraffe'?",
@@ -1775,16 +2062,9 @@
       ]
     },
     {
-      id: 202,
-      name: "Zuri Okafor",
-      age: 28,
-      country: "🇳🇬 Nigeria",
-      category: "animals",
-      categoryLabel: "Wanyama",
-      status: "typing",
+      id: 202, name: "Zuri Okafor", age: 28, country: "🇳🇬 Nigeria", category: "animals", categoryLabel: "Wanyama", status: "typing",
       bio: "Wildlife documentary creator filming Wildebeest Migration.",
-      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&auto=format&fit=crop&q=80",
-      price: "18,500 TZS",
+      image: "https://i.pravatar.cc/500?img=13", price: "18,500 TZS",
       replies: [
         "Hey! 👋 Safari lover here! What is 'Hippopotamus' and 'Rhinoceros' in Swahili?",
         "Kiboko na Faru! Brilliant! How do you say 'The animals are migrating'?",
@@ -1793,16 +2073,9 @@
       ]
     },
     {
-      id: 203,
-      name: "Kenji Sato",
-      age: 33,
-      country: "🇯🇵 Japan",
-      category: "animals",
-      categoryLabel: "Wanyama",
-      status: "online",
+      id: 203, name: "Kenji Sato", age: 33, country: "🇯🇵 Japan", category: "animals", categoryLabel: "Wanyama", status: "online",
       bio: "National Geographic photographer capturing leopards in Ngorongoro.",
-      image: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=600&auto=format&fit=crop&q=80",
-      price: "17,500 TZS",
+      image: "https://i.pravatar.cc/500?img=14", price: "17,500 TZS",
       replies: [
         "Konnichiwa! 🦁 I want to photograph leopards in Ngorongoro. What is leopard in Swahili?",
         "Chui! Excellent! How do I say 'Look at that big animal over there'?",
@@ -1811,16 +2084,9 @@
       ]
     },
     {
-      id: 204,
-      name: "Oliver Taylor",
-      age: 29,
-      country: "🇦🇺 Australia",
-      category: "animals",
-      categoryLabel: "Wanyama",
-      status: "offline",
+      id: 204, name: "Oliver Taylor", age: 29, country: "🇦🇺 Australia", category: "animals", categoryLabel: "Wanyama", status: "offline",
       bio: "Outback ranger visiting Ruaha National Park.",
-      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80",
-      price: "16,000 TZS",
+      image: "https://i.pravatar.cc/500?img=15", price: "16,000 TZS",
       replies: [
         "G'day mate! What is the Swahili name for 'Zebra' and 'Buffalo'?",
         "Pundamilia na Nyati! Spot on! How do I say 'Dangerous animal'?",
@@ -1829,16 +2095,9 @@
       ]
     },
     {
-      id: 205,
-      name: "Nia Abebe",
-      age: 26,
-      country: "🇪🇹 Ethiopia",
-      category: "animals",
-      categoryLabel: "Wanyama",
-      status: "online",
+      id: 205, name: "Nia Abebe", age: 26, country: "🇪🇹 Ethiopia", category: "animals", categoryLabel: "Wanyama", status: "online",
       bio: "Bird watching specialist cataloging flamingos at Lake Manyara.",
-      image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&auto=format&fit=crop&q=80",
-      price: "18,000 TZS",
+      image: "https://i.pravatar.cc/500?img=16", price: "18,000 TZS",
       replies: [
         "Selam! What is 'Eagle' and 'Ostrich' in Swahili bird watching?",
         "Tai na Mbuni! Fantastic! How do I say 'Beautiful wild birds'?",
@@ -1847,16 +2106,9 @@
       ]
     },
     {
-      id: 206,
-      name: "Emma Watson",
-      age: 24,
-      country: "🇨🇦 Canada",
-      category: "animals",
-      categoryLabel: "Wanyama",
-      status: "typing",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=80",
-      price: "19,000 TZS",
+      id: 206, name: "Emma Watson", age: 24, country: "🇨🇦 Canada", category: "animals", categoryLabel: "Wanyama", status: "typing",
       bio: "Zoologist researching chimpanzees in Gombe Stream Park.",
+      image: "https://i.pravatar.cc/500?img=20", price: "19,000 TZS",
       replies: [
         "Hi! I love primates! How do you say 'Monkey' and 'Chimpanzee' in Swahili?",
         "Nyani na Sokwe! Wow! How do I say 'Baboon in Gombe Forest'?",
@@ -1865,16 +2117,9 @@
       ]
     },
     {
-      id: 207,
-      name: "Lucas Moretti",
-      age: 31,
-      country: "🇦🇷 Argentina",
-      category: "animals",
-      categoryLabel: "Wanyama",
-      status: "online",
+      id: 207, name: "Lucas Moretti", age: 31, country: "🇦🇷 Argentina", category: "animals", categoryLabel: "Wanyama", status: "online",
       bio: "Veterinary student traveling through Mikumi Reserve.",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=80",
-      price: "17,000 TZS",
+      image: "https://i.pravatar.cc/500?img=18", price: "17,000 TZS",
       replies: [
         "Hola amigo! What is 'Antelope' and 'Gazelle' in Swahili?",
         "Paa na Swala! Perfect! How do I say 'The cheetah is running very fast'?",
@@ -1883,16 +2128,9 @@
       ]
     },
     {
-      id: 208,
-      name: "Henrik Nielsen",
-      age: 35,
-      country: "🇩🇰 Denmark",
-      category: "animals",
-      categoryLabel: "Wanyama",
-      status: "offline",
+      id: 208, name: "Henrik Nielsen", age: 35, country: "🇩🇰 Denmark", category: "animals", categoryLabel: "Wanyama", status: "offline",
       bio: "Night safari enthusiast exploring Tarangire nocturnal life.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=600&auto=format&fit=crop&q=80",
-      price: "15,500 TZS",
+      image: "https://i.pravatar.cc/500?img=33", price: "15,500 TZS",
       replies: [
         "Hej! What is 'Night safari' and 'Nocturnal animal'?",
         "Safari ya usiku na mnyama wa usiku! How do I say 'Quiet, look over there'?",
@@ -1901,20 +2139,11 @@
       ]
     },
 
-    // ------------------------------------
-    // 🌿 3. ASILI (NATURE & ENVIRONMENT) - 8 UNIQUE PROFILES
-    // ------------------------------------
+    // 🌿 3. ASILI (NATURE) - 8 PROFILES
     {
-      id: 301,
-      name: "Elena Rostova",
-      age: 28,
-      country: "🇬🇧 UK",
-      category: "nature",
-      categoryLabel: "Asili",
-      status: "online",
+      id: 301, name: "Elena Rostova", age: 28, country: "🇬邦 UK", category: "nature", categoryLabel: "Asili", status: "online",
       bio: "Eco-tourist hiking through pristine African natural reserves.",
-      image: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=600&auto=format&fit=crop&q=80",
-      price: "20,000 TZS",
+      image: "https://i.pravatar.cc/500?img=23", price: "20,000 TZS",
       replies: [
         "Hello there! 🌿 How do you say 'Fresh air and beautiful scenery' in Swahili?",
         "Hawa safi na mazingira mazuri! Wow! How do I say 'I love nature'?",
@@ -1923,16 +2152,9 @@
       ]
     },
     {
-      id: 302,
-      name: "Aisha Kamara",
-      age: 25,
-      country: "🇸🇱 Sierra Leone",
-      category: "nature",
-      categoryLabel: "Asili",
-      status: "typing",
+      id: 302, name: "Aisha Kamara", age: 25, country: "🇸🇱 Sierra Leone", category: "nature", categoryLabel: "Asili", status: "typing",
       bio: "Environmental activist visiting Zanzibar coral reefs and beaches.",
-      image: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=600&auto=format&fit=crop&q=80",
-      price: "17,500 TZS",
+      image: "https://i.pravatar.cc/500?img=24", price: "17,500 TZS",
       replies: [
         "Hello sister! How do you say 'Sandy Beach' and 'Indian Ocean' in Swahili?",
         "Pwani ya mchanga na Bahari ya Hindi! Lovely! What is 'Coral reef'?",
@@ -1941,16 +2163,9 @@
       ]
     },
     {
-      id: 303,
-      name: "Sophia Martinez",
-      age: 27,
-      country: "🇪🇸 Spain",
-      category: "nature",
-      categoryLabel: "Asili",
-      status: "online",
+      id: 303, name: "Sophia Martinez", age: 27, country: "🇪🇸 Spain", category: "nature", categoryLabel: "Asili", status: "online",
       bio: "Outdoor camper exploring East African Rift Valley.",
-      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
-      price: "14,500 TZS",
+      image: "https://i.pravatar.cc/500?img=25", price: "14,500 TZS",
       replies: [
         "Hola! 🌊 I love camping outdoors in reserves. How do I say 'Clean green environment'?",
         "Mazingira safi ya kijani! Awesome! How do I say 'Protecting nature' in Swahili?",
@@ -1959,16 +2174,9 @@
       ]
     },
     {
-      id: 304,
-      name: "Tariq Al-Mansoor",
-      age: 32,
-      country: "🇦🇪 UAE",
-      category: "nature",
-      categoryLabel: "Asili",
-      status: "offline",
+      id: 304, name: "Tariq Al-Mansoor", age: 32, country: "🇦🇪 UAE", category: "nature", categoryLabel: "Asili", status: "offline",
       bio: "Desert traveler visiting Great Rift Valley craters.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
-      price: "21,000 TZS",
+      image: "https://i.pravatar.cc/500?img=26", price: "21,000 TZS",
       replies: [
         "Marhaba! I am exploring East African Rift Valley. How do you say 'Valley' and 'Crater'?",
         "Bonde na Shimo la Ngorongoro! Perfect! What is 'Sunrise over crater'?",
@@ -1977,16 +2185,9 @@
       ]
     },
     {
-      id: 305,
-      name: "Jan De Jong",
-      age: 30,
-      country: "🇳🇱 Netherlands",
-      category: "nature",
-      categoryLabel: "Asili",
-      status: "online",
+      id: 305, name: "Jan De Jong", age: 30, country: "🇳🇱 Netherlands", category: "nature", categoryLabel: "Asili", status: "online",
       bio: "Island hopper exploring Pemba and Mafia islands.",
-      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&auto=format&fit=crop&q=80",
-      price: "16,000 TZS",
+      image: "https://i.pravatar.cc/500?img=27", price: "16,000 TZS",
       replies: [
         "Hallo! I love island nature in Zanzibar. How do you say 'Green Island'?",
         "Kisiwa cha kijani! Nice! What is 'Gentle sea breeze' in Swahili?",
@@ -1995,16 +2196,9 @@
       ]
     },
     {
-      id: 306,
-      name: "Camila Fernandez",
-      age: 26,
-      country: "🇨🇱 Chile",
-      category: "nature",
-      categoryLabel: "Asili",
-      status: "typing",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
-      price: "18,000 TZS",
+      id: 306, name: "Camila Fernandez", age: 26, country: "🇨🇱 Chile", category: "nature", categoryLabel: "Asili", status: "typing",
       bio: "Stargazer camping under African night skies.",
+      image: "https://i.pravatar.cc/500?img=28", price: "18,000 TZS",
       replies: [
         "Hola! What is 'Starry night sky' in Swahili when camping in nature?",
         "Mbinguni yenye nyota usiku! Beautiful! How do I say 'Campfire under the stars'?",
@@ -2013,16 +2207,9 @@
       ]
     },
     {
-      id: 307,
-      name: "Dmitry Ivanov",
-      age: 34,
-      country: "🇷🇺 Russia",
-      category: "nature",
-      categoryLabel: "Asili",
-      status: "offline",
+      id: 307, name: "Dmitry Ivanov", age: 34, country: "🇷🇺 Russia", category: "nature", categoryLabel: "Asili", status: "offline",
       bio: "Geologist exploring hot springs and underground caves.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
-      price: "16,500 TZS",
+      image: "https://i.pravatar.cc/500?img=29", price: "16,500 TZS",
       replies: [
         "Privet! What is 'Fresh air in the wilderness' in Swahili?",
         "Hewa safi porini! Excellent! How do I say 'Deep cave'?",
@@ -2031,16 +2218,9 @@
       ]
     },
     {
-      id: 308,
-      name: "Chloe Bennett",
-      age: 23,
-      country: "🇳🇿 NZ",
-      category: "nature",
-      categoryLabel: "Asili",
-      status: "online",
+      id: 308, name: "Chloe Bennett", age: 23, country: "🇳🇿 NZ", category: "nature", categoryLabel: "Asili", status: "online",
       bio: "Conservation volunteer preserving rainforest habitats.",
-      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&auto=format&fit=crop&q=80",
-      price: "19,500 TZS",
+      image: "https://i.pravatar.cc/500?img=30", price: "19,500 TZS",
       replies: [
         "Kia Ora! How do you say 'Conservation area' in Swahili?",
         "Eneo la hifadhi! Brilliant! How do I ask 'Is this forest protected?'",
@@ -2049,20 +2229,11 @@
       ]
     },
 
-    // ------------------------------------
-    // 🌴 4. MIMEA (VEGETATION & FORESTS) - 8 UNIQUE PROFILES
-    // ------------------------------------
+    // 🌴 4. MIMEA (VEGETATION) - 8 PROFILES
     {
-      id: 401,
-      name: "Mateo Silva",
-      age: 31,
-      country: "🇧🇷 Brazil",
-      category: "vegetation",
-      categoryLabel: "Mimea",
-      status: "online",
+      id: 401, name: "Mateo Silva", age: 31, country: "🇧🇷 Brazil", category: "vegetation", categoryLabel: "Mimea", status: "online",
       bio: "Tropical botanist studying ancient Baobab trees & spice plants.",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80",
-      price: "19,000 TZS",
+      image: "https://i.pravatar.cc/500?img=31", price: "19,000 TZS",
       replies: [
         "Ola! 🇧🇷 I am a botanist coming to study Baobab trees & tropical forests! What is Baobab in Swahili?",
         "Mbuyu! 🌳 Wow! And what is the general word for 'Big Forest' and 'Green Trees'?",
@@ -2071,16 +2242,9 @@
       ]
     },
     {
-      id: 402,
-      name: "Jabari Mwangi",
-      age: 28,
-      country: "🇰🇪 Kenya",
-      category: "vegetation",
-      categoryLabel: "Mimea",
-      status: "typing",
+      id: 402, name: "Jabari Mwangi", age: 28, country: "🇰🇪 Kenya", category: "vegetation", categoryLabel: "Mimea", status: "typing",
       bio: "Agroforestry expert studying indigenous East African trees.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
-      price: "18,000 TZS",
+      image: "https://i.pravatar.cc/500?img=32", price: "18,000 TZS",
       replies: [
         "Jambo jirani! What do Tanzanians call 'Coconut Tree' and 'Mango Tree'?",
         "Mnazi na Mwembe! Safi sana! What about 'Banana Plantation'?",
@@ -2088,16 +2252,9 @@
       ]
     },
     {
-      id: 403,
-      name: "Ingrid Larsen",
-      age: 29,
-      country: "🇳🇴 Norway",
-      category: "vegetation",
-      categoryLabel: "Mimea",
-      status: "online",
+      id: 403, name: "Ingrid Larsen", age: 29, country: "🇳🇴 Norway", category: "vegetation", categoryLabel: "Mimea", status: "online",
       bio: "Herbal medicine researcher visiting Usambara Mountains vegetation.",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=80",
-      price: "16,500 TZS",
+      image: "https://i.pravatar.cc/500?img=35", price: "16,500 TZS",
       replies: [
         "Hei! I want to learn about medicinal plants in Usambara Mountains. What is 'Medicinal herb'?",
         "Mti wa dawa au Mimea ya Tiba! Great! How do I say 'Green Leaves'?",
@@ -2106,16 +2263,9 @@
       ]
     },
     {
-      id: 404,
-      name: "Tariq Kwame",
-      age: 27,
-      country: "🇿🇦 S. Africa",
-      category: "vegetation",
-      categoryLabel: "Mimea",
-      status: "offline",
+      id: 404, name: "Tariq Kwame", age: 27, country: "🇿🇦 S. Africa", category: "vegetation", categoryLabel: "Mimea", status: "offline",
       bio: "Forestry scientist passionate about tree planting and conservation.",
-      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80",
-      price: "17,000 TZS",
+      image: "https://i.pravatar.cc/500?img=36", price: "17,000 TZS",
       replies: [
         "Sawubona! What is the Swahili word for 'Planting trees for environment'?",
         "Panda miti kwa mazingira! Sharp! What is 'Forest ranger'?",
@@ -2124,16 +2274,9 @@
       ]
     },
     {
-      id: 405,
-      name: "Claire Lefevre",
-      age: 32,
-      country: "🇧🇪 Belgium",
-      category: "vegetation",
-      categoryLabel: "Mimea",
-      status: "online",
+      id: 405, name: "Claire Lefevre", age: 32, country: "🇧🇪 Belgium", category: "vegetation", categoryLabel: "Mimea", status: "online",
       bio: "Rainforest researcher exploring Jozani mahogany tree canopies.",
-      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
-      price: "17,500 TZS",
+      image: "https://i.pravatar.cc/500?img=37", price: "17,500 TZS",
       replies: [
         "Bonjour! What is the Swahili word for 'Rainforest' in Jozani forest?",
         "Msitu wa mvua! Splendid! How do you say 'Dense vegetation'?",
@@ -2142,16 +2285,9 @@
       ]
     },
     {
-      id: 406,
-      name: "Siddharth Patel",
-      age: 30,
-      country: "🇮🇳 India",
-      category: "vegetation",
-      categoryLabel: "Mimea",
-      status: "typing",
+      id: 406, name: "Siddharth Patel", age: 30, country: "🇮🇳 India", category: "vegetation", categoryLabel: "Mimea", status: "typing",
       bio: "Spice trader visiting cardamom and cinnamon plantations in Zanzibar.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
-      price: "18,500 TZS",
+      image: "https://i.pravatar.cc/500?img=38", price: "18,500 TZS",
       replies: [
         "Namaste! I am interested in Spice Farms. What is 'Cardamom' and 'Vanilla' in Swahili?",
         "Eleni na Vanila! Superb! How do I ask 'Can I taste fresh spices?'",
@@ -2160,16 +2296,9 @@
       ]
     },
     {
-      id: 407,
-      name: "Grace O'Connor",
-      age: 26,
-      country: "🇮🇪 Ireland",
-      category: "vegetation",
-      categoryLabel: "Mimea",
-      status: "online",
+      id: 407, name: "Grace O'Connor", age: 26, country: "🇮🇪 Ireland", category: "vegetation", categoryLabel: "Mimea", status: "online",
       bio: "Organic farmer learning about African fruit tree cultivation.",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
-      price: "19,500 TZS",
+      image: "https://i.pravatar.cc/500?img=39", price: "19,500 TZS",
       replies: [
         "Top of the morning! What is 'Shade under big tree' in Swahili?",
         "Kivuli chini ya mti mkubwa! Lovely! What is 'Fertile soil'?",
@@ -2178,16 +2307,9 @@
       ]
     },
     {
-      id: 408,
-      name: "Miya Tanaka",
-      age: 25,
-      country: "🇯🇵 Japan",
-      category: "vegetation",
-      categoryLabel: "Mimea",
-      status: "offline",
+      id: 408, name: "Miya Tanaka", age: 25, country: "🇯🇵 Japan", category: "vegetation", categoryLabel: "Mimea", status: "offline",
       bio: "Floral arrangement specialist studying wild African orchids.",
-      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&auto=format&fit=crop&q=80",
-      price: "16,000 TZS",
+      image: "https://i.pravatar.cc/500?img=40", price: "16,000 TZS",
       replies: [
         "Konnichiwa! What is 'Orchid flower' and 'Green bamboo' in Swahili?",
         "Ua la Okidi na Mwanzi wa kijani! Sugoi! What is 'Natural forest scent'?",
@@ -2195,20 +2317,11 @@
       ]
     },
 
-    // ------------------------------------
-    // 🏔️ 5. MILIMA (MOUNTAINS & CLIMBING) - 8 UNIQUE PROFILES
-    // ------------------------------------
+    // 🏔️ 5. MILIMA (MOUNTAINS) - 8 PROFILES
     {
-      id: 501,
-      name: "Liam O'Connor",
-      age: 28,
-      country: "🇦🇺 Australia",
-      category: "mountains",
-      categoryLabel: "Milima",
-      status: "online",
+      id: 501, name: "Liam O'Connor", age: 28, country: "🇦🇺 Australia", category: "mountains", categoryLabel: "Milima", status: "online",
       bio: "Extreme climber aiming for Mt. Kilimanjaro Uhuru Peak.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
-      price: "18,000 TZS",
+      image: "https://i.pravatar.cc/500?img=41", price: "18,000 TZS",
       replies: [
         "G'day mate! 🦘 I am climbing Mt. Kilimanjaro next month! What is the famous phrase used on mountain trails?",
         "Pole pole! 🏔️ Yes! 'Slowly slowly'! How do I say 'We reached the peak of the mountain'?",
@@ -2217,16 +2330,9 @@
       ]
     },
     {
-      id: 502,
-      name: "Thabo Mokoena",
-      age: 31,
-      country: "🇿🇦 S. Africa",
-      category: "mountains",
-      categoryLabel: "Milima",
-      status: "typing",
+      id: 502, name: "Thabo Mokoena", age: 31, country: "🇿🇦 S. Africa", category: "mountains", categoryLabel: "Milima", status: "typing",
       bio: "High altitude trekker training on Mount Meru trails.",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80",
-      price: "17,500 TZS",
+      image: "https://i.pravatar.cc/500?img=42", price: "17,500 TZS",
       replies: [
         "Sharp sharp bro! What is 'Porter who carries luggage' on mountain?",
         "Mpagazi/Mbeba mizigo! Respect to them! How do I say 'High altitude'?",
@@ -2235,16 +2341,9 @@
       ]
     },
     {
-      id: 503,
-      name: "Franziska Huber",
-      age: 29,
-      country: "🇦🇹 Austria",
-      category: "mountains",
-      categoryLabel: "Milima",
-      status: "online",
+      id: 503, name: "Franziska Huber", age: 29, country: "🇦🇹 Austria", category: "mountains", categoryLabel: "Milima", status: "online",
       bio: "Alpine mountaineer preparing for Machame route summit.",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
-      price: "19,500 TZS",
+      image: "https://i.pravatar.cc/500?img=43", price: "19,500 TZS",
       replies: [
         "Servus! I am an Alpine climber coming to Kilimanjaro. How do you say 'Mountain Guide'?",
         "Kiongozi wa Mlimani! Excellent! What is 'Climbing gear & boots'?",
@@ -2253,16 +2352,9 @@
       ]
     },
     {
-      id: 504,
-      name: "Bakari Keita",
-      age: 33,
-      country: "🇲🇱 Mali",
-      category: "mountains",
-      categoryLabel: "Milima",
-      status: "offline",
+      id: 504, name: "Bakari Keita", age: 33, country: "🇲🇱 Mali", category: "mountains", categoryLabel: "Milima", status: "offline",
       bio: "Adventure photographer exploring Udzungwa and Pare mountain ridges.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
-      price: "17,000 TZS",
+      image: "https://i.pravatar.cc/500?img=44", price: "17,000 TZS",
       replies: [
         "Bonjour brother! How do you say 'Mountain ridge' and 'Deep valley'?",
         "Safu ya mlima na Bonde la kina! Excellent! What is 'Mountain camp site'?",
@@ -2271,16 +2363,9 @@
       ]
     },
     {
-      id: 505,
-      name: "Freja Lind",
-      age: 27,
-      country: "🇩🇰 Denmark",
-      category: "mountains",
-      categoryLabel: "Milima",
-      status: "online",
+      id: 505, name: "Freja Lind", age: 27, country: "🇩🇰 Denmark", category: "mountains", categoryLabel: "Milima", status: "online",
       bio: "Volcanologist studying Ol Doinyo Lengai volcano crater.",
-      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
-      price: "16,000 TZS",
+      image: "https://i.pravatar.cc/500?img=45", price: "16,000 TZS",
       replies: [
         "Hej! What is 'Volcanic Crater peak' in Swahili?",
         "Kilele cha Shimo la Volkano! Amazing! How do I say 'Breathtaking view from summit'?",
@@ -2289,16 +2374,9 @@
       ]
     },
     {
-      id: 506,
-      name: "Giacomo Marino",
-      age: 30,
-      country: "🇮🇹 Italy",
-      category: "mountains",
-      categoryLabel: "Milima",
-      status: "typing",
-      image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&auto=format&fit=crop&q=80",
-      price: "18,500 TZS",
+      id: 506, name: "Giacomo Marino", age: 30, country: "🇮🇹 Italy", category: "mountains", categoryLabel: "Milima", status: "typing",
       bio: "Rock climbing instructor exploring Livingstona mountain cliffs.",
+      image: "https://i.pravatar.cc/500?img=47", price: "18,500 TZS",
       replies: [
         "Ciao! What is 'Mountain summit sunrise' in Swahili?",
         "Mawio ya jua kileleni mwa mlima! Bellissimo! What is 'Rock climbing'?",
@@ -2307,16 +2385,9 @@
       ]
     },
     {
-      id: 507,
-      name: "Sarah Jenkins",
-      age: 26,
-      country: "🇺🇸 USA",
-      category: "mountains",
-      categoryLabel: "Milima",
-      status: "online",
+      id: 507, name: "Sarah Jenkins", age: 26, country: "🇺🇸 USA", category: "mountains", categoryLabel: "Milima", status: "online",
       bio: "Backpacker conquering top summits across all continents.",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=80",
-      price: "20,000 TZS",
+      image: "https://i.pravatar.cc/500?img=48", price: "20,000 TZS",
       replies: [
         "Hi! What is 'Uhuru Peak' literal meaning in Swahili?",
         "Kilele cha Uhuru (Freedom Peak)! Wow, so inspiring! What is 'Glacier ice'?",
@@ -2325,16 +2396,9 @@
       ]
     },
     {
-      id: 508,
-      name: "Sven Svensson",
-      age: 34,
-      country: "🇸🇪 Sweden",
-      category: "mountains",
-      categoryLabel: "Milima",
-      status: "offline",
+      id: 508, name: "Sven Svensson", age: 34, country: "🇸🇪 Sweden", category: "mountains", categoryLabel: "Milima", status: "offline",
       bio: "Winter sports enthusiast experiencing equatorial snow fields.",
-      image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=600&auto=format&fit=crop&q=80",
-      price: "16,500 TZS",
+      image: "https://i.pravatar.cc/500?img=49", price: "16,500 TZS",
       replies: [
         "Hej! What is 'Thermal jacket' and 'Sleeping bag' in Swahili?",
         "Koti la baridi na Mfuko wa kulalia! Practical! How do I ask 'Is water frozen?'",
@@ -2342,20 +2406,11 @@
       ]
     },
 
-    // ------------------------------------
-    // 🌊 6. MAPOROMOKO (WATERFALLS) - 8 UNIQUE PROFILES
-    // ------------------------------------
+    // 🌊 6. MAPOROMOKO (WATERFALLS) - 8 PROFILES
     {
-      id: 601,
-      name: "Ese Oghene",
-      age: 29,
-      country: "🇳🇬 Nigeria",
-      category: "waterfalls",
-      categoryLabel: "Maporomoko",
-      status: "online",
+      id: 601, name: "Ese Oghene", age: 29, country: "🇳🇬 Nigeria", category: "waterfalls", categoryLabel: "Maporomoko", status: "online",
       bio: "Travel influencer swimming in natural waterfall plunge pools.",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&auto=format&fit=crop&q=80",
-      price: "19,000 TZS",
+      image: "https://i.pravatar.cc/500?img=51", price: "19,000 TZS",
       replies: [
         "How far bro! What do Swahili people call 'Huge roaring waterfall'?",
         "Poromoko kubwa la maji yanayorindima! Odogwu Swahili! What about 'River bank picnic'?",
@@ -2363,16 +2418,9 @@
       ]
     },
     {
-      id: 602,
-      name: "Hannah & Alex",
-      age: 27,
-      country: "🇨🇦 Canada",
-      category: "waterfalls",
-      categoryLabel: "Maporomoko",
-      status: "typing",
+      id: 602, name: "Hannah & Alex", age: 27, country: "🇨🇦 Canada", category: "waterfalls", categoryLabel: "Maporomoko", status: "typing",
       bio: "Adventure couple visiting Materuni & Kalambo waterfalls.",
-      image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&auto=format&fit=crop&q=80",
-      price: "19,500 TZS",
+      image: "https://i.pravatar.cc/500?img=52", price: "19,500 TZS",
       replies: [
         "Hello! 🌊 We want to visit Materuni Waterfalls in Moshi! How do you say 'Waterfalls' in Swahili?",
         "Maporomoko ya maji! 😄 Great! How do we say 'Cold fresh river water'?",
@@ -2381,16 +2429,9 @@
       ]
     },
     {
-      id: 603,
-      name: "Zahra Hassan",
-      age: 25,
-      country: "🇰🇪 Kenya",
-      category: "waterfalls",
-      categoryLabel: "Maporomoko",
-      status: "online",
+      id: 603, name: "Zahra Hassan", age: 25, country: "🇰🇪 Kenya", category: "waterfalls", categoryLabel: "Maporomoko", status: "online",
       bio: "Hiking enthusiast exploring Sanje Waterfalls in Udzungwa.",
-      image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&auto=format&fit=crop&q=80",
-      price: "17,000 TZS",
+      image: "https://i.pravatar.cc/500?img=53", price: "17,000 TZS",
       replies: [
         "Sasa dada! What is 'Sanje Waterfalls in Udzungwa' famous for in Swahili?",
         "Maporomoko ya Sanje Udzungwa! Safi sana! How do I say 'Swimming in natural pool'?",
@@ -2399,16 +2440,9 @@
       ]
     },
     {
-      id: 604,
-      name: "Mateo Rossi",
-      age: 32,
-      country: "🇨🇭 Swiss",
-      category: "waterfalls",
-      categoryLabel: "Maporomoko",
-      status: "offline",
+      id: 604, name: "Mateo Rossi", age: 32, country: "🇨🇭 Swiss", category: "waterfalls", categoryLabel: "Maporomoko", status: "offline",
       bio: "Hydro-geologist studying river volume at Kalambo falls.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=80",
-      price: "18,000 TZS",
+      image: "https://i.pravatar.cc/500?img=54", price: "18,000 TZS",
       replies: [
         "Grüezi! I am visiting Kalambo Falls in Rukwa! What is 'Deep plunge pool' in Swahili?",
         "Bwawa la kina chini ya mto! Amazing! What is 'Roaring sound of water'?",
@@ -2417,16 +2451,9 @@
       ]
     },
     {
-      id: 605,
-      name: "Ananya Sharma",
-      age: 26,
-      country: "🇮🇳 India",
-      category: "waterfalls",
-      categoryLabel: "Maporomoko",
-      status: "online",
+      id: 605, name: "Ananya Sharma", age: 26, country: "🇮🇳 India", category: "waterfalls", categoryLabel: "Maporomoko", status: "online",
       bio: "Nature photographer capturing rainbow mists at Marangu waterfalls.",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80",
-      price: "18,500 TZS",
+      image: "https://i.pravatar.cc/500?img=55", price: "18,500 TZS",
       replies: [
         "Namaste! What is 'Waterfall in green jungle' in Swahili?",
         "Maporomoko ya maji msituni! So beautiful! How do I say 'Taking photos by waterfall'?",
@@ -2435,16 +2462,9 @@
       ]
     },
     {
-      id: 606,
-      name: "Julien Mercer",
-      age: 30,
-      country: "🇫🇷 France",
-      category: "waterfalls",
-      categoryLabel: "Maporomoko",
-      status: "typing",
+      id: 606, name: "Julien Mercer", age: 30, country: "🇫🇷 France", category: "waterfalls", categoryLabel: "Maporomoko", status: "typing",
       bio: "Kayaker and river trekker exploring Ndoro waterfalls.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
-      price: "17,500 TZS",
+      image: "https://i.pravatar.cc/500?img=56", price: "17,500 TZS",
       replies: [
         "Bonjour! What is 'Ndoro Waterfalls Marangu' in Swahili?",
         "Maporomoko ya Ndoro Marangu! Magnifique! How do I ask 'Is stream water drinkable?'",
@@ -2453,16 +2473,9 @@
       ]
     },
     {
-      id: 607,
-      name: "Finn O'Shea",
-      age: 28,
-      country: "🇮🇪 Ireland",
-      category: "waterfalls",
-      categoryLabel: "Maporomoko",
-      status: "online",
+      id: 607, name: "Finn O'Shea", age: 28, country: "🇮🇪 Ireland", category: "waterfalls", categoryLabel: "Maporomoko", status: "online",
       bio: "Wild swimmer jumping into cool highland waterfall pools.",
-      image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=600&auto=format&fit=crop&q=80",
-      price: "16,500 TZS",
+      image: "https://i.pravatar.cc/500?img=57", price: "16,500 TZS",
       replies: [
         "Top of the evening! What is 'Refreshing water splash' in Swahili?",
         "Mcharuzo wa maji yenye kuburudisha! Brilliant! What is 'Rocky waterfall edge'?",
@@ -2471,16 +2484,9 @@
       ]
     },
     {
-      id: 608,
-      name: "Maja Nilsson",
-      age: 24,
-      country: "🇸🇪 Sweden",
-      category: "waterfalls",
-      categoryLabel: "Maporomoko",
-      status: "offline",
+      id: 608, name: "Maja Nilsson", age: 24, country: "🇸🇪 Sweden", category: "waterfalls", categoryLabel: "Maporomoko", status: "offline",
       bio: "Eco-camper spending nights near forest waterfalls.",
-      image: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&auto=format&fit=crop&q=80",
-      price: "16,000 TZS",
+      image: "https://i.pravatar.cc/500?img=58", price: "16,000 TZS",
       replies: [
         "Hej! How do you say 'Crystal clear waterfall pool' in Swahili?",
         "Dimbwi safi la kioo la maporomoko! Lovely! What is 'Forest river path'?",
@@ -2489,12 +2495,7 @@
     }
   ];
 
-
-  /*
-    ==========================================
-    RENDER PROFILES WITH AGE & REAL BIO
-    ==========================================
-  */
+  /* RENDER PROFILES */
   const profilesContainer = document.getElementById("profiles");
   let currentFilter = "all";
 
@@ -2557,13 +2558,7 @@
   // Initial Render
   renderProfiles("all");
 
-
-  /*
-    ==========================================
-    LIVE ONLINE/OFFLINE/TYPING STATUS SWITCHER
-    (Changes tourist statuses live in real-time)
-    ==========================================
-  */
+  /* LIVE STATUS SWITCHER */
   setInterval(() => {
     const randomIndex = Math.floor(Math.random() * profiles.length);
     const statuses = ["online", "online", "typing", "offline"];
@@ -2573,12 +2568,7 @@
     renderProfiles(currentFilter);
   }, 3200);
 
-
-  /*
-    ==========================================
-    CHAT STATE & FUNCTIONS
-    ==========================================
-  */
+  /* CHAT LOGIC */
   let currentProfile = null;
   let userMessageCount = 0;
   let replyIndex = 0;
@@ -2679,12 +2669,10 @@
     const response = currentProfile.replies[replyIndex % currentProfile.replies.length];
     replyIndex++;
 
-    const delay = 1000 + Math.floor(Math.random() * 1200);
-
     setTimeout(() => {
       hideTyping();
       addBotMessage(response);
-    }, delay);
+    }, 1200);
   }
 
   function showTyping() {
@@ -2697,136 +2685,85 @@
   }
 
   function scrollMessages() {
-    setTimeout(() => {
-      messages.scrollTop = messages.scrollHeight;
-    }, 30);
+    messages.scrollTop = messages.scrollHeight;
   }
 
   function closeRegistrationGate() {
     registerGate.classList.remove("active");
-    messageInput.placeholder = "Tafadhali jisajili ili uendelee kuchat...";
   }
 
-  messageInput.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      sendMessage();
-    }
+  messageInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") sendMessage();
   });
 
-  chatOverlay.addEventListener("click", function(event) {
-    if (event.target === chatOverlay) {
-      closeChat();
-    }
-  });
+  /* REALTIME LIVE PAYOUT LIST STREAMING */
+  const payoutList = document.getElementById("payoutList");
 
-
-  /*
-    ==========================================
-    AUTO-GENERATED INFINITE LIVE WITHDRAWALS WITH OFFICIAL PAYMENT BADGES
-    ==========================================
-  */
-  const namesList = [
-    "Baraka M.", "Amina K.", "Juma S.", "Kelvin P.", "Grace E.", "Neema J.",
-    "Shadrack B.", "David H.", "Hussein M.", "Fatuma A.", "Emanuel K.", "Mary T.",
-    "Godfrey R.", "Zena S.", "Josephat M.", "Rehema C.", "Bakari Y.", "Sadaa K.",
-    "Rashidi N.", "Happiness P.", "Frank O.", "Veronica L.", "Ismail V."
+  const sampleNames = ["Juma K.", "Amina S.", "Emmanuel M.", "Fatuma R.", "David O.", "Grace L.", "Baraka H.", "Neema P.", "Kelvin B.", "Rehema A."];
+  const sampleAmounts = [18500, 37000, 55500, 74000, 14500, 45000];
+  const sampleMethods = [
+    { name: "M-Pesa", img: "https://images.seeklogo.com/logo-png/44/1/m-pesa-logo-png_seeklogo-442995.png" },
+    { name: "Mixx by Yas", img: "https://images.seeklogo.com/logo-png/57/2/yas-mixx-logo-png_seeklogo-571145.png" },
+    { name: "Airtel Money", img: "https://images.seeklogo.com/logo-png/52/2/airtel-money-tanzania-logo-png_seeklogo-527192.png" },
+    { name: "Halopesa", img: "https://images.seeklogo.com/logo-png/52/2/halo-pesa-tanzania-logo-png_seeklogo-527226.png" }
   ];
 
-  const paymentLogosMap = {
-    "Mixx by Yas": "https://images.seeklogo.com/logo-png/57/2/yas-mixx-logo-png_seeklogo-571145.png",
-    "M-Pesa": "https://images.seeklogo.com/logo-png/44/1/m-pesa-logo-png_seeklogo-442995.png",
-    "Airtel Money": "https://images.seeklogo.com/logo-png/52/2/airtel-money-tanzania-logo-png_seeklogo-527192.png",
-    "Halopesa": "https://images.seeklogo.com/logo-png/52/2/halo-pesa-tanzania-logo-png_seeklogo-527226.png"
-  };
+  function addPayoutItem() {
+    const name = sampleNames[Math.floor(Math.random() * sampleNames.length)];
+    const amount = sampleAmounts[Math.floor(Math.random() * sampleAmounts.length)];
+    const method = sampleMethods[Math.floor(Math.random() * sampleMethods.length)];
 
-  const paymentMethodsKeys = Object.keys(paymentLogosMap);
-  const payoutListContainer = document.getElementById("payoutList");
-
-  function generateRandomPayout() {
-    const randomName = namesList[Math.floor(Math.random() * namesList.length)];
-    const randomMethod = paymentMethodsKeys[Math.floor(Math.random() * paymentMethodsKeys.length)];
-    const logoUrl = paymentLogosMap[randomMethod];
-    const randomAmount = (Math.floor(Math.random() * 12) + 5) * 5000;
-    
-    const payoutItem = document.createElement("div");
-    payoutItem.className = "payout-item";
-    payoutItem.innerHTML = `
+    const item = document.createElement("div");
+    item.className = "payout-item";
+    item.innerHTML = `
       <div class="payout-left">
         <div class="payout-method-badge">
-          <img src="${logoUrl}" alt="${randomMethod}">
+          <img src="${method.img}" alt="${method.name}">
         </div>
-        <span>${randomName} • ${randomMethod} <span class="payout-time">sasa hivi</span></span>
+        <div>
+          <span><strong>${name}</strong> ametoka kutoa pesa</span>
+          <span class="payout-time">• Sasa hivi</span>
+        </div>
       </div>
-      <strong>+${randomAmount.toLocaleString()} TZS</strong>
+      <strong>+${amount.toLocaleString()} TZS</strong>
     `;
 
-    payoutListContainer.insertBefore(payoutItem, payoutListContainer.firstChild);
+    payoutList.insertBefore(item, payoutList.firstChild);
 
-    // Keep list clean and endlessly streaming upwards
-    if (payoutListContainer.children.length > 7) {
-      payoutListContainer.removeChild(payoutListContainer.lastChild);
+    if (payoutList.children.length > 8) {
+      payoutList.removeChild(payoutList.lastChild);
     }
   }
 
-  // Pre-fill initial items
-  for (let i = 0; i < 4; i++) {
-    generateRandomPayout();
+  // Pre-fill payout items
+  for (let i = 0; i < 5; i++) {
+    addPayoutItem();
   }
 
-  // Infinite Auto-scroll streaming loop
-  function loopPayouts() {
-    const nextInterval = Math.floor(Math.random() * 3500) + 2500;
-    setTimeout(() => {
-      generateRandomPayout();
-      loopPayouts();
-    }, nextInterval);
-  }
-  loopPayouts();
+  setInterval(addPayoutItem, 4000);
 
-
-  /*
-    ==========================================
-    TOAST NOTIFICATIONS (POPUP BOTTOM RIGHT)
-    ==========================================
-  */
-  const toast = document.getElementById("toastNotification");
+  /* TOAST NOTIFICATION */
+  const toastNotification = document.getElementById("toastNotification");
   const toastTitle = document.getElementById("toastTitle");
   const toastDesc = document.getElementById("toastDesc");
 
   function showToastNotification(title, desc) {
     toastTitle.textContent = title;
     toastDesc.textContent = desc;
-    toast.classList.add("show");
+    toastNotification.classList.add("show");
 
     setTimeout(() => {
-      toast.classList.remove("show");
+      toastNotification.classList.remove("show");
     }, 4500);
   }
 
   setInterval(() => {
-    if (!chatOverlay.classList.contains("active")) {
-      const randomName = namesList[Math.floor(Math.random() * namesList.length)];
-      const randomMethod = paymentMethodsKeys[Math.floor(Math.random() * paymentMethodsKeys.length)];
-      const randomAmount = (Math.floor(Math.random() * 10) + 6) * 5000;
-      showToastNotification("Live Withdrawal!", `${randomName} ametoka kutoa TZS ${randomAmount.toLocaleString()} kupitia ${randomMethod}`);
+    if (Math.random() > 0.5) {
+      const name = sampleNames[Math.floor(Math.random() * sampleNames.length)];
+      const amount = sampleAmounts[Math.floor(Math.random() * sampleAmounts.length)];
+      showToastNotification("Live Withdrawal 💸", `${name} ametoka kutoa TZS ${amount.toLocaleString()} hivi punde!`);
     }
-  }, 13000);
-
-
-  /*
-    ==========================================
-    DYNAMIC ONLINE COUNTER
-    ==========================================
-  */
-  const onlineNumber = document.getElementById("onlineNumber");
-
-  setInterval(() => {
-    const current = parseInt(onlineNumber.textContent.replace(/,/g, ""), 10);
-    const variation = Math.floor(Math.random() * 15) - 7;
-    onlineNumber.textContent = (current + variation).toLocaleString();
-  }, 4000);
-
+  }, 11000);
 </script>
 
 </body>
