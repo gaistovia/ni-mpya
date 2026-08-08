@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
+  <!-- SEO META TAGS -->
+  <title>Kuhusu Sisi — UTALIICHAT | Mfumo Rasmi wa Watalii Tanzania</title>
+  <meta name="description" content="Jifunze zaidi kuhusu UTALIICHAT - Jukwaa linalowaunganisha watalii duniani na Watanzania kwa ajili ya kujifunza Kiswahili na utamaduni huku ukipata kipato.">
+  <meta name="keywords" content="Kuhusu UTALIICHAT, Fundisha Kiswahili, Utalii Tanzania, Kazi za Mtandaoni, Kiswahili kwa Watalii">
+  <meta name="author" content="UTALIICHAT">
+  <meta name="robots" content="index, follow">
+
+  <!-- THEME COLOR FOR MOBILE BROWSERS -->
+  <meta name="theme-color" content="#030d07">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --bg: #030d07;
+      --bg2: #071f12;
+      --card: rgba(12, 35, 22, 0.65);
+      --border: rgba(52, 211, 153, 0.18);
+      
+      --green-main: #10b981;
+      --green-glow: #059669;
+      --green-accent: #34d399;
+      
+      --yellow-main: #fbbf24;
+      --yellow-glow: #f59e0b;
+      
+      --white: #ffffff;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", sans-serif;
+      background:
+        linear-gradient(rgba(3, 13, 7, 0.88), rgba(3, 13, 7, 0.94)),
+        url('https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1920&auto=format&fit=crop&q=80') center/cover fixed no-repeat;
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      padding-bottom: 60px;
+    }
+
+    /* PRELOADER STYLES */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: #030d07;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .loader-spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(52, 211, 153, 0.1);
+      border-top: 4px solid var(--green-accent);
+      border-right: 4px solid var(--yellow-main);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 20px;
+    }
+    .loader-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: 1.5px;
+    }
+    .loader-text span { color: var(--yellow-main); }
+    .loader-sub {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.04;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+      background-size: 35px 35px;
+      z-index: 1;
+    }
+
+    button, a {
+      font-family: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1000px, calc(100% - 28px));
+      margin: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .glass {
+      background: var(--card);
+      border: 1px solid var(--border);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    /* TOP BAR */
+    .top-price-bar {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background: linear-gradient(90deg, #059669, #d97706);
+      color: #ffffff;
+      text-align: center;
+      padding: 10px 15px;
+      font-weight: 800;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .top-price-bar a {
+      background: #03140a;
+      color: var(--yellow-main);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      transition: all 0.3s ease;
+      display: inline-block;
+      border: 1px solid rgba(251, 191, 36, 0.4);
+    }
+
+    .top-price-bar a:hover {
+      background: #ffffff;
+      color: #042f1a;
+      transform: scale(1.05);
+    }
+
+    /* HEADER */
+    header {
+      margin-top: 15px;
+      padding: 14px 22px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 50px;
+      z-index: 80;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--green-main), var(--yellow-main));
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+      font-size: 22px;
+    }
+
+    .brand-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+      color: var(--white);
+    }
+
+    .brand-name span { color: var(--yellow-main); }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      transition: 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: var(--green-main);
+      color: #03140a;
+    }
+
+    /* ABOUT CONTENT STYLES */
+    .about-hero {
+      padding: 50px 0 30px;
+      text-align: center;
+    }
+
+    .about-hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(30px, 5vw, 52px);
+      color: var(--white);
+      margin-bottom: 15px;
+    }
+
+    .gradient {
+      background: linear-gradient(90deg, var(--green-accent), var(--yellow-main));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .about-hero p {
+      max-width: 750px;
+      margin: auto;
+      color: #d1d5db;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .content-card {
+      padding: 35px;
+      border-radius: 28px;
+      margin-bottom: 30px;
+    }
+
+    .content-card h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 24px;
+      color: var(--yellow-main);
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .content-card p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #d1d5db;
+      margin-bottom: 15px;
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .value-box {
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .value-box div {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .value-box h3 {
+      font-size: 16px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .value-box p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .cta-box {
+      text-align: center;
+      padding: 40px 20px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(251, 191, 36, 0.15));
+      border: 1px solid var(--border);
+      margin-top: 40px;
+    }
+
+    .cta-box h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 26px;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 14px 32px;
+      border-radius: 30px;
+      background: linear-gradient(90deg, var(--green-accent), var(--yellow-main));
+      color: #042f1a;
+      font-weight: 800;
+      font-size: 14px;
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+      transition: 0.3s;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(16, 185, 129, 0.5);
+    }
+
+    footer {
+      padding: 30px 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: 11px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      margin-top: 50px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 12px;
+    }
+
+    .footer-links a { color: var(--muted); }
+    .footer-links a:hover { color: var(--yellow-main); }
+
+    @media (max-width: 768px) {
+      .values-grid { grid-template-columns: 1fr; }
+      .content-card { padding: 22px; }
+      header { top: 62px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="loader-spinner"></div>
+  <div class="loader-text">UTALII<span>CHAT</span></div>
+  <div class="loader-sub">Inapakia Ukurasa wa Kuhusu Sisi...</div>
+</div>
+
+<!-- TOP BANNER -->
+<div class="top-price-bar">
+  <span>🔥 ADA YA USAJILI: TZS 14,500 TU | Jiunge na Maelfu ya Watanzania:</span>
+  <a href="https://kozenasite.site/register?ref=Nico45" target="_blank">Bofya Hapa Kujiunga →</a>
+</div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="glass">
+    <div class="brand">
+      <div class="logo">🌍</div>
+      <div>
+        <div class="brand-name">UTALII<span>CHAT</span></div>
+        <small style="color:var(--muted); font-size:10px;">Teach Swahili • Earn Money</small>
+      </div>
+    </div>
+    <a href="index.html" class="nav-btn">← Rudi Nyumbani</a>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="about-hero">
+    <h1>Kuhusu <span class="gradient">UTALIICHAT</span></h1>
+    <p>
+      Tunganisha utamaduni wetu mtukufu wa Kiswahili na ulimwengu. UTALIICHAT ni mfumo wa kisasa unaowawezesha Watanzania kuwafundisha watalii Kiswahili na kutangaza vivutio vya nchi yetu huku wakijipatia kipato cha papo hapo.
+    </p>
+  </section>
+
+  <!-- MISSION & VISION -->
+  <div class="content-card glass">
+    <h2>🎯 Dira na Dhumuni Letu</h2>
+    <p>
+      UTALIICHAT iliasisiwa kwa lengo la kutatua changamoto mbili kuu: kuwapa watalii wanaotembelea Tanzania uzoefu wa moja kwa moja wa kujifunza lugha na utamaduni kabla na wakati wa safari zao, pamoja na kutoa fursa ya ajira ya mtandaoni inayofikika kwa urahisi kwa vijana na jamii ya Kitanzania.
+    </p>
+    <p>
+      Tunaamini kuwa Kiswahili sio tu lugha, bali ni daraja linalounganisha watu wa mataifa mbalimbali na ukarimu wa Kitanzania.
+    </p>
+  </div>
+
+  <!-- HOW IT WORKS & VALUES -->
+  <div class="content-card glass">
+    <h2>⭐ Misingi Yetu Kuu</h2>
+    <div class="values-grid">
+      <div class="value-box">
+        <div>🤝</div>
+        <h3>Ushirikiano wa Kweli</h3>
+        <p>Tunanufaisha watalii kwa lugha halisi na tunanufaisha watumiaji wetu kwa malipo ya papo hapo.</p>
+      </div>
+      <div class="value-box">
+        <div>⚡</div>
+        <h3>Malipo ya Haraka</h3>
+        <p>Mfumo wetu wa Auto-Withdrawal unakuwezesha kutoa pesa zako kupitia M-Pesa, Mixx by Yas, Airtel Money au Halopesa muda wowote.</p>
+      </div>
+      <div class="value-box">
+        <div>🦁</div>
+        <h3>Kutangaza Utalii</h3>
+        <p>Tunawapa fursa watalii kujifunza kuhusu Serengeti, Zanzibar, Kilimanjaro na utamaduni wa Kitanzania moja kwa moja kutoka kwako.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECURITY & VERIFICATION -->
+  <div class="content-card glass">
+    <h2>🔒 Usalama na Uhakiki</h2>
+    <p>
+      Ili kulinda usalama wa watalii na kuhakikisha huduma bora, mfumo wetu unatumia utaratibu wa uhakiki ambapo kila mwalimu/mfundishaji anajiunga kwa ada ndogo ya usajili ya <strong>TZS 14,500</strong>. Hii inasaidia kuzuia akaunti za kughushi (Spam) na kudumisha kiwango cha juu cha uaminifu.
+    </p>
+  </div>
+
+  <!-- CTA BOX -->
+  <div class="cta-box glass">
+    <h2>Upo Tayari Kuanza Kuingiza Kipato?</h2>
+    <p style="color:#d1d5db; font-size:14px; margin-top:8px;">
+      Anza kuchat na watalii wanaopenda Tanzania sasa na uingize TZS 18,500+ kwa kila mazungumzo.
+    </p>
+    <a href="https://kozenasite.site/register?ref=Nico45" target="_blank" class="cta-btn">
+      Kamilisha Usajili Sasa (14,500 TZS) →
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-links">
+      <a href="index.html">Nyumbani</a> • 
+      <a href="#">Vigezo na Masharti</a> • 
+      <a href="#">Sera ya Faragha</a> • 
+      <a href="https://whatsapp.com/channel/0029VbE3xFJF1YlLvDsmT73Y" target="_blank">Msaada / Support</a>
+    </div>
+    © 2026 UTALIICHAT. All rights reserved. | Mfumo Rasmi wa Watalii Tanzania
+  </footer>
+
+</div>
+
+<script>
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("preloader").classList.add("hidden");
+    }, 600);
+  });
+</script>
+
+</body>
+</html>
