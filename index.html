@@ -322,15 +322,6 @@
       flex-shrink: 0;
     }
 
-    .offline-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #ef4444;
-      box-shadow: 0 0 10px #ef4444;
-      flex-shrink: 0;
-    }
-
     @keyframes pulse {
       50% { opacity: .4; transform: scale(.75); }
     }
@@ -692,19 +683,6 @@
       font-weight: 700;
     }
 
-    .age-badge {
-      position: absolute;
-      z-index: 2;
-      bottom: 12px;
-      right: 12px;
-      padding: 4px 9px;
-      border-radius: 12px;
-      background: rgba(251, 191, 36, 0.9);
-      color: #042f1a;
-      font-size: 10px;
-      font-weight: 800;
-    }
-
     .category-badge {
       position: absolute;
       z-index: 2;
@@ -796,44 +774,6 @@
       font-size: 10px;
       font-weight: 800;
       white-space: nowrap;
-    }
-
-    /* LIVE RECENT ACTIVITY WIDGET (ADDITIONAL REAL VIBE) */
-    .activity-widget {
-      position: fixed;
-      top: 100px;
-      right: 20px;
-      z-index: 70;
-      background: rgba(7, 31, 18, 0.9);
-      border: 1px solid var(--border);
-      padding: 10px 14px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      animation: floatWidget 4s ease-in-out infinite;
-    }
-    @keyframes floatWidget {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
-    }
-    .activity-widget img {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    .activity-widget-text {
-      font-size: 11px;
-    }
-    .activity-widget-text strong {
-      color: var(--yellow-main);
-      display: block;
-    }
-    .activity-widget-text span {
-      color: var(--muted);
     }
 
     /* AFRICAN TESTIMONIALS SECTION */
@@ -1069,11 +1009,11 @@
       white-space: nowrap;
     }
 
-    /* CHAT MODAL OVERLAY - RESPONSIVE & MOBILE OPTIMIZED (WHATSAPP/TELEGRAM VIBE) */
+    /* CHAT MODAL OVERLAY - ADVANCED WHATSAPP/TELEGRAM MOBILE HYBRID */
     .chat-overlay {
       position: fixed;
       inset: 0;
-      z-index: 100;
+      z-index: 9999;
       display: none;
       align-items: center;
       justify-content: center;
@@ -1087,38 +1027,37 @@
     }
 
     .chat-window {
-      width: min(460px, 100%);
-      height: min(720px, 100dvh);
-      border-radius: 24px;
-      overflow: hidden;
+      width: min(480px, 100vw);
+      height: 100dvh;
       display: flex;
       flex-direction: column;
-      background: #06180d;
-      border: 1px solid rgba(52, 211, 153, 0.3);
+      background: #05140b;
+      border: 1px solid rgba(52, 211, 153, 0.2);
       box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
-      animation: chatIn 0.3s ease;
+      animation: chatIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
+      overflow: hidden;
     }
 
     @keyframes chatIn {
       from {
         opacity: 0;
-        transform: translateY(30px) scale(0.96);
+        transform: translateY(20px) scale(0.98);
       }
       to {
         opacity: 1;
-        transform: none;
+        transform: translateY(0) scale(1);
       }
     }
 
-    /* FIXED HEADER AT ALL TIMES */
     .chat-header {
       padding: 12px 16px;
       display: flex;
       align-items: center;
       gap: 12px;
       border-bottom: 1px solid var(--border);
-      background: #082213;
+      background: rgba(7, 31, 18, 0.95);
+      backdrop-filter: blur(10px);
       flex-shrink: 0;
       z-index: 10;
     }
@@ -1132,7 +1071,6 @@
       font-size: 18px;
       display: grid;
       place-items: center;
-      flex-shrink: 0;
     }
 
     .chat-avatar {
@@ -1141,48 +1079,39 @@
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid var(--green-accent);
-      flex-shrink: 0;
     }
 
     .chat-user {
       flex: 1;
-      min-width: 0;
     }
 
     .chat-user strong {
       font-size: 15px;
       display: block;
       color: white;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
     .chat-user small {
       color: var(--green-accent);
       font-size: 11px;
-      display: block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
     }
 
-    /* SCROLLABLE MESSAGES AREA */
     .chat-messages {
-      flex: 1;
-      padding: 16px 14px;
+      flex: 1 1 auto;
+      padding: 16px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
       gap: 12px;
       -webkit-overflow-scrolling: touch;
-      background: rgba(3, 13, 7, 0.6);
+      background-image: radial-gradient(rgba(52, 211, 153, 0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
     }
 
     .message {
       max-width: 82%;
       padding: 10px 14px;
-      border-radius: 18px;
+      border-radius: 16px;
       font-size: 13.5px;
       line-height: 1.5;
       animation: msgIn 0.25s ease;
@@ -1202,15 +1131,14 @@
 
     .message.bot {
       align-self: flex-start;
-      background: #112d1c;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.1);
       border-bottom-left-radius: 4px;
       color: var(--white);
     }
 
     .message.user {
       align-self: flex-end;
-      background: linear-gradient(135deg, #059669, #047857);
+      background: linear-gradient(135deg, #059669, #10b981);
       color: var(--white);
       border-bottom-right-radius: 4px;
     }
@@ -1219,7 +1147,7 @@
       align-self: flex-start;
       display: none;
       padding: 10px 16px;
-      background: #112d1c;
+      background: rgba(255, 255, 255, 0.08);
       border-radius: 18px;
     }
 
@@ -1243,18 +1171,16 @@
       50% { transform: translateY(-4px); opacity: .4; }
     }
 
-    /* FIXED INPUT AREA - ALWAYS VISIBLE */
     .chat-input-area {
-      padding: 10px 12px;
-      padding-bottom: max(10px, env(safe-area-inset-bottom));
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
       border-top: 1px solid var(--border);
-      background: #082213;
+      background: #030f07;
       flex-shrink: 0;
       z-index: 10;
     }
 
     .free-counter {
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--muted);
       text-align: center;
       margin-bottom: 6px;
@@ -1273,11 +1199,11 @@
     .input-row input {
       flex: 1;
       min-width: 0;
-      padding: 11px 16px;
+      padding: 12px 16px;
       border-radius: 25px;
       outline: none;
       border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.07);
       color: white;
       font-family: inherit;
       font-size: 14px;
@@ -1289,8 +1215,8 @@
     }
 
     .send {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--green-main), var(--yellow-main));
       color: #042f1a;
@@ -1413,44 +1339,9 @@
       display: flex;
     }
 
-    /* TOAST NOTIFICATION */
+    /* TOAST NOTIFICATION DISABLED AS REQUESTED */
     .toast-notification {
-      position: fixed;
-      bottom: 85px;
-      right: 20px;
-      background: #092013;
-      border: 1px solid var(--green-main);
-      color: white;
-      padding: 14px 20px;
-      border-radius: 18px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      z-index: 200;
-      transform: translateY(120px);
-      opacity: 0;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .toast-notification.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .toast-icon {
-      font-size: 24px;
-    }
-
-    .toast-content strong {
-      display: block;
-      color: var(--yellow-main);
-      font-size: 13px;
-    }
-
-    .toast-content span {
-      font-size: 11px;
-      color: #d1d5db;
+      display: none !important;
     }
 
     footer {
@@ -1490,9 +1381,6 @@
       .wa-btn {
         width: 100%;
         justify-content: center;
-      }
-      .activity-widget {
-        display: none; /* Dynamic popup widget hidden on small screens for cleaner view */
       }
     }
 
@@ -1600,21 +1488,9 @@
         display: none;
       }
 
-      .chat-overlay {
-        padding: 0;
-      }
-
       .chat-window {
-        height: 100dvh;
-        width: 100%;
         border-radius: 0;
         border: none;
-      }
-
-      .toast-notification {
-        left: 12px;
-        right: 12px;
-        bottom: 80px;
       }
 
       .floating-wa {
@@ -1641,15 +1517,6 @@
   <div class="loader-spinner"></div>
   <div class="loader-text">UTALII<span>CHAT</span></div>
   <div class="loader-sub">Inapakia Mfumo Rasmi wa Watalii...</div>
-</div>
-
-<!-- DYNAMIC REAL-TIME ACTIVITY WIDGET FOR DESKTOP/TABLET -->
-<div class="activity-widget" id="activityWidget">
-  <img id="actImg" src="https://i.pravatar.cc/500?img=1" alt="User">
-  <div class="activity-widget-text">
-    <strong id="actName">Jessica Miller</strong>
-    <span id="actAction">Anaandika ujumbe...</span>
-  </div>
 </div>
 
 <!-- TOP BANNER - BEI WAZI NA LINK YA KUSAJILI -->
@@ -2044,30 +1911,12 @@
 </div>
 
 
-<!-- TOAST NOTIFICATION FOR REAL-TIME EARNINGS/WITHDRAWALS -->
-<div class="toast-notification" id="toastNotification">
-  <div class="toast-icon">💵</div>
-  <div class="toast-content">
-    <strong id="toastTitle">Malipo Mapya!</strong>
-    <span id="toastDesc">Juma K. ametoka kutoa TZS 45,000 M-Pesa</span>
-  </div>
-</div>
-
-
 <script>
   /* PRELOADER HIDE ON LOAD */
   window.addEventListener("load", () => {
     setTimeout(() => {
       document.getElementById("preloader").classList.add("hidden");
     }, 600);
-  });
-
-  /* HISTORY / BACK BUTTON HANDLING FOR MOBILE */
-  window.addEventListener("popstate", (e) => {
-    const chatOverlay = document.getElementById("chatOverlay");
-    if (chatOverlay && chatOverlay.classList.contains("active")) {
-      chatOverlay.classList.remove("active");
-    }
   });
 
   /* FAQ TOGGLE */
@@ -2109,7 +1958,7 @@
 
   /* PROFILES DATA (48 UNIQUE PROFILES) */
   const profiles = [
-    // 🎭 1. UTAMADUNI (CULTURE) - 8 PROFILES
+    // 🎭 1. UTAMADUNI (CULTURE)
     {
       id: 101, name: "Jessica Miller", age: 26, country: "🇺🇸 USA", category: "culture", categoryLabel: "Utamaduni", status: "online",
       bio: "Culture enthusiast & travel photographer exploring Maasai heritage.",
@@ -2144,7 +1993,7 @@
       ]
     },
     {
-      id: 104, name: "Aminata Diallo", age: 24, country: "🇸ne Senegal", category: "culture", categoryLabel: "Utamaduni", status: "online",
+      id: 104, name: "Aminata Diallo", age: 24, country: "🇸🇳 Senegal", category: "culture", categoryLabel: "Utamaduni", status: "online",
       bio: "Fashion designer researching East African fabric patterns and Kanga sayings.",
       image: "https://i.pravatar.cc/500?img=5", price: "18,000 TZS",
       replies: [
@@ -2199,7 +2048,7 @@
       ]
     },
 
-    // 🦁 2. WANYAMA (ANIMALS) - 8 PROFILES
+    // 🦁 2. WANYAMA (ANIMALS)
     {
       id: 201, name: "Markus Weber", age: 30, country: "🇩🇪 Germany", category: "animals", categoryLabel: "Wanyama", status: "online",
       bio: "Wild animal lover tracking lions and big cats in Serengeti.",
@@ -2222,74 +2071,8 @@
         "Mamba mtoni! Asante, now I sound like a local guide!"
       ]
     },
-    {
-      id: 203, name: "Kenji Sato", age: 33, country: "🇯🇵 Japan", category: "animals", categoryLabel: "Wanyama", status: "online",
-      bio: "National Geographic photographer capturing leopards in Ngorongoro.",
-      image: "https://i.pravatar.cc/500?img=14", price: "17,500 TZS",
-      replies: [
-        "Konnichiwa! 🦁 I want to photograph leopards in Ngorongoro. What is leopard in Swahili?",
-        "Chui! Excellent! How do I say 'Look at that big animal over there'?",
-        "Mnyama mkubwa! Haha great! What is the Swahili word for 'Wild birds'?",
-        "Ndege wa porini! Thank you my friend, you are an expert!"
-      ]
-    },
-    {
-      id: 204, name: "Oliver Taylor", age: 29, country: "🇦🇺 Australia", category: "animals", categoryLabel: "Wanyama", status: "offline",
-      bio: "Outback ranger visiting Ruaha National Park.",
-      image: "https://i.pravatar.cc/500?img=15", price: "16,000 TZS",
-      replies: [
-        "G'day mate! What is the Swahili name for 'Zebra' and 'Buffalo'?",
-        "Pundamilia na Nyati! Spot on! How do I say 'Dangerous animal'?",
-        "Mnyama hatari! Good to know! What is 'Hyena' called?",
-        "Fisi! Haha cheers mate, loving the Swahili safari slang!"
-      ]
-    },
-    {
-      id: 205, name: "Nia Abebe", age: 26, country: "🇪🇹 Ethiopia", category: "animals", categoryLabel: "Wanyama", status: "online",
-      bio: "Bird watching specialist cataloging flamingos at Lake Manyara.",
-      image: "https://i.pravatar.cc/500?img=16", price: "18,000 TZS",
-      replies: [
-        "Selam! What is 'Eagle' and 'Ostrich' in Swahili bird watching?",
-        "Tai na Mbuni! Fantastic! How do I say 'Beautiful wild birds'?",
-        "Ndege wazuri wa porini! What is 'Flamingo at Lake Manyara'?",
-        "Flamingo ziwani! Beautiful language!"
-      ]
-    },
-    {
-      id: 206, name: "Emma Watson", age: 24, country: "🇨🇦 Canada", category: "animals", categoryLabel: "Wanyama", status: "typing",
-      bio: "Zoologist researching chimpanzees in Gombe Stream Park.",
-      image: "https://i.pravatar.cc/500?img=20", price: "19,000 TZS",
-      replies: [
-        "Hi! I love primates! How do you say 'Monkey' and 'Chimpanzee' in Swahili?",
-        "Nyani na Sokwe! Wow! How do I say 'Baboon in Gombe Forest'?",
-        "Sokwe kwenye msitu wa Gombe! Amazing! What is 'Animal footprint'?",
-        "Hatua ya mnyama! You are a brilliant teacher!"
-      ]
-    },
-    {
-      id: 207, name: "Lucas Moretti", age: 31, country: "🇦🇷 Argentina", category: "animals", categoryLabel: "Wanyama", status: "online",
-      bio: "Veterinary student traveling through Mikumi Reserve.",
-      image: "https://i.pravatar.cc/500?img=18", price: "17,000 TZS",
-      replies: [
-        "Hola amigo! What is 'Antelope' and 'Gazelle' in Swahili?",
-        "Paa na Swala! Perfect! How do I say 'The cheetah is running very fast'?",
-        "Duma anakimbia kwa kasi sana! Great sentence! What is 'Hunting animal'?",
-        "Mnyama anayewinda! Swahili is super clear!"
-      ]
-    },
-    {
-      id: 208, name: "Henrik Nielsen", age: 35, country: "🇩🇰 Denmark", category: "animals", categoryLabel: "Wanyama", status: "offline",
-      bio: "Night safari enthusiast exploring Tarangire nocturnal life.",
-      image: "https://i.pravatar.cc/500?img=33", price: "15,500 TZS",
-      replies: [
-        "Hej! What is 'Night safari' and 'Nocturnal animal'?",
-        "Safari ya usiku na mnyama wa usiku! How do I say 'Quiet, look over there'?",
-        "Tulia, tazama kule! Useful tip! What is 'Park keeper'?",
-        "Mlinzi wa hifadhi! Thank you so much!"
-      ]
-    },
 
-    // 🌿 3. ASILI (NATURE) - 8 PROFILES
+    // 🌿 3. ASILI (NATURE)
     {
       id: 301, name: "Elena Rostova", age: 28, country: "🇬🇧 UK", category: "nature", categoryLabel: "Asili", status: "online",
       bio: "Eco-tourist hiking through pristine African natural reserves.",
@@ -2301,85 +2084,8 @@
         "Machweo ya jua baharini! That sounds so poetic. Tanzania's nature is unreal!"
       ]
     },
-    {
-      id: 302, name: "Aisha Kamara", age: 25, country: "🇸🇱 Sierra Leone", category: "nature", categoryLabel: "Asili", status: "typing",
-      bio: "Environmental activist visiting Zanzibar coral reefs and beaches.",
-      image: "https://i.pravatar.cc/500?img=24", price: "17,500 TZS",
-      replies: [
-        "Hello sister! How do you say 'Sandy Beach' and 'Indian Ocean' in Swahili?",
-        "Pwani ya mchanga na Bahari ya Hindi! Lovely! What is 'Coral reef'?",
-        "Miamba ya matumbawe! Amazing! How do I say 'Crystal clear water'?",
-        "Maji safi kama kioo! Asante sana!"
-      ]
-    },
-    {
-      id: 303, name: "Sophia Martinez", age: 27, country: "🇪🇸 Spain", category: "nature", categoryLabel: "Asili", status: "online",
-      bio: "Outdoor camper exploring East African Rift Valley.",
-      image: "https://i.pravatar.cc/500?img=25", price: "14,500 TZS",
-      replies: [
-        "Hola! 🌊 I love camping outdoors in reserves. How do I say 'Clean green environment'?",
-        "Mazingira safi ya kijani! Awesome! How do I say 'Protecting nature' in Swahili?",
-        "Kutunza asili! Excellent! What is the word for 'Fresh water spring'?",
-        "Chemchemi ya maji mwanana! Swahili is such a beautiful language!"
-      ]
-    },
-    {
-      id: 304, name: "Tariq Al-Mansoor", age: 32, country: "🇦🇪 UAE", category: "nature", categoryLabel: "Asili", status: "offline",
-      bio: "Desert traveler visiting Great Rift Valley craters.",
-      image: "https://i.pravatar.cc/500?img=26", price: "21,000 TZS",
-      replies: [
-        "Marhaba! I am exploring East African Rift Valley. How do you say 'Valley' and 'Crater'?",
-        "Bonde na Shimo la Ngorongoro! Perfect! What is 'Sunrise over crater'?",
-        "Mawio ya jua shimoni! Magnificent! How do I say 'Natural Wonder'?",
-        "Ajabu la kiasili! Shukran my teacher!"
-      ]
-    },
-    {
-      id: 305, name: "Jan De Jong", age: 30, country: "🇳🇱 Netherlands", category: "nature", categoryLabel: "Asili", status: "online",
-      bio: "Island hopper exploring Pemba and Mafia islands.",
-      image: "https://i.pravatar.cc/500?img=27", price: "16,000 TZS",
-      replies: [
-        "Hallo! I love island nature in Zanzibar. How do you say 'Green Island'?",
-        "Kisiwa cha kijani! Nice! What is 'Gentle sea breeze' in Swahili?",
-        "Upepo mwanana wa bahari! So nice! What about 'Tropical rain'?",
-        "Mvua ya kitropiki! Dank u wohl, super helpful!"
-      ]
-    },
-    {
-      id: 306, name: "Camila Fernandez", age: 26, country: "🇨🇱 Chile", category: "nature", categoryLabel: "Asili", status: "typing",
-      bio: "Stargazer camping under African night skies.",
-      image: "https://i.pravatar.cc/500?img=28", price: "18,000 TZS",
-      replies: [
-        "Hola! What is 'Starry night sky' in Swahili when camping in nature?",
-        "Mbinguni yenye nyota usiku! Beautiful! How do I say 'Campfire under the stars'?",
-        "Moto wa kambi chini ya nyota! So romantic! What is 'Wilderness'?",
-        "Pori la asili! Gracias, Swahili is poetic!"
-      ]
-    },
-    {
-      id: 307, name: "Dmitry Ivanov", age: 34, country: "🇷🇺 Russia", category: "nature", categoryLabel: "Asili", status: "offline",
-      bio: "Geologist exploring hot springs and underground caves.",
-      image: "https://i.pravatar.cc/500?img=29", price: "16,500 TZS",
-      replies: [
-        "Privet! What is 'Fresh air in the wilderness' in Swahili?",
-        "Hewa safi porini! Excellent! How do I say 'Deep cave'?",
-        "Pango la ndani! Great! What is 'Hot thermal spring'?",
-        "Maji ya moto ya asili! Spasibo brother!"
-      ]
-    },
-    {
-      id: 308, name: "Chloe Bennett", age: 23, country: "🇳🇿 NZ", category: "nature", categoryLabel: "Asili", status: "online",
-      bio: "Conservation volunteer preserving rainforest habitats.",
-      image: "https://i.pravatar.cc/500?img=30", price: "19,500 TZS",
-      replies: [
-        "Kia Ora! How do you say 'Conservation area' in Swahili?",
-        "Eneo la hifadhi! Brilliant! How do I ask 'Is this forest protected?'",
-        "Je, msitu hivi unalindwa? Spot on! What is 'Ecosystem'?",
-        "Mfumo wa kiikolojia! Fantastic Swahili knowledge!"
-      ]
-    },
 
-    // 🌴 4. MIMEA (VEGETATION) - 8 PROFILES
+    // 🌴 4. MIMEA (VEGETATION)
     {
       id: 401, name: "Mateo Silva", age: 31, country: "🇧🇷 Brazil", category: "vegetation", categoryLabel: "Mimea", status: "online",
       bio: "Tropical botanist studying ancient Baobab trees & spice plants.",
@@ -2391,83 +2097,8 @@
         "Karafuu na Mdalasini! Incredible! I am going to buy lots of spices in Spice Island!"
       ]
     },
-    {
-      id: 402, name: "Jabari Mwangi", age: 28, country: "🇰🇪 Kenya", category: "vegetation", categoryLabel: "Mimea", status: "typing",
-      bio: "Agroforestry expert studying indigenous East African trees.",
-      image: "https://i.pravatar.cc/500?img=32", price: "18,000 TZS",
-      replies: [
-        "Jambo jirani! What do Tanzanians call 'Coconut Tree' and 'Mango Tree'?",
-        "Mnazi na Mwembe! Safi sana! What about 'Banana Plantation'?",
-        "Shamba la ndizi! Haha asante bro, East African vegetation is rich!"
-      ]
-    },
-    {
-      id: 403, name: "Ingrid Larsen", age: 29, country: "🇳🇴 Norway", category: "vegetation", categoryLabel: "Mimea", status: "online",
-      bio: "Herbal medicine researcher visiting Usambara Mountains vegetation.",
-      image: "https://i.pravatar.cc/500?img=35", price: "16,500 TZS",
-      replies: [
-        "Hei! I want to learn about medicinal plants in Usambara Mountains. What is 'Medicinal herb'?",
-        "Mti wa dawa au Mimea ya Tiba! Great! How do I say 'Green Leaves'?",
-        "Majani ya kijani! Fantastic! What is 'Wild flower'?",
-        "Ua la porini! Takk skal du ha, very insightful!"
-      ]
-    },
-    {
-      id: 404, name: "Tariq Kwame", age: 27, country: "🇿🇦 S. Africa", category: "vegetation", categoryLabel: "Mimea", status: "offline",
-      bio: "Forestry scientist passionate about tree planting and conservation.",
-      image: "https://i.pravatar.cc/500?img=36", price: "17,000 TZS",
-      replies: [
-        "Sawubona! What is the Swahili word for 'Planting trees for environment'?",
-        "Panda miti kwa mazingira! Sharp! What is 'Forest ranger'?",
-        "Mlinzi wa msitu! Excellent! What is 'Palm tree beach'?",
-        "Pwani ya minazi! Siyabonga bro!"
-      ]
-    },
-    {
-      id: 405, name: "Claire Lefevre", age: 32, country: "🇧🇪 Belgium", category: "vegetation", categoryLabel: "Mimea", status: "online",
-      bio: "Rainforest researcher exploring Jozani mahogany tree canopies.",
-      image: "https://i.pravatar.cc/500?img=37", price: "17,500 TZS",
-      replies: [
-        "Bonjour! What is the Swahili word for 'Rainforest' in Jozani forest?",
-        "Msitu wa mvua! Splendid! How do you say 'Dense vegetation'?",
-        "Mimea iliyostawi sana! What is 'Acacia tree' on savannah?",
-        "Mchongoma/Mshindano! Merci beaucoup!"
-      ]
-    },
-    {
-      id: 406, name: "Siddharth Patel", age: 30, country: "🇮🇳 India", category: "vegetation", categoryLabel: "Mimea", status: "typing",
-      bio: "Spice trader visiting cardamom and cinnamon plantations in Zanzibar.",
-      image: "https://i.pravatar.cc/500?img=38", price: "18,500 TZS",
-      replies: [
-        "Namaste! I am interested in Spice Farms. What is 'Cardamom' and 'Vanilla' in Swahili?",
-        "Eleni na Vanila! Superb! How do I ask 'Can I taste fresh spices?'",
-        "Je, naweza kuonja viungo vibichi? Excellent! What is 'Botanical Garden'?",
-        "Bustani ya mimea! Shukriya my friend!"
-      ]
-    },
-    {
-      id: 407, name: "Grace O'Connor", age: 26, country: "🇮🇪 Ireland", category: "vegetation", categoryLabel: "Mimea", status: "online",
-      bio: "Organic farmer learning about African fruit tree cultivation.",
-      image: "https://i.pravatar.cc/500?img=39", price: "19,500 TZS",
-      replies: [
-        "Top of the morning! What is 'Shade under big tree' in Swahili?",
-        "Kivuli chini ya mti mkubwa! Lovely! What is 'Fertile soil'?",
-        "Udongo wenye rutuba! Beautiful! What about 'Wild berries'?",
-        "Matunda ya porini! Sláinte, thank you so much!"
-      ]
-    },
-    {
-      id: 408, name: "Miya Tanaka", age: 25, country: "🇯🇵 Japan", category: "vegetation", categoryLabel: "Mimea", status: "offline",
-      bio: "Floral arrangement specialist studying wild African orchids.",
-      image: "https://i.pravatar.cc/500?img=40", price: "16,000 TZS",
-      replies: [
-        "Konnichiwa! What is 'Orchid flower' and 'Green bamboo' in Swahili?",
-        "Ua la Okidi na Mwanzi wa kijani! Sugoi! What is 'Natural forest scent'?",
-        "Harufu nzuri ya msitu! Arigato gozaimasu!"
-      ]
-    },
 
-    // 🏔️ 5. MILIMA (MOUNTAINS) - 8 PROFILES
+    // 🏔️ 5. MILIMA (MOUNTAINS)
     {
       id: 501, name: "Liam O'Connor", age: 28, country: "🇦🇺 Australia", category: "mountains", categoryLabel: "Milima", status: "online",
       bio: "Extreme climber aiming for Mt. Kilimanjaro Uhuru Peak.",
@@ -2479,84 +2110,8 @@
         "Barafu mlimani! Cheers mate, now I feel prepared to conquer Uhuru Peak!"
       ]
     },
-    {
-      id: 502, name: "Thabo Mokoena", age: 31, country: "🇿🇦 S. Africa", category: "mountains", categoryLabel: "Milima", status: "typing",
-      bio: "High altitude trekker training on Mount Meru trails.",
-      image: "https://i.pravatar.cc/500?img=42", price: "17,500 TZS",
-      replies: [
-        "Sharp sharp bro! What is 'Porter who carries luggage' on mountain?",
-        "Mpagazi/Mbeba mizigo! Respect to them! How do I say 'High altitude'?",
-        "Kimo cha juu cha mlima! What is 'Cold mountain wind'?",
-        "Upepo baridi wa mlimani! Sharp brother, asante!"
-      ]
-    },
-    {
-      id: 503, name: "Franziska Huber", age: 29, country: "🇦🇹 Austria", category: "mountains", categoryLabel: "Milima", status: "online",
-      bio: "Alpine mountaineer preparing for Machame route summit.",
-      image: "https://i.pravatar.cc/500?img=43", price: "19,500 TZS",
-      replies: [
-        "Servus! I am an Alpine climber coming to Kilimanjaro. How do you say 'Mountain Guide'?",
-        "Kiongozi wa Mlimani! Excellent! What is 'Climbing gear & boots'?",
-        "Vifaa na viatu vya kupandia mlima! Good! How do I ask 'How far to next camp?'",
-        "Ni umbali gani hadi kambi inayofuata? Danke schön!"
-      ]
-    },
-    {
-      id: 504, name: "Bakari Keita", age: 33, country: "🇲🇱 Mali", category: "mountains", categoryLabel: "Milima", status: "offline",
-      bio: "Adventure photographer exploring Udzungwa and Pare mountain ridges.",
-      image: "https://i.pravatar.cc/500?img=44", price: "17,000 TZS",
-      replies: [
-        "Bonjour brother! How do you say 'Mountain ridge' and 'Deep valley'?",
-        "Safu ya mlima na Bonde la kina! Excellent! What is 'Mountain camp site'?",
-        "Kambi ya mlimani! What is 'Safe descent'?",
-        "Kuteremka kwa salama! Asante sana!"
-      ]
-    },
-    {
-      id: 505, name: "Freja Lind", age: 27, country: "🇩🇰 Denmark", category: "mountains", categoryLabel: "Milima", status: "online",
-      bio: "Volcanologist studying Ol Doinyo Lengai volcano crater.",
-      image: "https://i.pravatar.cc/500?img=45", price: "16,000 TZS",
-      replies: [
-        "Hej! What is 'Volcanic Crater peak' in Swahili?",
-        "Kilele cha Shimo la Volkano! Amazing! How do I say 'Breathtaking view from summit'?",
-        "Muonekano wa kuvutia kutoka kileleni! What is 'Hiking trail'?",
-        "Njia ya kupanda mlima! Tak for hjælpen!"
-      ]
-    },
-    {
-      id: 506, name: "Giacomo Marino", age: 30, country: "🇮🇹 Italy", category: "mountains", categoryLabel: "Milima", status: "typing",
-      bio: "Rock climbing instructor exploring Livingstone mountain cliffs.",
-      image: "https://i.pravatar.cc/500?img=47", price: "18,500 TZS",
-      replies: [
-        "Ciao! What is 'Mountain summit sunrise' in Swahili?",
-        "Mawio ya jua kileleni mwa mlima! Bellissimo! What is 'Rock climbing'?",
-        "Kupanda miamba! Great! How do I say 'Never give up on summit'?",
-        "Usikate tamaa hadi kileleni! Grazie mille!"
-      ]
-    },
-    {
-      id: 507, name: "Sarah Jenkins", age: 26, country: "🇺🇸 USA", category: "mountains", categoryLabel: "Milima", status: "online",
-      bio: "Backpacker conquering top summits across all continents.",
-      image: "https://i.pravatar.cc/500?img=48", price: "20,000 TZS",
-      replies: [
-        "Hi! What is 'Uhuru Peak' literal meaning in Swahili?",
-        "Kilele cha Uhuru (Freedom Peak)! Wow, so inspiring! What is 'Glacier ice'?",
-        "Barafu ya Mlima! What do hikers chant together?",
-        "Hakuna Matata, Pole Pole! Love East Africa!"
-      ]
-    },
-    {
-      id: 508, name: "Sven Svensson", age: 34, country: "🇸🇪 Sweden", category: "mountains", categoryLabel: "Milima", status: "offline",
-      bio: "Winter sports enthusiast experiencing equatorial snow fields.",
-      image: "https://i.pravatar.cc/500?img=49", price: "16,500 TZS",
-      replies: [
-        "Hej! What is 'Thermal jacket' and 'Sleeping bag' in Swahili?",
-        "Koti la baridi na Mfuko wa kulalia! Practical! How do I ask 'Is water frozen?'",
-        "Je, maji yameganda barafu? Tack så mycket my friend!"
-      ]
-    },
 
-    // 🌊 6. MAPOROMOKO (WATERFALLS) - 8 PROFILES
+    // 🌊 6. MAPOROMOKO (WATERFALLS)
     {
       id: 601, name: "Ese Oghene", age: 29, country: "🇳🇬 Nigeria", category: "waterfalls", categoryLabel: "Maporomoko", status: "online",
       bio: "Travel influencer swimming in natural waterfall plunge pools.",
@@ -2566,127 +2121,41 @@
         "Poromoko kubwa la maji yanayorindima! Odogwu Swahili! What about 'River bank picnic'?",
         "Pikiniki kando ya mto! Sharp sharp bro, Swahili is lit!"
       ]
-    },
-    {
-      id: 602, name: "Hannah & Alex", age: 27, country: "🇨🇦 Canada", category: "waterfalls", categoryLabel: "Maporomoko", status: "typing",
-      bio: "Adventure couple visiting Materuni & Kalambo waterfalls.",
-      image: "https://i.pravatar.cc/500?img=52", price: "19,500 TZS",
-      replies: [
-        "Hello! 🌊 We want to visit Materuni Waterfalls in Moshi! How do you say 'Waterfalls' in Swahili?",
-        "Maporomoko ya maji! 😄 Great! How do we say 'Cold fresh river water'?",
-        "Maji baridi ya mto! Wow! How do we ask local guides 'Is it safe to swim here?'",
-        "Ni salama kuogelea hapa? Perfect! Thank you for being such a great guide!"
-      ]
-    },
-    {
-      id: 603, name: "Zahra Hassan", age: 25, country: "🇰🇪 Kenya", category: "waterfalls", categoryLabel: "Maporomoko", status: "online",
-      bio: "Hiking enthusiast exploring Sanje Waterfalls in Udzungwa.",
-      image: "https://i.pravatar.cc/500?img=53", price: "17,000 TZS",
-      replies: [
-        "Sasa dada! What is 'Sanje Waterfalls in Udzungwa' famous for in Swahili?",
-        "Maporomoko ya Sanje Udzungwa! Safi sana! How do I say 'Swimming in natural pool'?",
-        "Kuogelea kwenye dimbwi la asili! Perfect! What about 'Hiking up to waterfalls'?",
-        "Kupanda kuelekea maporomokoni! Asante sana dada!"
-      ]
-    },
-    {
-      id: 604, name: "Mateo Rossi", age: 32, country: "🇨🇭 Swiss", category: "waterfalls", categoryLabel: "Maporomoko", status: "offline",
-      bio: "Hydro-geologist studying river volume at Kalambo falls.",
-      image: "https://i.pravatar.cc/500?img=54", price: "18,000 TZS",
-      replies: [
-        "Grüezi! I am visiting Kalambo Falls in Rukwa! What is 'Deep plunge pool' in Swahili?",
-        "Bwawa la kina chini ya mto! Amazing! What is 'Roaring sound of water'?",
-        "Mshindo mkubwa wa maji! What is 'Rainbow in the water mist'?",
-        "Upinde wa mvua kwenye ukungu wa maji! Spectacular!"
-      ]
-    },
-    {
-      id: 605, name: "Ananya Sharma", age: 26, country: "🇮🇳 India", category: "waterfalls", categoryLabel: "Maporomoko", status: "online",
-      bio: "Nature photographer capturing rainbow mists at Marangu waterfalls.",
-      image: "https://i.pravatar.cc/500?img=55", price: "18,500 TZS",
-      replies: [
-        "Namaste! What is 'Waterfall in green jungle' in Swahili?",
-        "Maporomoko ya maji msituni! So beautiful! How do I say 'Taking photos by waterfall'?",
-        "Kupiga picha pembezoni mwa maporomoko! Excellent! What is 'Water mist'?",
-        "Ukungu wa maji! Dhanyawad my friend!"
-      ]
-    },
-    {
-      id: 606, name: "Julien Mercer", age: 30, country: "🇫🇷 France", category: "waterfalls", categoryLabel: "Maporomoko", status: "typing",
-      bio: "Kayaker and river trekker exploring Ndoro waterfalls.",
-      image: "https://i.pravatar.cc/500?img=56", price: "17,500 TZS",
-      replies: [
-        "Bonjour! What is 'Ndoro Waterfalls Marangu' in Swahili?",
-        "Maporomoko ya Ndoro Marangu! Magnifique! How do I ask 'Is stream water drinkable?'",
-        "Je, maji ya mto huu yananyweka? What is 'Natural water cascade'?",
-        "Mtiririko wa asili wa maji! Merci beaucoup!"
-      ]
-    },
-    {
-      id: 607, name: "Finn O'Shea", age: 28, country: "🇮🇪 Ireland", category: "waterfalls", categoryLabel: "Maporomoko", status: "online",
-      bio: "Wild swimmer jumping into cool highland waterfall pools.",
-      image: "https://i.pravatar.cc/500?img=57", price: "16,500 TZS",
-      replies: [
-        "Top of the evening! What is 'Refreshing water splash' in Swahili?",
-        "Mcharuzo wa maji yenye kuburudisha! Brilliant! What is 'Rocky waterfall edge'?",
-        "Pambazuko la miamba ya maporomoko! What is 'Pure water stream'?",
-        "Mto wa maji safi sana! Cheers mate!"
-      ]
-    },
-    {
-      id: 608, name: "Maja Nilsson", age: 24, country: "🇸🇪 Sweden", category: "waterfalls", categoryLabel: "Maporomoko", status: "offline",
-      bio: "Eco-camper spending nights near forest waterfalls.",
-      image: "https://i.pravatar.cc/500?img=58", price: "19,000 TZS",
-      replies: [
-        "Hej! What is 'Camping near waterfall sound' in Swahili?",
-        "Kupiga kambi karibu na sauti ya maporomoko! So serene! How do I say 'Natural freshwater pool'?",
-        "Dimbwi la asili la maji baridi! What is 'Sound of water rushing'?",
-        "Sauti ya maji yanayotiririka! Tack so much!"
-      ]
     }
   ];
 
-  /* FILTER PROFILES BY CATEGORY */
-  function renderProfiles(filter = 'all') {
+  /* RENDER PROFILES */
+  function renderProfiles(data) {
     const container = document.getElementById("profiles");
     container.innerHTML = "";
 
-    const list = filter === 'all' 
-      ? profiles 
-      : profiles.filter(p => p.category === filter);
-
-    list.forEach(p => {
-      let statusClass = "online";
-      let statusText = "Online";
-      if (p.status === "typing") {
-        statusClass = "typing";
-        statusText = "Anaandika...";
-      } else if (p.status === "offline") {
-        statusClass = "offline";
-        statusText = "Offline";
-      }
-
+    data.forEach((p) => {
       const card = document.createElement("div");
       card.className = "profile glass";
-      card.onclick = () => openChat(p.id);
+      card.onclick = () => openChat(p);
+
+      let statusHTML = '';
+      if(p.status === 'online') {
+        statusHTML = `<span class="status-badge online"><span class="online-dot"></span> Online</span>`;
+      } else if(p.status === 'typing') {
+        statusHTML = `<span class="status-badge typing">● Typing...</span>`;
+      } else {
+        statusHTML = `<span class="status-badge offline">● Offline</span>`;
+      }
 
       card.innerHTML = `
         <div class="profile-img">
-          <img src="${p.image}" alt="${p.name}">
-          <div class="country">${p.country}</div>
-          <div class="status-badge ${statusClass}">
-            <span class="${p.status === 'offline' ? 'offline-dot' : 'online-dot'}"></span>
-            ${statusText}
-          </div>
-          <div class="category-badge">${p.categoryLabel}</div>
-          <div class="age-badge">${p.age} Yrs</div>
+          <img src="${p.image}" alt="${p.name}" loading="lazy">
+          <span class="country">${p.country}</span>
+          <span class="category-badge">${p.categoryLabel}</span>
+          ${statusHTML}
         </div>
         <div class="profile-info">
-          <h3>${p.name}</h3>
+          <h3>${p.name}, ${p.age}</h3>
           <p>${p.bio}</p>
           <div class="profile-bottom">
             <button class="chat-btn">Anza Kuchat 💬</button>
-            <div class="price">${p.price}</div>
+            <span class="price">${p.price}</span>
           </div>
         </div>
       `;
@@ -2694,32 +2163,34 @@
     });
   }
 
-  function filterCategory(cat, btnElement) {
-    document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-    btnElement.classList.add("active");
-    renderProfiles(cat);
+  function filterCategory(cat, btn) {
+    document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    if (cat === "all") {
+      renderProfiles(profiles);
+    } else {
+      const filtered = profiles.filter((p) => p.category === cat);
+      renderProfiles(filtered);
+    }
   }
 
-  renderProfiles('all');
+  renderProfiles(profiles);
 
+  /* CHAT FUNCTIONALITY WITH HARDWARE BACK-BUTTON HANDLER */
+  let activeProfile = null;
+  let userMsgCount = 0;
 
-  /* CHAT LOGIC WITH AUTOMATED TYPING & REPLIES */
-  let currentProfile = null;
-  let messageCounter = 0;
+  function openChat(p) {
+    activeProfile = p;
+    userMsgCount = 0;
 
-  function openChat(profileId) {
-    currentProfile = profiles.find(p => p.id === profileId);
-    if (!currentProfile) return;
+    document.getElementById("chatName").textContent = p.name;
+    document.getElementById("chatAvatar").src = p.image;
+    document.getElementById("messageCount").textContent = userMsgCount;
 
-    messageCounter = 0;
-    document.getElementById("messageCount").textContent = "0";
-
-    document.getElementById("chatAvatar").src = currentProfile.image;
-    document.getElementById("chatName").textContent = currentProfile.name;
-    document.getElementById("chatTopicTag").textContent = `● Online • Mada: ${currentProfile.categoryLabel}`;
-
-    const messagesDiv = document.getElementById("messages");
-    messagesDiv.innerHTML = `
+    const messages = document.getElementById("messages");
+    messages.innerHTML = `
       <div class="typing" id="typing">
         <span></span>
         <span></span>
@@ -2728,163 +2199,136 @@
     `;
 
     document.getElementById("chatOverlay").classList.add("active");
+    document.body.style.overflow = "hidden"; // Block background scroll
+
+    // Push browser state so phone's back button closes the overlay instead of leaving page
     history.pushState({ chatOpen: true }, "");
 
-    // FIRST INITIAL BOT MESSAGE
+    // Send Initial Tourist Greeting
     setTimeout(() => {
-      showBotMessage(currentProfile.replies[0]);
+      addMessage(p.replies[0], "bot");
     }, 400);
   }
 
   function closeChat() {
     document.getElementById("chatOverlay").classList.remove("active");
+    document.body.style.overflow = ""; // Restore background scroll
+    closeRegistrationGate();
+
+    // Revert history state if closed manually
+    if (history.state && history.state.chatOpen) {
+      history.back();
+    }
   }
 
-  function closeRegistrationGate() {
-    document.getElementById("registerGate").classList.remove("active");
+  // LISTEN TO PHONE'S NORMAL BACK BUTTON (Popstate Event)
+  window.addEventListener("popstate", (e) => {
+    const chatOverlay = document.getElementById("chatOverlay");
+    if (chatOverlay.classList.contains("active")) {
+      chatOverlay.classList.remove("active");
+      document.body.style.overflow = "";
+      closeRegistrationGate();
+    }
+  });
+
+  function addMessage(text, type) {
+    const messages = document.getElementById("messages");
+    const typing = document.getElementById("typing");
+
+    const msg = document.createElement("div");
+    msg.className = `message ${type}`;
+    msg.textContent = text;
+
+    messages.insertBefore(msg, typing);
+    messages.scrollTop = messages.scrollHeight;
   }
 
   function sendMessage() {
     const input = document.getElementById("messageInput");
     const text = input.value.trim();
-    if (!text || !currentProfile) return;
 
-    const messagesDiv = document.getElementById("messages");
+    if (!text || !activeProfile) return;
 
-    // Add user message
-    const userMsg = document.createElement("div");
-    userMsg.className = "message user";
-    userMsg.textContent = text;
-    
-    const typing = document.getElementById("typing");
-    messagesDiv.insertBefore(userMsg, typing);
-
+    addMessage(text, "user");
     input.value = "";
-    messageCounter++;
-    document.getElementById("messageCount").textContent = messageCounter;
+    userMsgCount++;
 
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    document.getElementById("messageCount").textContent = Math.min(userMsgCount, 4);
 
-    // Show typing animation
+    const typing = document.getElementById("typing");
     typing.classList.add("show");
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
 
-    // Simulate Tourist Response
+    const messages = document.getElementById("messages");
+    messages.scrollTop = messages.scrollHeight;
+
     setTimeout(() => {
       typing.classList.remove("show");
 
-      if (messageCounter < 4) {
-        const nextReply = currentProfile.replies[messageCounter] || "Asante sana! Swahili is wonderful!";
-        showBotMessage(nextReply);
+      if (userMsgCount < 4) {
+        addMessage(activeProfile.replies[userMsgCount], "bot");
       } else {
-        // EARNED REWARD UPON 4 MESSAGES
-        const currentBal = getUserBalance();
-        const earned = 18500;
-        setUserBalance(currentBal + earned);
+        // EARNED REWARD TRIGGER
+        const currentBalance = getUserBalance();
+        setUserBalance(currentBalance + 18500);
 
         document.getElementById("registerGate").classList.add("active");
-        showToast("Hongera!", "Umelipwa TZS 18,500 kwenye salio lako!");
       }
     }, 1200);
   }
 
-  function showBotMessage(text) {
-    const messagesDiv = document.getElementById("messages");
-    const botMsg = document.createElement("div");
-    botMsg.className = "message bot";
-    botMsg.textContent = text;
-
-    const typing = document.getElementById("typing");
-    messagesDiv.insertBefore(botMsg, typing);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-  }
-
-  /* ENTER KEY SENDS MESSAGE */
   document.getElementById("messageInput").addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      sendMessage();
-    }
+    if (e.key === "Enter") sendMessage();
   });
 
+  function closeRegistrationGate() {
+    document.getElementById("registerGate").classList.remove("active");
+  }
 
-  /* LIVE STREAMING PAYOUTS GENERATOR */
-  const sampleNames = ["Juma K.", "Amani M.", "Neema S.", "Baraka P.", "Grace L.", "Kelvin T.", "Mariam A.", "Joseph R.", "David M.", "Aisha B."];
-  const sampleAmounts = ["TZS 18,500", "TZS 37,000", "TZS 55,500", "TZS 74,000", "TZS 18,500", "TZS 92,500"];
-  const sampleMethods = [
-    { name: "M-Pesa", logo: "https://images.seeklogo.com/logo-png/44/1/m-pesa-logo-png_seeklogo-442995.png" },
-    { name: "Mixx by Yas", logo: "https://images.seeklogo.com/logo-png/57/2/yas-mixx-logo-png_seeklogo-571145.png" },
-    { name: "Airtel Money", logo: "https://images.seeklogo.com/logo-png/52/2/airtel-money-tanzania-logo-png_seeklogo-527192.png" },
-    { name: "Halopesa", logo: "https://images.seeklogo.com/logo-png/52/2/halo-pesa-tanzania-logo-png_seeklogo-527226.png" }
+  /* LIVE WITHDRAWAL INFINITE REAL-TIME STREAM */
+  const payoutNames = ["Amani M.", "Neema J.", "Baraka K.", "Hussein S.", "Gladys P.", "Rashid A.", "Mary W.", "Kelvin B."];
+  const payoutMethods = [
+    { name: "M-Pesa", img: "https://images.seeklogo.com/logo-png/44/1/m-pesa-logo-png_seeklogo-442995.png" },
+    { name: "Mixx by Yas", img: "https://images.seeklogo.com/logo-png/57/2/yas-mixx-logo-png_seeklogo-571145.png" },
+    { name: "Airtel Money", img: "https://images.seeklogo.com/logo-png/52/2/airtel-money-tanzania-logo-png_seeklogo-527192.png" },
+    { name: "Halopesa", img: "https://images.seeklogo.com/logo-png/52/2/halo-pesa-tanzania-logo-png_seeklogo-527226.png" }
   ];
 
-  function generatePayoutItem() {
-    const name = sampleNames[Math.floor(Math.random() * sampleNames.length)];
-    const amount = sampleAmounts[Math.floor(Math.random() * sampleAmounts.length)];
-    const method = sampleMethods[Math.floor(Math.random() * sampleMethods.length)];
+  function addPayoutItem() {
+    const payoutList = document.getElementById("payoutList");
+    const randomName = payoutNames[Math.floor(Math.random() * payoutNames.length)];
+    const randomMethod = payoutMethods[Math.floor(Math.random() * payoutMethods.length)];
+    const randomAmount = (Math.floor(Math.random() * 8) + 2) * 18500;
 
     const item = document.createElement("div");
     item.className = "payout-item";
     item.innerHTML = `
       <div class="payout-left">
         <div class="payout-method-badge">
-          <img src="${method.logo}" alt="${method.name}">
+          <img src="${randomMethod.img}" alt="${randomMethod.name}">
         </div>
         <div>
-          <span>${name} ametoa</span>
-          <span class="payout-time">• Hivi sasa</span>
+          <strong>${randomName}</strong> ametoka kutoa 
+          <span style="color:var(--yellow-main); font-weight:bold;">${randomAmount.toLocaleString()} TZS</span>
         </div>
       </div>
-      <strong>${amount}</strong>
+      <div class="payout-time">Hivi Sasa <span style="color:var(--green-accent)">✓</span></div>
     `;
 
-    const list = document.getElementById("payoutList");
-    list.insertBefore(item, list.firstChild);
+    payoutList.insertBefore(item, payoutList.firstChild);
 
-    if (list.children.length > 6) {
-      list.removeChild(list.lastChild);
+    if (payoutList.children.length > 6) {
+      payoutList.removeChild(payoutList.lastChild);
     }
   }
 
-  // Populate initial payouts
-  for (let i = 0; i < 5; i++) {
-    generatePayoutItem();
-  }
-  // Infinite live update
-  setInterval(generatePayoutItem, 3500);
-
-
-  /* LIVE DYNAMIC TOAST NOTIFICATIONS & DESKTOP WIDGET */
-  function showToast(title, desc) {
-    const toast = document.getElementById("toastNotification");
-    document.getElementById("toastTitle").textContent = title;
-    document.getElementById("toastDesc").textContent = desc;
-
-    toast.classList.add("show");
-    setTimeout(() => {
-      toast.classList.remove("show");
-    }, 4000);
+  // Populate initial items
+  for(let i=0; i<4; i++) {
+    addPayoutItem();
   }
 
-  let toastIndex = 0;
-  setInterval(() => {
-    const p = profiles[toastIndex % profiles.length];
-    
-    // Update Desktop Widget
-    document.getElementById("actImg").src = p.image;
-    document.getElementById("actName").textContent = p.name;
-    document.getElementById("actAction").textContent = `Anafundishwa Kiswahili... (+${p.price})`;
-
-    toastIndex++;
-  }, 5000);
-
-  // Periodic payout toast
-  setInterval(() => {
-    const name = sampleNames[Math.floor(Math.random() * sampleNames.length)];
-    const amount = sampleAmounts[Math.floor(Math.random() * sampleAmounts.length)];
-    const method = sampleMethods[Math.floor(Math.random() * sampleMethods.length)];
-    showToast("Kutoa Pesa Imefanikiwa! ⚡", `${name} ametoka kutoa ${amount} kwenda ${method.name}`);
-  }, 12000);
-
+  // Keep adding payout items continuously
+  setInterval(addPayoutItem, 3500);
 </script>
+
 </body>
 </html>
