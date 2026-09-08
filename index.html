@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>UTALIICHAT — Chati na Watalii, Lipwa Papo Hapo</title>
+<meta name="description" content="UTALIICHAT — Chati na watalii wanaopenda Tanzania, wafundishe Kiswahili na pata kipato.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="./logo.png">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+ --bg:#030d07;--bg2:#071f12;--card:#0c2316;--card2:#0f2a1b;
+ --border:rgba(52,211,153,.18);--green:#10b981;--green2:#059669;--mint:#34d399;
+ --gold:#fbbf24;--gold2:#f59e0b;--white:#fff;--text:#f3f4f6;--muted:#9ca3af;
+ --wa:#25d366;
+}
+html,body{background:var(--bg);color:var(--text);font-family:"Plus Jakarta Sans",sans-serif}
+body{min-height:100vh;padding-bottom:80px;overflow-x:hidden}
+button,a,input{font:inherit}button{border:0;cursor:pointer}a{text-decoration:none;color:inherit}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.035;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:36px 36px;z-index:0}
+.app{width:min(760px,100%);margin:auto;position:relative;z-index:1;background:linear-gradient(180deg,#030d07 0%,#06140c 100%);min-height:100vh}
+.header{position:sticky;top:0;z-index:100;background:rgba(3,13,7,.96);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
+.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,var(--green),var(--gold));box-shadow:0 0 24px rgba(16,185,129,.3);font-size:21px}
+.brand-name{font:800 19px Syne,sans-serif;line-height:1}.brand-name span{color:var(--gold)}
+.brand-sub{font-size:8px;color:var(--muted);letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+.online{display:flex;align-items:center;gap:7px;background:rgba(16,185,129,.1);border:1px solid rgba(52,211,153,.25);padding:7px 11px;border-radius:20px;font-size:10px;font-weight:800}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 12px var(--mint);animation:pulse 1.5s infinite}
+@keyframes pulse{50%{opacity:.45;transform:scale(.78)}}
+
+.top-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 16px}
+.action{padding:12px;border-radius:18px;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;gap:7px}
+.action.join{background:linear-gradient(135deg,var(--green),var(--green2));color:#03140a;box-shadow:0 8px 20px rgba(16,185,129,.18)}
+.action.support{background:rgba(255,255,255,.045);border:1px solid var(--border);color:#fff}
+
+.dashboard{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:0 16px 14px}
+.balance{border-radius:17px;padding:12px 10px;min-height:108px;border:1px solid var(--border);background:var(--card);display:flex;flex-direction:column;justify-content:space-between}
+.balance:nth-child(1){border-color:#047857;background:linear-gradient(145deg,#07351f,#061c12)}
+.balance:nth-child(2){border-color:var(--gold2);background:linear-gradient(145deg,#3a2907,#211704)}
+.balance:nth-child(3){border-color:#10b981;background:linear-gradient(145deg,#063d22,#022c14)}
+.balance small{font-size:9px;color:#cbd5e1;font-weight:700}.amount{font-size:14px;font-weight:900;margin-top:7px}.current .amount{color:#fde047}.withdrawn .amount{color:#6ee7b7}
+.withdraw{margin-top:7px;padding:7px;border-radius:13px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#231700;text-align:center;font-size:10px;font-weight:900}
+
+.hero{padding:20px 16px 22px;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 12px;border-radius:20px;border:1px solid rgba(251,191,36,.25);background:rgba(251,191,36,.08);color:var(--gold);font-size:9px;font-weight:800}
+.hero h1{font:800 clamp(28px,8vw,46px)/1.08 Syne,sans-serif;margin:15px auto 0;letter-spacing:-1.5px}
+.gradient{background:linear-gradient(90deg,var(--mint),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:12px;color:#b7c1bb;line-height:1.65;max-width:610px;margin:12px auto 0}
+
+.section-head{padding:0 16px 12px}.section-title{font:800 20px Syne,sans-serif}.section-sub{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5}
+.tabs{display:flex;gap:8px;overflow:auto;padding:0 16px 13px;scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}
+.tab{white-space:nowrap;padding:9px 13px;border-radius:20px;border:1px solid var(--border);background:rgba(255,255,255,.035);color:#cbd5e1;font-size:10px;font-weight:800}
+.tab.active{background:linear-gradient(90deg,var(--green),var(--gold));color:#03140a;border-color:transparent}
+
+.cards{display:flex;flex-direction:column;gap:10px;padding:0 16px}
+.user-card{background:linear-gradient(145deg,#0c2316,#07170e);border:1px solid var(--border);border-radius:20px;padding:13px;display:flex;flex-direction:column;gap:12px;transition:.25s}
+.user-card:active{transform:scale(.992)}
+.user-top{display:flex;align-items:center;gap:12px}
+.avatar-wrap{position:relative;width:64px;height:64px;flex:0 0 auto}
+.avatar{width:100%;height:100%;object-fit:cover;border-radius:50%;border:2px solid var(--mint)}
+.status-dot{position:absolute;right:1px;bottom:1px;width:14px;height:14px;border-radius:50%;background:var(--mint);border:2px solid #0c2316;box-shadow:0 0 12px var(--mint)}
+.user-info{min-width:0;flex:1}.user-info h3{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.user-info p{font-size:10px;color:var(--muted);margin-top:3px}.online-text{color:var(--mint);font-weight:800}
+.topic{display:inline-block;margin-top:6px;font-size:9px;font-weight:800;color:#a7f3d0;background:rgba(16,185,129,.1);padding:4px 8px;border-radius:10px}
+.card-actions{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:7px}
+.btn{padding:9px 7px;border-radius:12px;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:5px}
+.chat-btn{background:linear-gradient(135deg,var(--green),var(--mint));color:#032013}.call-btn{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.3);color:var(--gold)}.video-btn{background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.22);color:var(--mint)}
+
+.support{margin:24px 16px 0;padding:16px;border:1px solid var(--border);background:var(--card);border-radius:20px}
+.support h3{font-size:16px}.support p{font-size:11px;color:var(--muted);margin:4px 0 12px}
+.support-links{display:grid;grid-template-columns:1fr 1fr;gap:8px}.support-links a{padding:10px;border-radius:13px;text-align:center;font-size:10px;font-weight:800;background:rgba(255,255,255,.04);border:1px solid var(--border)}
+.ticker{margin:12px 16px 0;padding:15px;border:1px solid var(--border);border-radius:20px;background:var(--card);overflow:hidden}
+.ticker-title{font-size:13px;font-weight:800;margin-bottom:9px}.ticker-list{display:flex;flex-direction:column;gap:7px}.tx{font-size:10px;padding:9px 11px;border-radius:12px;background:rgba(255,255,255,.035);color:#cbd5e1}.tx strong{color:var(--gold)}
+
+.reviews{padding:24px 16px}.review{padding:14px;border-radius:17px;border:1px solid var(--border);background:var(--card);margin-top:9px}.review-head{display:flex;justify-content:space-between;align-items:center}.review-user{display:flex;gap:9px;align-items:center}.initial{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#07351f;color:var(--mint);font-weight:900}.review small{color:var(--muted);font-size:9px}.stars{color:var(--gold);font-size:10px}.review p{font-size:10px;color:#cbd5e1;line-height:1.5;margin-top:8px}
+
+footer{padding:25px 16px 40px;text-align:center;border-top:1px solid rgba(255,255,255,.05);color:var(--muted);font-size:9px;line-height:1.8}
+footer a{color:var(--gold)}
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.86);backdrop-filter:blur(14px);z-index:1000;display:none;align-items:center;justify-content:center;padding:12px}
+.modal.show{display:flex}
+.chat-box{width:min(430px,100%);height:min(690px,100dvh);background:#05140b;border:1px solid rgba(52,211,153,.22);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;position:relative;box-shadow:0 30px 90px rgba(0,0,0,.85);animation:chatIn .25s ease}
+@keyframes chatIn{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+.chat-head{padding:12px 14px;display:flex;align-items:center;gap:10px;background:#092016;border-bottom:1px solid var(--border)}
+.chat-avatar{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--mint)}
+.chat-user{flex:1}.chat-user strong{font-size:14px;display:block}.chat-status{font-size:10px;color:var(--mint);font-weight:800;margin-top:2px}
+.close{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.07);color:#fff;font-size:18px}
+.chat-body{flex:1;overflow:auto;padding:15px;display:flex;flex-direction:column;gap:9px;background:radial-gradient(circle at top,rgba(16,185,129,.06),transparent 45%)}
+.msg{max-width:82%;padding:10px 13px;border-radius:15px;font-size:12px;line-height:1.45;animation:msgIn .22s ease}.bot{align-self:flex-start;background:rgba(255,255,255,.09);border-bottom-left-radius:4px}.me{align-self:flex-end;background:linear-gradient(135deg,#059669,#10b981);border-bottom-right-radius:4px}
+@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.typing{align-self:flex-start;background:rgba(255,255,255,.08);padding:9px 12px;border-radius:16px;display:none;gap:4px}.typing.show{display:flex}.typing i{width:5px;height:5px;border-radius:50%;background:#aaa;animation:td 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}@keyframes td{50%{transform:translateY(-4px);opacity:.35}}
+.chat-foot{padding:10px;border-top:1px solid var(--border);background:#06170d}.counter{text-align:center;color:var(--muted);font-size:9px;margin-bottom:6px}.counter strong{color:var(--gold)}
+.input-row{display:flex;gap:7px}.input{flex:1;border:1px solid var(--border);outline:none;background:rgba(255,255,255,.06);color:#fff;border-radius:22px;padding:11px 13px;font-size:12px}.send{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--gold));color:#03140a;font-weight:900}
+.lock{position:absolute;inset:58px 0 0;background:rgba(3,13,7,.97);z-index:5;display:none;align-items:center;justify-content:center;text-align:center;padding:28px}.lock.show{display:flex}.lock-card{max-width:340px}.lock-icon{font-size:43px}.lock h2{font:800 22px Syne,sans-serif;margin:10px 0 7px}.lock p{font-size:12px;line-height:1.6;color:#cbd5e1}.checkline{display:flex;align-items:center;justify-content:center;gap:7px;color:var(--mint);font-size:10px;font-weight:800;margin:12px 0}.spinner{width:18px;height:18px;border:2px solid rgba(52,211,153,.2);border-top-color:var(--mint);border-radius:50%;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.join-btn{display:block;margin-top:15px;padding:13px;border-radius:18px;background:linear-gradient(135deg,var(--green),var(--gold));color:#03140a;font-weight:900;font-size:12px}
+.later{width:100%;margin-top:8px;padding:10px;border-radius:16px;background:rgba(255,255,255,.05);color:var(--muted);font-size:10px}
+
+@media(max-width:520px){
+ .dashboard{grid-template-columns:repeat(3,1fr)}.balance{min-height:100px}.amount{font-size:12px}
+ .card-actions{grid-template-columns:1.2fr 1fr 1fr}.btn{font-size:9px}
+ .chat-box{border-radius:0;height:100dvh}.modal{padding:0}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<header class="header">
+  <div class="brand">
+    <div class="logo">🌍</div>
+    <div><div class="brand-name">UTALII<span>CHAT</span></div><div class="brand-sub">Wafundishe Kiswahili • Pata Kipato</div></div>
+  </div>
+  <div class="online"><span class="dot"></span><span id="onlineCount">28,450</span> ONLINE</div>
+</header>
+
+<div class="top-actions">
+  <a class="action join" href="https://kozenasite.site/register?ref=Nico45" target="_blank">🚀 Fungua Account</a>
+  <button class="action support" onclick="openSupport()">🎧 Msaada</button>
+</div>
+
+<section class="dashboard">
+  <div class="balance"><small>Mapato Yote</small><div class="amount" id="totalBalance">TZS 0</div><small>Net Profit</small></div>
+  <div class="balance current"><small>Salio la Sasa</small><div class="amount" id="currentBalance">TZS 0</div><button class="withdraw" onclick="openWithdraw()">Toa Pesa</button></div>
+  <div class="balance withdrawn"><small>Pesa Iliyotolewa</small><div class="amount">TZS 0</div><small>Withdrawn</small></div>
+</section>
+
+<section class="hero">
+  <div class="hero-badge"><span class="dot"></span> WATALII WAPO ONLINE SASA</div>
+  <h1>Chagua Mgeni.<br><span class="gradient">Anza Kuchat.</span></h1>
+  <p>Wageni kutoka nchi mbalimbali wanakuja kujifunza Kiswahili, Tanzania na utamaduni wetu. Fungua profile, anza mazungumzo na ujenge connection.</p>
+</section>
+
+<div class="section-head">
+  <div class="section-title">Watalii Waliopo Online</div>
+  <div class="section-sub">Huu ndio muundo wa Verino-style: list ya profile moja moja, taarifa wazi na actions za Chat, Voice na Video.</div>
+</div>
+
+<div class="tabs" id="tabs">
+  <button class="tab active" onclick="filterProfiles('all',this)">🌍 Wote</button>
+  <button class="tab" onclick="filterProfiles('culture',this)">🎭 Utamaduni</button>
+  <button class="tab" onclick="filterProfiles('animals',this)">🦁 Wanyama</button>
+  <button class="tab" onclick="filterProfiles('nature',this)">🌿 Asili</button>
+  <button class="tab" onclick="filterProfiles('vegetation',this)">🌴 Mimea</button>
+  <button class="tab" onclick="filterProfiles('mountains',this)">🏔️ Milima</button>
+  <button class="tab" onclick="filterProfiles('waterfalls',this)">🌊 Maporomoko</button>
+</div>
+
+<div class="cards" id="cards"></div>
+
+<section class="support">
+  <h3>Huduma kwa Wateja</h3>
+  <p>Una swali au changamoto? Wasiliana nasi moja kwa moja.</p>
+  <div class="support-links">
+    <a href="https://wa.me/255706020560" target="_blank">💬 WhatsApp</a>
+    <a href="https://whatsapp.com/channel/0029Vb8SZkn60eBXUpXloF2r" target="_blank">📢 Channel</a>
+  </div>
+</section>
+
+<section class="ticker">
+  <div class="ticker-title">💸 Miamala ya Hivi Karibuni</div>
+  <div class="ticker-list" id="ticker"></div>
+</section>
+
+<section class="reviews">
+  <div class="section-title">⭐ Rating & Maoni</div>
+  <div class="section-sub">Maoni ya mfano kwa ajili ya demo ya UI.</div>
+  <div class="review"><div class="review-head"><div class="review-user"><div class="initial">A</div><div><strong>Amina Hassan</strong><br><small>Dar es Salaam</small></div></div><div class="stars">★★★★★</div></div><p>Nimependa jinsi profiles zinavyoonekana na chat inafunguka haraka kwenye simu.</p></div>
+  <div class="review"><div class="review-head"><div class="review-user"><div class="initial">J</div><div><strong>Joseph M.</strong><br><small>Mbeya</small></div></div><div class="stars">★★★★★</div></div><p>Muonekano ni rahisi kuelewa na kila mgeni ana taarifa zake wazi.</p></div>
+</section>
+
+<footer>
+  <a href="about.html">Kuhusu sisi</a> · <a href="terms.html">Vigezo na Masharti</a> · <a href="privacy.html">Sera ya Faragha</a><br>
+  © 2026 UTALIICHAT · <a href="https://kozenasite.site/register?ref=Nico45" target="_blank">Jiunge Hapa</a>
+</footer>
+</div>
+
+<!-- CHAT -->
+<div class="modal" id="chatModal">
+  <div class="chat-box">
+    <div class="chat-head">
+      <img id="chatAvatar" class="chat-avatar" src="" alt="">
+      <div class="chat-user"><strong id="chatName">Mgeni</strong><div class="chat-status" id="chatStatus">● Online</div></div>
+      <button class="close" onclick="closeChat()">×</button>
+    </div>
+    <div class="chat-body" id="chatBody"><div class="typing" id="typing"><i></i><i></i><i></i></div></div>
+    <div class="chat-foot" id="chatFoot">
+      <div class="counter">Ujumbe uliotuma: <strong><span id="msgCount">0</span>/2</strong> · Baada ya jumbe 2 mfumo utakagua Account</div>
+      <div class="input-row"><input class="input" id="chatInput" placeholder="Andika ujumbe wako hapa..." autocomplete="off"><button class="send" onclick="sendMessage()">➤</button></div>
+    </div>
+    <div class="lock" id="chatLock">
+      <div class="lock-card">
+        <div class="lock-icon">🔐</div>
+        <div class="checkline" id="checking"><span class="spinner"></span> Inakagua Account yako...</div>
+        <h2 id="lockTitle">Tayari kwa hatua inayofuata</h2>
+        <p id="lockText">Ili uendelee kuchat na mgeni, unatakiwa kuwa na Account inayofanya kazi.</p>
+        <a class="join-btn" href="https://kozenasite.site/register?ref=Nico45" target="_blank">🚀 Fungua Account TZS 14,500</a>
+        <button class="later" onclick="closeChat()">Funga kwa muda</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUPPORT -->
+<div class="modal" id="supportModal">
+  <div style="width:min(390px,100%);background:#0b2014;border:1px solid var(--border);border-radius:22px;padding:22px;text-align:center">
+    <div style="font-size:35px">🎧</div><h2 style="font:800 21px Syne,sans-serif;margin:8px 0">Customer Assistance</h2>
+    <p style="font-size:11px;color:var(--muted);line-height:1.5">Wasiliana nasi kupitia WhatsApp au Channel.</p>
+    <a class="join-btn" href="https://wa.me/255706020560" target="_blank">💬 WhatsApp Support</a>
+    <a class="join-btn" style="margin-top:8px;background:rgba(255,255,255,.06);color:#fff" href="https://whatsapp.com/channel/0029Vb8SZkn60eBXUpXloF2r" target="_blank">📢 WhatsApp Channel</a>
+    <button class="later" onclick="closeSupport()">Funga</button>
+  </div>
+</div>
+
+<!-- WITHDRAW -->
+<div class="modal" id="withdrawModal">
+  <div style="width:min(390px,100%);background:#0b2014;border:1px solid var(--gold2);border-radius:22px;padding:22px;text-align:center">
+    <div style="font-size:35px">🔒</div><h2 style="font:800 21px Syne,sans-serif;margin:8px 0">Activate Account Yako</h2>
+    <p style="font-size:11px;color:#cbd5e1;line-height:1.6">Ili utoe pesa zako kwenda M-Pesa, Mixx by Yas, Airtel Money au Bank, account yako inatakiwa iwe activated.</p>
+    <div style="margin:14px 0;padding:12px;border:1px dashed rgba(251,191,36,.4);border-radius:15px;color:#a7f3d0">Ada ya Activation<br><strong style="font-size:18px;color:var(--gold)">TZS 14,500</strong></div>
+    <a class="join-btn" href="https://kozenasite.site/register?ref=Nico45" target="_blank">🚀 Activate Account</a>
+    <button class="later" onclick="closeWithdraw()">Funga</button>
+  </div>
+</div>
+
+<script>
+const REGISTRATION_URL="https://kozenasite.site/register?ref=Nico45";
+const BALANCE_KEY="utaliichat_verino_layout_balance";
+const ACCOUNT_KEY="utaliichat_demo_account";
+const profiles=[
+
+    // 🎭 1. UTAMADUNI (CULTURE)
+    {
+      id: 101, name: "Jessica Miller", age: 26, country: "🇺🇸 USA", category: "culture", categoryLabel: "Utamaduni", status: "online",
+      bio: "Culture enthusiast & travel photographer exploring Maasai heritage.",
+      image: "https://i.pravatar.cc/500?img=1", price: "18,500 TZS",
+      replies: [
+        "Jambo! 👋 I love African traditions. How do you greet elders respectfully in Swahili?",
+        "Shikamoo! 😄 Wow, and what is the proper response when an elder says 'Marahaba'?",
+        "That is so polite! What is the Swahili word for traditional clothing like Kitenge?",
+        "I love Tanzanian hospitality! ❤️ Can you teach me how to say 'Welcome home' in Swahili?"
+      ]
+    },
+    {
+      id: 102, name: "Kofi Mensah", age: 29, country: "🇬🇭 Ghana", category: "culture", categoryLabel: "Utamaduni", status: "online",
+      bio: "Pan-African historian studying Swahili coastal traditions and Taarab.",
+      image: "https://i.pravatar.cc/500?img=2", price: "19,000 TZS",
+      replies: [
+        "Hello brother! Pan-African roots are strong! How do you say 'Brotherhood' in Swahili?",
+        "Undugu! Exactly! What about 'Unity is strength'?",
+        "Umoja ni Nguvu! Wise words from East Africa! How do I say 'One Love'?",
+        "Upendo mmoja! Asante sana my brother!"
+      ]
+    },
+    {
+      id: 103, name: "Pierre Dubois", age: 31, country: "🇫🇷 France", category: "culture", categoryLabel: "Utamaduni", status: "typing",
+      bio: "Musicology researcher fascinated by traditional drums and dances.",
+      image: "https://i.pravatar.cc/500?img=3", price: "16,000 TZS",
+      replies: [
+        "Bonjour! 😊 We love Swahili music and wedding dances! How do you say 'Traditional dance'?",
+        "Ngoma za kienyeji! Amazing! How do we say 'Delicious traditional food'?",
+        "Chakula kitamu cha asili! What is 'Ugali and Fish' called in Swahili?",
+        "Wonderful! Swahili culture is so rich and vibrant. Asante sana!"
+      ]
+    },
+    {
+      id: 104, name: "Aminata Diallo", age: 24, country: "🇸🇳 Senegal", category: "culture", categoryLabel: "Utamaduni", status: "online",
+      bio: "Fashion designer researching East African fabric patterns and Kanga sayings.",
+      image: "https://i.pravatar.cc/500?img=5", price: "18,000 TZS",
+      replies: [
+        "Salama! I am visiting Maasai villages. How do I ask 'How are you' in respectful Swahili?",
+        "Habari gani! Perfect. What is the Swahili word for 'Cultural Heritage'?",
+        "Uritithi wa Utamaduni! I am amazed. How do I say 'Thank you for your warmth'?",
+        "Asante kwa ukarimu wako! Swahili language is so melodic!"
+      ]
+    },
+    {
+      id: 105, name: "Klaus Schmidt", age: 34, country: "🇩🇪 Germany", category: "culture", categoryLabel: "Utamaduni", status: "offline",
+      bio: "Museum curator documenting Stone Town architecture and ancient ruins.",
+      image: "https://i.pravatar.cc/500?img=6", price: "17,000 TZS",
+      replies: [
+        "Guten Tag! I am researching Swahili history in Stone Town. What is 'Historical Museum' in Swahili?",
+        "Makumbusho ya Historia! Great! How do I ask 'Who constructed this castle'?",
+        "Nani alijenga jengo hili? Perfect grammar! What is 'Ancient artifacts'?",
+        "Vitu vya kale! Thank you, you are a great language partner!"
+      ]
+    },
+    {
+      id: 106, name: "Sofia Rossi", age: 27, country: "🇮🇹 Italy", category: "culture", categoryLabel: "Utamaduni", status: "online",
+      bio: "Art collector interested in Makonde wood carvings and handmade beads.",
+      image: "https://i.pravatar.cc/500?img=9", price: "15,500 TZS",
+      replies: [
+        "Ciao! I love Tanzanian handicrafts and wood carvings! How do I say 'Makonde Carvings'?",
+        "Kinyago cha Makonde! Nice! How do I negotiate price gently in a local market?",
+        "Naomba unipe punguzo! Haha love it! What is 'Handmade jewelry'?",
+        "Mapambo ya mikono! Swahili people are so creative!"
+      ]
+    },
+    {
+      id: 107, name: "Charlotte Smith", age: 25, country: "🇬🇧 UK", category: "culture", categoryLabel: "Utamaduni", status: "typing",
+      bio: "Cultural blogger attending local weddings and storytelling festivals.",
+      image: "https://i.pravatar.cc/500?img=10", price: "20,000 TZS",
+      replies: [
+        "Hello! I want to attend a Swahili wedding! What is 'Bride' and 'Groom' in Swahili?",
+        "Bibi harusi na Bwana harusi! Splendid! What is 'Wedding celebration'?",
+        "Sherehe ya harusi! What do guests shout during celebrations?",
+        "Vigelegele! Haha that sounds amazing! Can't wait!"
+      ]
+    },
+    {
+      id: 108, name: "Lars Lindqvist", age: 32, country: "🇸🇪 Sweden", category: "culture", categoryLabel: "Utamaduni", status: "offline",
+      bio: "Linguist studying Afro-Asiatic and Bantu language roots.",
+      image: "https://i.pravatar.cc/500?img=11", price: "16,500 TZS",
+      replies: [
+        "Hej! I am listening to Taarab music! How do you say 'Poetic song' in Swahili?",
+        "Wimbo wa ushairi! Amazing! How do I ask 'Who is the singer'?",
+        "Nani mwimbaji? Excellent! What is 'Sweet melody'?",
+        "Sauti tamu! Swahili culture is truly rich."
+      ]
+    },
+
+    // 🦁 2. WANYAMA (ANIMALS)
+    {
+      id: 201, name: "Markus Weber", age: 30, country: "🇩🇪 Germany", category: "animals", categoryLabel: "Wanyama", status: "online",
+      bio: "Wild animal lover tracking lions and big cats in Serengeti.",
+      image: "https://i.pravatar.cc/500?img=12", price: "15,000 TZS",
+      replies: [
+        "Hallo! 👋 I am coming for a Safari in Serengeti! How do you say 'Lion' and 'Elephant' in Swahili?",
+        "Simba and Tembo! 😄 Super cool! What about 'Cheetah' and 'Giraffe'?",
+        "Duma and Twiga! I love wildlife! How do I ask the guide 'Where are the wild animals?'",
+        "Wako wapi wanyama! Perfect! 🦁 I can't wait to see the Big Five!"
+      ]
+    },
+    {
+      id: 202, name: "Zuri Okafor", age: 28, country: "🇳🇬 Nigeria", category: "animals", categoryLabel: "Wanyama", status: "typing",
+      bio: "Wildlife documentary creator filming Wildebeest Migration.",
+      image: "https://i.pravatar.cc/500?img=13", price: "18,500 TZS",
+      replies: [
+        "Hey! 👋 Safari lover here! What is 'Hippopotamus' and 'Rhinoceros' in Swahili?",
+        "Kiboko na Faru! Brilliant! How do you say 'The animals are migrating'?",
+        "Wanyama wanahama! Awesome. What about 'Crocodile in the river'?",
+        "Mamba mtoni! Asante, now I sound like a local guide!"
+      ]
+    },
+
+    // 🌿 3. ASILI (NATURE)
+    {
+      id: 301, name: "Elena Rostova", age: 28, country: "🇬🇧 UK", category: "nature", categoryLabel: "Asili", status: "online",
+      bio: "Eco-tourist hiking through pristine African natural reserves.",
+      image: "https://i.pravatar.cc/500?img=23", price: "20,000 TZS",
+      replies: [
+        "Hello there! 🌿 How do you say 'Fresh air and beautiful scenery' in Swahili?",
+        "Hawa safi na mazingira mazuri! Wow! How do I say 'I love nature'?",
+        "Ninapenda asili! Did I say it right? What is 'Sunset over the ocean'?",
+        "Machweo ya jua baharini! That sounds so poetic. Tanzania's nature is unreal!"
+      ]
+    },
+
+    // 🌴 4. MIMEA (VEGETATION)
+    {
+      id: 401, name: "Mateo Silva", age: 31, country: "🇧🇷 Brazil", category: "vegetation", categoryLabel: "Mimea", status: "online",
+      bio: "Tropical botanist studying ancient Baobab trees & spice plants.",
+      image: "https://i.pravatar.cc/500?img=31", price: "19,000 TZS",
+      replies: [
+        "Ola! 🇧🇷 I am a botanist coming to study Baobab trees & tropical forests! What is Baobab in Swahili?",
+        "Mbuyu! 🌳 Wow! And what is the general word for 'Big Forest' and 'Green Trees'?",
+        "Msitu mkubwa na Miti ya kijani! Perfect! What about 'Zanzibar Spices' like Cloves?",
+        "Karafuu na Mdalasini! Incredible! I am going to buy lots of spices in Spice Island!"
+      ]
+    },
+
+    // 🏔️ 5. MILIMA (MOUNTAINS)
+    {
+      id: 501, name: "Liam O'Connor", age: 28, country: "🇦🇺 Australia", category: "mountains", categoryLabel: "Milima", status: "online",
+      bio: "Extreme climber aiming for Mt. Kilimanjaro Uhuru Peak.",
+      image: "https://i.pravatar.cc/500?img=41", price: "18,000 TZS",
+      replies: [
+        "G'day mate! 🦘 I am climbing Mt. Kilimanjaro next month! What is the famous phrase used on mountain trails?",
+        "Pole pole! 🏔️ Yes! 'Slowly slowly'! How do I say 'We reached the peak of the mountain'?",
+        "Tumefika kileleni! What is 'Mount Meru' and 'Snow on the mountain' in Swahili?",
+        "Barafu mlimani! Cheers mate, now I feel prepared to conquer Uhuru Peak!"
+      ]
+    },
+
+    // 🌊 6. MAPOROMOKO (WATERFALLS)
+    {
+      id: 601, name: "Ese Oghene", age: 29, country: "🇳🇬 Nigeria", category: "waterfalls", categoryLabel: "Maporomoko", status: "online",
+      bio: "Travel influencer swimming in natural waterfall plunge pools.",
+      image: "https://i.pravatar.cc/500?img=51", price: "19,000 TZS",
+      replies: [
+        "How far bro! What do Swahili people call 'Huge roaring waterfall'?",
+        "Poromoko kubwa la maji yanayorindima! Odogwu Swahili! What about 'River bank picnic'?",
+        "Pikiniki kando ya mto! Sharp sharp bro, Swahili is lit!"
+      ]
+    }
+];
+
+let activeProfile=null, userMessages=0, botTimer=null;
+
+function money(n){return Number(n||0).toLocaleString()+" TZS"}
+function getBalance(){return Number(localStorage.getItem(BALANCE_KEY)||0)}
+function updateBalance(){const b=getBalance();document.getElementById("currentBalance").textContent=money(b);document.getElementById("totalBalance").textContent=money(b)}
+updateBalance();
+
+function renderProfiles(list){
+ const box=document.getElementById("cards"); box.innerHTML="";
+ list.forEach(p=>{
+   const online=p.status!=="offline";
+   const el=document.createElement("article"); el.className="user-card";
+   el.innerHTML=`
+    <div class="user-top">
+      <div class="avatar-wrap"><img class="avatar" src="${p.image}" alt="${p.name}" loading="lazy">${online?'<span class="status-dot"></span>':''}</div>
+      <div class="user-info">
+        <h3>${p.name}, ${p.age}</h3>
+        <p>${p.country} · <span class="${online?'online-text':''}">${p.status}</span></p>
+        <span class="topic">${p.categoryLabel}</span>
+      </div>
+    </div>
+    <div style="font-size:10px;color:#aeb9b2;line-height:1.5">${p.bio}</div>
+    <div class="card-actions">
+      <button class="btn chat-btn" onclick="openChat(${p.id})">💬 Chat</button>
+      <a class="btn call-btn" href="${REGISTRATION_URL}" target="_blank">📞 Voice</a>
+      <a class="btn video-btn" href="${REGISTRATION_URL}" target="_blank">🎥 Video</a>
+    </div>`;
+   box.appendChild(el);
+ });
+}
+function filterProfiles(cat,btn){
+ document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));btn.classList.add("active");
+ renderProfiles(cat==="all"?profiles:profiles.filter(p=>p.category===cat));
+}
+renderProfiles(profiles);
+
+function openChat(id){
+ activeProfile=profiles.find(p=>p.id===id); userMessages=0;
+ document.getElementById("chatAvatar").src=activeProfile.image;
+ document.getElementById("chatName").textContent=activeProfile.name;
+ document.getElementById("chatStatus").textContent=activeProfile.status==="typing"?"● anaandika...":"● Online";
+ document.getElementById("msgCount").textContent="0";
+ document.getElementById("chatBody").innerHTML='<div class="typing" id="typing"><i></i><i></i><i></i></div>';
+ document.getElementById("chatFoot").style.display="block";
+ document.getElementById("chatLock").classList.remove("show");
+ document.getElementById("chatModal").classList.add("show");
+ document.body.style.overflow="hidden";
+ setTimeout(()=>sendBot(activeProfile.replies[0],700),300);
+ setTimeout(()=>document.getElementById("chatInput").focus(),350);
+}
+function closeChat(){document.getElementById("chatModal").classList.remove("show");document.body.style.overflow="";clearTimeout(botTimer)}
+function addMessage(text,type){
+ const body=document.getElementById("chatBody"),typing=document.getElementById("typing");
+ const d=document.createElement("div");d.className="msg "+(type==="user"?"me":"bot");d.textContent=text;body.insertBefore(d,typing);body.scrollTop=body.scrollHeight;
+}
+function sendBot(text,delay){
+ const typing=document.getElementById("typing"),status=document.getElementById("chatStatus");
+ if(!typing)return;typing.classList.add("show");status.textContent="● anaandika...";
+ botTimer=setTimeout(()=>{typing.classList.remove("show");status.textContent="● Online";addMessage(text,"bot")},delay);
+}
+function sendMessage(){
+ const input=document.getElementById("chatInput"),text=input.value.trim();
+ if(!text||!activeProfile)return;
+ if(userMessages>=2)return;
+ addMessage(text,"user");input.value="";userMessages++;
+ document.getElementById("msgCount").textContent=userMessages;
+ if(userMessages===1){
+   sendBot(activeProfile.replies[1]||"Asante! Nimefurahi kuzungumza nawe 😊",1200);
+ }else if(userMessages===2){
+   sendBot(activeProfile.replies[2]||"Ningependa kuendelea na mazungumzo yetu!",1300);
+   setTimeout(checkAccount,3600);
+ }
+}
+function checkAccount(){
+ document.getElementById("chatFoot").style.display="none";
+ document.getElementById("chatLock").classList.add("show");
+ document.getElementById("checking").innerHTML='<span class="spinner"></span> Inakagua Account yako...';
+ document.getElementById("lockTitle").textContent="Inakagua Account yako";
+ setTimeout(()=>{
+   const hasAccount=localStorage.getItem(ACCOUNT_KEY)==="true";
+   if(hasAccount){
+     document.getElementById("chatLock").classList.remove("show");
+     document.getElementById("chatFoot").style.display="block";
+     document.getElementById("chatStatus").textContent="● Account verified";
+     addMessage("Account yako imethibitishwa. Tunaendelea na mazungumzo 😊","bot");
+     document.getElementById("checking").innerHTML="✓ Account imethibitishwa";
+   }else{
+     document.getElementById("checking").innerHTML="⚠ Account haijathibitishwa";
+     document.getElementById("lockTitle").textContent="Huna Account Inayofanya Kazi";
+     document.getElementById("lockText").textContent="Umetuma jumbe mbili. Ili uendelee kuchat na "+activeProfile.name+", fungua Account yako kwanza. Link ya kujiunga ni ile ile ya Kozenasite.";
+   }
+ },1500);
+}
+document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendMessage()});
+
+function openSupport(){document.getElementById("supportModal").classList.add("show")}
+function closeSupport(){document.getElementById("supportModal").classList.remove("show")}
+function openWithdraw(){document.getElementById("withdrawModal").classList.add("show")}
+function closeWithdraw(){document.getElementById("withdrawModal").classList.remove("show")}
+
+const names=["Amani M.","Neema J.","Baraka K.","Hussein S.","Gladys P.","Rashid A.","Mary W.","Kelvin B."];
+function addTx(){
+ const t=document.getElementById("ticker"),n=names[Math.floor(Math.random()*names.length)],a=(Math.floor(Math.random()*7)+2)*18500;
+ const d=document.createElement("div");d.className="tx";d.innerHTML=`🟢 <strong>${n}</strong> ametoka kutoa <strong>${a.toLocaleString()} TZS</strong> · Hivi sasa`;
+ t.prepend(d);while(t.children.length>5)t.lastChild.remove();
+}
+for(let i=0;i<3;i++)addTx();setInterval(addTx,3200);
+
+let online=28450;setInterval(()=>{online+=Math.random()>.5?Math.floor(Math.random()*8): -Math.floor(Math.random()*5);document.getElementById("onlineCount").textContent=online.toLocaleString()},4000);
+document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")}));
+</script>
+</body>
+</html>
