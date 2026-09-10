@@ -343,310 +343,1736 @@ footer a{color:var(--gold)}
   </div>
 </div>
 
+```html
 <script>
+/* ============================================================
+   UTALIICHAT V2
+   50 TOURISTS
+   MAJORITY EUROPEAN / AMERICAN / AUSTRALIAN
+   PAGINATION: 20 + 20 + 10
+============================================================ */
+
 const REGISTRATION_URL="https://moxeraagencies.com/register?ref=Medison205";
 const BALANCE_KEY="utaliichat_layout_balance";
 const ACCOUNT_KEY="utaliichat_account";
+
+const PROFILES_PER_PAGE=20;
+
+let activeCategory="all";
+let currentPage=1;
+let activeProfile=null;
+let userMessages=0;
+let botTimer=null;
+
+
+/* ============================================================
+   50 TOURIST PROFILES
+============================================================ */
+
 const profiles=[
 
-    // 🎭 1. UTAMADUNI (CULTURE)
-    {
-      id: 101, name: "Jessica Miller", age: 26, country: "🇺🇸 USA", category: "culture", categoryLabel: "Utamaduni", status: "online",
-      bio: "Culture enthusiast & travel photographer exploring Maasai heritage.",
-      image: "https://i.pravatar.cc/500?img=1", price: "18,500 TZS",
-      replies: [
-        "Jambo! 👋 I love African traditions. How do you greet elders respectfully in Swahili?",
-        "Shikamoo! 😄 Wow, and what is the proper response when an elder says 'Marahaba'?",
-        "That is so polite! What is the Swahili word for traditional clothing like Kitenge?",
-        "I love Tanzanian hospitality! ❤️ Can you teach me how to say 'Welcome home' in Swahili?"
-      ]
-    },
-    {
-      id: 102, name: "Kofi Mensah", age: 29, country: "🇬🇭 Ghana", category: "culture", categoryLabel: "Utamaduni", status: "online",
-      bio: "Pan-African historian studying Swahili coastal traditions and Taarab.",
-      image: "https://i.pravatar.cc/500?img=2", price: "19,000 TZS",
-      replies: [
-        "Hello brother! Pan-African roots are strong! How do you say 'Brotherhood' in Swahili?",
-        "Undugu! Exactly! What about 'Unity is strength'?",
-        "Umoja ni Nguvu! Wise words from East Africa! How do I say 'One Love'?",
-        "Upendo mmoja! Asante sana my brother!"
-      ]
-    },
-    {
-      id: 103, name: "Pierre Dubois", age: 31, country: "🇫🇷 France", category: "culture", categoryLabel: "Utamaduni", status: "typing",
-      bio: "Musicology researcher fascinated by traditional drums and dances.",
-      image: "https://i.pravatar.cc/500?img=3", price: "16,000 TZS",
-      replies: [
-        "Bonjour! 😊 We love Swahili music and wedding dances! How do you say 'Traditional dance'?",
-        "Ngoma za kienyeji! Amazing! How do we say 'Delicious traditional food'?",
-        "Chakula kitamu cha asili! What is 'Ugali and Fish' called in Swahili?",
-        "Wonderful! Swahili culture is so rich and vibrant. Asante sana!"
-      ]
-    },
-    {
-      id: 104, name: "Aminata Diallo", age: 24, country: "🇸🇳 Senegal", category: "culture", categoryLabel: "Utamaduni", status: "online",
-      bio: "Fashion designer researching East African fabric patterns and Kanga sayings.",
-      image: "https://i.pravatar.cc/500?img=5", price: "18,000 TZS",
-      replies: [
-        "Salama! I am visiting Maasai villages. How do I ask 'How are you' in respectful Swahili?",
-        "Habari gani! Perfect. What is the Swahili word for 'Cultural Heritage'?",
-        "Uritithi wa Utamaduni! I am amazed. How do I say 'Thank you for your warmth'?",
-        "Asante kwa ukarimu wako! Swahili language is so melodic!"
-      ]
-    },
-    {
-      id: 105, name: "Klaus Schmidt", age: 34, country: "🇩🇪 Germany", category: "culture", categoryLabel: "Utamaduni", status: "offline",
-      bio: "Museum curator documenting Stone Town architecture and ancient ruins.",
-      image: "https://i.pravatar.cc/500?img=6", price: "17,000 TZS",
-      replies: [
-        "Guten Tag! I am researching Swahili history in Stone Town. What is 'Historical Museum' in Swahili?",
-        "Makumbusho ya Historia! Great! How do I ask 'Who constructed this castle'?",
-        "Nani alijenga jengo hili? Perfect grammar! What is 'Ancient artifacts'?",
-        "Vitu vya kale! Thank you, you are a great language partner!"
-      ]
-    },
-    {
-      id: 106, name: "Sofia Rossi", age: 27, country: "🇮🇹 Italy", category: "culture", categoryLabel: "Utamaduni", status: "online",
-      bio: "Art collector interested in Makonde wood carvings and handmade beads.",
-      image: "https://i.pravatar.cc/500?img=9", price: "15,500 TZS",
-      replies: [
-        "Ciao! I love Tanzanian handicrafts and wood carvings! How do I say 'Makonde Carvings'?",
-        "Kinyago cha Makonde! Nice! How do I negotiate price gently in a local market?",
-        "Naomba unipe punguzo! Haha love it! What is 'Handmade jewelry'?",
-        "Mapambo ya mikono! Swahili people are so creative!"
-      ]
-    },
-    {
-      id: 107, name: "Charlotte Smith", age: 25, country: "🇬🇧 UK", category: "culture", categoryLabel: "Utamaduni", status: "typing",
-      bio: "Cultural blogger attending local weddings and storytelling festivals.",
-      image: "https://i.pravatar.cc/500?img=10", price: "20,000 TZS",
-      replies: [
-        "Hello! I want to attend a Swahili wedding! What is 'Bride' and 'Groom' in Swahili?",
-        "Bibi harusi na Bwana harusi! Splendid! What is 'Wedding celebration'?",
-        "Sherehe ya harusi! What do guests shout during celebrations?",
-        "Vigelegele! Haha that sounds amazing! Can't wait!"
-      ]
-    },
-    {
-      id: 108, name: "Lars Lindqvist", age: 32, country: "🇸🇪 Sweden", category: "culture", categoryLabel: "Utamaduni", status: "offline",
-      bio: "Linguist studying Afro-Asiatic and Bantu language roots.",
-      image: "https://i.pravatar.cc/500?img=11", price: "16,500 TZS",
-      replies: [
-        "Hej! I am listening to Taarab music! How do you say 'Poetic song' in Swahili?",
-        "Wimbo wa ushairi! Amazing! How do I ask 'Who is the singer'?",
-        "Nani mwimbaji? Excellent! What is 'Sweet melody'?",
-        "Sauti tamu! Swahili culture is truly rich."
-      ]
-    },
+/* =========================
+   🎭 CULTURE
+========================= */
 
-    // 🦁 2. WANYAMA (ANIMALS)
-    {
-      id: 201, name: "Markus Weber", age: 30, country: "🇩🇪 Germany", category: "animals", categoryLabel: "Wanyama", status: "online",
-      bio: "Wild animal lover tracking lions and big cats in Serengeti.",
-      image: "https://i.pravatar.cc/500?img=12", price: "15,000 TZS",
-      replies: [
-        "Hallo! 👋 I am coming for a Safari in Serengeti! How do you say 'Lion' and 'Elephant' in Swahili?",
-        "Simba and Tembo! 😄 Super cool! What about 'Cheetah' and 'Giraffe'?",
-        "Duma and Twiga! I love wildlife! How do I ask the guide 'Where are the wild animals?'",
-        "Wako wapi wanyama! Perfect! 🦁 I can't wait to see the Big Five!"
-      ]
-    },
-    {
-      id: 202, name: "Zuri Okafor", age: 28, country: "🇳🇬 Nigeria", category: "animals", categoryLabel: "Wanyama", status: "typing",
-      bio: "Wildlife documentary creator filming Wildebeest Migration.",
-      image: "https://i.pravatar.cc/500?img=13", price: "18,500 TZS",
-      replies: [
-        "Hey! 👋 Safari lover here! What is 'Hippopotamus' and 'Rhinoceros' in Swahili?",
-        "Kiboko na Faru! Brilliant! How do you say 'The animals are migrating'?",
-        "Wanyama wanahama! Awesome. What about 'Crocodile in the river'?",
-        "Mamba mtoni! Asante, now I sound like a local guide!"
-      ]
-    },
+{
+ id:101,
+ name:"Emma Wilson",
+ age:26,
+ country:"🇬🇧 UK",
+ category:"culture",
+ categoryLabel:"Utamaduni",
+ status:"online",
+ bio:"Travel photographer exploring Maasai heritage, local traditions and Tanzanian culture.",
+ image:"https://i.pravatar.cc/500?img=1",
+ price:"18,500 TZS",
+ replies:[
+  "Hello! 👋 I am fascinated by Tanzanian culture. How do I greet an elder respectfully in Swahili?",
+  "Shikamoo! 😊 And what is the proper response when someone says Shikamoo?",
+  "Marahaba! I love learning this. What does 'karibu' mean in different situations?",
+  "Thank you! Swahili culture is beautiful."
+ ]
+},
 
-    // 🌿 3. ASILI (NATURE)
-    {
-      id: 301, name: "Elena Rostova", age: 28, country: "🇬🇧 UK", category: "nature", categoryLabel: "Asili", status: "online",
-      bio: "Eco-tourist hiking through pristine African natural reserves.",
-      image: "https://i.pravatar.cc/500?img=23", price: "20,000 TZS",
-      replies: [
-        "Hello there! 🌿 How do you say 'Fresh air and beautiful scenery' in Swahili?",
-        "Hawa safi na mazingira mazuri! Wow! How do I say 'I love nature'?",
-        "Ninapenda asili! Did I say it right? What is 'Sunset over the ocean'?",
-        "Machweo ya jua baharini! That sounds so poetic. Tanzania's nature is unreal!"
-      ]
-    },
+{
+ id:102,
+ name:"Daniel Carter",
+ age:29,
+ country:"🇺🇸 USA",
+ category:"culture",
+ categoryLabel:"Utamaduni",
+ status:"online",
+ bio:"American traveler interested in African history, traditional communities and local stories.",
+ image:"https://i.pravatar.cc/500?img=3",
+ price:"19,000 TZS",
+ replies:[
+  "Hi! 👋 I want to understand more about Tanzanian traditions. Where should I start?",
+  "That is really interesting! How do you say 'traditional culture' in Swahili?",
+  "Utamaduni wa asili! Nice. Can you teach me another useful phrase?",
+  "Awesome! I am learning something new every minute."
+ ]
+},
 
-    // 🌴 4. MIMEA (VEGETATION)
-    {
-      id: 401, name: "Mateo Silva", age: 31, country: "🇧🇷 Brazil", category: "vegetation", categoryLabel: "Mimea", status: "online",
-      bio: "Tropical botanist studying ancient Baobab trees & spice plants.",
-      image: "https://i.pravatar.cc/500?img=31", price: "19,000 TZS",
-      replies: [
-        "Ola! 🇧🇷 I am a botanist coming to study Baobab trees & tropical forests! What is Baobab in Swahili?",
-        "Mbuyu! 🌳 Wow! And what is the general word for 'Big Forest' and 'Green Trees'?",
-        "Msitu mkubwa na Miti ya kijani! Perfect! What about 'Zanzibar Spices' like Cloves?",
-        "Karafuu na Mdalasini! Incredible! I am going to buy lots of spices in Spice Island!"
-      ]
-    },
+{
+ id:103,
+ name:"Sophie Martin",
+ age:24,
+ country:"🇫🇷 France",
+ category:"culture",
+ categoryLabel:"Utamaduni",
+ status:"typing",
+ bio:"French cultural explorer interested in Swahili music, food and traditional celebrations.",
+ image:"https://i.pravatar.cc/500?img=5",
+ price:"17,500 TZS",
+ replies:[
+  "Bonjour! 😊 I love Tanzanian culture. What is the Swahili word for traditional dance?",
+  "Ngoma! Amazing. What about traditional Tanzanian food?",
+  "Chakula cha asili! I definitely want to try it.",
+  "Thank you! I am enjoying learning Swahili."
+ ]
+},
 
-    // 🏔️ 5. MILIMA (MOUNTAINS)
-    {
-      id: 501, name: "Liam O'Connor", age: 28, country: "🇦🇺 Australia", category: "mountains", categoryLabel: "Milima", status: "online",
-      bio: "Extreme climber aiming for Mt. Kilimanjaro Uhuru Peak.",
-      image: "https://i.pravatar.cc/500?img=41", price: "18,000 TZS",
-      replies: [
-        "G'day mate! 🦘 I am climbing Mt. Kilimanjaro next month! What is the famous phrase used on mountain trails?",
-        "Pole pole! 🏔️ Yes! 'Slowly slowly'! How do I say 'We reached the peak of the mountain'?",
-        "Tumefika kileleni! What is 'Mount Meru' and 'Snow on the mountain' in Swahili?",
-        "Barafu mlimani! Cheers mate, now I feel prepared to conquer Uhuru Peak!"
-      ]
-    },
+{
+ id:104,
+ name:"Oliver Brown",
+ age:31,
+ country:"🇬🇧 UK",
+ category:"culture",
+ categoryLabel:"Utamaduni",
+ status:"online",
+ bio:"History enthusiast visiting East Africa and studying Swahili coastal traditions.",
+ image:"https://i.pravatar.cc/500?img=8",
+ price:"20,000 TZS",
+ replies:[
+  "Hello! I am researching Swahili coastal history. Can you teach me a few phrases?",
+  "That makes sense! How do I say 'old town' in Swahili?",
+  "Mji wa zamani! Perfect. What about 'historical building'?",
+  "This is exactly the kind of language practice I wanted."
+ ]
+},
 
-    // 🌊 6. MAPOROMOKO (WATERFALLS)
-    {
-      id: 601, name: "Ese Oghene", age: 29, country: "🇳🇬 Nigeria", category: "waterfalls", categoryLabel: "Maporomoko", status: "online",
-      bio: "Travel influencer swimming in natural waterfall plunge pools.",
-      image: "https://i.pravatar.cc/500?img=51", price: "19,000 TZS",
-      replies: [
-        "How far bro! What do Swahili people call 'Huge roaring waterfall'?",
-        "Poromoko kubwa la maji yanayorindima! Odogwu Swahili! What about 'River bank picnic'?",
-        "Pikiniki kando ya mto! Sharp sharp bro, Swahili is lit!"
-      ]
-    }
+{
+ id:105,
+ name:"Anna Schmidt",
+ age:28,
+ country:"🇩🇪 Germany",
+ category:"culture",
+ categoryLabel:"Utamaduni",
+ status:"online",
+ bio:"Museum lover fascinated by Stone Town architecture, history and Swahili heritage.",
+ image:"https://i.pravatar.cc/500?img=9",
+ price:"18,000 TZS",
+ replies:[
+  "Hallo! 👋 I love history and architecture. What does 'museum' mean in Swahili?",
+  "Makumbusho! Great word. How do I ask where the museum is?",
+  "Makumbusho iko wapi? Nice! I am getting better.",
+  "Asante sana for helping me!"
+ ]
+},
+
+{
+ id:106,
+ name:"Lucas Rossi",
+ age:27,
+ country:"🇮🇹 Italy",
+ category:"culture",
+ categoryLabel:"Utamaduni",
+ status:"online",
+ bio:"Italian art lover interested in Makonde carvings, Tanzanian fashion and handmade crafts.",
+ image:"https://i.pravatar.cc/500?img=11",
+ price:"16,500 TZS",
+ replies:[
+  "Ciao! 🇮🇹 I love Tanzanian art. What are Makonde carvings called?",
+  "Kinyago cha Makonde! Beautiful. How do I politely ask for a lower price?",
+  "Naomba unipe punguzo! 😄 I will remember that.",
+  "Thank you! Tanzanian craftsmanship is incredible."
+ ]
+},
+
+{
+ id:107,
+ name:"Charlotte Evans",
+ age:25,
+ country:"🇬🇧 UK",
+ category:"culture",
+ categoryLabel:"Utamaduni",
+ status:"online",
+ bio:"Lifestyle blogger exploring Tanzanian weddings, storytelling and traditional celebrations.",
+ image:"https://i.pravatar.cc/500?img=10",
+ price:"20,000 TZS",
+ replies:[
+  "Hello! I want to understand Tanzanian weddings better. What is bride in Swahili?",
+  "Bibi harusi! And what about groom?",
+  "Bwana harusi! Perfect. I am learning quickly.",
+  "This is so much fun. Asante!"
+ ]
+},
+
+{
+ id:108,
+ name:"Nicolas Laurent",
+ age:32,
+ country:"🇫🇷 France",
+ category:"culture",
+ categoryLabel:"Utamaduni",
+ status:"offline",
+ bio:"Language enthusiast studying Swahili expressions, poetry and coastal culture.",
+ image:"https://i.pravatar.cc/500?img=12",
+ price:"17,000 TZS",
+ replies:[
+  "Salut! 😊 I am studying Swahili expressions. Can you teach me a poetic phrase?",
+  "That sounds beautiful. How do I say 'beautiful ocean'?",
+  "Bahari nzuri! Wonderful.",
+  "Swahili sounds very poetic."
+ ]
+},
+
+/* =========================
+   🦁 ANIMALS
+========================= */
+
+{
+ id:201,
+ name:"James Anderson",
+ age:30,
+ country:"🇺🇸 USA",
+ category:"animals",
+ categoryLabel:"Wanyama",
+ status:"online",
+ bio:"Wildlife lover planning a Serengeti safari and hoping to see the Big Five.",
+ image:"https://i.pravatar.cc/500?img=13",
+ price:"19,500 TZS",
+ replies:[
+  "Hello! 🦁 I am coming to Tanzania for a safari. How do you say lion in Swahili?",
+  "Simba! Perfect. And elephant?",
+  "Tembo! Great. What about cheetah?",
+  "Duma! I am ready for my safari!"
+ ]
+},
+
+{
+ id:202,
+ name:"Michael Johnson",
+ age:34,
+ country:"🇬🇧 UK",
+ category:"animals",
+ categoryLabel:"Wanyama",
+ status:"typing",
+ bio:"Nature documentary fan dreaming of seeing lions, elephants and wildebeest in Tanzania.",
+ image:"https://i.pravatar.cc/500?img=14",
+ price:"18,500 TZS",
+ replies:[
+  "Hi! 👋 Wildlife is my biggest passion. How do I say elephant?",
+  "Tembo! Nice. What about giraffe?",
+  "Twiga! I love that word.",
+  "Thank you! Tanzania looks amazing."
+ ]
+},
+
+{
+ id:203,
+ name:"Lena Müller",
+ age:27,
+ country:"🇩🇪 Germany",
+ category:"animals",
+ categoryLabel:"Wanyama",
+ status:"online",
+ bio:"Wildlife photographer visiting Tanzania to photograph big cats and elephants.",
+ image:"https://i.pravatar.cc/500?img=16",
+ price:"20,000 TZS",
+ replies:[
+  "Hallo! 📷 I am a wildlife photographer. How do I ask where the lions are?",
+  "Simba wako wapi? Excellent!",
+  "And how do I say 'beautiful animal'?",
+  "Mnyama mzuri! Perfect."
+ ]
+},
+
+{
+ id:204,
+ name:"Thomas Evans",
+ age:29,
+ country:"🇬🇧 UK",
+ category:"animals",
+ categoryLabel:"Wanyama",
+ status:"online",
+ bio:"Safari enthusiast fascinated by Tanzania's national parks and wildlife conservation.",
+ image:"https://i.pravatar.cc/500?img=17",
+ price:"18,000 TZS",
+ replies:[
+  "Hello! I am planning a safari. What is the Swahili word for wildlife?",
+  "Wanyamapori! Great. And national park?",
+  "Hifadhi ya taifa. Amazing.",
+  "I am learning useful safari phrases."
+ ]
+},
+
+{
+ id:205,
+ name:"Sophie Anderson",
+ age:26,
+ country:"🇨🇦 Canada",
+ category:"animals",
+ categoryLabel:"Wanyama",
+ status:"online",
+ bio:"Canadian traveler passionate about elephants, giraffes and wildlife conservation.",
+ image:"https://i.pravatar.cc/500?img=18",
+ price:"19,000 TZS",
+ replies:[
+  "Hi! 🐘 I love elephants. How do I say 'big elephant'?",
+  "Tembo mkubwa! Nice. What is giraffe?",
+  "Twiga! I love how Swahili words sound.",
+  "Thank you for teaching me!"
+ ]
+},
+
+{
+ id:206,
+ name:"David Weber",
+ age:33,
+ country:"🇩🇪 Germany",
+ category:"animals",
+ categoryLabel:"Wanyama",
+ status:"offline",
+ bio:"Adventure traveler interested in Serengeti migration and African wildlife.",
+ image:"https://i.pravatar.cc/500?img=19",
+ price:"17,500 TZS",
+ replies:[
+  "Hallo! I want to learn safari vocabulary.",
+  "How do I say 'animals are moving'?",
+  "Wanyama wanahama! Fantastic.",
+  "Now I can impress my safari guide!"
+ ]
+},
+
+{
+ id:207,
+ name:"Emily Taylor",
+ age:24,
+ country:"🇺🇸 USA",
+ category:"animals",
+ categoryLabel:"Wanyama",
+ status:"online",
+ bio:"Travel creator planning her first African safari and learning basic Swahili.",
+ image:"https://i.pravatar.cc/500?img=20",
+ price:"16,500 TZS",
+ replies:[
+  "Hey! 👋 This is my first safari. Teach me a simple Swahili phrase.",
+  "Pole pole! I have heard that one!",
+  "What else should I know?",
+  "Asante sana! I am excited."
+ ]
+},
+
+{
+ id:208,
+ name:"Henry Walker",
+ age:35,
+ country:"🇦🇺 Australia",
+ category:"animals",
+ categoryLabel:"Wanyama",
+ status:"online",
+ bio:"Australian explorer interested in African wildlife, conservation and safari photography.",
+ image:"https://i.pravatar.cc/500?img=21",
+ price:"19,500 TZS",
+ replies:[
+  "G'day! 🦁 I am preparing for a Tanzania safari.",
+  "What does 'wild animal' mean in Swahili?",
+  "Mnyama wa porini! Excellent.",
+  "Cheers! This is very helpful."
+ ]
+},
+
+/* =========================
+   🌿 NATURE
+========================= */
+
+{
+ id:301,
+ name:"Olivia Williams",
+ age:28,
+ country:"🇬🇧 UK",
+ category:"nature",
+ categoryLabel:"Asili",
+ status:"online",
+ bio:"Eco-traveler hiking through Tanzania's forests, beaches and natural reserves.",
+ image:"https://i.pravatar.cc/500?img=23",
+ price:"20,000 TZS",
+ replies:[
+  "Hello! 🌿 I love nature. How do I say 'I love nature' in Swahili?",
+  "Ninapenda asili! Did I say it correctly?",
+  "Yes! And how do I say beautiful scenery?",
+  "Mazingira mazuri! Thank you!"
+ ]
+},
+
+{
+ id:302,
+ name:"Ethan Moore",
+ age:30,
+ country:"🇺🇸 USA",
+ category:"nature",
+ categoryLabel:"Asili",
+ status:"online",
+ bio:"Outdoor traveler interested in forests, beaches, sunsets and African landscapes.",
+ image:"https://i.pravatar.cc/500?img=24",
+ price:"18,500 TZS",
+ replies:[
+  "Hi! I love African landscapes. How do I say beautiful nature?",
+  "Asili nzuri! Great.",
+  "What is sunset in Swahili?",
+  "Machweo! Beautiful word."
+ ]
+},
+
+{
+ id:303,
+ name:"Clara Fischer",
+ age:26,
+ country:"🇩🇪 Germany",
+ category:"nature",
+ categoryLabel:"Asili",
+ status:"typing",
+ bio:"Hiker exploring Tanzania's natural reserves and mountain landscapes.",
+ image:"https://i.pravatar.cc/500?img=25",
+ price:"17,500 TZS",
+ replies:[
+  "Hallo! 🌿 I enjoy hiking. How do I say 'beautiful mountain'?",
+  "Mlima mzuri! Wonderful.",
+  "What about fresh air?",
+  "Hewa safi! Asante."
+ ]
+},
+
+{
+ id:304,
+ name:"Jack Wilson",
+ age:32,
+ country:"🇬🇧 UK",
+ category:"nature",
+ categoryLabel:"Asili",
+ status:"online",
+ bio:"Adventure traveler exploring Tanzania's national parks, forests and coastline.",
+ image:"https://i.pravatar.cc/500?img=26",
+ price:"19,000 TZS",
+ replies:[
+  "Hello! I want to learn some nature vocabulary.",
+  "How do I say 'forest'?",
+  "Msitu! Nice and simple.",
+  "I am definitely using that on my trip."
+ ]
+},
+
+{
+ id:305,
+ name:"Mia Thompson",
+ age:25,
+ country:"🇺🇸 USA",
+ category:"nature",
+ categoryLabel:"Asili",
+ status:"online",
+ bio:"Travel blogger documenting beautiful landscapes, beaches and sustainable tourism.",
+ image:"https://i.pravatar.cc/500?img=27",
+ price:"18,000 TZS",
+ replies:[
+  "Hey! 🌊 I love beaches and nature. How do I say ocean?",
+  "Bahari! Great.",
+  "And beautiful beach?",
+  "Pwani nzuri! Thank you!"
+ ]
+},
+
+{
+ id:306,
+ name:"Felix Bauer",
+ age:31,
+ country:"🇩🇪 Germany",
+ category:"nature",
+ categoryLabel:"Asili",
+ status:"offline",
+ bio:"European backpacker interested in Tanzania's landscapes and eco-tourism.",
+ image:"https://i.pravatar.cc/500?img=28",
+ price:"16,500 TZS",
+ replies:[
+  "Hallo! I am backpacking through Tanzania.",
+  "What does eco-tourism mean in Swahili?",
+  "Utalii wa mazingira! Great.",
+  "That is exactly what I am interested in."
+ ]
+},
+
+{
+ id:307,
+ name:"Grace Miller",
+ age:29,
+ country:"🇨🇦 Canada",
+ category:"nature",
+ categoryLabel:"Asili",
+ status:"online",
+ bio:"Canadian photographer searching for waterfalls, beaches and unforgettable sunsets.",
+ image:"https://i.pravatar.cc/500?img=29",
+ price:"19,500 TZS",
+ replies:[
+  "Hi! 📷 I am looking for beautiful places to photograph.",
+  "How do I ask 'Where is the beach?'",
+  "Pwani iko wapi? Perfect!",
+  "Thank you!"
+ ]
+},
+
+{
+ id:308,
+ name:"Alexander Scott",
+ age:34,
+ country:"🇬🇧 UK",
+ category:"nature",
+ categoryLabel:"Asili",
+ status:"online",
+ bio:"Landscape photographer fascinated by Tanzania's dramatic natural scenery.",
+ image:"https://i.pravatar.cc/500?img=30",
+ price:"20,000 TZS",
+ replies:[
+  "Hello! I am a landscape photographer.",
+  "How do I say 'beautiful view'?",
+  "Mandhari nzuri! Excellent.",
+  "That phrase will be useful."
+ ]
+},
+
+/* =========================
+   🌴 VEGETATION
+========================= */
+
+{
+ id:401,
+ name:"Mateo Silva",
+ age:31,
+ country:"🇧🇷 Brazil",
+ category:"vegetation",
+ categoryLabel:"Mimea",
+ status:"online",
+ bio:"Tropical botanist studying baobab trees, spice plants and African forests.",
+ image:"https://i.pravatar.cc/500?img=31",
+ price:"19,000 TZS",
+ replies:[
+  "Olá! 🌳 I am studying tropical plants. What is baobab in Swahili?",
+  "Mbuyu! Great. What about forest?",
+  "Msitu! Perfect.",
+  "Thank you! Tanzanian plants are fascinating."
+ ]
+},
+
+{
+ id:402,
+ name:"Isabella Rossi",
+ age:27,
+ country:"🇮🇹 Italy",
+ category:"vegetation",
+ categoryLabel:"Mimea",
+ status:"online",
+ bio:"Botany enthusiast interested in Zanzibar spices and traditional medicinal plants.",
+ image:"https://i.pravatar.cc/500?img=32",
+ price:"18,500 TZS",
+ replies:[
+  "Ciao! 🌿 I love plants and spices.",
+  "How do you say cloves in Swahili?",
+  "Karafuu! Wonderful.",
+  "And cinnamon?",
+  "Mdalasini! Asante!"
+ ]
+},
+
+{
+ id:403,
+ name:"Noah Bennett",
+ age:30,
+ country:"🇬🇧 UK",
+ category:"vegetation",
+ categoryLabel:"Mimea",
+ status:"online",
+ bio:"Nature researcher fascinated by tropical trees and Tanzania's botanical diversity.",
+ image:"https://i.pravatar.cc/500?img=33",
+ price:"17,500 TZS",
+ replies:[
+  "Hello! I am interested in tropical trees.",
+  "How do I say 'green tree'?",
+  "Mti wa kijani! Nice.",
+  "Thank you for teaching me."
+ ]
+},
+
+{
+ id:404,
+ name:"Amelia Clark",
+ age:26,
+ country:"🇺🇸 USA",
+ category:"vegetation",
+ categoryLabel:"Mimea",
+ status:"typing",
+ bio:"Travel lover interested in tropical gardens, flowers and Zanzibar spice farms.",
+ image:"https://i.pravatar.cc/500?img=34",
+ price:"18,000 TZS",
+ replies:[
+  "Hi! 🌺 I love tropical flowers.",
+  "What is flower in Swahili?",
+  "Ua! Easy.",
+  "What about beautiful flower?",
+  "Ua zuri! I love it."
+ ]
+},
+
+{
+ id:405,
+ name:"Jonas Keller",
+ age:33,
+ country:"🇩🇪 Germany",
+ category:"vegetation",
+ categoryLabel:"Mimea",
+ status:"online",
+ bio:"German botanist exploring African forests and traditional plant knowledge.",
+ image:"https://i.pravatar.cc/500?img=35",
+ price:"19,500 TZS",
+ replies:[
+  "Hallo! I study plants and traditional knowledge.",
+  "How do I say medicinal plant?",
+  "Mmea wa dawa! Excellent.",
+  "This language practice is very useful."
+ ]
+},
+
+{
+ id:406,
+ name:"Lucy Harris",
+ age:28,
+ country:"🇬🇧 UK",
+ category:"vegetation",
+ categoryLabel:"Mimea",
+ status:"online",
+ bio:"Eco-traveler interested in tropical forests, flowers and sustainable farming.",
+ image:"https://i.pravatar.cc/500?img=36",
+ price:"16,500 TZS",
+ replies:[
+  "Hello! 🌱 I love sustainable farming.",
+  "How do I say farm?",
+  "Shamba! Great.",
+  "And green farm?",
+  "Shamba la kijani!"
+ ]
+},
+
+{
+ id:407,
+ name:"Ethan Brooks",
+ age:29,
+ country:"🇦🇺 Australia",
+ category:"vegetation",
+ categoryLabel:"Mimea",
+ status:"online",
+ bio:"Australian traveler fascinated by baobab trees, tropical forests and spices.",
+ image:"https://i.pravatar.cc/500?img=37",
+ price:"18,500 TZS",
+ replies:[
+  "G'day! 🌳 Tell me about Tanzanian trees.",
+  "What is baobab called?",
+  "Mbuyu! Awesome.",
+  "I will remember that."
+ ]
+},
+
+/* =========================
+   🏔️ MOUNTAINS
+========================= */
+
+{
+ id:501,
+ name:"Liam O'Connor",
+ age:28,
+ country:"🇮🇪 Ireland",
+ category:"mountains",
+ categoryLabel:"Milima",
+ status:"online",
+ bio:"Mountain climber preparing for Kilimanjaro and the famous Uhuru Peak.",
+ image:"https://i.pravatar.cc/500?img=41",
+ price:"18,000 TZS",
+ replies:[
+  "Hello! 🏔️ I am climbing Kilimanjaro. What phrase should I know?",
+  "Pole pole! Slowly slowly. I love it.",
+  "How do I say 'we reached the summit'?",
+  "Tumefika kileleni! Perfect!"
+ ]
+},
+
+{
+ id:502,
+ name:"William Turner",
+ age:35,
+ country:"🇬🇧 UK",
+ category:"mountains",
+ categoryLabel:"Milima",
+ status:"online",
+ bio:"Experienced hiker planning his Kilimanjaro adventure and learning Swahili.",
+ image:"https://i.pravatar.cc/500?img=42",
+ price:"20,000 TZS",
+ replies:[
+  "Hi! 🏔️ Kilimanjaro is on my bucket list.",
+  "How do I say mountain?",
+  "Mlima! Easy.",
+  "And high mountain?",
+  "Mlima mrefu!"
+ ]
+},
+
+{
+ id:503,
+ name:"Sophia Brown",
+ age:27,
+ country:"🇺🇸 USA",
+ category:"mountains",
+ categoryLabel:"Milima",
+ status:"typing",
+ bio:"Adventure traveler preparing for her first Kilimanjaro climb.",
+ image:"https://i.pravatar.cc/500?img=43",
+ price:"19,000 TZS",
+ replies:[
+  "Hey! I am preparing for Kilimanjaro.",
+  "What does 'pole pole' mean?",
+  "Slowly slowly! Perfect.",
+  "I will definitely need that on the mountain."
+ ]
+},
+
+{
+ id:504,
+ name:"Maximilian Wolf",
+ age:32,
+ country:"🇩🇪 Germany",
+ category:"mountains",
+ categoryLabel:"Milima",
+ status:"online",
+ bio:"German mountaineer fascinated by Kilimanjaro, Meru and African highlands.",
+ image:"https://i.pravatar.cc/500?img=44",
+ price:"18,500 TZS",
+ replies:[
+  "Hallo! 🏔️ I love mountains.",
+  "How do I say snow?",
+  "The word is the same: the context helps!",
+  "Interesting. Thank you!"
+ ]
+},
+
+{
+ id:505,
+ name:"James Cooper",
+ age:30,
+ country:"🇬🇧 UK",
+ category:"mountains",
+ categoryLabel:"Milima",
+ status:"online",
+ bio:"Hiker and adventure photographer planning a Kilimanjaro expedition.",
+ image:"https://i.pravatar.cc/500?img=45",
+ price:"19,500 TZS",
+ replies:[
+  "Hello! 📷 I am photographing Kilimanjaro.",
+  "How do I say summit?",
+  "Kilele! Nice.",
+  "Now I know an important mountain word."
+ ]
+},
+
+{
+ id:506,
+ name:"Emma Johnson",
+ age:26,
+ country:"🇨🇦 Canada",
+ category:"mountains",
+ categoryLabel:"Milima",
+ status:"offline",
+ bio:"Canadian outdoor enthusiast interested in Tanzania's mountain trails.",
+ image:"https://i.pravatar.cc/500?img=46",
+ price:"17,000 TZS",
+ replies:[
+  "Hi! 🏔️ I love hiking.",
+  "How do I say trail?",
+  "Njia! Great.",
+  "Thank you!"
+ ]
+},
+
+{
+ id:507,
+ name:"Leo Martin",
+ age:29,
+ country:"🇫🇷 France",
+ category:"mountains",
+ categoryLabel:"Milima",
+ status:"online",
+ bio:"French adventurer planning Kilimanjaro and learning practical Swahili phrases.",
+ image:"https://i.pravatar.cc/500?img=47",
+ price:"18,500 TZS",
+ replies:[
+  "Bonjour! I am preparing for Kilimanjaro.",
+  "How do I say 'Are you tired?'",
+  "Umechoka? Perfect.",
+  "That will be useful during hiking!"
+ ]
+},
+
+/* =========================
+   🌊 WATERFALLS
+========================= */
+
+{
+ id:601,
+ name:"George Adams",
+ age:31,
+ country:"🇬🇧 UK",
+ category:"waterfalls",
+ categoryLabel:"Maporomoko",
+ status:"online",
+ bio:"Adventure traveler searching for Tanzania's hidden waterfalls and natural swimming spots.",
+ image:"https://i.pravatar.cc/500?img=51",
+ price:"19,000 TZS",
+ replies:[
+  "Hello! 🌊 I love waterfalls. How do I say waterfall in Swahili?",
+  "Maporomoko ya maji! Excellent.",
+  "How do I ask where the waterfall is?",
+  "Maporomoko yako wapi? Great!"
+ ]
+},
+
+{
+ id:602,
+ name:"Daniel Miller",
+ age:28,
+ country:"🇺🇸 USA",
+ category:"waterfalls",
+ categoryLabel:"Maporomoko",
+ status:"typing",
+ bio:"American adventure creator exploring Tanzania's rivers, waterfalls and hiking trails.",
+ image:"https://i.pravatar.cc/500?img=52",
+ price:"18,500 TZS",
+ replies:[
+  "Hey! 🌊 I am looking for amazing waterfalls.",
+  "How do I say river?",
+  "Mto! Simple.",
+  "And river bank?",
+  "Kando ya mto!"
+ ]
+},
+
+{
+ id:603,
+ name:"Hannah Weber",
+ age:25,
+ country:"🇩🇪 Germany",
+ category:"waterfalls",
+ categoryLabel:"Maporomoko",
+ status:"online",
+ bio:"German traveler interested in waterfalls, forests and nature photography.",
+ image:"https://i.pravatar.cc/500?img=53",
+ price:"17,500 TZS",
+ replies:[
+  "Hallo! 📷 I love photographing waterfalls.",
+  "How do I say beautiful waterfall?",
+  "Poromoko zuri! Very nice.",
+  "Thank you!"
+ ]
+},
+
+{
+ id:604,
+ name:"Benjamin Clark",
+ age:33,
+ country:"🇬🇧 UK",
+ category:"waterfalls",
+ categoryLabel:"Maporomoko",
+ status:"online",
+ bio:"Outdoor explorer interested in hidden swimming holes and Tanzanian waterfalls.",
+ image:"https://i.pravatar.cc/500?img=54",
+ price:"19,500 TZS",
+ replies:[
+  "Hello! I am looking for natural swimming places.",
+  "How do I ask if swimming is allowed?",
+  "Naweza kuogelea? Perfect!",
+  "That will be very useful."
+ ]
+},
+
+{
+ id:605,
+ name:"Megan Taylor",
+ age:27,
+ country:"🇺🇸 USA",
+ category:"waterfalls",
+ categoryLabel:"Maporomoko",
+ status:"online",
+ bio:"Travel photographer exploring Tanzania's waterfalls and tropical landscapes.",
+ image:"https://i.pravatar.cc/500?img=55",
+ price:"18,000 TZS",
+ replies:[
+  "Hi! 🌊 Tanzania looks incredible.",
+  "How do I say water?",
+  "Maji! Easy.",
+  "What about cold water?",
+  "Maji baridi!"
+ ]
+},
+
+{
+ id:606,
+ name:"Oliver Fischer",
+ age:30,
+ country:"🇩🇪 Germany",
+ category:"waterfalls",
+ categoryLabel:"Maporomoko",
+ status:"offline",
+ bio:"Backpacker exploring waterfalls, rivers and mountain villages in Tanzania.",
+ image:"https://i.pravatar.cc/500?img=56",
+ price:"16,500 TZS",
+ replies:[
+  "Hallo! I am backpacking through Tanzania.",
+  "What does 'beautiful place' mean?",
+  "Mahali pazuri! Excellent.",
+  "I will use that everywhere."
+ ]
+},
+
+{
+ id:607,
+ name:"William Harris",
+ age:34,
+ country:"🇨🇦 Canada",
+ category:"waterfalls",
+ categoryLabel:"Maporomoko",
+ status:"online",
+ bio:"Canadian outdoor enthusiast searching for scenic waterfalls and hiking destinations.",
+ image:"https://i.pravatar.cc/500?img=57",
+ price:"19,000 TZS",
+ replies:[
+  "Hi! 🥾 I love hiking.",
+  "How do I say 'let's go'?",
+  "Twende! Perfect.",
+  "That one is easy to remember."
+ ]
+},
+
+{
+ id:608,
+ name:"Sophia Evans",
+ age:26,
+ country:"🇬🇧 UK",
+ category:"waterfalls",
+ categoryLabel:"Maporomoko",
+ status:"online",
+ bio:"British travel blogger documenting hidden waterfalls and eco-tourism destinations.",
+ image:"https://i.pravatar.cc/500?img=58",
+ price:"18,500 TZS",
+ replies:[
+  "Hello! I am documenting hidden places in Tanzania.",
+  "How do I say hidden place?",
+  "Mahali palipofichika! Nice.",
+  "Swahili is beautiful."
+ ]
+}
+
 ];
 
-let activeProfile=null, userMessages=0, botTimer=null;
 
-function money(n){return Number(n||0).toLocaleString()+" TZS"}
-function getBalance(){return Number(localStorage.getItem(BALANCE_KEY)||0)}
-function updateBalance(){const b=getBalance();document.getElementById("currentBalance").textContent=money(b);document.getElementById("totalBalance").textContent=money(b)}
+/* ============================================================
+   BALANCE
+============================================================ */
+
+function money(n){
+ return Number(n||0).toLocaleString()+" TZS";
+}
+
+function getBalance(){
+ return Number(localStorage.getItem(BALANCE_KEY)||0);
+}
+
+function updateBalance(){
+ const b=getBalance();
+
+ const current=document.getElementById("currentBalance");
+ const total=document.getElementById("totalBalance");
+
+ if(current)current.textContent=money(b);
+ if(total)total.textContent=money(b);
+}
+
 updateBalance();
 
+
+/* ============================================================
+   TANZANIA DATE
+============================================================ */
+
 function updateTanzaniaDate(){
-  const el=document.getElementById("tzDate");
-  if(!el)return;
-  const now=new Date();
-  const parts=new Intl.DateTimeFormat("en-GB",{
-    timeZone:"Africa/Dar_es_Salaam",
-    day:"2-digit",month:"short",year:"numeric"
-  }).formatToParts(now);
-  const map={}; parts.forEach(p=>map[p.type]=p.value);
-  el.innerHTML=`🇹🇿 <span>📅</span> <b>${map.day} ${map.month} ${map.year}</b>`;
+
+ const el=document.getElementById("tzDate");
+
+ if(!el)return;
+
+ const now=new Date();
+
+ const parts=new Intl.DateTimeFormat("en-GB",{
+  timeZone:"Africa/Dar_es_Salaam",
+  day:"2-digit",
+  month:"short",
+  year:"numeric"
+ }).formatToParts(now);
+
+ const map={};
+
+ parts.forEach(p=>{
+  map[p.type]=p.value;
+ });
+
+ el.innerHTML=
+ `🇹🇿 <span>📅</span> <b>${map.day} ${map.month} ${map.year}</b>`;
 }
+
 updateTanzaniaDate();
 setInterval(updateTanzaniaDate,60000);
 
 
-function renderProfiles(list){
- const box=document.getElementById("cards"); box.innerHTML="";
- list.forEach(p=>{
-   const online=p.status!=="offline";
-   const el=document.createElement("article"); el.className="user-card";
-   el.innerHTML=`
-    <div class="user-top">
-      <div class="user-main-row">
-        <div class="avatar-wrap"><img class="avatar" src="${p.image}" alt="${p.name}" loading="lazy">${online?'<span class="status-dot"></span>':''}</div>
-        <div class="user-info">
-          <h3>${p.name}, ${p.age}</h3>
-          <p>${p.country} · <span class="${online?'online-text':''}">${p.status}</span></p>
-          <span class="topic">${p.categoryLabel}</span>
-        </div>
-      </div>
-      <div class="session-meta">
-        <div class="session-label">Mgeni analipa</div>
-        <div class="session-price">${p.price}</div>
-        <div class="session-time">${p.time || "1h 15m session"}</div>
-      </div>
+/* ============================================================
+   PAGINATION
+============================================================ */
+
+function getFilteredProfiles(){
+
+ if(activeCategory==="all"){
+  return profiles;
+ }
+
+ return profiles.filter(
+  p=>p.category===activeCategory
+ );
+}
+
+
+function getTotalPages(){
+
+ const total=getFilteredProfiles().length;
+
+ return Math.max(
+  1,
+  Math.ceil(total/PROFILES_PER_PAGE)
+ );
+}
+
+
+function renderPagination(){
+
+ let pagination=document.getElementById("pagination");
+
+ if(!pagination){
+
+  pagination=document.createElement("div");
+
+  pagination.id="pagination";
+  pagination.className="pagination";
+
+  const cards=document.getElementById("cards");
+
+  cards.insertAdjacentElement(
+   "afterend",
+   pagination
+  );
+ }
+
+ const totalPages=getTotalPages();
+
+ if(currentPage>totalPages){
+  currentPage=totalPages;
+ }
+
+ pagination.innerHTML="";
+
+ /* PREVIOUS */
+
+ const prev=document.createElement("button");
+
+ prev.className="page-btn arrow";
+ prev.innerHTML="‹";
+ prev.disabled=currentPage===1;
+
+ prev.onclick=()=>{
+  if(currentPage>1){
+   currentPage--;
+   renderProfiles();
+   window.scrollTo({
+    top:document.getElementById("cards").offsetTop-100,
+    behavior:"smooth"
+   });
+  }
+ };
+
+ pagination.appendChild(prev);
+
+
+ /* PAGE NUMBERS */
+
+ for(let i=1;i<=totalPages;i++){
+
+  const btn=document.createElement("button");
+
+  btn.className=
+   "page-btn "+
+   (i===currentPage?"active":"");
+
+  btn.textContent=i;
+
+  btn.onclick=()=>{
+   currentPage=i;
+   renderProfiles();
+
+   window.scrollTo({
+    top:document.getElementById("cards").offsetTop-100,
+    behavior:"smooth"
+   });
+  };
+
+  pagination.appendChild(btn);
+ }
+
+
+ /* NEXT */
+
+ const next=document.createElement("button");
+
+ next.className="page-btn arrow";
+ next.innerHTML="›";
+ next.disabled=currentPage===totalPages;
+
+ next.onclick=()=>{
+  if(currentPage<totalPages){
+
+   currentPage++;
+
+   renderProfiles();
+
+   window.scrollTo({
+    top:document.getElementById("cards").offsetTop-100,
+    behavior:"smooth"
+   });
+  }
+ };
+
+ pagination.appendChild(next);
+
+
+ /* INFO */
+
+ const filtered=getFilteredProfiles();
+
+ const start=
+  filtered.length===0
+   ?0
+   :(currentPage-1)*PROFILES_PER_PAGE+1;
+
+ const end=
+  Math.min(
+   currentPage*PROFILES_PER_PAGE,
+   filtered.length
+  );
+
+ const info=document.createElement("div");
+
+ info.className="page-info";
+
+ info.textContent=
+  `Inaonyesha ${start}–${end} kati ya ${filtered.length} tourists`;
+
+ pagination.appendChild(info);
+}
+
+
+/* ============================================================
+   RENDER PROFILES
+============================================================ */
+
+function renderProfiles(){
+
+ const box=document.getElementById("cards");
+
+ if(!box)return;
+
+ box.innerHTML="";
+
+ const filtered=getFilteredProfiles();
+
+ const start=
+  (currentPage-1)*PROFILES_PER_PAGE;
+
+ const pageItems=
+  filtered.slice(
+   start,
+   start+PROFILES_PER_PAGE
+  );
+
+
+ pageItems.forEach(p=>{
+
+  const online=p.status!=="offline";
+
+  const el=document.createElement("article");
+
+  el.className="user-card";
+
+  el.innerHTML=`
+
+   <div class="user-top">
+
+    <div class="user-main-row">
+
+     <div class="avatar-wrap">
+
+      <img
+       class="avatar"
+       src="${p.image}"
+       alt="${p.name}"
+       loading="lazy"
+      >
+
+      ${
+       online
+       ? '<span class="status-dot"></span>'
+       : ''
+      }
+
+     </div>
+
+     <div class="user-info">
+
+      <h3>${p.name}, ${p.age}</h3>
+
+      <p>
+       ${p.country}
+       ·
+       <span class="${online?'online-text':''}">
+        ${p.status}
+       </span>
+      </p>
+
+      <span class="topic">
+       ${p.categoryLabel}
+      </span>
+
+     </div>
+
     </div>
-    <div class="user-bio">${p.bio}</div>
-    <div class="card-actions">
-      <button class="btn chat-btn" onclick="openChat(${p.id})">💬 Chat</button>
-      <a class="btn call-btn" href="${REGISTRATION_URL}" target="_blank">📞 Voice</a>
-      <a class="btn video-btn" href="${REGISTRATION_URL}" target="_blank">🎥 Video</a>
-    </div>`;
-   box.appendChild(el);
+
+
+    <div class="session-meta">
+
+     <div class="session-label">
+      Mgeni analipa
+     </div>
+
+     <div class="session-price">
+      ${p.price}
+     </div>
+
+     <div class="session-time">
+      ${p.time||"1h 15m session"}
+     </div>
+
+    </div>
+
+   </div>
+
+
+   <div class="user-bio">
+    ${p.bio}
+   </div>
+
+
+   <div class="card-actions">
+
+    <button
+     class="btn chat-btn"
+     onclick="openChat(${p.id})"
+    >
+     💬 Chat
+    </button>
+
+    <a
+     class="btn call-btn"
+     href="${REGISTRATION_URL}"
+     target="_blank"
+     rel="noopener"
+    >
+     📞 Voice
+    </a>
+
+    <a
+     class="btn video-btn"
+     href="${REGISTRATION_URL}"
+     target="_blank"
+     rel="noopener"
+    >
+     🎥 Video
+    </a>
+
+   </div>
+  `;
+
+  box.appendChild(el);
  });
+
+
+ if(pageItems.length===0){
+
+  box.innerHTML=`
+   <div style="
+    padding:40px 20px;
+    text-align:center;
+    color:var(--muted);
+   ">
+    Hakuna tourist kwenye category hii.
+   </div>
+  `;
+ }
+
+
+ renderPagination();
 }
+
+
+/* ============================================================
+   CATEGORY FILTER
+============================================================ */
+
 function filterProfiles(cat,btn){
- document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));btn.classList.add("active");
- renderProfiles(cat==="all"?profiles:profiles.filter(p=>p.category===cat));
+
+ activeCategory=cat;
+ currentPage=1;
+
+ document
+  .querySelectorAll(".tab")
+  .forEach(x=>x.classList.remove("active"));
+
+ if(btn){
+  btn.classList.add("active");
+ }
+
+ renderProfiles();
 }
-renderProfiles(profiles);
+
+
+/* INITIAL */
+
+renderProfiles();
+
+
+/* ============================================================
+   CHAT SYSTEM
+============================================================ */
 
 function openChat(id){
- activeProfile=profiles.find(p=>p.id===id); userMessages=0;
- document.getElementById("chatAvatar").src=activeProfile.image;
- document.getElementById("chatName").textContent=activeProfile.name;
- document.getElementById("chatStatus").textContent=activeProfile.status==="typing"?"● anaandika...":"● Online";
+
+ activeProfile=
+  profiles.find(
+   p=>p.id===id
+  );
+
+ if(!activeProfile)return;
+
+ userMessages=0;
+
+ document.getElementById("chatAvatar").src=
+  activeProfile.image;
+
+ document.getElementById("chatName").textContent=
+  activeProfile.name;
+
+ document.getElementById("chatStatus").textContent=
+  activeProfile.status==="typing"
+   ?"● anaandika..."
+   :"● Online";
+
  document.getElementById("msgCount").textContent="0";
- document.getElementById("chatBody").innerHTML='<div class="typing" id="typing"><i></i><i></i><i></i></div>';
+
+ document.getElementById("chatBody").innerHTML=
+  '<div class="typing" id="typing"><i></i><i></i><i></i></div>';
+
  document.getElementById("chatFoot").style.display="block";
- document.getElementById("chatLock").classList.remove("show");
- document.getElementById("chatModal").classList.add("show");
+
+ document.getElementById("chatLock")
+  .classList.remove("show");
+
+ document.getElementById("chatModal")
+  .classList.add("show");
+
  document.body.style.overflow="hidden";
- setTimeout(()=>sendBot(activeProfile.replies[0],700),300);
- setTimeout(()=>document.getElementById("chatInput").focus(),350);
+
+ setTimeout(()=>{
+  if(activeProfile){
+   sendBot(
+    activeProfile.replies[0],
+    700
+   );
+  }
+ },300);
+
+ setTimeout(()=>{
+  const input=document.getElementById("chatInput");
+
+  if(input)input.focus();
+
+ },350);
 }
-function closeChat(){document.getElementById("chatModal").classList.remove("show");document.body.style.overflow="";clearTimeout(botTimer)}
+
+
+function closeChat(){
+
+ document.getElementById("chatModal")
+  .classList.remove("show");
+
+ document.body.style.overflow="";
+
+ clearTimeout(botTimer);
+}
+
+
 function addMessage(text,type){
- const body=document.getElementById("chatBody"),typing=document.getElementById("typing");
- const d=document.createElement("div");d.className="msg "+(type==="user"?"me":"bot");d.textContent=text;body.insertBefore(d,typing);body.scrollTop=body.scrollHeight;
+
+ const body=document.getElementById("chatBody");
+
+ const typing=document.getElementById("typing");
+
+ const d=document.createElement("div");
+
+ d.className=
+  "msg "+
+  (type==="user"?"me":"bot");
+
+ d.textContent=text;
+
+ body.insertBefore(
+  d,
+  typing
+ );
+
+ body.scrollTop=
+  body.scrollHeight;
 }
+
+
 function sendBot(text,delay){
- const typing=document.getElementById("typing"),status=document.getElementById("chatStatus");
- if(!typing)return;typing.classList.add("show");status.textContent="● anaandika...";
- botTimer=setTimeout(()=>{typing.classList.remove("show");status.textContent="● Online";addMessage(text,"bot")},delay);
+
+ const typing=
+  document.getElementById("typing");
+
+ const status=
+  document.getElementById("chatStatus");
+
+ if(!typing)return;
+
+ typing.classList.add("show");
+
+ status.textContent="● anaandika...";
+
+ botTimer=setTimeout(()=>{
+
+  typing.classList.remove("show");
+
+  status.textContent="● Online";
+
+  addMessage(text,"bot");
+
+ },delay);
 }
+
+
 function sendMessage(){
- const input=document.getElementById("chatInput"),text=input.value.trim();
+
+ const input=
+  document.getElementById("chatInput");
+
+ const text=
+  input.value.trim();
+
  if(!text||!activeProfile)return;
+
  if(userMessages>=2)return;
- addMessage(text,"user");input.value="";userMessages++;
- document.getElementById("msgCount").textContent=userMessages;
+
+ addMessage(
+  text,
+  "user"
+ );
+
+ input.value="";
+
+ userMessages++;
+
+ document.getElementById("msgCount")
+  .textContent=userMessages;
+
+
  if(userMessages===1){
-   sendBot(activeProfile.replies[1]||"Asante! Nimefurahi kuzungumza nawe 😊",1200);
- }else if(userMessages===2){
-   sendBot(activeProfile.replies[2]||"Ningependa kuendelea na mazungumzo yetu!",1300);
-   setTimeout(checkAccount,3600);
+
+  sendBot(
+   activeProfile.replies[1]||
+   "Asante! Nimefurahi kuzungumza nawe 😊",
+   1200
+  );
+
+ }
+
+
+ else if(userMessages===2){
+
+  sendBot(
+   activeProfile.replies[2]||
+   "Ningependa kuendelea na mazungumzo yetu!",
+   1300
+  );
+
+  setTimeout(
+   checkAccount,
+   3600
+  );
  }
 }
+
+
 function checkAccount(){
- document.getElementById("chatFoot").style.display="none";
- document.getElementById("chatLock").classList.add("show");
- document.getElementById("checking").innerHTML='<span class="spinner"></span> Inakagua Account yako...';
- document.getElementById("lockTitle").textContent="Inakagua Account yako";
+
+ document.getElementById("chatFoot")
+  .style.display="none";
+
+ document.getElementById("chatLock")
+  .classList.add("show");
+
+ document.getElementById("checking")
+  .innerHTML=
+  '<span class="spinner"></span> Inakagua Account yako...';
+
+ document.getElementById("lockTitle")
+  .textContent="Inakagua Account yako";
+
+
  setTimeout(()=>{
-   const hasAccount=localStorage.getItem(ACCOUNT_KEY)==="true";
-   if(hasAccount){
-     document.getElementById("chatLock").classList.remove("show");
-     document.getElementById("chatFoot").style.display="block";
-     document.getElementById("chatStatus").textContent="● Account verified";
-     addMessage("Account yako imethibitishwa. Tunaendelea na mazungumzo 😊","bot");
-     document.getElementById("checking").innerHTML="✓ Account imethibitishwa";
-   }else{
-     document.getElementById("checking").innerHTML="⚠ Account haijathibitishwa";
-     document.getElementById("lockTitle").textContent="Huna Account Inayofanya Kazi";
-     document.getElementById("lockText").textContent="Umetuma jumbe mbili. Ili uendelee kuchat na "+activeProfile.name+", fungua Account yako kwanza. Link ya kujiunga ni ile ile ya Kozenasite.";
-   }
+
+  const hasAccount=
+   localStorage.getItem(ACCOUNT_KEY)==="true";
+
+
+  if(hasAccount){
+
+   document.getElementById("chatLock")
+    .classList.remove("show");
+
+   document.getElementById("chatFoot")
+    .style.display="block";
+
+   document.getElementById("chatStatus")
+    .textContent="● Account verified";
+
+   addMessage(
+    "Account yako imethibitishwa. Tunaendelea na mazungumzo 😊",
+    "bot"
+   );
+
+   document.getElementById("checking")
+    .innerHTML=
+    "✓ Account imethibitishwa";
+
+  }
+
+  else{
+
+   document.getElementById("checking")
+    .innerHTML=
+    "⚠ Account haijathibitishwa";
+
+   document.getElementById("lockTitle")
+    .textContent=
+    "Huna Account Inayofanya Kazi";
+
+   document.getElementById("lockText")
+    .textContent=
+    "Umetuma jumbe mbili. Ili uendelee kuchat na "+
+    activeProfile.name+
+    ", fungua Account yako kwanza.";
+
+  }
+
  },1500);
 }
-document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")sendMessage()});
 
-function openSupport(){document.getElementById("supportModal").classList.add("show")}
-function closeSupport(){document.getElementById("supportModal").classList.remove("show")}
-function openWithdraw(){document.getElementById("withdrawModal").classList.add("show")}
-function closeWithdraw(){document.getElementById("withdrawModal").classList.remove("show")}
 
-const names=["Amani M.","Neema J.","Baraka K.","Hussein S.","Gladys P.","Rashid A.","Mary W.","Kelvin B."];
-function addTx(){
- const t=document.getElementById("ticker"),n=names[Math.floor(Math.random()*names.length)],a=(Math.floor(Math.random()*7)+2)*18500;
- const d=document.createElement("div");d.className="tx";d.innerHTML=`🟢 <strong>${n}</strong> ametoka kutoa <strong>${a.toLocaleString()} TZS</strong> · Hivi sasa`;
- t.prepend(d);while(t.children.length>5)t.lastChild.remove();
+/* ENTER TO SEND */
+
+const chatInput=
+ document.getElementById("chatInput");
+
+if(chatInput){
+
+ chatInput.addEventListener(
+  "keydown",
+  e=>{
+   if(e.key==="Enter"){
+    sendMessage();
+   }
+  }
+ );
 }
-for(let i=0;i<3;i++)addTx();setInterval(addTx,3200);
 
-let online=28450;setInterval(()=>{online+=Math.random()>.5?Math.floor(Math.random()*8): -Math.floor(Math.random()*5);document.getElementById("onlineCount").textContent=online.toLocaleString()},4000);
-document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("show")}));
+
+/* ============================================================
+   SUPPORT / WITHDRAW
+============================================================ */
+
+function openSupport(){
+ document.getElementById("supportModal")
+  .classList.add("show");
+}
+
+function closeSupport(){
+ document.getElementById("supportModal")
+  .classList.remove("show");
+}
+
+function openWithdraw(){
+ document.getElementById("withdrawModal")
+  .classList.add("show");
+}
+
+function closeWithdraw(){
+ document.getElementById("withdrawModal")
+  .classList.remove("show");
+}
+
+
+/* ============================================================
+   TRANSACTION TICKER
+============================================================ */
+
+const names=[
+ "Amani M.",
+ "Neema J.",
+ "Baraka K.",
+ "Hussein S.",
+ "Gladys P.",
+ "Rashid A.",
+ "Mary W.",
+ "Kelvin B."
+];
+
+
+function addTx(){
+
+ const t=
+  document.getElementById("ticker");
+
+ if(!t)return;
+
+ const n=
+  names[
+   Math.floor(
+    Math.random()*names.length
+   )
+  ];
+
+ const a=
+  (Math.floor(
+   Math.random()*7
+  )+2)*18500;
+
+ const d=
+  document.createElement("div");
+
+ d.className="tx";
+
+ d.innerHTML=
+  `🟢 <strong>${n}</strong> ametoka kutoa <strong>${a.toLocaleString()} TZS</strong> · Hivi sasa`;
+
+ t.prepend(d);
+
+ while(t.children.length>5){
+  t.lastChild.remove();
+ }
+}
+
+
+for(let i=0;i<3;i++){
+ addTx();
+}
+
+setInterval(
+ addTx,
+ 3200
+);
+
+
+/* ============================================================
+   ONLINE COUNTER
+============================================================ */
+
+let online=28450;
+
+setInterval(()=>{
+
+ online +=
+  Math.random()>.5
+   ?Math.floor(Math.random()*8)
+   :-Math.floor(Math.random()*5);
+
+ const el=
+  document.getElementById("onlineCount");
+
+ if(el){
+  el.textContent=
+   online.toLocaleString();
+ }
+
+},4000);
+
+
+/* ============================================================
+   CLOSE MODALS
+============================================================ */
+
+document
+ .querySelectorAll(".modal")
+ .forEach(m=>{
+
+  m.addEventListener(
+   "click",
+   e=>{
+    if(e.target===m){
+     m.classList.remove("show");
+    }
+   }
+  );
+
+ });
+
+
+/* ============================================================
+   DEV INFO
+============================================================ */
+
+console.log(
+ "UTALIICHAT V2 loaded:",
+ profiles.length,
+ "tourist profiles"
+);
+
+console.log(
+ "Pagination:",
+ Math.ceil(
+  profiles.length/PROFILES_PER_PAGE
+ ),
+ "pages"
+);
+
 </script>
+```
+
 </body>
 </html>
