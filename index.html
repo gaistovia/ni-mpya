@@ -129,6 +129,88 @@ footer a{color:var(--gold)}
  .card-actions{grid-template-columns:1.2fr 1fr 1fr}.btn{font-size:11px}
  .chat-box{border-radius:0;height:100dvh}.modal{padding:0}
 }
+
+ ```css
+/* =========================
+   V2 PAGINATION
+========================= */
+
+.pagination{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  padding:20px 16px 8px;
+  flex-wrap:wrap;
+}
+
+.page-btn{
+  min-width:42px;
+  height:42px;
+  padding:0 13px;
+  border-radius:13px;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.045);
+  color:#cbd5e1;
+  font-size:12px;
+  font-weight:900;
+  transition:.2s ease;
+}
+
+.page-btn:hover{
+  border-color:rgba(52,211,153,.45);
+  transform:translateY(-1px);
+}
+
+.page-btn.active{
+  background:linear-gradient(135deg,var(--green),var(--gold));
+  color:#03140a;
+  border-color:transparent;
+  box-shadow:0 6px 18px rgba(16,185,129,.2);
+}
+
+.page-btn.arrow{
+  color:var(--mint);
+}
+
+.page-btn:disabled{
+  opacity:.35;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.page-info{
+  width:100%;
+  text-align:center;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+  margin-top:5px;
+}
+
+.results-count{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:5px;
+}
+
+@media(max-width:520px){
+  .pagination{
+    padding-left:12px;
+    padding-right:12px;
+    gap:6px;
+  }
+
+  .page-btn{
+    min-width:39px;
+    height:39px;
+    padding:0 10px;
+    font-size:11px;
+  }
+}
+```
+
+ 
 </style>
 </head>
 <body>
